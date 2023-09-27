@@ -165,18 +165,7 @@ namespace project
             Console.WriteLine();
             #endregion
 
-            #region 1_15
-            double k = 1;
-            b = 1;
-            for (int i = 0; i < 5; i++)
-            {
-                c = k;
-                k = k + b;
-                b = c;
-
-            }
-            Console.WriteLine($"{k}/{b}");
-            #endregion
+            
 
             #region 2_1
             x = 1;
