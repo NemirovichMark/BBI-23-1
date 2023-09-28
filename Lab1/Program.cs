@@ -17,7 +17,7 @@ namespace project
             {
                 S = S + i;
             }
-            Console.WriteLine(S);
+            Console.WriteLine("1_1:\n{0}", S);
             Console.WriteLine();
             #endregion
 
@@ -27,7 +27,7 @@ namespace project
             {
                 S = S + 1 / i;
             }
-            Console.WriteLine(S);
+            Console.WriteLine("1_2:\n{0}", S);
             Console.WriteLine();
             #endregion
 
@@ -37,7 +37,7 @@ namespace project
             {
                 s = s + i / (i + 1);
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_3:\n{0}", s);
             Console.WriteLine();
             #endregion
 
@@ -48,7 +48,7 @@ namespace project
             {
                 s = s + Math.Cos(i * x) / Math.Pow(x, (i - 1));
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_4:\n{0}", s);
             Console.WriteLine();
             #endregion
 
@@ -60,12 +60,12 @@ namespace project
             {
                 s = s + Math.Pow(p + h * i, 2);
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_5:\n{0}", s);
             Console.WriteLine();
             #endregion
 
             #region 1_6
-            Console.WriteLine("x   y");
+            Console.WriteLine("1_6:\n{0}", "x   y");
             double y = 0;
             for (x = -4; x <= 4; x += 0.5)
             {
@@ -79,7 +79,7 @@ namespace project
             int n = 6;
             int f = 6;
             f = Fact(n);
-            Console.WriteLine(f);
+            Console.WriteLine("1_7:\n{0}", f);
             Console.WriteLine();
             #endregion
 
@@ -89,7 +89,7 @@ namespace project
             {
                 s += Fact(i);
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_8:\n{0}", s);
             Console.WriteLine();
             #endregion
 
@@ -99,7 +99,7 @@ namespace project
             {
                 s += Math.Pow(-1, i) * Math.Pow(5, i) / Fact(i);
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_9:\n{0}", s);
             Console.WriteLine();
             #endregion
 
@@ -109,9 +109,11 @@ namespace project
             {
                 s *= 3;
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_10:\n{0}", s);
             Console.WriteLine();
             #endregion
+
+            Console.WriteLine("1_11(а):");
 
             #region 1_11(а)
             s = 0;
@@ -122,6 +124,8 @@ namespace project
             Console.WriteLine();
             Console.WriteLine();
             #endregion
+
+            Console.WriteLine("1_11(б):");
 
             #region 1_11(б)
             s = 0;
@@ -141,12 +145,12 @@ namespace project
             {
                 s += 1 / Math.Pow(x, i);
             }
-            Console.WriteLine(s);
+            Console.WriteLine("1_12:\n{0}", s);
             Console.WriteLine();
             #endregion
 
             #region 1_13
-            Console.WriteLine("x   y");
+            Console.WriteLine("1_13:\n{0}", "x   y");
             y = 0;
             h = 0.1;
             for (x = -1.5; x <= 1.5; x += h)
@@ -158,6 +162,8 @@ namespace project
             }
             Console.WriteLine();
             #endregion
+
+            Console.WriteLine("1_14:");
 
             #region 1_14
             n = 8;
@@ -186,7 +192,7 @@ namespace project
                 k = k + b;
                 b = c;
             }
-            Console.WriteLine($"{k}/{b}");
+            Console.WriteLine("1_15:\n{0}", $"{k}/{b}");
             Console.WriteLine();
             #endregion
 
@@ -205,7 +211,7 @@ namespace project
                 }
 
             }
-            Console.WriteLine(sum);
+            Console.WriteLine("2_1:\n{0}", sum);
             Console.WriteLine();
             #endregion
 
@@ -224,7 +230,7 @@ namespace project
                     c = g - 3;
                 }
             }
-            Console.WriteLine(c);
+            Console.WriteLine("2_2:\n{0}", c);
             Console.WriteLine();
             #endregion
 
@@ -239,7 +245,7 @@ namespace project
                 s += (a + n * h);
                 n += 1;
             }
-            Console.WriteLine(n - 1);
+            Console.WriteLine("2_3:\n{0}", n - 1);
             Console.WriteLine();
             #endregion
 
@@ -253,7 +259,7 @@ namespace project
                 s += Math.Pow(x, 2 * n);
                 n += 1;
             }
-            Console.WriteLine(s);
+            Console.WriteLine("2_4:\n{0}", s);
             Console.WriteLine();
             #endregion
 
@@ -266,10 +272,63 @@ namespace project
                 n = n - m;
             }
             ostat = n;
-            Console.WriteLine(chast);
-            Console.WriteLine(ostat);
+            Console.WriteLine("2_5:\nЧастное:{0}, Остаток: {1}", chast, ostat);
             Console.WriteLine();
             #endregion
+
+            #region 2_7(а)
+            s = 10;
+            u = 0;
+            k = 0;
+            while (k < 7)
+            {
+                u += s;
+                s = s * 1.1;
+                k += 1;
+            }
+            Console.WriteLine("2_7(а):\n{0}", u);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_7(б)
+            s = 10;
+            u = 0;
+            k = 0;
+            while (u < 100)
+            {
+                u += s;
+                s *= 1.1;
+                k++;
+            }
+            Console.WriteLine("2_7(б):\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_7(в)
+            s = 10;
+            k = 1;
+            while(s < 20)
+            {
+                s *= 1.1;
+                k++;
+            }
+            Console.WriteLine("2_7(в):\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_8
+            s = 10000;
+            k = 0;
+            while (s <= 20000)
+            {
+                s *= 1.08;
+                k++;
+            }
+            Console.WriteLine("2_8:\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            Console.WriteLine("3_6:");
 
             #region 3_6
             double o = 1;
@@ -287,7 +346,6 @@ namespace project
                 y = ((1 + Math.Pow(x, 2)) * Math.Atan(x)) / 2;
                 Console.WriteLine($"{s} {y}");
             }
-            Console.WriteLine();
             #endregion
         }
     }
