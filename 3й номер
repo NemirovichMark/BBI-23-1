@@ -1,0 +1,32 @@
+using System;
+namespace HelloWorld
+{
+    class program
+    {
+        static void Main()
+        {
+            double a=0.1;
+            double b=1;
+            double h=0.05;
+            for (double x=a;x<=b+h;x=x+h)
+            {
+                double i=0;
+                double s=0;
+                double sled=1;
+                while (Math.Abs(sled)>=0.0001)
+                {
+                    s=s+sled;
+                    i++;
+                    double f=1;
+                    for (double j=2;j<=i;j++)
+                    {
+                        f=f*j;
+                    }
+                    sled=Math.Pow(2*x,i)/f;
+                }
+                double y=Math.Pow(Math.E,2*x);
+                Console.WriteLine($"{x} ---> {s}, y={y}");
+            }
+        }
+    }
+}
