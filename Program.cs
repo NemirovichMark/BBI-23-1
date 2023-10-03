@@ -1,5 +1,4 @@
-﻿
-#region 1.1
+﻿#region 1.1
 int s = 0;
 for (int i = 2; i <= 35; i += 3)
 { s += i; }
@@ -35,8 +34,36 @@ double r = 0;
 double p = 3;
 double h = 2;
 for (double no = 0; no <= 9; no++)
-{ r += Math.Pow(p + no * h, 2);}
+{ r += Math.Pow(p + no * h, 2); }
 Console.WriteLine(r);
+#endregion
+#region 1.7
+int m = 1;
+for (int k = 1; k < 7; k++)
+{
+    m *= k;
+}
+Console.WriteLine(m);
+#endregion
+#region 1.8
+m = 0;
+int v = 1;
+for (int pp = 1; pp < 7; pp++ )
+{
+    v *= pp;
+    m += v;
+}
+Console.WriteLine(m);
+#endregion
+#region 1.10
+q = 3;
+w = 1;
+while (w < 8)
+{
+    q *= q;
+    w++;
+}
+Console.WriteLine(q);
 #endregion
 #region 2.1
 double eps = 0.0001;
@@ -45,9 +72,10 @@ double a = 0;
 double y = 0.5;
 int n = 1;
 do
-{a = Math.Cos(n * y) / Math.Pow(n, 2);
-t += a;
-n++;
+{
+    a = Math.Cos(n * y) / Math.Pow(n, 2);
+    t += a;
+    n++;
 }
 
 while (Math.Abs(a) > eps);
@@ -56,7 +84,7 @@ Console.WriteLine(t);
 #region 2.2
 p = 1;
 for (n = 1; n * p <= 30000; n += 3)
-{p *= n;}
+{ p *= n; }
 
 Console.WriteLine(p);
 #endregion
