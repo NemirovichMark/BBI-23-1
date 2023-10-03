@@ -144,16 +144,17 @@ namespace project
             #endregion
 
             #region 1_12
-            s = 0; k = -1;
-            l = 5;
-            for (int i = 1; i <= 6; i++)
+            s = 1;
+            x = 4;
+            k = x;
+            for (int i = 1; i <= 10; i++)
             {
-                s += k * l / Fact(i);
-                k *= -1;
-                l *= 5;
+                s += 1 / k;
+                k *= x;
             }
-            Console.WriteLine("1_9:\n{0}", s);
+            Console.WriteLine("1_12:\n{0}", s);
             Console.WriteLine();
+
             #endregion
 
             #region 1_13
@@ -173,18 +174,15 @@ namespace project
             Console.WriteLine("1_14:");
 
             #region 1_14
-            n = 8;
-            double u = 1;
+            double a = 1;
             double b = 1;
-            double c = 0;
-            Console.Write($"{u} {b} ");
+            Console.Write($"{a} {b} ");
 
-            for (int i = 2; i < n; i++)
+            for (int i = 2; i < 8; i++)
             {
-                c = u + b;
-                Console.Write($"{c} ");
-                u = b;
-                b = c;
+                b = a + b;
+                Console.Write($"{b} ");
+                a = b - a;
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -193,6 +191,7 @@ namespace project
             #region 1_15
             k = 1;
             b = 1;
+            double c = 0;
             for (int i = 0; i < 5; i++)
             {
                 c = k;
@@ -245,7 +244,7 @@ namespace project
             p = 100;
             n = 0;
             s = 0;
-            double a = 1;
+            a = 1;
             h = 2;
             while (s <= p)
             {
@@ -287,7 +286,7 @@ namespace project
 
             #region 2_7(а)
             s = 10;
-            u = 0;
+            double u = 0;
             k = 0;
             while (k < 7)
             {
@@ -340,21 +339,23 @@ namespace project
             Console.WriteLine("3_6:");
 
             #region 3_6
-            double o = 1;
-            a = 0.1;
-            h = 0.1;
-            for (x = a; x <= o; x += h)
-            {
-                s = 0;
-                int i = 1;
-                while ((Math.Abs(Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1)))) >= 0.0001)
+                double o = 1;
+                a = 0.1;
+                h = 0.1;
+                for (x = a; x <= o; x += h)
                 {
-                    s += Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
-                    i += 1;
+                    k = x * x * x;
+                    s = 0;
+                    int i = 1;
+                    while (Math.Abs(((2 * (i % 2)) - 1) * (k / (4 * i * i - 1))) >= 0.0001)
+                    {
+                        s += (2 * (i % 2) - 1) * (k / (4 * i * i - 1));
+                        k *= x * x;
+                        i += 1;
+                    }
+                    y = (1 + x * x) * Math.Atan(x) / 2;
+                    Console.WriteLine($"{s} {y}");
                 }
-                y = ((1 + Math.Pow(x, 2)) * Math.Atan(x)) / 2;
-                Console.WriteLine($"{s} {y}");
-            }
             #endregion
         }
     }
