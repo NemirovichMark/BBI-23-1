@@ -55,6 +55,17 @@ for (int pp = 1; pp < 7; pp++ )
 }
 Console.WriteLine(m);
 #endregion
+#region 1.9
+m = -1;
+q = 0;
+double d = 0;
+for (double  z = 1; z < 7; z++)
+{
+    d *= z;
+    q += (Math.Pow(m, z) * Math.Pow(5, z)) / d;
+}
+Console.WriteLine(q);
+#endregion
 #region 1.10
 q = 3;
 w = 1;
