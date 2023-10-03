@@ -41,22 +41,26 @@ class Program
         #region 1-4
         //double sum = 0.0;
         //double × = 5.0;
+        //double s = x 
         //for (double i = 1; i < 10; i++)
         //{
-        //    sum += Math.Cos(i * x) / Math.Pow(x, i - 1);
+        //    sum += Math.Cos(i * x) / s;
+        //    s *= x
         //}
         //Console.WriteLine(sum);
         #endregion
 
         #region 1-5
-        //double p = 20;
-        //double h = 23;
-        //double s = 0;
-        //for (double i = 0; 1 < 10; 1++)
-        //{
-        //    s += Math.Pow((p + i * h), 2);
-        //}
-        //Console.WriteLine(s);
+        //        s = 0; 
+        // double h = 1; 
+        // double p = 1; 
+        // for (double i = 0; i <= 9; i++) 
+        // { 
+        //     s += (p + h * i) * (p + h * i); 
+        // } 
+        // Console.WriteLine("1_5:\n{0}", s); 
+        // Console.WriteLine(); 
+
         #endregion
 
         #region 1 - 6
@@ -64,7 +68,7 @@ class Program
         //double x;
         //for (x = -4; x <= 4; x += 0.5)
         //{
-        //    y = 0.5 * Math.Pow(x, 2) - 7 * x;
+        //     y = 0.5 * x * x - 7 * x; 
         //    Console.WriteLine($"{ x},{ y}");
 
         //}
@@ -144,11 +148,17 @@ class Program
         #endregion
 
         #region 1- 12
-        //int x = 2;
-        //double s = 0.0;
+        //int x = 10;
+        //int s = 1;
+        //int  sx = x;
         //for (int i = 1; i <= 10; i++)
         //{
-        //    s += 1.0 + Math.Pow(x, i);
+        //    for (int pow = 1; pow < i; pow++)
+        //    {
+        //        x = x * sx;
+
+        //    }
+        //    s += 1 / x;
 
         //}
         //Console.WriteLine(s);
@@ -240,19 +250,18 @@ class Program
         #endregion
 
         #region 2 - 4
-        //double x = 0.5;
-        //double chlenposl;
-        //double sum = 1.0;
-        //double epsilon = 0.0001;
-        //int n = 2; // степень
-        //do
-        //{
-        //    n += 2;
-        //    chlenposl = Math.Pow(x, n);
-        //    sum += chlenposl;
-        //}
-        //while (Math.Abs(chlenposl) <= epsilon);
-        //Console.WriteLine(sum);
+            // double e = 0.0001;
+            // x = 0.9;
+            // s = 1;
+            // k = 1;
+            // n = 0;
+            // while (k >= e)
+            // {
+            //     n++;
+            //     k *= x * x;
+            //     s += k;
+            // }
+            // Console.WriteLine(s);
         #endregion
 
         #region 2 - 5
