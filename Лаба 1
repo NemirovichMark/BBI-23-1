@@ -341,7 +341,7 @@
 //            s = s + a;
 //            n = n + 1;
 //          } while (Math.Abs(a) > 0.00001);
-//          Console.WriteLine("сумма равна {0:f4}", s);
+//          Console.WriteLine("{0:f4}", s);
 //          }
 //        }
 //    }
