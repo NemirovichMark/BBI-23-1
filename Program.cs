@@ -1,159 +1,358 @@
-﻿static void Main()
-{ 
- #region 1_1
-int S = 0;
-for (int i = 2; i <= 35; i += 3)
+﻿using System;
+namespace project
 {
-    S += i;
-}
-Console.WriteLine(S);
-#endregion
-
-#region 1_2
-double S = 0;
-for (double i = 1; i <= 10; i++)
-{
-    S += 1 / i;
-}
-Console.WriteLine(S);
-#endregion
-
-#region 1_3
-double S = 0;
-for (double i = 3; i <= 113; i++)
-{
-    S += (i - 1) / i;
-}
-Console.WriteLine(S);
-#endregion
-
-#region 1_10
-int pow = 1;
-for (int i = 0; i < 7; i++)
-{
-    pow *= 3;
-}
-Console.WriteLine(pow);
-#endregion
-
-#region 1_11
-for (int i = 1; i <= 6; i++) 
-{
-    Console.Write(i + " ");
-}
-Console.WriteLine();
-for (int i = 0; i < 6; i++)
-{
-    Console.Write("5 ");
-}
-#endregion
-
-#region 2_1
-double eps = 0.0001;
-double s = 0;
-double a = 0;
-double x = 0.5;
-int n = 1;
-do
-{
-    a = Math.Cos(n * x) / Math.Pow(n, 2);
-    s += a;
-    n++;
-}
-while (Math.Abs(a) > eps);
-Console.WriteLine(s);
-#endregion
-
-#region 2_2
-int p = 1;
-for (int n = 1; n * p <= 30000; n += 3)
-{
-    p *= n;
-}
-Console.WriteLine(p);
-#endregion
-
-#region 2_3
-int a = 4;
-int b = 5;
-int p = 100;
-int n = 0;
-int s = 0;
-do
-{
-    s += a + n * b;
-    n++;
-}
-while (s <= p);
-n -= 1;
-Console.WriteLine(n);
-#endregion
-
-#region 2_4
-double x = 0.5;
-double s = 0;
-double eps = 0.0001;
-int n = 0;
-double a = 0;
-do
-{
-    a = Math.Pow(x, 2 * n);
-    s += a;
-    n++;
-}
-while (a > eps);
-Console.WriteLine(s);
-#endregion
-
-#region 2_5
-int a = 29;
-int b = 2;
-int x = 0;
-do
-{
-    x++;
-    a -= b;
-}
-while (a > b);
-Console.WriteLine(a);
-Console.WriteLine(x);
-#endregion
-
-#region 3_1
-using System;
-using System.Diagnostics.CodeAnalysis;
-
-class project
-{
-    public static int Factorial(int fact)
+    class Project
     {
-        if (fact == 0 || fact == 1) return 1;
-        return fact * Factorial(fact - 1);
-    }
-
-    public static void Main(string[] args)
-    {
-
-        double s = 0;
-        int i = 0;
-        double y = 0;
-
-
-        for (double x = 0.1; x <= 1; x = x + 0.05)
+        public static int Fact(int n)
         {
-            double tr = 0;
-            do
+            if (n == 0) return 1;
+            if (n == 1) return 1;
+            else return Fact(n - 1) * n;
+        }
+        static void Main()
+        {
+            #region 1_1 
+            double S = 0;
+            for (int i = 2; i <= 35; i += 3)
             {
-                tr = (Math.Pow(x, (2 * i)) / Factorial(2 * i));
-                s = s + tr;
-                i++;
+                S = S + i;
             }
-            while (Math.Abs(tr) >= 0.0001);
-            Console.WriteLine(s);
-            y = (Math.Pow(Math.E, x) + Math.Pow(Math.E, -x)) / 2;
-            Console.WriteLine("Y равен" + y);
+            Console.WriteLine("1_1:\n{0}", S);
+            Console.WriteLine();
+            #endregion
 
+            #region 1_2 
+            S = 0;
+            for (double i = 1; i <= 10; i++)
+            {
+                S = S + 1 / i;
+            }
+            Console.WriteLine("1_2:\n{0}", S);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_3 
+            double s = 0;
+            for (double i = 2; i <= 113; i += 2)
+            {
+                s = s + i / (i + 1);
+            }
+            Console.WriteLine("1_3:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_4 
+            s = 0;
+            double x = 2;
+            double k = x;
+            for (double i = 1; i <= 9; i++)
+            {
+                s += Math.Cos(i * x) / k;
+                k *= x;
+            }
+            Console.WriteLine("1_4:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_5 
+            s = 0;
+            double h = 3;
+            double p = 4;
+            for (double i = 0; i <= 9; i++)
+            {
+                s += (p + h * i) * (p + h * i);
+            }
+            Console.WriteLine("1_5:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_6 
+            Console.WriteLine("1_6:\n{0}", "x   y");
+            double y = 0;
+            for (x = -4; x <= 4; x += 0.5)
+            {
+                y = 0.5 * x * x - 7 * x;
+                Console.WriteLine($"{x} {y}");
+            }
+            Console.WriteLine();
+            #endregion
+
+            #region 1_7 
+            int n = 6;
+            int f = 6;
+            f = Fact(n);
+            Console.WriteLine("1_7:\n{0}", f);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_8 
+            s = 0;
+            for (int i = 1; i <= 6; i++)
+            {
+                s += Fact(i);
+            }
+            Console.WriteLine("1_8:\n{0}", s);
+            Console.WriteLine();
+            #endregion 
+
+            #region 1_9 
+            s = 0; k = -1;
+            double l = 5;
+            for (int i = 1; i <= 6; i++)
+            {
+                s += k * l / Fact(i);
+                k *= -1;
+                l *= 5;
+            }
+            Console.WriteLine("1_9:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_10 
+            s = 1;
+            for (int i = 1; i <= 7; i++)
+            {
+                s *= 3;
+            }
+            Console.WriteLine("1_10:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            Console.WriteLine("1_11(а):");
+
+            #region 1_11(а) 
+            s = 0;
+            for (int i = 1; i <= 6; i++)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            #endregion
+
+            Console.WriteLine("1_11(б):");
+
+            #region 1_11(б) 
+            s = 0;
+            int t = 5;
+            for (int i = 1; i <= 6; i++)
+            {
+                Console.Write(t + " ");
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            #endregion
+            #region 1_12
+            s = 0;
+            x = 4;
+            for (int i = 0; i <= 10; i++)
+            {
+                s += 1 / Math.Pow(x, i);
+            }
+            Console.WriteLine("1_12:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 1_13 
+            Console.WriteLine("1_13:\n{0}", "x   y");
+            y = 0;
+            h = 0.1;
+            for (x = -1.5; x <= 1.5; x += h)
+            {
+                if (x <= -1) y = 1;
+                if (x > -1 & x <= 1) y = -x;
+                else y = -1;
+                Console.WriteLine($"{x} {y}");
+            }
+            Console.WriteLine();
+            #endregion
+
+            Console.WriteLine("1_14:");
+
+            #region 1_14 
+            n = 8;
+            double u = 1;
+            double b = 1;
+            double c = 0;
+            Console.Write($"{u} {b} ");
+
+            for (int i = 2; i < n; i++)
+            {
+                c = u + b;
+                Console.Write($"{c} ");
+                u = b;
+                b = c;
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            #endregion
+
+            #region 1_15 
+            k = 1;
+            b = 1;
+            for (int i = 0; i < 5; i++)
+            {
+                c = k;
+                k = k + b;
+                b = c;
+            }
+            Console.WriteLine("1_15:\n{0}", $"{k}/{b}");
+            Console.WriteLine();
+            #endregion 
+
+            #region 2_1 
+            x = 1;
+            double sum = Math.Cos(x);
+            for (int i = 1; i < 10000; i++)
+            {
+                if (Math.Abs(Math.Cos(i * x) / (i * i)) < 0.0001)
+                {
+                    break;
+                }
+                else
+                {
+                    sum += Math.Cos(i * x) / (i * i);
+                }
+            }
+            Console.WriteLine("2_1:\n{0}", sum);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_2 
+            p = 1;
+            c = 0;
+            for (int g = 1; g < 30000; g += 3)
+            {
+                if (p > 30000)
+                {
+                    break;
+                }
+                else
+                {
+                    p *= g;
+                    c = g - 3;
+                }
+            }
+            Console.WriteLine("2_2:\n{0}", c);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_3 
+            p = 80;
+            n = 0;
+            s = 0;
+            double a = 1;
+            h = 8;
+            while (s <= p)
+            {
+                s += (a + n * h);
+                n += 1;
+            }
+            Console.WriteLine("2_3:\n{0}", n - 1);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_4 
+            double e = 0.0001;
+            x = 0.6;
+            s = 1;
+            k = 1;
+            n = 0;
+            while (k >= e)
+            {
+                n++;
+                k *= x * x;
+                s += k;
+            }
+            Console.WriteLine("2_4:\n{0}", s);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_5 
+            int m = 3, chast = 0, ostat = 0;
+            n = 4;
+            while (n - m >= 0)
+            {
+                chast += 1;
+                n = n - m;
+            }
+            ostat = n;
+            Console.WriteLine("2_5:\nЧастное:{0}, Остаток: {1}", chast, ostat);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_7(а) 
+            s = 10;
+            u = 0;
+            k = 0;
+            while (k < 7)
+            {
+                u += s;
+                s = s * 1.1;
+                k += 1;
+            }
+            Console.WriteLine("2_7(а):\n{0}", u);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_7(б) 
+            s = 10;
+            u = 0;
+            k = 0;
+            while (u < 100)
+            {
+                u += s;
+                s *= 1.1;
+                k++;
+            }
+            Console.WriteLine("2_7(б):\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_7(в) 
+            s = 10;
+            k = 1;
+            while (s < 20)
+            {
+                s *= 1.1;
+                k++;
+            }
+            Console.WriteLine("2_7(в):\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_8 
+            s = 10000;
+            k = 0;
+            while (s <= 20000)
+            {
+                s *= 1.08;
+                k++;
+            }
+            Console.WriteLine("2_8:\n{0}", k);
+            Console.WriteLine();
+            #endregion
+
+            Console.WriteLine("3_6:");
+
+            #region 3_6 
+            double o = 1;
+            a = 0.1;
+            h = 0.1;
+            for (x = a; x <= o; x += h)
+            {
+                s = 0;
+                int i = 1;
+                while (Math.Abs(Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1))) >= 0.0001)
+                {
+                    s += Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
+                    i += 1;
+                }
+                y = (1 + Math.Pow(x, 2)) * Math.Atan(x) / 2;
+                Console.WriteLine($"{s} {y}");
+            }
+            #endregion
         }
     }
-    #endregion
 }
+
