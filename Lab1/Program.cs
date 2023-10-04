@@ -337,18 +337,38 @@ namespace project
             #endregion
 
             #region 3_1
-            //я по списку 19 => 19-2*9=1 
             S = 0;
             A = 0.1;
             double b = 1;
             double step = 0.1;
             long J = 0;
+            long xJ = 0;
+            long MO1 = -1;
+            double x1 = 1;
+            long MO2 = MO1;
+            double x2 = x1;
+            long F = 1;
             for (x = A; x <= b; x += step)
             {
-                while (Math.Abs(Math.Pow(-1, J) * Math.Pow(x, 2 * J) / Fact(2 * J)) >= 0.0001)
+                while (Math.Abs(MO1 * x1 / F) >= 0.0001)
                 {
-                    S += Math.Pow(-1, J) * Math.Pow(x, 2 * J) / Fact(2 * J);
+                    S += MO1 * x1 / F;
+                    x1 = x;
+                    x2 = x1;
                     J += 1;
+                    xJ = 2 * J;
+                    F = F * (xJ-1)*xJ;
+                    for (int pow=1; pow < xJ; pow++)
+                    {
+                        x1 = x1 * x2;
+                    }
+                    MO1 = MO1 * MO2;
+                }
+                x1 = x;
+                x2 = x1;
+                for (int pow = 1; pow < xJ; pow++)
+                {
+                    x1 = x1 * x2;
                 }
                 double y = Math.Cos(x);
                 Console.WriteLine("3_1: " + $"{S} {y}");
