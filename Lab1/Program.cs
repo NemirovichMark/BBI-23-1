@@ -337,38 +337,34 @@ namespace project
             #endregion
 
             #region 3_1
-            S = 0;
-            A = 0.1;
+            double S = 0;
+            double A = 0.1;
             double b = 1;
             double step = 0.1;
             long J = 0;
-            long xJ = 0;
-            long MO1 = -1;
-            double x1 = 1;
-            long MO2 = MO1;
-            double x2 = x1;
-            long F = 1;
-            for (x = A; x <= b; x += step)
+            long XJ=2*J;
+            long MO1 = 1;
+            long MO2 = -1;
+            long F=1;
+            for (double x = A; x <= b; x += step)
             {
+                S=0;
+                J=0;
+                F=1;
+                MO1=1;
+                double x1=1;
                 while (Math.Abs(MO1 * x1 / F) >= 0.0001)
                 {
                     S += MO1 * x1 / F;
-                    x1 = x;
-                    x2 = x1;
+                    x1=x;
                     J += 1;
-                    xJ = 2 * J;
-                    F = F * (xJ-1)*xJ;
-                    for (int pow=1; pow < xJ; pow++)
+                    XJ=J*2;
+                    MO1=-MO1;
+                    F=F*XJ*(XJ-1);
+                    for (int pow=1; pow<XJ; pow++)
                     {
-                        x1 = x1 * x2;
+                    x1=x1*x;
                     }
-                    MO1 = MO1 * MO2;
-                }
-                x1 = x;
-                x2 = x1;
-                for (int pow = 1; pow < xJ; pow++)
-                {
-                    x1 = x1 * x2;
                 }
                 double y = Math.Cos(x);
                 Console.WriteLine("3_1: " + $"{S} {y}");
