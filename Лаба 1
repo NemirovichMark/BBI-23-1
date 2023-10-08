@@ -499,45 +499,29 @@
 //уровень3
 
 //9
-//using System;
-//using Internal;
-//namespace ConsoleApplicatoin2
-//{
-//    class Program
-//    {
-//        static void Main(string[] args)
-//        {
-//            double a = 0.1;
-//            double b = 0.5;
-//            double h = 0.05;
-//            double s = 0;
-//            double y(double x)
-//            {
-//                return Math.Atan(x);
-//            }
-//            double t(int i, double x)
-//            {
-//                double ch = Math.Pow(-1, i) * Math.Pow(x, 2 * i + 1);
-//                double zn = 2 * i + 1;
-//                return ch / zn;
-//            }
-//            double x = a;
-//            while (x <= b)
-//            {
-//                int i = 0;
-//                double currentTerm = t(i, x);
-//                while (Math.Abs(currentTerm) >= 0.0001)
-//                {
-//                    s += currentTerm;
-//                    i++;
-//                    currentTerm = t(i, x);
-//                }
-//                Console.WriteLine("x = " + x);
-//                Console.WriteLine("s = " + s);
-//                Console.WriteLine("y = " + y(x));
-//                Console.WriteLine();
-//                x += h;
-//            }
-//        }
-//    }
-//}
+using System;
+namespace ConsoleApplicatoin2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double a = 0.1;
+            double b = 0.5;
+            double h = 0.05;
+            for (double x = a; x <= b; x += h)
+            {
+                double s = 0;
+                double i = 0;
+                while ((Math.Abs(Math.Pow(-1, i) * (Math.Pow(x, 2 * i + 1) / (2 * i + 1)))) >= 0.0001)
+                {
+                    s = s + Math.Pow(-1, i) * (Math.Pow(x, 2 * i + 1) / (2 * i + 1));
+                    i ++ ;
+                }
+                double y = Math.Atan(x);
+                Console.WriteLine($"x={x}, s={s}, y={y}");
+       
+            }
+        }
+    }
+}
