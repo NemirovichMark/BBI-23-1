@@ -14,17 +14,12 @@ class Program
     public static double Step(double n, double step)
     {
         double s = 1;
-        if (step == 0) return 1;
-        if (step == 1)
-            return step;
-        else
+        for (int i = 0; i < step; i++)
         {
-            for (int i = 0; i < step; i++)
-            {
-                s = s * n;
-            }
-            return s;
+            s = s * n;
         }
+        return s;
+      
     }
     public static void Main(string[] args)
     {
@@ -55,6 +50,7 @@ class Program
         Console.WriteLine("1-3:\n{0}", s);
         Console.WriteLine();
         #endregion
+
         #region 1-4
         s = 0.0;
         double x = 60.0;
@@ -65,6 +61,7 @@ class Program
         Console.WriteLine("1-4:\n{0}", s);
         Console.WriteLine();
         #endregion
+
         #region 1-5
         double p = 10;
         double h = 7;
@@ -204,15 +201,17 @@ class Program
         #endregion
 
         #region 2-1
+        double temp = 0;
         x = 60.0;
         s = Math.Cos(x);
         n = 2;
         do
         {
-            s += Math.Cos(n * x) / Step(n, 2);
+            temp = Math.Cos(n * x) / Step(n, 2);
+            s += temp;
             n++;
         }
-        while (Math.Abs(Math.Cos(n * x) / Step(n, 2)) > 0.0001);
+        while (Math.Abs(temp) >=0.0001);
         Console.WriteLine("2-1:\n{0}", s);
         Console.WriteLine();
         #endregion
@@ -249,10 +248,11 @@ class Program
         x = 0.5;
         do
         {
-            s += Step(x, 2 * n);
+            temp = Step(x, 2 * n);
+            s += temp;
             n++;
         }
-        while (Step(x, 2 * n) >= 0.0001);
+        while (temp > 0.0001);
         Console.WriteLine("2-1:\n{0}", s);
         Console.WriteLine();
         #endregion
@@ -329,14 +329,16 @@ class Program
             double s1 = 0;
             do
             {
-                s1 += Step(-1, i) * Math.Cos(i * x) / Step(i, 2);
+                temp = Step(-1, i) * Math.Cos(i * x) / Step(i, 2);
+                s1 += temp;
                 i++;
             }
-            while (Math.Abs(Step(-1, i) * Math.Cos(i * x) / Step(i, 2)) >= 0.0001);
+            while (temp >= 0.0001);
             y1 = (x * x - (pi * pi / 3)) / 4;
             Console.WriteLine($"{s1} {y1}");
         }
         #endregion
     }
 }
+
 
