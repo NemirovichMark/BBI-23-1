@@ -348,6 +348,7 @@ namespace project
             double qq = 1;
             a = 0.1;
             h = 0.1;
+            y=0;
 for (x = a; x <= qq; x += h)
 {
     k = x * x * x;
