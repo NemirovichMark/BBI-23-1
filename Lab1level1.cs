@@ -68,76 +68,51 @@ class Program
 
 #region 1.4
 /*
-using System;
+double s = 0;
+double x = 1;    
+double k = x;
 
-class Program
-{
-    static void Main()
-    {
-        double x = 1.0; // Значение x
-        int n = 9;     // Количество членов ряда
-        double sum = 0.0;
-
-        for (int i = 1; i <= n; i++)
+        for (double n = 1; n <= 9; n++)
         {
-            double term = Math.Cos(i * x) / Math.Pow(x, i - 1);
-            sum += term;
+    s+= Math.Cos(n*x)/k;
+    k = k*x;
         }
 
-        Console.WriteLine("Сумма ряда равна: " + sum);
-    }
-}
+Console.WriteLine(s);
 */
 
 #endregion
 
 #region 1.5
 /*
-using System;
+double s = 0;  
+double h = 1; 
+double p = 1;    
 
-class Program
-{
-    static void Main()
-    {
-        double p = 2.0;  // Первый член последовательности
-        double h = 1.5; // Шаг арифметической прогрессии
-        int n = 10;     // Количество членов ряда
-        double sum = 0.0;
-
-        for (int i = 0; i < n; i++)
+        for (double i = 0; i <= 9; i++)
         {
-            double term = Math.Pow(p + i * h, 2);
-            sum += term;
+            s = s + (p + h * i) * (p + h * i);
         }
 
-        Console.WriteLine("Сумма квадратов 10 членов арифметической прогрессии равна: " + sum);
-    }
-}
+Console.WriteLine("\n{0}", s);
+Console.WriteLine(); 
 */
 #endregion
 
 #region 1.6
 /*
-using System;
+const double xh = -4, xk = 4, h = 0.5;
+double x, y;
+int i, n;
+n = (int) ((xk - xh) / h + 1); // определение кол-ва значений аргкмента при его изменении в пределах с шагом h
+x = xh; 
 
-class Program
-{
-    static void Main()
+for (i = 1; i <= n; i = i + 1)
     {
-        Console.WriteLine("x\t  y(x)");
-        Console.WriteLine("---------------------");
-
-        double startX = -4.0;
-        double endX = 4.0;
-        double step = 0.5;
-
-        for (double x = startX; x <= endX; x += step)
-        {
-            double y = 0.5 * x * x - 7 * x;
-            Console.WriteLine($"{x}\t{y}");
-        }
+    y = 0.5 * x * x - 7 * x;
+    Console.WriteLine("x={0:f2}\ty = {1:f2}", x, y);
+    x = x + h;
     }
-}
 */
 #endregion
 
@@ -189,27 +164,17 @@ class Program
 
 #region 1.9
 /*
-int n = 6;
-double s = 0.0;
+double s = 0, fac = 1;
+double a = -1;
+double m = 5;
 
-for (int i = 1; i <= n; i++)
-
-{
-    n = i * i
-    s += Math.Pow(-1, i) * Math.Pow(5, i) / fact(i);
-}
-
-
-static long fact(int n) // функция для нахождения факториала 
-{
-    long result = 1;
-    for (int i = 1; i <= n; i++)
-    {
-        result *= i;
+for (int i = 1; i <= 6; i++)
+    { 
+    fac = fac * i;
+    s += a * m / fac; 
+    a *= -1;
+    m *= 5;
     }
-
-    return result;
-}
 Console.WriteLine(s);
 */
 #endregion
@@ -243,14 +208,32 @@ for (int i = 0; i < 6; i++)
 
 #region 1.12
 /*
-int x = 2;
-double s = 0.0;
-for (int i = 1; i <= 10; i++)
-{
-   s += 1.0 + Math.Pow(x, i);
+double s = 1;
+double x = 7; 
+double k = x; 
 
-}
+for (int i = 1; i <= 10; i++)
+    {
+    s = s + 1 / k;
+    k *=x;
+    }
 Console.WriteLine(s);
+*/
+#endregion
+
+#region 1.13 
+/*
+Console.WriteLine("1_13:\n{0}", "x   y");
+double x, y;
+double h = 0.1;
+for (x = -1.5; x <= 1.5; x += h)
+{
+    if (x <= -1) y = 1;
+    if (x > -1 & x <= 1) y = -x;
+    else y = -1;
+    Console.WriteLine($"{x} {y}");
+}
+Console.WriteLine();
 */
 #endregion
 

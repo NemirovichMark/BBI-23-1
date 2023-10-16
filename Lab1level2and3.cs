@@ -27,63 +27,58 @@ class Program
 
 #region 2.2
 /*
-using System;
+    int n = 1; 
+    int p = 1; 
 
-class Program
-{
-    static void Main()
-    {
-        int L = 30000; // Заданное значение L
-        int n = 1;    // Начинаю с n = 1
-        int p = 1;    // Начальное значение произведения
-
-        while (p * (3 * n + 1) <= L)
-        {
-            p *= 3 * n + 1;
-            n++;
-        }
-
-        Console.WriteLine("Наибольшее значение n: " + (n - 1));
+    for (int i = n; i = i + 3) 
+    { 
+         if (p * i < 30000) 
+        p = p * i;
+    else
+      {
+    n = i - 3;
+    break;
+      }
     }
-}
+Console.WriteLine(n);
 */
 #endregion
 
 #region 2.3
 /*
-int a = 1; // первый член прогрессии
-int h = 2; // шаг прогрессии
-int p = 100; // заданное число
-int n = 0; // количество членов прогрессии
+int s = 0, n = 0, m;
+const int a = 2, h = 3, p = 41;
 
-int sum = 0; // сумма членов прогрессии
-int count = 0; // количество членов прогрессии
+while (s < p)
 
-while (sum <= p)
 {
-    count++;
-    sum += a + (count * h);
+m = a +n * h;
+s = s + m; 
+n = n + 1;
 }
 
-n = count - 1;
-
-Console.WriteLine("Количество членов прогрессии: " + n);
+n = n - 1;
+Console.WriteLine("{0:d}", n);
 */
 #endregion
 
 #region 2.4
 /*
-double e = 0.0001;
-n = 0;
-x = 0.9;
-s = 0;
-while (Math.Pow(x, 2 * n) >= e)
+const double eps = 0.0001;
+double x = 0.9;
+double s = 1;
+double n = 0;
+double a = 1;
+
+while (a >= eps)
+
 {
-    s += Math.Pow(x, 2 * n);
-    n += 1;
+n++;
+a *= x * x;
+s += a;
 }
-Console.WriteLine("2_4:\n{0}", s);
-Console.WriteLine();
+
+Console.WriteLine(s);
 */
 #endregion
 
@@ -170,11 +165,11 @@ Console.WriteLine();
 #endregion
 
 #region 3.7
-/*
-using System;
-mamespace ConsoleAplication2
 
-    class Program
+using System;
+
+
+class Program
 {
     public static int Factoria(int fact)
     {
@@ -189,17 +184,22 @@ mamespace ConsoleAplication2
 
         for (double x = 0.1; x <= 1; x = x + 0.05)
         {
+            i = 0;
             double tr = 0;
             do
             {
-                tr = (Math.Pow(x, (2 * i)) / Factorial(2 * i));
+                tr = (Math.Pow(x, (2 * i)) / Factoria(2 * i));
+                if (Math.Abs(tr) < 0.0001) break;
                 s = s + tr;
                 i++;
             }
             while (Math.Abs(tr) >= 0.0001);
             Console.WriteLine(s);
-            y = (Math.Pow(Math.E, x) + Math.Pow(Math.E, y - x)) / 2;
-            Console.WriteLina("Y равен" + y);
+            y = (Math.Pow(Math.E, x) + Math.Pow(Math.E, -x)) / 2;
+            Console.WriteLine("Y равен" + y);
         }
-*/
+    }
+}
+
+
 #endregion
