@@ -328,13 +328,15 @@ for (x = 0.1; x <= 1; x += 0.1)
     s = 0;
     int i = 1;
     double z = 0;
+    k = x * x;
     while (z >= 0.0001)
     {
-        z = Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
+        z = k*x / (4 * i * i - 1);
         s += z;
         i += 1;
+        k *= (-x) * x;
     }
-    y = (1 + Math.Pow(x, 2)) * Math.Atan(x) / 2;
+    y = (((1 + x*x) * Math.Atan(x))/ 2) - x/2;
     Console.WriteLine("\nСумма:{0}, Функция: {1}", s, y);
 }
 
