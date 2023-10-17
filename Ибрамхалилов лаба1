@@ -179,31 +179,37 @@ namespace project
             n = 8;
             double u = 1;
             double b = 1;
-            double c = 0;
             Console.Write($"{u} {b} ");
 
-            for (int i = 2; i < n; i++)
+            for (int i = 3; i < n; i++)
             {
-                c = u + b;
+               u = b + u;
+               b = u - b;
                 Console.Write($"{c} ");
-                u = b;
-                b = c;
+                
             }
             Console.WriteLine();
-            Console.WriteLine();
+            
             #endregion
 
             #region 1_15 
-            k = 1;
-            b = 1;
-            for (int i = 0; i < 5; i++)
-            {
-                c = k;
-                k = k + b;
-                b = c;
-            }
-            Console.WriteLine("1_15:\n{0}", $"{k}/{b}");
-            Console.WriteLine();
+            int n = 5; 
+            int aaa = 1; 
+            int bbb = 1; 
+            int ccc = 2; 
+            int ddd = 1; 
+
+        
+        for (int i = 3; i <= n; i++)
+        {
+             ccc = aaa + ccc;
+            aaa = ccc - aaa;
+            ddd = bbb + ddd;
+            bbb = ddd - bbb;
+        }
+
+        
+        Console.WriteLine($"5-й член последовательности: {ccc}/{ddd}");
             #endregion 
 
             #region 2_1 
@@ -360,7 +366,7 @@ for (x = a; x <= qq; x += h)
         k *= x * x;
         i += 1;
     }
-    y = (1 + x * x) * Math.Atan(x) / 2;
+    y = (1 + x * x) * Math.Atan(x) / 2-(x/2);
     Console.WriteLine($"{s}   {y}");
 }
             #endregion
