@@ -327,9 +327,11 @@ for (x = 0.1; x <= 1; x += 0.1)
 {
     s = 0;
     int i = 1;
-    while (Math.Abs(Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1))) >= 0.0001)
+    double z = 0;
+    while (z >= 0.0001)
     {
-        s += Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
+        z = Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
+        s += z;
         i += 1;
     }
     y = (1 + Math.Pow(x, 2)) * Math.Atan(x) / 2;
