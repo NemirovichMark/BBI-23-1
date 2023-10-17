@@ -405,12 +405,17 @@ internal class Program
             double b = 1;
             double h = 0.1;
             int i = 0;
+            double q = 1;
             for (double x = a; x <= b; x += h)
             {
-                while (Math.Abs(myPow(-1, i) * myPow(x, 2 * i) / Fact(2 * i)) >= 0.0001)
+                s = 0;
+                i = 0;
+                q = 1;
+                while (Math.Abs(q * myPow(x, 2 * i) / Fact(2 * i)) >= 0.0001)
                 {
-                    s += myPow(-1, i) * myPow(x, 2 * i) / Fact(2 * i);
+                    s += q * myPow(x, 2 * i) / Fact(2 * i);
                     i += 1;
+                    q = -q;
                 }
                 double y = Math.Cos(x);
                 Console.WriteLine($"{s} {y}");
