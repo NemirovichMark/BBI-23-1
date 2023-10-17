@@ -1,8 +1,10 @@
 #region 1.1 
+using System;
+
 double S = 0;
 for (int i = 2; i <= 35; i += 3)
 {
-    S = S + i;
+    S += i;
 }
 Console.WriteLine("1.1:\n{0}", S);
 Console.WriteLine();
@@ -12,7 +14,7 @@ Console.WriteLine();
 S = 0;
 for (double i = 1; i <= 10; i++)
 {
-    S = S + 1 / i;
+    S += 1 / i;
 }
 Console.WriteLine("1.2:\n{0}", S);
 Console.WriteLine();
@@ -20,9 +22,9 @@ Console.WriteLine();
 
 #region 1.3 
 double s = 0;
-for (double i = 2; i <= 113; i += 2)
+for (double i = 2; i <= 112; i += 2)
 {
-    s = s + i / (i + 1);
+    s += i / (i + 1);
 }
 Console.WriteLine("1.3:\n{0}", s);
 Console.WriteLine();
@@ -33,7 +35,7 @@ double x = 0.5;
 double e = 0;
 for (double i = 1; i <= 9; i++)
 { e += Math.Cos(i * x) / Math.Pow(x, i - 1); }
-Console.WriteLine(e);
+Console.WriteLine("1.4\n{0}", e);
 Console.WriteLine();
 #endregion
 
@@ -83,7 +85,7 @@ Console.WriteLine();
 #endregion
 
 #region 1.9 
-s = 0; 
+s = 0;
 double k = -1;
 double l = 5;
 for (int i = 1; i <= 6; i++)
@@ -124,6 +126,7 @@ for (int i = 1; i <= 6; i++)
 {
     Console.Write(t + " ");
 }
+Console.WriteLine();
 Console.WriteLine();
 #endregion
 
@@ -199,10 +202,9 @@ do
 }
 
 while (Math.Abs(r) > eps);
-Console.WriteLine(" 2.1:\n{0}",s);
+Console.WriteLine(" 2.1:\n{0}", s);
 Console.WriteLine();
 #endregion
-
 
 #region 2.2
 p = 1;
@@ -213,11 +215,10 @@ do
     n += 3;
 }
 while (p * n < 30000);
-n-= 3;
+n -= 3;
 Console.WriteLine("2.2:\n{0}", n);
 Console.WriteLine();
 #endregion
-
 
 #region 2.3
 a = 2;
@@ -245,10 +246,10 @@ p = 0;
 do
 {
     p = Math.Pow(x, 2 * n);
-    l += a;
+    l += p;
     n++;
 }
-while (a > eps);
+while (p > eps);
 Console.WriteLine("2.4\n{0}", l);
 Console.WriteLine();
 #endregion
@@ -276,7 +277,7 @@ while (k < 7)
 {
     u += s;
     s = s * 1.1;
-    k += 1;
+    k ++;
 }
 Console.WriteLine("2.7(а):\n{0}", u);
 Console.WriteLine();
@@ -322,10 +323,7 @@ Console.WriteLine();
 
 #region 3.6
 Console.WriteLine("3.6:");
-double z = 1;
-double q = 0.1;
-h = 0.1;
-for (x = q; x <= z; x += h)
+for (x = 0.1; x <= 1; x += 0.1)
 {
     s = 0;
     int i = 1;
@@ -335,7 +333,7 @@ for (x = q; x <= z; x += h)
         i += 1;
     }
     y = (1 + Math.Pow(x, 2)) * Math.Atan(x) / 2;
-    Console.WriteLine($"{s} {y}");
+    Console.WriteLine("\nСумма:{0}, Функция: {1}", s, y);
 }
 
 #endregion
