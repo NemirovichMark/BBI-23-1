@@ -7,66 +7,22 @@ namespace project
     {
         static void Main()
         {
-            #region 1_1(1)
-            Console.WriteLine("1_1(1):\nКоординаты (0, 2)");
-            double x = 0;
-            double y = 2;
+            #region 1_1
+            Console.WriteLine("1_1:");
+            Console.WriteLine("Введите x:");
+            double x = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите y:");
+            double y = Convert.ToDouble(Console.ReadLine());
             double r = 2;
             if (x * x + y * y == r * r)
             {
-                Console.WriteLine("Лежит на окружности");
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("Точка лежит на окружности");
             }
             else
             {
-                Console.WriteLine("Не лежит на окружности");
-            }
-            Console.WriteLine();
-            #endregion
-
-            #region 1_1(2)
-            Console.WriteLine("1_1(2):\nКоординаты (1.5, 0.7)");
-            x = 1.5;
-            y = 0.7;
-            r = 2;
-            if (x * x + y * y == r * r)
-            {
-                Console.WriteLine("Лежит на окружности");
-            }
-            else
-            {
-                Console.WriteLine("Не лежит на окружности");
-            }
-            Console.WriteLine();
-            #endregion
-
-            #region 1_1(3)
-            Console.WriteLine("1_1(3):\nКоординаты (1, 2)");
-            x = 1;
-            y = 1;
-            r = 2;
-            if (x * x + y * y == r * r)
-            {
-                Console.WriteLine("Лежит на окружности");
-            }
-            else
-            {
-                Console.WriteLine("Не лежит на окружности");
-            }
-            Console.WriteLine();
-            #endregion
-
-            #region 1_1(4)
-            Console.WriteLine("1_1(4):\nКоординаты (3, 0)");
-            x = 3;
-            y = 0;
-            r = 2;
-            if (x * x + y * y == r * r)
-            {
-                Console.WriteLine("Лежит на окружности");
-            }
-            else
-            {
-                Console.WriteLine("Не лежит на окружности");
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("Точка не лежит на окружности");
             }
             Console.WriteLine();
             #endregion
@@ -175,7 +131,7 @@ namespace project
                     Console.WriteLine("Точка лежит в 4 четверти");
                 }
             }
-            Console.WriteLine("2_5:\nКол-во точек в 1 четверти:{0}, Кол-во точек в 3 четверти: {1}", s1, s2);
+            Console.WriteLine("2_7:\nКол-во точек в 1 четверти:{0}, Кол-во точек в 3 четверти: {1}", s1, s2);
             #endregion
         }
     }
