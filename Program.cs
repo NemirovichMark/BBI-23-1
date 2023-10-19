@@ -334,26 +334,10 @@ namespace project
             Console.WriteLine("2_8:\n{0}", k);
             Console.WriteLine();
             #endregion
-
-            Console.WriteLine("3_6:");
-
-            #region 3_6 
-            double o = 1;
-            a = 0.1;
-            h = 0.1;
-            for (x = a; x <= o; x += h)
-            {
-                s = 0;
-                int i = 1;
-                while (Math.Abs(Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1))) >= 0.0001)
-                {
-                    s += Math.Pow(-1, i + 1) * (Math.Pow(x, 2 * i + 1) / (4 * Math.Pow(i, 2) - 1));
-                    i += 1;
-                }
-                y = (1 + Math.Pow(x, 2)) * Math.Atan(x) / 2;
-                Console.WriteLine($"{s} {y}");
             }
-            #endregion
-        }
     }
 }
+
+           
+
+ 
