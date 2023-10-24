@@ -166,18 +166,15 @@ Console.WriteLine();
 
 #region 1.14
 Console.WriteLine("1.14:");
-double n = 8;
 double u = 1;
 double b = 1;
-double c = 0;
 Console.Write($"{u} {b} ");
 
-for (int i = 2; i < n; i++)
+for (int i = 2; i < 8; i++)
 {
-    c = u + b;
-    Console.Write($"{c} ");
-    u = b;
-    b = c;
+    Console.Write($"{u + b} ");
+    b = b + u;
+    u = b - u;
 }
 Console.WriteLine();
 Console.WriteLine();
