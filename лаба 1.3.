@@ -1,0 +1,30 @@
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        double a = 0.1;
+        double b = 1;
+        double h = 0.05;
+        for (double x = a; x <= b + h; x = x + h)
+        {
+            double i = 0;
+            double s = 0;
+            double p = 1;
+            while (Math.Abs(p) >= 0.0001)
+            {
+                s = s + p;
+                i++;
+                double f = 1, pow_2x = 1;
+                for (double j = 1; j <= i; j++)
+                {
+                    f = f * j;
+                    pow_2x *= 2 * x;
+                }
+                p = pow_2x / f;
+            }
+            double y = Math.Pow(Math.E, 2 * x);
+            Console.WriteLine($"{x}, {s}, y={y}");
+        }
+    }
+}
