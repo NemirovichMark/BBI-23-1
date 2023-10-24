@@ -113,16 +113,19 @@ internal class Program
         Console.WriteLine(s);
 
     }
-    private static void Task4()
-    {
-        double s = 0;
-        double x = 10.0;
-        for (int i = 0; i <= 8; i++)
-        {
-            s += Math.Cos(x * (i + 1)) / myPow(x, i);
-        }
-        Console.WriteLine(s);
-    }
+ private static void Task4()
+ {
+     double s = 0;
+     double x = 1;
+     double k = x;
+     for (double i = 1; i <= 9; i++)
+     {
+         s += Math.Cos(i * x) / k;
+         k *= x;
+     }
+     Console.WriteLine("\n{0}", s);
+     Console.WriteLine();
+ }
 
     private static double myPow(double x, int y)
     {
@@ -298,17 +301,17 @@ internal class Program
         Console.WriteLine("сумма равна {0:f}", s);
     }
     private static void Task2_2()
-    {
-        double p = 1;
-        int L = 30000;
-        int i = 1;
-        while (p <= L)
-        {
-            i += 3;
-            p *= i;
-        }
-        Console.WriteLine(i);
-    }
+ {
+     double p = 1;
+     int L = 30000;
+     int i = 1;
+     while (p <= L)
+     {
+         i += 3;
+         p *= i;
+     }
+     Console.WriteLine(i-3);
+ }
     private static void Task2_3()
     {
         double sum = 0;
@@ -323,19 +326,22 @@ internal class Program
         }
         Console.WriteLine(n);
     }
-    private static void Task2_4()
-    {
-        double sum = 0;
-        double x = 0.5;
-        int n = 0;
-        const double eps = 0.0001;
-        while ((x * myPow(x, n)) >= eps)
-        {
-            sum += x * myPow(x, n);
-            n += 2;
-        }
-        Console.WriteLine(sum);
-    }
+ private static void Task2_4()
+ {
+     double sum = 0;
+     double x = 0.5;
+     int n = 0;
+     const double eps = 0.0001;
+     double k = myPow(x, n);
+     while ((x * k) >= eps)
+     {
+         k=myPow(x,n);
+         sum += k;
+         n += 2;
+     }
+
+     Console.WriteLine(sum);
+ }
     private static void Task2_5()
     {
         int m = 2, chast = 0, ostat = 0;
@@ -391,36 +397,38 @@ internal class Program
     }
     private static void Task3_1()
 
-    {
-        static long Fact(long n)
-        {
-            if (n == 0)
-                return 1;
-            else
-                return n * Fact(n - 1);
-        }
-        {
-            double s = 0;
-            double a = 0.1;
-            double b = 1;
-            double h = 0.1;
-            int i = 0;
-            double q = 1;
-            for (double x = a; x <= b; x += h)
-            {
-                s = 0;
-                i = 0;
-                q = 1;
-                while (Math.Abs(q * myPow(x, 2 * i) / Fact(2 * i)) >= 0.0001)
-                {
-                    s += q * myPow(x, 2 * i) / Fact(2 * i);
-                    i += 1;
-                    q = -q;
-                }
-                double y = Math.Cos(x);
-                Console.WriteLine($"{s} {y}");
-            }
+ {
+     static long Fact(long n)
+     {
+         if (n == 0)
+             return 1;
+         else
+             return n * Fact(n - 1);
+     }
+     {
+         double s = 0;
+         double a = 0.1;
+         double b = 1;
+         double h = 0.1;
+         int i = 0;
+         double q = 1;
+         for (double x = a; x <= b; x += h)
+         {
+             s = 0;
+             i = 0;
+             q = 1;
+             double k = q * myPow(x, 2 * i) / Fact(2 * i);
+             while (Math.Abs(k) >= 0.0001)
+             {
+                 k = q * myPow(x, 2 * i) / Fact(2 * i);
+                 s += k;
+                 i += 1;
+                 q = -q;
+             }
+             double y = Math.Cos(x);
+             Console.WriteLine($"{s} {y}");
+         }
 
-        }
-    }
+     }
+ }
 }
