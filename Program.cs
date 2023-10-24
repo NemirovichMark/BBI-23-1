@@ -347,6 +347,3 @@ for (x = 0.1; x <= 1; x += 0.1)
 }
 
 #endregion
-
-#endregion
-#endregion
