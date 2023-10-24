@@ -1,5 +1,6 @@
 #region 1.1 
 using System;
+
 double S = 0;
 for (int i = 2; i <= 35; i += 3)
 {
@@ -8,6 +9,7 @@ for (int i = 2; i <= 35; i += 3)
 Console.WriteLine("1.1:\n{0}", S);
 Console.WriteLine();
 #endregion
+
 #region 1.2 
 S = 0;
 for (double i = 1; i <= 10; i++)
@@ -17,6 +19,7 @@ for (double i = 1; i <= 10; i++)
 Console.WriteLine("1.2:\n{0}", S);
 Console.WriteLine();
 #endregion
+
 #region 1.3 
 double s = 0;
 for (double i = 2; i <= 112; i += 2)
@@ -26,14 +29,20 @@ for (double i = 2; i <= 112; i += 2)
 Console.WriteLine("1.3:\n{0}", s);
 Console.WriteLine();
 #endregion
-#region 1.4
-double x = 0.5;
-double e = 0;
+
+#region 1_4 
+s = 0;
+double x = 1;
+double K = x;
 for (double i = 1; i <= 9; i++)
-{ e += Math.Cos(i * x) / Math.Pow(x, i - 1); }
-Console.WriteLine("1.4\n{0}", e);
+{
+    s += Math.Cos(i * x) / K;
+    K *= x;
+}
+Console.WriteLine("1_4:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.5 
 s = 0;
 double h = 4;
@@ -45,6 +54,7 @@ for (double i = 0; i <= 9; i++)
 Console.WriteLine("1.5:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.6 
 Console.WriteLine("1.6:\n{0}", " x y");
 double y = 0;
@@ -55,6 +65,7 @@ for (x = -4; x <= 4.00001; x += 0.5)
 }
 Console.WriteLine();
 #endregion
+
 #region 1.7
 s = 1;
 for (double i = 1; i < 7; i++)
@@ -64,6 +75,7 @@ for (double i = 1; i < 7; i++)
 Console.WriteLine("1.7:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.8 
 s = 0;
 int a = 1;
@@ -75,21 +87,21 @@ for (int i = 1; i <= 6; i++)
 Console.WriteLine("1.8:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.9 
 s = 0;
 double k = -1;
 double l = 5;
-double f = 1;
 for (int i = 1; i <= 6; i++)
 {
-    s += k * l / i * f;
+    s += k * l / i;
     k *= -1;
     l *= 5;
-    f *= i;
 }
 Console.WriteLine("1.9:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.10 
 s = 1;
 for (int i = 1; i <= 7; i++)
@@ -99,6 +111,7 @@ for (int i = 1; i <= 7; i++)
 Console.WriteLine("1.10:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.11(а) 
 Console.WriteLine("1.11(а):");
 s = 0;
@@ -108,6 +121,7 @@ for (int i = 1; i <= 6; i++)
 }
 Console.WriteLine();
 #endregion
+
 #region 1.11(б) 
 Console.WriteLine("1.11(б):");
 s = 0;
@@ -119,16 +133,23 @@ for (int i = 1; i <= 6; i++)
 Console.WriteLine();
 Console.WriteLine();
 #endregion
+
 #region 1.12 
 s = 0;
 x = 2;
-for (double i = 0; i < 11; i++)
+double I = 1;
+int N = 0;
+do
 {
-    s += 1 / Math.Pow(x, i);
+    s += 1 / I;
+    I *= x;
+    N++;
 }
+while (N < 11);
 Console.WriteLine("1.12:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 1.13 
 Console.WriteLine("1.13:\n{0}", "x     y");
 y = 0;
@@ -142,6 +163,7 @@ for (x = -1.5; x <= 1.500001; x += h)
 }
 Console.WriteLine();
 #endregion
+
 #region 1.14
 Console.WriteLine("1.14:");
 double n = 8;
@@ -149,6 +171,7 @@ double u = 1;
 double b = 1;
 double c = 0;
 Console.Write($"{u} {b} ");
+
 for (int i = 2; i < n; i++)
 {
     c = u + b;
@@ -159,6 +182,7 @@ for (int i = 2; i < n; i++)
 Console.WriteLine();
 Console.WriteLine();
 #endregion
+
 #region 1.15 
 k = 1;
 b = 1;
@@ -171,22 +195,23 @@ for (int i = 0; i < 5; i++)
 Console.WriteLine("1.15:\n{0}", $"{k}/{b}");
 Console.WriteLine();
 #endregion
+
 #region 2.1 
-double eps = 0.0001;
 s = 0;
 double r = 0;
 y = 0.5;
 n = 1;
 do
 {
-    r = Math.Cos(n * y) / Math.Pow(n, 2);
+    r = Math.Cos(n * y) / n*n;
     s += r;
     n++;
 }
-while (Math.Abs(r) > eps);
+while (Math.Abs(r) > 0.0001);
 Console.WriteLine(" 2.1:\n{0}", s);
 Console.WriteLine();
 #endregion
+
 #region 2.2
 p = 1;
 n = 1;
@@ -200,6 +225,7 @@ n -= 3;
 Console.WriteLine("2.2:\n{0}", n);
 Console.WriteLine();
 #endregion
+
 #region 2.3
 a = 2;
 b = 3;
@@ -216,22 +242,24 @@ n -= 1;
 Console.WriteLine("2.3\n{0}", n);
 Console.WriteLine();
 #endregion
-#region 2.4
-x = 0.5;
-l = 0;
-eps = 0.0001;
+
+#region 2_4 
+double e = 0.0001;
+x = 0.9;
+s = 1;
+k = 1;
 n = 0;
-p = 0;
-do
+while (k >= e)
 {
-    p = Math.Pow(x, 2 * n);
-    l += p;
     n++;
+    k *= x * x;
+    s += k;
 }
-while (p > eps);
-Console.WriteLine("2.4\n{0}", l);
+Console.WriteLine("2_4:\n{0}", s);
 Console.WriteLine();
 #endregion
+
+
 #region 2.5 
 int m = 3,
 chast = 0,
@@ -246,6 +274,7 @@ ostat = o;
 Console.WriteLine("2.5:\nЧастное:{0}, Остаток: {1}", chast, ostat);
 Console.WriteLine();
 #endregion
+
 #region 2.7(а) 
 s = 10;
 u = 0;
@@ -254,11 +283,12 @@ while (k < 7)
 {
     u += s;
     s = s * 1.1;
-    k++;
+    k ++;
 }
 Console.WriteLine("2.7(а):\n{0}", u);
 Console.WriteLine();
 #endregion
+
 #region 2.7(б) 
 s = 10;
 u = 0;
@@ -272,6 +302,7 @@ while (u < 100)
 Console.WriteLine("2.7(б):\n{0}", k);
 Console.WriteLine();
 #endregion
+
 #region 2.7(в) 
 s = 10;
 k = 1;
@@ -283,6 +314,7 @@ while (s < 20)
 Console.WriteLine("2.7(в):\n{0}", k);
 Console.WriteLine();
 #endregion
+
 #region 2.8 
 s = 10000;
 k = 0;
@@ -294,22 +326,27 @@ while (s <= 20000)
 Console.WriteLine("2.8:\n{0}", k);
 Console.WriteLine();
 #endregion
+
 #region 3.6
 Console.WriteLine("3.6:");
 for (x = 0.1; x <= 1; x += 0.1)
 {
-    k = x * x * x;
     s = 0;
     int i = 1;
-    while (Math.Abs(k / (4 * i * i - 1)) >= 0.0001)
+    double z = 0;
+    k = x * x;
+    while (z >= 0.0001)
     {
-        s += k / (4 * i * i - 1);
-        k *= (-x) * x;
+        z = k*x / (4 * i * i - 1);
+        s += z;
         i += 1;
+        k *= (-x) * x;
     }
-    y = (1 + x * x) * Math.Atan(x) / 2 - x / 2;
+    y = (((1 + x*x) * Math.Atan(x))/ 2) - x/2;
     Console.WriteLine("\nСумма:{0}, Функция: {1}", s, y);
 }
+
+#endregion
 
 #endregion
 #endregion
