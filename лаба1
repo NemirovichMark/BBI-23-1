@@ -1,0 +1,473 @@
+#region 1.1
+/*
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int s = 2;
+        int d = 35;
+        int p = 3;
+        int sum = 0;
+
+        for (int i = s; i <= d; i += p)
+        {
+            sum += i;
+        }
+
+        Console.WriteLine( sum);
+    }
+}
+*/
+#endregion
+
+#region 1.2
+/* 
+using System;
+
+class Program
+{
+	static void Main()
+	{
+		int n = 10;
+		double sum = 0.0;
+
+		for (int i = 1; i <= n; i++)
+		{
+			sum += 1.0 / i;
+		}
+
+		Console.WriteLine(sum);
+	}
+}
+*/
+#endregion
+
+#region 1.3
+/*
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = 112; 
+        double sum = 0.0;
+
+        for (int i = 2; i <= n; i += 2)
+        {
+            sum += (double)i / (i + 1);
+        }
+
+        Console.WriteLine(sum);
+    }
+}
+*/
+#endregion
+
+#region 1.4
+/*
+double s = 0;
+double x = 1;    
+double k = x;
+
+        for (double n = 1; n <= 9; n++)
+        {
+    s+= Math.Cos(n*x)/k;
+    k = k*x;
+        }
+
+Console.WriteLine(s);
+*/
+
+#endregion
+
+#region 1.5
+/*
+double s = 0;  
+double h = 1; 
+double p = 1;    
+
+        for (double i = 0; i <= 9; i++)
+        {
+            s = s + (p + h * i) * (p + h * i);
+        }
+
+Console.WriteLine("\n{0}", s);
+Console.WriteLine(); 
+*/
+#endregion
+
+#region 1.6
+/*
+const double xh = -4, xk = 4, h = 0.5;
+double x, y;
+int i, n;
+n = (int) ((xk - xh) / h + 1); 
+x = xh; 
+
+for (i = 1; i <= n; i = i + 1)
+    {
+    y = 0.5 * x * x - 7 * x;
+    Console.WriteLine("x={0:f2}\ty = {1:f2}", x, y);
+    x = x + h;
+    }
+*/
+#endregion
+
+#region 1.7
+/*
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = 6;
+        int factorial = 1;
+
+        for (int i = 1; i <= n; i++)
+        {
+            factorial *= i;
+        }
+
+        Console.WriteLine(factorial);
+    }
+}
+*/
+#endregion
+
+#region 1.8
+/*
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = 6;
+        int sum = 0;
+        int factorial = 1;
+
+        for (int i = 1; i <= n; i++)
+        {
+            factorial *= i;
+            sum += factorial;
+        }
+
+        Console.WriteLine( sum);
+    }
+}
+*/
+#endregion
+
+#region 1.9
+/* 
+double s = 0, f = 1;
+double a = -1;
+double m = 5;
+
+for (int i = 1; i <= 6; i++)
+    { 
+    fac = c * i;
+    s += a * m / f; 
+    a *= -1;
+    m *= 5;
+    }
+Console.WriteLine(s);
+*/
+#endregion
+
+#region 1.10
+/*
+int a = 3;
+int s = 7;
+int v = 1;
+for (int i = 0; i < s; i++)
+{
+    v *= a;
+}
+Console.WriteLine(v);
+*/
+#endregion
+
+#region 1.11
+/*
+for (int i = 1; i <= 6; i++)
+{
+    Console.Write(i + " ");
+}
+
+for (int i = 0; i < 6; i++)
+{
+    Console.Write("5 ");
+}
+*/
+#endregion
+
+#region 1.12
+/*
+double s = 1;
+double x = 7; 
+double k = x; 
+
+for (int i = 1; i <= 10; i++)
+    {
+    s = s + 1 / k;
+    k *=x;
+    }
+Console.WriteLine(s);
+*/
+#endregion
+
+#region 1.13 
+/*
+Console.WriteLine("1_13:\n{0}", "x   y");
+double x, y;
+double h = 0.1;
+for (x = -1.5; x <= 1.5; x += h)
+{
+    if (x <= -1) y = 1;
+    if (x > -1 & x <= 1) y = -x;
+    else y = -1;
+    Console.WriteLine($"{x} {y}");
+}
+Console.WriteLine();
+*/
+#endregion
+
+#region 1.14
+/*
+int a = 1; 
+int b = 1; 
+int next = 0;
+Console.WriteLine(a);
+Console.WriteLine(b);
+for (int i = 2; i <= 7; i ++)
+{
+    next = (a + b);
+    Console.WriteLine($"{next}");
+    a = b;
+    b = next; 
+}
+*/
+#endregion
+
+#region 1.15
+/*
+double a1 = 1;
+double b1 = 1;
+double a2 = 2;
+double b2 = 1;
+int n = 5;
+
+
+for (int i = 3; i <= n; i++)
+{
+    double na = a1 + a2;
+    double nb = b1 + b2;
+
+
+    a1 = a2;
+    b1 = b2;
+    a2 = na;
+    b2 = nb;
+}
+double res = a2 / b2;
+Console.WriteLine(res);
+*/
+#endregion
+#region 2.1
+/*
+using System;
+
+class Program
+{
+	static void Main()
+	{
+		double x = 0.5; 
+		double epsilon = 0.0001; 
+		double sum = 0.0;
+		double term = 1.0; 
+		int n = 1;
+
+		while (Math.Abs(term) >= epsilon)
+		{
+			sum += term;
+			n++;
+			term = Math.Cos(n * x) / (n * n);
+		}
+
+		Console.WriteLine(sum);
+	}
+}
+*/
+#endregion
+
+#region 2.2
+/*
+    int n = 1; 
+    int p = 1; 
+
+    for (int i = n; i = i + 3) 
+    { 
+         if (p * i < 30000) 
+        p = p * i;
+    else
+      {
+    n = i - 3;
+    break;
+      }
+    }
+Console.WriteLine(n);
+*/
+#endregion
+
+#region 2.3
+/*
+int s = 0, n = 0, m;
+const int a = 2, h = 3, p = 41;
+
+while (s < p)
+
+{
+m = a +n * h;
+s = s + m; 
+n = n + 1;
+}
+
+Console.WriteLine("{0:d}", n);
+*/
+#endregion
+
+#region 2.4
+/*
+const double eps = 0.0001;
+double x = 0.9;
+double s = 1;
+double n = 0;
+double a = 1;
+
+while (a >= eps)
+
+{
+n++;
+a *= x * x;
+s += a;
+}
+
+Console.WriteLine(s);
+*/
+#endregion
+
+#region 2.5
+/*
+using System;
+namespace ConsoleApplication3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int N, M;
+            int result = 0;
+            N = Int32.Parse(Console.ReadLine());
+            M = Int32.Parse(Console.ReadLine());
+            while (N >= M)
+            {
+                N -= M;
+                result++;
+            }
+            Console.WriteLine("Частное: {result},остаток: {N}");
+            Console.ReadKey();
+        }
+    }
+}
+*/
+#endregion
+
+#region 2.7
+/*
+//А
+double dailyDistance = 10; 
+double sumDistance = dailyDistance; 
+
+for (int day = 2; day <= 7; day++)
+{
+    dailyDistance *= 1.1; 
+    sumDistance += dailyDistance; 
+}
+
+Console.WriteLine( sumDistance + );
+
+//Б
+double dailyDistance = 10; 
+double sumDistance = dailyDistance; 
+int day = 2; 
+
+while (sumDistance <= 100)
+{
+    dailyDistance *= 1.1; 
+    sumDistance += dailyDistance; 
+    day++;
+}
+
+Console.WriteLine((day - 1));
+
+//В 
+double dailyDistance = 10; 
+int day = 1; 
+
+while (dailyDistance <= 20)
+{
+    dailyDistance *= 1.1; 
+    day++;
+}
+
+Console.WriteLine( day );
+*/
+#endregion
+
+#region 2.8
+/*
+s = 10000;
+k = 0;
+while (s <= 20000)
+{
+    s *= 1.08;
+    k++;
+}
+Console.WriteLine("2.8:\n{0}", k);
+Console.WriteLine();
+*/
+/* 3.3 */
+using System;
+namespace project
+{
+    class Project
+    {
+
+        public static int Fact(int n)
+        {
+            if (n == 0) return 1;
+            if (n == 1) return 1;
+            else return Fact(n - 1) * n;
+        }
+        static void Main()
+        {
+            for (double x = 0.1; x <= 1; x += 0.1)
+            {
+                double s = 1;
+                int i = 1;
+                while (Math.Abs(Math.Cos(i * x) / Fact(i)) >= 0.0001)
+                {
+                    s += Math.Cos(i * x) / Fact(i);
+                    i++;
+                }
+                double y = Math.Pow(Math.E, Math.Cos(x)) * Math.Cos(Math.Sin(x));
+                Console.WriteLine($"{s} {y}");
+            }
+        }
+    }
+} 
