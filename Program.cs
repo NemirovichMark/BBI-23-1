@@ -46,34 +46,34 @@ Console.WriteLine();
 
 #region 2.1
 Console.WriteLine("2.1");
-int n = int.Parse(Console.ReadLine());
-int[] rostD = new int[n];
-int[] rostM = new int[n];
+double srM, srD; //Средний рост мальчиков и девочек
+int nM = 0, nD = 0; // Количество мальчиков и девочек
+Console.WriteLine("Введико количество учеников:");
+n = double.Parse(Console.ReadLine()); //количество учеников в целом
+double m = 0, d = 0; // суммарный рост для мальчиков и девочек
 for (int i = 0; i < n; i++)
 {
-    int rost = int.Parse(Console.ReadLine());
-    if (i < n / 2)
+    Console.WriteLine("Введите рост ученика:");
+    double s = double.Parse(Console.ReadLine());
+    Console.WriteLine("Введите пол ученика (д - девочка, м - мальчик):");
+    string gender = Console.ReadLine();
+    if (gender == "д")
     {
-        rostD[i] = rost;
-    }
+        d += s;
+        nD++;
+    }    
     else
     {
-        rostM[i - n / 2] = rost;
+        m += s;
+        nM++;   
     }
+
 }
-double srD = ROST(rostD);
-double srM = ROST(rostM);
-Console.WriteLine($"Средний рост девочек:{srD} ");
-Console.WriteLine($"Средний рост мальчиков:{srM} ");
-static double ROST(int[] heights)
-{
-    int sum = 0;
-    foreach (int height in heights)
-    {
-        sum += height;
-    }
-    return (double)sum / heights.Length;
-}
+srM = m / nM;
+srD = d / nD;
+Console.WriteLine($"Средний рост девочек: {srD}");
+Console.WriteLine($"Средний рост мальчиков: {srM}");
+Console.WriteLine();
 #endregion
 
 #region 2.4
