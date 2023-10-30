@@ -206,13 +206,14 @@ namespace project
             double sum = Math.Cos(x);
             for (int i = 1; i < 10000; i++)
             {
-                if (Math.Abs(Math.Cos(i * x) / (i * i)) < 0.0001)
+                double num = Math.Cos(i * x) / (i * i);
+                if (Math.Abs(num) < 0.0001)
                 {
                     break;
                 }
                 else
                 {
-                    sum += Math.Cos(i * x) / (i * i);
+                    sum += num;
                 }
 
             }
