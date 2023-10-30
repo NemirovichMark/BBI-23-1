@@ -8,7 +8,7 @@ class Program
     {
         #region 1_1 
         //int s = 0;
-        //for (int i = 2; i < 36; i += 1)
+        //for (int i = 2; i <+ 35; i += 3)
         //{
         //    s += i;
         //}
@@ -38,16 +38,18 @@ class Program
         #endregion
 
         #region 1_4
-        //double x = 5.0;
-        //double sum = Math.Cos(x);
-        //for (int i = 2; i <= 9; i++)
+        //double s = 0;
+        //double x = 1;
+        //double st = x;
+
+        //for (double n = 1; n <= 9; n++)
         //{
-        //    sum += Math.Cos(i * x) / Math.Pow(x, i - 1);
+        //    s += Math.Cos(n * x) / st;
+        //    st *= x;
         //}
 
-        //Console.WriteLine(sum);
+        //Console.WriteLine(s);
         //Console.ReadLine();
-
         #endregion
         #region 1_5
         //double p = 30;
@@ -149,14 +151,18 @@ class Program
         #endregion
 
         #region 1_12
-        //int x = 2;
-        //double s = 0;
+        //double s = 1;
+        //double x = 7;
+        //double k = x;
+
         //for (int i = 1; i <= 10; i++)
         //{
-        //    s += Math.Pow(x, i);
+        //    s = s + 1 / k;
+        //    k *= x;
         //}
         //Console.WriteLine(s);
         //Console.ReadLine();
+
         #endregion
 
         #region 1_13
@@ -231,20 +237,20 @@ class Program
         #endregion
 
         #region 2_2
-        //double p = 1, c = 0;
-        //for (int g = 1; g < 30000; g += 3)
+        //int n = 1;
+        //int p = 1;
+
+        //for (int i = n; i = i + 3);
         //{
-        //    if (p > 30000)
-        //    {
-        //        break;
-        //    }
+        //    if (p * i < 30000)
+        //        p = p * i;
         //    else
         //    {
-        //        p *= g;
-        //        c = g - 3;
+        //        n = i - 3;
+        //        break;
         //    }
         //}
-        //Console.WriteLine(c);
+        //Console.WriteLine(n);
         //Console.ReadLine();
         #endregion
         #region 2_3
@@ -265,14 +271,23 @@ class Program
         //Console.ReadLine();
         #endregion
         #region 2_4
-        //double e = 0.0001, x = 0.9, n = 0, s = 0;
-        //while (Math.Pow(x, 2 * n) >= e)
+        //const double eps = 0.0001;
+        //double x = 0.9;
+        //double s = 1;
+        //double n = 0;
+        //double a = 1;
+
+        //while (a >= eps)
+
         //{
-        //    s += Math.Pow(x, 2 * n);
-        //    n += 1;
+        //    n++;
+        //    a *= x * x;
+        //    s += a;
         //}
+
         //Console.WriteLine(s);
         //Console.ReadLine();
+
         #endregion
         #region 2_5
         //int N, M;
