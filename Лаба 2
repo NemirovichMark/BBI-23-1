@@ -34,7 +34,11 @@ namespace project
             double b = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("Введите c:");
             double c = Convert.ToDouble(Console.ReadLine());
-            double z = Math.Max(Math.Min(a, b), c);
+            double z = a;
+            if (b<z)
+                z = b;
+            if (c>z)
+                z = c;
             Console.WriteLine("Ответ:");
             Console.WriteLine(z);
             Console.WriteLine();
