@@ -21,7 +21,7 @@ class Program
         {
             c = Math.Min(a, b);
         }
-        Console.WriteLine("Ответ:");
+        Console.WriteLine("Ответ");
         Console.WriteLine(c);
         Console.WriteLine();
         #endregion
@@ -37,33 +37,33 @@ class Program
         Console.WriteLine("3.1");
         if (Math.Sqrt(s) / 2 >= Math.Sqrt(r / pi))
         {
-            Console.WriteLine("Можно");
+            Console.WriteLine("МОЖНО");
         }
         else
         {
-            Console.WriteLine("Нелья");
+            Console.WriteLine("НЕЛЬЗЯ");
         }
         r = 3.2;
         s = 4;
         Console.WriteLine("3.2");
         if (Math.Sqrt(s) / 2 >= Math.Sqrt(r / pi))
         {
-            Console.WriteLine("Можно");
+            Console.WriteLine("МОЖНО");
         }
         else
         {
-            Console.WriteLine("Нелья");
+            Console.WriteLine("НЕЛЬЗЯ");
         }
         r = 6;
         s = 9;
         Console.WriteLine("3.3");
         if (Math.Sqrt(s) / 2 >= Math.Sqrt(r / pi))
         {
-            Console.WriteLine("Можно");
+            Console.WriteLine("МОЖНО");
         }
         else
         {
-            Console.WriteLine("Нелья");
+            Console.WriteLine("НЕЛЬЗЯ");
         }
         Console.WriteLine();
         #endregion
