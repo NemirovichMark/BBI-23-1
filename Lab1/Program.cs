@@ -1444,11 +1444,14 @@ class Program
 
         #region 2-5
         Console.WriteLine("2-5:");
-        n = 7;m = 5;
-        arr = new double[n, m];
-        D = new int[n];
-        max = -100000000000000;
-        ind = 0;su = 0;
+        int n = 7;
+        int m = 5;
+        double[,] arr = new double[n, m];
+        int[] D = new int[m];
+        double max = -100000000000000;
+        int ind = 0;
+        double su = 0;
+        string str;
         Console.WriteLine("Введите матрицу: 7 строк по 5 эллементов,через пробел:");
         for (int i = 0; i < n; i++)
         {
@@ -1465,7 +1468,7 @@ class Program
             {
                 if (arr[j, i] > max)
                 {
-                    max = arr[i,j];
+                    max = arr[j,i];
                     ind = j;
                 }
             }
@@ -1473,6 +1476,7 @@ class Program
             ind = 0;
             max = -10000000000000000;
         }
+        Console.WriteLine("[{0}]", string.Join(';', D));
         Console.WriteLine("Исходная матрица:");
         for (int i = 0; i < n; i++)
         {
