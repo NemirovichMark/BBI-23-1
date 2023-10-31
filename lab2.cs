@@ -96,22 +96,40 @@ internal class Program
     }
     private static void Task2_5()
     {
-        int n = 30;
-        int H = 0;
-        Console.WriteLine("Введите норматив:");
-        double w = Convert.ToDouble(Console.ReadLine());
-        for (int i = 1; i <= n; i++)
+    int n = 30;
+    int H = 0;
+    int Q = 0;
+    int F = 0;
+    Console.WriteLine("Введите норматив:");
+    double w = Convert.ToDouble(Console.ReadLine());
+    for (int i = 1; i <= n; i++)
+    {
+        Console.WriteLine("Введите результат участника:");
+        string x = Console.ReadLine();
+        if (x != "-")
         {
-            Console.WriteLine("Введите результат участника:");
-            double x = Convert.ToDouble(Console.ReadLine());
-            if (x >= w)
+            double k = Convert.ToDouble(x);
+            if (k >= w)
             {
                 H++;
             }
+            if (k < w)
+            {
+                Q++;
+            }
         }
-        Console.WriteLine("Ответ:");
-        Console.WriteLine(H);
+        else
+        {
+            F++;
+        }
     }
+    Console.WriteLine("Прошли");
+    Console.WriteLine(H);
+    Console.WriteLine("Не прошли");
+    Console.WriteLine(Q);
+    Console.WriteLine("Сошли");
+    Console.WriteLine(F);
+}
     private static void Task2_8()
     {
         double S = 0;
