@@ -356,33 +356,20 @@ class Program
         //Console.ReadLine();
         #endregion
         #region 3_2
-        //double s = 0;
-        //double eps = 0.0001;
-        //double a = 0.1;
-        //double b = 0.8;
-        //double h = 0.1;
-        //double x = a;
-        //int i = 0;
-        //double y;
-        //while (true)
-        //{
-        //    double now = (Math.Pow(x, i) * Math.Sin((i * Math.PI) / 4));
-
-        //    if (now < eps)
-        //    {
-        //        y = ((x * Math.Sin((Math.PI / 4))) / (1 - 2 * x * Math.Cos((Math.PI) / 4) + x * x));
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        s += now;
-        //    }
-        //    i++;
-        //    x += h;
-        //}
-        //Console.WriteLine(y);
-        //Console.WriteLine(s);
-        //Console.ReadLine();
+        for (double x = 0.1; x <= 0.8; x += 0.1)
+        {
+            double s = 0;
+            int i = 1;
+            while (Math.Pow(x, i) * Math.Sin((i * Math.PI) / 4) >= 0.0001)
+            {
+                s += Math.Pow(x, i) * Math.Sin((i * Math.PI) / 4);
+                i += 1;
+            }
+            double y = ((x * Math.Sin((Math.PI / 4))) / (1 - 2 * x * Math.Cos((Math.PI) / 4) + x * x));
+            Console.WriteLine($"{s} {y}");
+            
+        }
+        Console.ReadLine();
         #endregion
 
     }
