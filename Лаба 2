@@ -59,19 +59,34 @@ namespace project
 
             #region 2_1
             Console.WriteLine("2_1:");
-            Console.WriteLine("Введите n:");
-            double n = Convert.ToDouble(Console.ReadLine());
-            double s = 0;
-            for (int i = 0; i < n; i++)
+            double girls = 0;
+            double boys = 0;
+            double r_g = 0;
+            double r_b = 0;
+            double sr_g = 0;
+            double sr_b = 0;
+            string input;
+            do
             {
-                Console.WriteLine("Введите рост ученика");
-                r = Convert.ToDouble(Console.ReadLine());
-                s += r;
-            }
-            s /= n;
-            Console.WriteLine("Средний рост учеников:");
-            Console.WriteLine(s);
-            Console.WriteLine();
+                Console.WriteLine("Введите пол, для окончания 0");
+                input = Console.ReadLine();
+                if (input == "g")
+                {
+                    girls += 1;
+                    Console.WriteLine("Введите рост");
+                    r_g += Convert.ToDouble(Console.ReadLine());
+                    sr_g = r_g / girls;
+                }
+                if (input == "b")
+                {
+                    boys += 1;
+                    Console.WriteLine("Введите рост");
+                    r_b += Convert.ToDouble(Console.ReadLine());
+                    sr_b = r_b / boys;
+                }
+            } while (input == "stop");
+            Console.WriteLine(sr_b);
+            Console.WriteLine(sr_g);
             #endregion
 
             #region 2_4
