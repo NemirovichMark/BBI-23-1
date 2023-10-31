@@ -114,13 +114,11 @@ while(true)
     double y = double.Parse(Console.ReadLine());
     if (x > 0 && y > 0)
     {
-        Console.WriteLine("Точка находится в 1-м квадранте");
         count1++;
         n++;
     }
     else if (x < 0 && y < 0)
     {
-        Console.WriteLine("Точка находится в 3-м квадранте");
         count3++;
         n++;
     }
