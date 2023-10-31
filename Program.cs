@@ -1,341 +1,139 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+
 namespace project
 {
     class Project
     {
-        public static int Fact(int n)
-        {
-            if (n == 0) return 1;
-            if (n == 1) return 1;
-            else return Fact(n - 1) * n;
-        }
         static void Main()
         {
-            #region 1_1 
-            double S = 0;
-            for (int i = 2; i <= 35; i += 3)
+            #region 1_1
+            Console.WriteLine("1_1:");
+            Console.WriteLine("Введите x:");
+            double x = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите y:");
+            double y = Convert.ToDouble(Console.ReadLine());
+            double r = 2;
+            if (x * x + y * y == r * r)
             {
-                S = S + i;
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("Точка лежит на окружности");
             }
-            Console.WriteLine("1_1:\n{0}", S);
+            else
+            {
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("Точка не лежит на окружности");
+            }
             Console.WriteLine();
             #endregion
 
-            #region 1_2 
-            S = 0;
-            for (double i = 1; i <= 10; i++)
-            {
-                S = S + 1 / i;
-            }
-            Console.WriteLine("1_2:\n{0}", S);
+            #region 1_4
+            Console.WriteLine("1_4:");
+            Console.WriteLine("Введите a:");
+            double a = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите b:");
+            double b = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите c:");
+            double c = Convert.ToDouble(Console.ReadLine());
+            double z = Math.Max(Math.Min(a, b), c);
+            Console.WriteLine("Ответ:");
+            Console.WriteLine(z);
             Console.WriteLine();
             #endregion
 
-            #region 1_3 
+            #region 1_7
+            Console.WriteLine("1_7:");
+            Console.WriteLine("Введите x");
+            x = Convert.ToDouble(Console.ReadLine());
+            if (Math.Abs(x) > 1)
+            {
+                y = 1;
+            }
+            if (Math.Abs(x) <= 1)
+            {
+                y = Math.Abs(x);
+            }
+            Console.WriteLine("Ответ:");
+            Console.WriteLine(y);
+            Console.WriteLine();
+            #endregion
+
+            #region 2_1
+            Console.WriteLine("2_1:");
+            Console.WriteLine("Введите n:");
+            double n = Convert.ToDouble(Console.ReadLine());
             double s = 0;
-            for (double i = 2; i <= 113; i += 2)
+            for (int i = 1; i <= n; i++)
             {
-                s = s + i / (i + 1);
+                Console.WriteLine("Введите рост ученика:");
+                r = Convert.ToDouble(Console.ReadLine());
+                s += r;
             }
-            Console.WriteLine("1_3:\n{0}", s);
+            s /= n;
+            Console.WriteLine("Средний рост учеников:");
+            Console.WriteLine(s);
             Console.WriteLine();
             #endregion
 
-            #region 1_4 
+            #region 2_4
+            Console.WriteLine("2_4:");
             s = 0;
-            double x = 1;
-            double k = x;
-            for (double i = 1; i <= 9; i++)
+            Console.WriteLine("Введите r1:");
+            double r1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите r2:");
+            double r2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Введите n:");
+            n = Convert.ToDouble(Console.ReadLine());
+            for (int i = 1; i <= n; i++)
             {
-                s += Math.Cos(i * x) / k;
-                k *= x;
-            }
-            Console.WriteLine("1_4:\n{0}", s);
-            Console.WriteLine();
-            #endregion
-
-            #region 1_5 
-            s = 0;
-            double h = 1;
-            double p = 1;
-            for (double i = 0; i <= 9; i++)
-            {
-                s += (p + h * i) * (p + h * i);
-            }
-            Console.WriteLine("1_5:\n{0}", s);
-            Console.WriteLine();
-            #endregion
-
-            #region 1_6 
-            Console.WriteLine("1_6:\n{0}", "x   y");
-            double y = 0;
-            for (x = -4; x <= 4; x += 0.5)
-            {
-                y = 0.5 * x * x - 7 * x;
-                Console.WriteLine($"{x} {y}");
-            }
-            Console.WriteLine();
-            #endregion
-
-            #region 1_7 
-            int n = 6;
-            int f = 6;
-            f = Fact(n);
-            Console.WriteLine("1_7:\n{0}", f);
-            Console.WriteLine();
-            #endregion
-            #region 1_8 
-            s = 0;
-            for (int i = 1; i <= 6; i++)
-            {
-                s += Fact(i);
-            }
-            Console.WriteLine("1_8:\n{0}", s);
-            Console.WriteLine();
-            #endregion 
-
-            #region 1_9 
-            s = 0; k = -1;
-            double l = 5;
-            for (int i = 1; i <= 6; i++)
-            {
-                s += k * l / Fact(i);
-                k *= -1;
-                l *= 5;
-            }
-            Console.WriteLine("1_9:\n{0}", s);
-            Console.WriteLine();
-            #endregion
-
-            #region 1_10 
-            s = 1;
-            for (int i = 1; i <= 7; i++)
-            {
-                s *= 3;
-            }
-            Console.WriteLine("1_10:\n{0}", s);
-            Console.WriteLine();
-            #endregion
-
-            Console.WriteLine("1_11(а):");
-
-            #region 1_11(а) 
-            s = 0;
-            for (int i = 1; i <= 6; i++)
-            {
-                Console.Write(i + " ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            #endregion
-
-            Console.WriteLine("1_11(б):");
-
-            #region 1_11(б) 
-            s = 0;
-            int t = 5;
-            for (int i = 1; i <= 6; i++)
-            {
-                Console.Write(t + " ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            #endregion
-            #region 1_12 
-            s = 0; k = -1;
-            l = 5;
-            for (int i = 1; i <= 6; i++)
-            {
-                s += k * l / Fact(i);
-                k *= -1;
-                l *= 5;
-            }
-            Console.WriteLine("1_12:\n{0}", s);
-            Console.WriteLine();
-            #endregion
-
-            #region 1_13 
-            Console.WriteLine("1_13:\n{0}", "x   y");
-            y = 0;
-            h = 0.1;
-            for (x = -1.5; x <= 1.5; x += h)
-            {
-                if (x <= -1) y = 1;
-                if (x > -1 & x <= 1) y = -x;
-                else y = -1;
-                Console.WriteLine($"{x} {y}");
-            }
-            Console.WriteLine();
-            #endregion
-
-            Console.WriteLine("1_14:");
-
-            #region 1_14 
-            n = 8;
-            double u = 1;
-            double b = 1;
-            double c = 0;
-            Console.Write($"{u} {b} ");
-
-            for (int i = 2; i < n; i++)
-            {
-                c = u + b;
-                Console.Write($"{c} ");
-                u = b;
-                b = c;
-            }
-            Console.WriteLine();
-            Console.WriteLine();
-            #endregion
-
-            #region 1_15 
-            k = 1;
-            b = 1;
-            for (int i = 0; i < 5; i++)
-            {
-                c = k;
-                k = k + b;
-                b = c;
-            }
-            Console.WriteLine("1_15:\n{0}", $"{k}/{b}");
-            Console.WriteLine();
-            #endregion 
-
-            #region 2_1 
-            x = 1;
-            double sum = Math.Cos(x);
-            for (int i = 1; i < 10000; i++)
-            {
-                double num = Math.Cos(i * x) / (i * i);
-                if (Math.Abs(num) < 0.0001)
+                Console.WriteLine("Введите x:");
+                x = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Введите y:");
+                y = Convert.ToDouble(Console.ReadLine());
+                if ((x * x + y * y < r1 * r1) & (x * x + y * y > r2 * r2))
                 {
-                    break;
-                }
-                else
-                {
-                    sum += num;
-                }
-
-            }
-            Console.WriteLine("2_1:\n{0}", sum);
-            Console.WriteLine();
-            #endregion
-
-            #region 2_2 
-            p = 1;
-            c = 0;
-            for (int g = 1; g < 30000; g += 3)
-            {
-                if (p > 30000)
-                {
-                    break;
-                }
-                else
-                {
-                    p *= g;
-                    c = g - 3;
+                    s++;
                 }
             }
-            Console.WriteLine("2_2:\n{0}", c);
+            Console.WriteLine("Ответ:");
+            Console.WriteLine(s);
             Console.WriteLine();
             #endregion
 
-            #region 2_3 
-            p = 100;
-            n = 0;
-            s = 0;
-            double a = 1;
-            h = 2;
-            while (s <= p)
+            #region 2_7
+            Console.WriteLine("2_7:");
+            double s1 = 0;
+            double s2 = 0;
+            Console.WriteLine("Введите n:");
+            n = Convert.ToDouble(Console.ReadLine());
+            for (int i = 1; i <= n; i++)
             {
-                s += (a + n * h);
-                n += 1;
-            }
-            Console.WriteLine("2_3:\n{0}", n - 1);
-            Console.WriteLine();
-            #endregion
+                Console.WriteLine("Введите x:");
+                x = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Введите y:");
+                y = Convert.ToDouble(Console.ReadLine());
+                if (x > 0 & y > 0)
+                {
+                    Console.WriteLine("Точка лежит в 1 четверти");
+                    s1++;
+                }
+                if (x < 0 & y > 0)
+                {
 
-            #region 2_4 
-            double e = 0.0001;
-            x = 0.9;
-            s = 1;
-            k = 1;
-            n = 0;
-            while (k >= e)
-            {
-                n++;
-                k *= x * x;
-                s += k;
+                    Console.WriteLine("Точка лежит в 2 четверти");
+                }
+                if (x < 0 & y < 0)
+                {
+                    Console.WriteLine("Точка лежит в 3 четверти");
+                    s2++;
+                }
+                if (x > 0 & y < 0)
+                {
+                    Console.WriteLine("Точка лежит в 4 четверти");
+                }
             }
-            Console.WriteLine("2_4:\n{0}", s);
-            Console.WriteLine();
+            Console.WriteLine("2_7:\nКол-во точек в 1 четверти:{0}, Кол-во точек в 3 четверти: {1}", s1, s2);
             #endregion
-
-            #region 2_5 
-            int m = 3, chast = 0, ostat = 0;
-            n = 5;
-            while (n - m >= 0)
-            {
-                chast += 1;
-                n = n - m;
-            }
-            ostat = n;
-            Console.WriteLine("2_5:\nЧастное:{0}, Остаток: {1}", chast, ostat);
-            Console.WriteLine();
-            #endregion
-
-            #region 2_7(а) 
-            s = 10;
-            u = 0;
-            k = 0;
-            while (k < 7)
-            {
-                u += s;
-                s = s * 1.1;
-                k += 1;
-            }
-            Console.WriteLine("2_7(а):\n{0}", u);
-            Console.WriteLine();
-            #endregion
-
-            #region 2_7(б) 
-            s = 10;
-            u = 0;
-            k = 0;
-            while (u < 100)
-            {
-                u += s;
-                s *= 1.1;
-                k++;
-            }
-            Console.WriteLine("2_7(б):\n{0}", k);
-            Console.WriteLine();
-            #endregion
-
-            #region 2_7(в) 
-            s = 10;
-            k = 1;
-            while (s < 20)
-            {
-                s *= 1.1;
-                k++;
-            }
-            Console.WriteLine("2_7(в):\n{0}", k);
-            Console.WriteLine();
-            #endregion
-
-            #region 2_8 
-            s = 10000;
-            k = 0;
-            while (s <= 20000)
-            {
-                s *= 1.08;
-                k++;
-            }
-            Console.WriteLine("2_8:\n{0}", k);
-            Console.WriteLine();
-            #endregion
-
         }
     }
 }
