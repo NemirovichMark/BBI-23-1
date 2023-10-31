@@ -102,29 +102,42 @@ Console.WriteLine();
 
 #region 2.7
 Console.Write("2.7");
-Console.WriteLine("Введите количество точек:");
-n = int.Parse(Console.ReadLine());
-int count1 = 0;
-int count3 = 0; 
-for (int i = 1; i <= n; i++)
+int n = 0;
+double count1 = 0;
+double count3 = 0;
+double p1 = 0, p3 = 0;
+while(true)
 {
     Console.WriteLine("Введите x");
-    x = double.Parse(Console.ReadLine());
+    double x = double.Parse(Console.ReadLine());
     Console.WriteLine("Введите y");
-    y = double.Parse(Console.ReadLine());
+    double y = double.Parse(Console.ReadLine());
     if (x > 0 && y > 0)
     {
         Console.WriteLine("Точка находится в 1-м квадранте");
         count1++;
+        n++;
     }
     else if (x < 0 && y < 0)
     {
         Console.WriteLine("Точка находится в 3-м квадранте");
         count3++;
+        n++;
+    }
+    else if ((x > 0 && y < 0) || (x < 0 && y > 0))
+    {
+        n++;
+    }
+    Console.WriteLine("Введите stop для завершения");
+    string stop = Console.ReadLine();
+    if (stop == "stop")
+    {
+        break;
     }
 }
-
-Console.WriteLine($"Количество точек в 1-м квадранте: {count1}");
-Console.WriteLine($"Количество точек в 3-м квадранте: {count3}");
+p1 = count1 / n * 100;
+p3 = count3 / n * 100;
+Console.WriteLine($"Процент точек в 1-м квадранте: {p1} %");
+Console.WriteLine($"Процент точек в 3-м квадранте: {p3} %");
 Console.WriteLine();
 #endregion
