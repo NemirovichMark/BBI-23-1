@@ -1,0 +1,7 @@
+C:\Users\Пользователь\source\repos\laba 1\bin\Debug\laba 1.exe.config
+C:\Users\Пользователь\source\repos\laba 1\bin\Debug\laba 1.exe
+C:\Users\Пользователь\source\repos\laba 1\bin\Debug\laba 1.pdb
+C:\Users\Пользователь\source\repos\laba 1\obj\Debug\laba 1.csproj.AssemblyReference.cache
+C:\Users\Пользователь\source\repos\laba 1\obj\Debug\laba 1.csproj.CoreCompileInputs.cache
+C:\Users\Пользователь\source\repos\laba 1\obj\Debug\laba 1.exe
+C:\Users\Пользователь\source\repos\laba 1\obj\Debug\laba 1.pdb
