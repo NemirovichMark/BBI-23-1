@@ -1018,5 +1018,39 @@ namespace lab3
         }
     }
 }
-
+/////////
+using System;
+namespace 3_3
+{
+    class Program 
+    {
+        static void Main()
+        {
+            int n=int.Parse(Console.ReadLine());
+            double [] a=new double [n];
+            int imax=0;
+            for (int i=0;i<n;i++)
+            {
+                a[i]=double.Parse(Console.ReadLine());
+                if (a[i]>a[imax]) imax=i;
+            }
+            Console.WriteLine();
+            for (int i=0;i<n;i++) Console.Write(a[i]);
+            int j=0;
+            double c;
+            if (imax>=1)
+            {
+                while (imax-j>2)
+                {
+                    c=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=c;
+                    j+=2; 
+                }
+            }
+            Console.WriteLine();
+            for (int i=0;i<n;i++) Console.Write(a[i]);
+        }
+    }
+}
 
