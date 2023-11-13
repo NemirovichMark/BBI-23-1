@@ -274,7 +274,7 @@ namespace lab3
             }
             a[m]=2*a[m];
             Console.WriteLine();
-            Console.Write("Конечный массив: ");
+            Console.Write("Мин эл увелич в 2 раза: ");
             for (int i=0;i<k;i++)
             {
                 Console.Write("{0} ",a[i]);
@@ -330,7 +330,7 @@ namespace lab3
                 Console.Write("{0} ",a[i]);
             }
             Console.WriteLine();
-            Console.Write("Конечный массив: ");
+            Console.Write("Все эл перед мин увелич в 2 раза: ");
             for (int i=0;i<k;i++)
             {
                 if (i<m)
@@ -365,7 +365,7 @@ namespace lab3
                 Console.Write("{0} ",a[i]);
             }
             Console.WriteLine();
-            Console.Write("Конечный массив: ");
+            Console.Write("Все эл после макс замен ср знач эл массива: ");
             for (int i=0;i<k;i++)
             {
                 if (i>m)
@@ -413,7 +413,7 @@ namespace lab3
                 Console.Write("{0} ",a[i]);
             }
             Console.WriteLine();
-            Console.Write("Новый массив: ");
+            Console.Write("Новый массив из - эл между макс и мин: ");
             for (int i=0;i<j;i++)
             {
                 Console.Write("{0} ",b[i]);
@@ -450,8 +450,8 @@ namespace lab3
                 }
             }
             Console.WriteLine();
-            Console.Write("Конечный массив: ");
-            for (int i=k-1;i>m+1;i--)
+            Console.Write("Добавл п после самого близкого к ср знач эл: ");
+            for (int i=k-1;i>=m+1;i--)
             {
                 a[i+1]=a[i];
             }
@@ -485,7 +485,7 @@ namespace lab3
             Console.WriteLine();
             a[m+1]=a[m+1]*2;
             Console.WriteLine();
-            Console.Write("Конечный массив: ");
+            Console.Write("Увелич в 2 раза эл после макс эл: ");
             for (int i=0;i<k;i++)
             {
                 Console.Write("{0} ",a[i]);
@@ -522,7 +522,7 @@ namespace lab3
                     if (a[i]<a[m1]) m1=i;
                 }
                 c=a[m];a[m]=a[m1];a[m1]=c;
-                Console.Write("Конечный массив: ");
+                Console.Write("Макс эл и мин из следующ за ним эл массива помен мест: ");
                 for (int i=0;i<k;i++)
                 {
                     Console.Write("{0} ",a[i]);
@@ -598,7 +598,7 @@ namespace lab3
                 {
                     for (int i=imin;i<k-1;i++) a[i]=a[i+1];
                 }
-                Console.Write("Конечный массив: ");
+                Console.Write("Удал мин среди положит эл: ");
                 for (int i=0;i<k-1;i++)
                 {
                     Console.Write("{0} ",a[i]);
@@ -633,8 +633,8 @@ namespace lab3
             if (ok==false) Console.WriteLine("нет положительных элементов");
             else 
             {
-                Console.Write("Конечный массив: ");
-                for (int i=k-1;i>ip+1;i--)
+                Console.Write("Встав п после послед + эл: ");
+                for (int i=k-1;i>=ip+1;i--)
                 {
                     a[i+1]=a[i];
                 }
@@ -675,7 +675,7 @@ namespace lab3
                 ss=0;
                 for (int i=imax+1;i<k;i++) ss+=a[i];
                 a[io]=ss;
-                Console.Write("Конечный массив: ");
+                Console.Write("1й - эл замен суммой эл расп после макс: ");
                 for (int i=0;i<k;i++)
                 {
                     Console.Write("{0} ",a[i]);
@@ -703,7 +703,7 @@ namespace lab3
             }
             Console.WriteLine();
             a[imax]=imax;
-            Console.Write("Конечный массив: ");
+            Console.Write("Макс из эл с чет индексами заменить его индексом: ");
             for (int i=0;i<k;i++)
             {
                 Console.Write("{0} ",a[i]);
@@ -737,7 +737,7 @@ namespace lab3
             else
             {
                 c=a[imax];a[imax]=a[io];a[io]=c;
-                Console.Write("Конечный массив: ");
+                Console.Write("Помен мест макс и 1й отриц эл: ");
                 for (int i=0;i<k;i++)
                 {
                     Console.Write("{0} ",a[i]);
@@ -780,21 +780,243 @@ namespace lab3
                 j++;
             }
             Console.WriteLine();
-            Console.Write("Преобразованный массив А: ");
+            Console.Write("Преобразованный массив А(вставл массив б после к-го эл массив а): ");
             for (int i=0;i<n1+m;i++) Console.Write("{0} ",a1[i]);
             #endregion
             #region 2_16
+            Console.WriteLine("№2_16:");
+            Console.WriteLine("Введите размер массива (обязательно нечетное значение)");
+            n1=int.Parse(Console.ReadLine());
+            a1= new double [n1];
+            a2= new double [n1];
+            for (int i=0;i<n1;i++)
+            {
+                a1[i]=double.Parse(Console.ReadLine());
+            }
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<n1;i++) Console.Write("{0} ",a1[i]);
+            sr=a1[(n1-1)/2];
+            j=0;
+            for (int i=0;i<n1;i++)
+            {
+                if (a1[i]<sr)
+                {
+                    a2[j]=i;
+                    j++;
+                }
+            }
+            Console.Write("Новый массив из индексов элементов, меньших среднего: ");
+            for (int i=0;i<j;i++)
+            {
+                Console.Write("{0} ",a2[i]);
+            }
             #endregion
+            Console.WriteLine();
             #region 2_17
+            Console.WriteLine("№2_17:");
+            Console.WriteLine("Введите размер массива");
+            n1=int.Parse(Console.ReadLine());
+            a1= new double [n1];
+            imax=0;
+            imin=0;
+            double sp=0;
+            double so=0;
+            ko=0;kp=0;
+            for (int i=0;i<n1;i++)
+            {
+                a1[i]=double.Parse(Console.ReadLine());
+            }
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+              if (a1[i]<a1[imin]) imin=i;
+              if (a1[i]>a1[imax]) imax=i;
+              if (a1[i]>0) 
+              {
+                  sp+=a1[i];
+                  kp++;
+              }
+              if (a1[i]<0)
+              {
+                  so+=a1[i];
+                  ko++;
+              }
+            }
+            Console.WriteLine();
+            if (imin<imax)
+            {
+                if (ko!=0)
+                {
+                    double otv=so/ko;
+                    Console.WriteLine("Ср арифм отрицательных чисел: {0}", otv);
+                }
+                else Console.WriteLine("Нет отрицательных чисел");
+            }
+            else
+            {
+                if (kp!=0)
+                {
+                    double otv=sp/kp;
+                    Console.WriteLine("Ср арифм положительных чисел: {0}", otv); 
+                }
+                else Console.WriteLine("Нет положительных чисел");
+            }
+            Console.WriteLine();
             #endregion
             #region 2_18
+            Console.WriteLine("№2_18:");
+            Console.WriteLine("Введите размер массива");
+            n1=int.Parse(Console.ReadLine());
+            a1= new double [n1];
+            for (int i=0;i<n1;i++)
+            {
+                a1[i]=double.Parse(Console.ReadLine());
+            }
+            double max1=a1[1];
+            double max2=a1[0];
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+              if ((i%2==0) && (a1[i]>max2)) max2=a1[i];
+              if ((a1[i]>max1) && (i%2==1)) max1=a1[i];
+            }
+            Console.WriteLine();
+            if (max2>max1)
+            {
+                for (int i=0; i<n1/2; i++) a1[i]=0;
+            }
+            else
+            {
+                for (int i=n1/2; i<n1; i++) a1[i]=0;
+            }
+            Console.Write("Конечный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+            }
             #endregion
+            Console.WriteLine();
             #region 2_19
+            Console.WriteLine("№2_19:");
+            Console.WriteLine("Введите размер массива");
+            n1=int.Parse(Console.ReadLine());
+            a1= new double [n1];
+            for (int i=0;i<n1;i++)
+            {
+                a1[i]=double.Parse(Console.ReadLine());
+            }
+            imax=0;
+            s=0;
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+              if (a1[i]>a1[imax]) imax=i;
+              s+=a1[i];
+               
+            }
+            Console.WriteLine();
+            if (a1[imax]>s) a1[imax]=0;
+            else a1[imax]=2*a1[imax];
+            Console.Write("Конечный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+            }
             #endregion
+            Console.WriteLine();
             #region 2_20
+            Console.WriteLine("№2_20:");
+            Console.WriteLine("Введите размер массива");
+            n1=int.Parse(Console.ReadLine());
+            a1= new double [n1];
+            for (int i=0;i<n1;i++)
+            {
+                a1[i]=double.Parse(Console.ReadLine());
+            }
+            imin=0;
+            double ss1=0;
+            double s2=0;
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<n1;i++)
+            {
+              Console.Write("{0} ",a1[i]);
+              if (a1[i]<a1[imin]) imin=i;
+              if (i%2==0) s2+=a1[i];
+              else ss1+=a1[i];
+            }
+            io=0;
+            while (a1[io]>=0) io+=1;
+            Console.WriteLine();
+            if (io<imin) Console.WriteLine("сумма элементов с чёт индексами: {0}",s2);
+            else Console.WriteLine("сумма элементов с нечёт индексами: {0}",ss1);
             #endregion
-            
-            
+            #region 3_1
+            k=10;
+            a1= new double [] {1,2,5,3,4,5,2,1,5,-5};
+            a2= new double [k];
+            j=0;
+            int imax=0;
+            for (int i=0;i<k;i++)
+            {
+                if (a1[i]==a1[imax]) 
+                {
+                    a2[j]=i;
+                    j++;
+                }
+                else if (a1[i]>a1[imax])
+                {
+                    a2[0]=i;
+                    imax=i;
+                    j=1;
+                }
+            }
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<k;i++) Console.Write("{0} ",a1[i]);
+            Console.WriteLine();
+            for (int i=0; i<j; i++)
+            {
+                Console.Write("{0} ",a2[i]);
+            }
+            #endregion
+            #region 3_2
+            k=10;
+            a1= new double [] {1,2,5,3,4,5,2,1,5,-5};
+            int [] a3= new int [k];
+            j=0;
+            imax=0;
+            for (int i=0;i<k;i++)
+            {
+                if (a1[i]==a1[imax]) 
+                {
+                    a3[j]=i;
+                    j++;
+                }
+                else if (a1[i]>a1[imax])
+                {
+                    a3[0]=i;
+                    imax=i;
+                    j=1;
+                }
+            }
+            Console.WriteLine();
+            Console.Write("Исходный массив: ");
+            for (int i=0;i<k;i++) Console.Write("{0} ",a1[i]);
+            for (int i=0; i<j; i++)
+            {
+                a1[a3[i]]=a1[a3[i]]*(i+1);
+            }
+            Console.WriteLine();
+            Console.Write("Конечный массив: ");
+            for (int i=0; i<k; i++)
+            {
+                Console.Write("{0} ",a1[i]);
+            }
+            #endregion
         }
     }
 }
+
+
