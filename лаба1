@@ -6,12 +6,12 @@ class Program
 {
     static void Main()
     {
-        int start = 2;
-        int end = 35;
-        int step = 3;
+        int s = 2;
+        int d = 35;
+        int p = 3;
         int sum = 0;
 
-        for (int i = start; i <= end; i += step)
+        for (int i = s; i <= d; i += p)
         {
             sum += i;
         }
@@ -164,14 +164,15 @@ class Program
 
 #region 1.9
 /* 
-double s = 0, fac = 1;
+
+double s = 0, f = 1;
 double a = -1;
 double m = 5;
 
 for (int i = 1; i <= 6; i++)
     { 
-    fac = fac * i;
-    s += a * m / fac; 
+    fac = c * i;
+    s += a * m / f; 
     a *= -1;
     m *= 5;
     }
@@ -182,13 +183,13 @@ Console.WriteLine(s);
 #region 1.10
 /*
 int a = 3;
-int step = 7;
-int otv = 1;
-for (int i = 0; i < step; i++)
+int s = 7;
+int v = 1;
+for (int i = 0; i < s; i++)
 {
-    otv *= a;
+    v *= a;
 }
-Console.WriteLine(otv);
+Console.WriteLine(v);
 */
 #endregion
 
@@ -265,20 +266,182 @@ int n = 5;
 
 for (int i = 3; i <= n; i++)
 {
-    double nexta = a1 + a2;
-    double nextb = b1 + b2;
+    double na = a1 + a2;
+    double nb = b1 + b2;
 
 
     a1 = a2;
     b1 = b2;
-    a2 = nexta;
-    b2 = nextb;
+    a2 = na;
+    b2 = nb;
 }
 double res = a2 / b2;
 Console.WriteLine(res);
 */
 #endregion
+#region 2.1
+/*
+using System;
 
+class Program
+{
+	static void Main()
+	{
+		double x = 0.5; 
+		double epsilon = 0.0001; 
+		double sum = 0.0;
+		double term = 1.0; 
+		int n = 1;
+
+		while (Math.Abs(term) >= epsilon)
+		{
+			sum += term;
+			n++;
+			term = Math.Cos(n * x) / (n * n);
+		}
+
+		Console.WriteLine(sum);
+	}
+}
+*/
+#endregion
+
+#region 2.2
+/*
+    int n = 1; 
+    int p = 1; 
+
+    for (int i = n; i = i + 3) 
+    { 
+         if (p * i < 30000) 
+        p = p * i;
+    else
+      {
+    n = i - 3;
+    break;
+      }
+    }
+Console.WriteLine(n);
+*/
+#endregion
+
+#region 2.3
+/*
+int s = 0, n = 0, m;
+const int a = 2, h = 3, p = 41;
+
+while (s < p)
+
+{
+m = a +n * h;
+s = s + m; 
+n = n + 1;
+}
+
+Console.WriteLine("{0:d}", n);
+*/
+#endregion
+
+#region 2.4
+/*
+const double eps = 0.0001;
+double x = 0.9;
+double s = 1;
+double n = 0;
+double a = 1;
+
+while (a >= eps)
+
+{
+n++;
+a *= x * x;
+s += a;
+}
+
+Console.WriteLine(s);
+*/
+#endregion
+
+#region 2.5
+/*
+using System;
+namespace ConsoleApplication3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int N, M;
+            int result = 0;
+            N = Int32.Parse(Console.ReadLine());
+            M = Int32.Parse(Console.ReadLine());
+            while (N >= M)
+            {
+                N -= M;
+                result++;
+            }
+            Console.WriteLine("Частное: {result},остаток: {N}");
+            Console.ReadKey();
+        }
+    }
+}
+*/
+#endregion
+
+#region 2.7
+/*
+//А
+double dailyDistance = 10; 
+double sumDistance = dailyDistance; 
+
+for (int day = 2; day <= 7; day++)
+{
+    dailyDistance *= 1.1; 
+    sumDistance += dailyDistance; 
+}
+
+Console.WriteLine( sumDistance + );
+
+//Б
+double dailyDistance = 10; 
+double sumDistance = dailyDistance; 
+int day = 2; 
+
+while (sumDistance <= 100)
+{
+    dailyDistance *= 1.1; 
+    sumDistance += dailyDistance; 
+    day++;
+}
+
+Console.WriteLine((day - 1));
+
+//В 
+double dailyDistance = 10; 
+int day = 1; 
+
+while (dailyDistance <= 20)
+{
+    dailyDistance *= 1.1; 
+    day++;
+}
+
+Console.WriteLine( day );
+*/
+#endregion
+
+#region 2.8
+/*
+s = 10000;
+k = 0;
+while (s <= 20000)
+{
+    s *= 1.08;
+    k++;
+}
+Console.WriteLine("2.8:\n{0}", k);
+Console.WriteLine();
+*/
 /* 3.3 */
 using System;
 namespace project
