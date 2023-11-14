@@ -8,8 +8,50 @@ using System.Reflection.Metadata;
 using System.Security.Cryptography;
 using System.Text;
 
+/*
+1 1 1 1 1
+-1 1 1 1 1
+-1 1 1 1 1
+-1 1 1 1 1
+2 2 2 2 2 2
+2 -2 -2 -2 -2 -2
+2 -2 -2 -2 -2 -2
+2 -2 -2 -2 -2 -2
+2 -2 -2 -2 -2 -2
+*/
 class Program
 {
+    public static double[,] vvod(int a, int b)
+    {
+        string str;
+        double[,] massivchik = new double[a, b];
+        double[] masss;
+        Console.WriteLine("Введите матрицу: " + a + " строки по " + b +" эллементов,через пробел:");
+        for (int i = 0; i < a; i++)
+        {
+            str = Console.ReadLine();
+            masss = str.Split(' ').Select(double.Parse).ToArray();
+            for (int j = 0; j < b; j++)
+            {
+                massivchik[i, j] = masss[j];
+            }
+        }
+        Console.WriteLine();
+        return massivchik;
+    }
+    public static void vivod(double[,] arr, int a, int b)
+    {
+        Console.WriteLine("Конечная матрица");
+        for (int i = 0; i < a; i++)
+        {
+            for (int j = 0; j < b; j++)
+            {
+                Console.Write(arr[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
     public static double[,] MaxMatr(double[,] arr, int a)
     {
         int ind = 0;
@@ -33,15 +75,7 @@ class Program
             arr[i, ind] = temp;
         }
         Console.WriteLine(ind);
-        Console.WriteLine("Конечная матрица");
-        for (int i = 0; i < a; i++)
-        {
-            for (int j = 0; j < a; j++)
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
+        vivod(arr, a, a);
         return arr;
     }
     public static int MaxEl(int a, int b, double[,] arr, int c)
@@ -121,40 +155,17 @@ class Program
 
         #region 3
         Console.WriteLine("3:");
-        int n1 = 4;
-        int m1 = 5;
-        int n2 = 5;
-        int m2 = 6;
-        double[] mass;
-        double[] massiv;
+        int n1 = 4;int m1 = 5;
+        int n2 = 5;int m2 = 6;
         double[,] B = new double[n1, m1];
         double[,] C = new double[n2, m2];
         double[,] A = new double[n1 + 1, m1];
-        string str, strr;
         int temp1 = 0;
         int temp2 = 0;
         int op1 = 0;
         int op2 = 1;
-        Console.WriteLine("Введите матрицу: 4 строки по 5 эллементов,через пробел:");
-        for (int i = 0; i < n1; i++)
-        {
-            str = Console.ReadLine();
-            mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m1; j++)
-            {
-                B[i, j] = mass[j];
-            }
-        }
-        Console.WriteLine("Введите матрицу: 5 строк по 6 эллементов,через пробел:");
-        for (int i = 0; i < n2; i++)
-        {
-            strr = Console.ReadLine();
-            massiv = strr.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m2; j++)
-            {
-                C[i, j] = massiv[j];
-            }
-        }
+        B = vvod(n1, m1);
+        C = vvod(n2, m2);
         temp1 = MaxEl(n1, m1, B, op1);
         temp2 = MaxEl(n2, m2, C, op2);
         Console.WriteLine(temp1 + " " + temp2);
@@ -162,30 +173,21 @@ class Program
         {
             for (int j = 0; j < m1; j++)
             {
-                if (i < temp1)
+                if (i < (temp1 + 1))
                 {
                     A[i, j] = B[i, j];
                 }
-                if (i == temp1)
+                if (i == (temp1 + 1))
                 {
                     A[i, j] = C[i, temp2];
                 }
-                if (i > temp1)
+                if (i > (temp1 + 1))
                 {
-                    A[i, j] = C[i - 1, j];
+                    A[i, j] = B[i - 1, j];
                 }
             }
         }
-        Console.WriteLine("Конечная матрица");
-        for (int i = 0; i < n1 + 1; i++)
-        {
-            for (int j = 0; j < m1; j++)
-            {
-                Console.Write(A[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
+        vivod(A, n1 + 1, m1);
         #endregion
 
         #region 9
@@ -218,47 +220,19 @@ class Program
         }
         Console.WriteLine("[{0}]", string.Join("; ", sortik(arr1, temp1)));
         Console.WriteLine("[{0}]", string.Join("; ", sortik(arr2, temp2)));
-        #endregion
+        #endregion*/
 
         #region 15
-        Console.WriteLine("Введите матрицу 1 через проблем:");
-        str = Console.ReadLine();
-        mass = str.Split(' ').Select(double.Parse).ToArray();
-        int n = mass.Length;
-        double[,] array1 = new double[n, n];
-        for (int i = 0; i < n; i++)
-        {
-            array1[0,i] = mass[i];
-        }
-        for(int i = 1; i < n; i++)
-        {
-            str = Console.ReadLine();
-            mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < n; j++)
-            {
-                array1[i, j] = mass[j];
-            }
-        }
-        Console.WriteLine("Введите матрицу 2 через проблем:");
-        str = Console.ReadLine();
-        massiv = str.Split(' ').Select(double.Parse).ToArray();
-        int m = massiv.Length;
-        double[,] array2 = new double[m, m];
-        for (int i = 0; i < m; i++)
-        {
-            array2[0, i] = massiv[i];
-        }
-        for (int i = 1; i < m; i++)
-        {
-            str = Console.ReadLine();
-            massiv = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m; j++)
-            {
-                array2[i, j] = massiv[j];
-            }
-        }
-        MaxMatr(array1, n);
-        MaxMatr(array2, m);
+        Console.WriteLine("Введите размер матрицы 1:");
+        int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Введите размер матрицы 2:");
+        int b = int.Parse(Console.ReadLine());
+        double[,] array1 = new double[a, a];
+        double[,] array2 = new double[b, b];
+        array1 = vvod(a, a);
+        array2 = vvod(b, b);
+        MaxMatr(array1, a);
+        MaxMatr(array2, b);
         #endregion
     }
 }
