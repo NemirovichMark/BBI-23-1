@@ -626,27 +626,33 @@ Console.WriteLine();
 #endregion
 
 #region 2.10
+Console.WriteLine("2.10");
 Console.Write("Введите длину массива: ");
 size = int.Parse(Console.ReadLine());
 a = new double[size];
-for (int i = 0; i < n; i++)
+int k = 0;//счетчик положительных элементов массива
+for (int i = 0; i < size; i++)
 {
     Console.Write($"Введите элемент массива {i + 1}: ");
     a[i] = int.Parse(Console.ReadLine());
 }
-amin = a[0];
-for (int i = 0; i < n; i++)
+double amin = a[0];
+for (int i = 0; i < size; i++)
 {
-    if (a[i] > 0 && a[i] < amin)
+    if (a[i] > 0)
     {
-        amin = a[i];
+        k++;
+        if (a[i] < amin)
+        {
+            amin = a[i];
+        }
     }
 }
-for (int i = 0; i < n; i++)
+for (int i = 0; i < size; i++)
 {
     if (a[i] == amin)
     {
-        for (int j = i; j < n - 1; j++)
+        for (int j = i; j < size - 1; j++)
         {
             a[j] = a[j + 1];
         }
@@ -654,85 +660,101 @@ for (int i = 0; i < n; i++)
         break;
     }
 }
-Console.WriteLine("Массив после удаления минимального положительного элемента:");
-for (int i = 0; i < n; i++)
+if (k > 0)
 {
-    Console.Write(a[i] + " ");
+    Console.WriteLine("Массив после удаления минимального положительного элемента:");
+    for (int i = 0; i < size; i++)
+    {
+        Console.Write(a[i] + " ");
+    }
+}
+if (k == 0)
+{
+    Console.WriteLine("В массиве нет положительных элементов.");
 }
 Console.WriteLine();
 #endregion
 
 #region 2.11
-Console.WriteLine("2.11");
+Console.WriteLine("2.1");
 Console.Write("Введите длину массива: ");
-size = int.Parse(Console.ReadLine());
-a = new double[size];
-for (int i = 0; i < n; i++)
-{
-    Console.Write($"Введите элемент массива {i + 1}: ");
-    a[i] = double.Parse(Console.ReadLine());
-}
-Console.Write("Введите элемент P: ");
-P = double.Parse(Console.ReadLine());
-int ilast = -1;
-for (int i = size - 1; i >= 0; i--)
-{
-    if (a[i] > 0)
-    {
-        ilast = i;
-        break;
-    }
-}
-size++;
-for (int i = size - 1; i > ilast + 1; i--)
-{
-    a[i] = a[i - 1];
-}
-
-a[ilast + 1] = P;
-Console.WriteLine("Массив после включения элемента P:");
+int size = int.Parse(Console.ReadLine());
+double[] a = new double[size];
+int k = 0; //Счетчик положительных элементов
 for (int i = 0; i < size; i++)
 {
-    Console.Write(a[i] + " ");
+    Console.Write($"Введите элемент {i + 1}: ");
+    a[i] = double.Parse(Console.ReadLine());
+    if (a[i] > 0)
+    {
+        k++;
+    }
+}
+if (k > 0)
+{
+    int r = 0;//Индекс последнего положительного элемента
+    Console.Write("Введите значение Р: ");
+    double P = double.Parse(Console.ReadLine());
+    for (int i = size - 1; i >= 0; i--)
+    {
+        if (a[i] > 0) { r = i; break; }
+    }
+
+    for (int i = size - 2; i > r; i--) { a[i + 1] = a[i]; }
+    a[r + 1] = P;
+    Console.WriteLine("Изменённый массив, после добавления Р:");
+    foreach (double x in a) { Console.Write(x + " "); }
+    Console.WriteLine();
+}
+if (k == 0)
+{
+    Console.WriteLine("В массиве отсутствуют положительные элементы.");
 }
 Console.WriteLine();
 #endregion
 
+
 #region 2.12
 Console.WriteLine("2.12");
 Console.Write("Введите длину массива: ");
-size = int.Parse(Console.ReadLine());
-a = new double[size];
-k = 0; //индекс первого отрицалельного элемента массива
-amax = a[0];
-imax = 0;
-sum = 0;
+int size = int.Parse(Console.ReadLine()); ;
+double[] a = new double[size];
+int k = 0;//счетчик отрицательных элементов
+double amax = a[0];
+int imax = 0;
 for (int i = 0; i < size; i++)
 {
     Console.Write($"Введите элемент массива {i + 1}: ");
     a[i] = double.Parse(Console.ReadLine());
-    if (a[i] > amax)
+    if (a[i] < 0) { k++; }
+    if (a[i] > amax) { amax = a[i]; imax = i; }
+}
+if (k > 0 && imax == size - 1)
+{
+     Console.WriteLine("Невозможно посчитать сумму чисел после максимального элемента, т.к. он в конце массива.");
+}
+if (k > 0 && imax != size - 1)
+{
+    int iot = 0;//индекс первого отрицательного элемента
+    double sum = 0;
+    for (int i = 0;i < size;i++)
     {
-        amax = a[i];
-        imax = i;
+        if (a[i] < 0) { iot = i; break; }
+    }
+    for (int i = imax + 1;i < size;i++)
+    {
+        sum += a[i];
+    }
+    a[iot] = sum;
+    Console.WriteLine("Изменённый массив: ");
+    foreach (double x in a)
+    {
+        Console.Write(x + " ");
     }
 }
-//сумма элементов, расположенных после максимального
-for (int i = imax + 1; i < size; i++)
+if (k == 0)
 {
-    sum += a[i];
-}
-//поиск первого отрицательного элемента
-for (int i = 0; i < size; i++)
-{
-    if (a[i] < 0) { k = i; break; }
-}
-Console.WriteLine($"Значение первого отрицального элемента {0} и его индекс {1}", a[k], k);
-a[k] = sum;
-Console.WriteLine("Изменённый массив: ");
-for (int i = 0; i < size; i++)
-{
-    Console.Write(a[i] + " ");
+    Console.WriteLine("Отрицательные элементы отсутствуют");
 }
 Console.WriteLine();
 #endregion
@@ -763,72 +785,76 @@ Console.WriteLine();
 #region 2.14
 Console.WriteLine("2.14");
 Console.Write("Введите длину массива: ");
-size = int.Parse(Console.ReadLine());
-a = new double[size];
-amax = a[0];
-imax = 0;
-k = 0; //индекс первого отрицательного элемента
-for (int i = 0; i < size; i++)
+int size = int.Parse(Console.ReadLine());
+double[] a = new double[size];
+int k = 0; // счетчик отрицательных элементов
+double amax = a[0];
+int imax = 0;
+for (int i = 0; i < size; i ++)
 {
-    Console.Write($"Введите значене элемента {i + 1}: ");
+    Console.Write($"Введите элемент массива {i + 1}: ");
     a[i] = double.Parse(Console.ReadLine());
-    if (a[i] > amax) { amax = a[i]; imax = i; }
+    if (a[i] > amax ) { amax = a[i]; imax = i; }
+    if (a[i] < 0) { k++; }
 }
-for (int i = 0; i < size; i++)
+if (k == 0)
 {
-    if (a[i] < 0) { k = i; break; }
+    Console.WriteLine("Отсутствуют отрицательные элементы.");
 }
-t = a[imax];
-a[imax] = a[k];
-a[k] = t;
-Console.WriteLine("Изменённый массив: ");
-for (int i = 0; i < size; i++)
+if (k > 0)
 {
-    Console.Write(a[i] + " ");
+    int iot = 0; //индекс первого отрицательного элемента
+    for (int i = 0; i < size; i++)
+    {
+        if (a[i] < 0) { iot = i; break; }
+    }
+    double h = a[imax];
+    a[imax] = a[iot];
+    a[iot] = h;
+    Console.WriteLine("Изменённый массив: ");
+    foreach (double x in  a) { Console.Write(x + " "); }
 }
 Console.WriteLine();
 #endregion
 
 #region 2.15
 Console.WriteLine("2.15");
-
-Console.Write("Введите длину массива a: ");
-int sizea = int.Parse(Console.ReadLine());
-a = new double[sizea];
-for (int i = 0; i < sizea; i++)
+Console.Write("Введите длину массива А: ");
+int n = int.Parse(Console.ReadLine());
+double[] a = new double[n];
+for (int i = 0; i < n; i++)
 {
-    Console.Write($"Введите элемент массива a {i + 1}: ");
+    Console.Write($"Введите элемент массива А {i + 1} :");
     a[i] = double.Parse(Console.ReadLine());
 }
-Console.Write("Введите длину массива b: ");
-int sizeb = int.Parse(Console.ReadLine());
-b = new double[sizeb];
-for (int i = 0; i < sizeb; i++)
+Console.Write("Введите длину массива B: ");
+int m = int.Parse(Console.ReadLine());
+double[] b = new double[m];
+for (int i = 0;i < m; i++)
 {
-    Console.Write($"Введите элемент массива b {i + 1}: ");
+    Console.Write($"Введите элемент массива В {i + 1}: ");
     b[i] = double.Parse(Console.ReadLine());
 }
-double[] A = new double[sizea + sizeb];
-Console.Write("Введите к: ");
-k = int.Parse(Console.ReadLine());
-for (int i = 0; i < k; i++)
+double[] c = new double[m + n];
+Console.Write("Введите К: ");
+int k = int.Parse(Console.ReadLine());
+Console.WriteLine("Полученный массив: ");
+for (int i = 0;i < m + n; i++)
 {
-    A[i] = a[i];
+    if (i <= k)
+    {
+        c[i] = a[i];
+    }
+    if (i > k && i <= (k + m)) 
+    {
+        c[i] = b[i - k - 1];
+    }
+    if (i > k && i > (k + m))
+    {
+        c[i] = a[i - m - k + 1];
+    }
+    Console.Write(c[i] + " ");
 }
-for (int i = 0; i < sizeb; i++)
-{
-    A[i + k + 1] = b[i];
-}
-for (int i = k + 1; i < n; i++)
-{
-    A[i + sizeb] = a[i];
-}
-Console.WriteLine("Массив A после вставки массива B:");
-for (int i = 0; i < sizea + sizeb; i++)
-{
-    Console.Write(A[i] + " ");
-}
-Console.WriteLine();
 #endregion
 
 #region 2.16
@@ -1028,22 +1054,22 @@ Console.WriteLine();
 #region 3.2
 Console.WriteLine("3.2");
 Console.Write("Введите длину массива: ");
-size = int.Parse(Console.ReadLine());
-a = new double[size];
-amax = a[0];
-for (int i = 0;i < size;i++)
+int size = int.Parse(Console.ReadLine());
+double [] a = new double[size];
+double amax = -100000000000000000;
+for (int i = 0; i < size; i++)
 {
     Console.Write($"Введите элемент массива {i + 1}: ");
     a[i] = double.Parse(Console.ReadLine());
-    if (a[i]  > amax)
+    if (a[i] > amax)
     {
         amax = a[i];
     }
 }
 Console.WriteLine("Изменённый массив: ");
-for (int i = 0;i < size;i++)
+for (int i = 0; i < size; i++)
 {
-    if (a[i] == amax) { a[i] += i + 1;}
+    if (a[i] == amax) { a[i] += i + 1; }
     Console.Write(a[i] + " ");
 }
 Console.WriteLine();
@@ -1053,27 +1079,18 @@ Console.WriteLine();
 Console.WriteLine("3.6");
 Console.Write("Введите длинну массива: ");
 int size = int.Parse(Console.ReadLine());
-double [] a = new double[size];
+double[] a = new double[size];
 int k = 1;
-int maxx = 1;
-for (int i = 0; i < size;i++)
+int maxx = 0;
+for (int i = 0; i < size; i++)
 {
     Console.Write($"Введите элемент массива {i + 1}: ");
     a[i] = double.Parse(Console.ReadLine());
 }
-for (int i = 0;i < size - 1;i++)
+for (int i = 0; i < size - 1; i++)
 {
-    for (int j = i + 1;j < size;j++)
-    {
-        if ((a[i] > a[j]) || (a[i] == a[j])) 
-        {
-            k ++; maxx = Math.Max(maxx, k); 
-        }
-        if (a[i] < a[j])
-        { 
-            k = 1; 
-        }
-    }
+    if (a[i] == a[i] && a[i] > a[i + 1]) { k++; maxx = Math.Max(maxx, k); }
+    else { k = 1; }
 }
 Console.WriteLine($"Максимальное количество элементов, упорядоченных по убыванию: {maxx}");
 Console.WriteLine();
