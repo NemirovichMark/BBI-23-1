@@ -1,0 +1,59 @@
+#region 2.2
+int n2 = 3;
+double a2 = 0;
+double b2 = 0;
+double r2 = 5;
+int k2 = 0;
+
+for (int i = 0; i < n2; i++)
+{
+    Console.WriteLine("x2: ");
+    double X2 = Convert.ToDouble(Console.ReadLine());
+    Console.WriteLine("y2: ");
+    double Y2 = Convert.ToDouble(Console.ReadLine());
+    if (Math.Sqrt(Math.Pow(X2 - a2, 2) + Math.Pow(Y2 - b2, 2)) <= r2)
+    {
+        k2 += 1;
+    }
+}
+Console.WriteLine(k2);
+#endregion
+
+#region 2.5
+int n5 = 30;
+int r5 = 5;
+int k5 = 0;
+
+for (int i = 0; i < n5; i++)
+{
+    Console.WriteLine("результат участника: ");
+    double X5 = Convert.ToDouble(Console.ReadLine());
+    if (X5 <= r5)
+    {
+        k5 += 1;
+    }
+}
+Console.WriteLine(k5);
+#endregion
+
+#region 2.8
+int n8 = 2;
+double r8 = Math.Pow(10, 5);
+double k8 = 0;
+double m8 = 0;
+
+for (int i = 0; i < n8; i++)
+{
+    Console.WriteLine("x8: ");
+    double X8 = Convert.ToDouble(Console.ReadLine());
+    Console.WriteLine("y8: ");
+    double Y8 = Convert.ToDouble(Console.ReadLine());
+    k8 += 1;
+    if (Math.Sqrt(Math.Pow(X8, 2) + Math.Pow(Y8, 2)) <= r8)
+    {
+        r8 = Math.Sqrt(Math.Pow(X8, 2) + Math.Pow(Y8, 2));
+        m8 = k8;
+    }
+}
+Console.WriteLine(m8 + " " + r8);
+#endregion
