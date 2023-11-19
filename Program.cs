@@ -772,44 +772,24 @@ internal class Program
         Console.WriteLine();
         #endregion
         
-        #region 2_15
-        Console.WriteLine("2_15:");
-        Console.WriteLine("Введите размер массива А ");
-        int n1 = int.Parse(Console.ReadLine());
-        Console.WriteLine("Введите размер массива В ");
-        m = int.Parse(Console.ReadLine());
-        Console.WriteLine("Введите номер элемента массива А, после которого нужно вставить массив В");
-        h = int.Parse(Console.ReadLine());
-        a1 = new double[n1 + m];
-        a2 = new double[m];
-        Console.WriteLine("Введите массив А");
-        for (int i = 0; i < n1; i++)
-        {
-            a1[i] = double.Parse(Console.ReadLine());
-        }
-        Console.WriteLine();
-        Console.WriteLine("Введите массив В");
-        for (int i = 0; i < m; i++)
-        {
-            a2[i] = double.Parse(Console.ReadLine());
-        }
-        Console.WriteLine();
-        Console.Write("Массив А: ");
-        for (int i = 0; i < n1; i++) Console.Write("{0} ", a1[i]);
-        Console.WriteLine();
-        Console.Write("Массив В: ");
-        for (int i = 0; i < m; i++) Console.Write("{0} ", a2[i]);
-        j = 0;
-        for (int i = n1 + m - 1; i >= h + m; i--) a1[i] = a1[i - m];
-        for (int i = h; i < h + m; i++)
-        {
-            a1[i] = a2[j];
-            j++;
-        }
-        Console.WriteLine();
-        Console.Write("Преобразованный массив А(вставл массив б после к-го эл массив а): ");
-        for (int i = 0; i < n1 + m; i++) Console.Write("{0} ", a1[i]);
-        #endregion
+       #region 2_15
+       Console.WriteLine("2_15:");
+       int k = 4;
+       int n = 10;
+       int m = 5;
+       int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+       int[] B = new int[] { 111, 4, 5, 6, 111 };
+       for (int i = 0; i < n; i++)
+       {
+       Console.Write("{0:d} ", A[i]);
+       if (i == (k - 1))
+       {
+       for (int j = 0; j < m; j++) Console.Write("{0:d} ", B[j]);
+       }
+       }
+       Console.WriteLine();
+       #endregion
+       
 
         #region 2_16
         Console.WriteLine("2_16:");
