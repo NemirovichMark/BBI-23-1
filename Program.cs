@@ -830,7 +830,7 @@ for (int i = 0; i < n; i++)
 Console.Write("Введите длину массива B: ");
 int m = int.Parse(Console.ReadLine());
 double[] b = new double[m];
-for (int i = 0;i < m; i++)
+for (int i = 0; i < m; i++)
 {
     Console.Write($"Введите элемент массива В {i + 1}: ");
     b[i] = double.Parse(Console.ReadLine());
@@ -838,22 +838,29 @@ for (int i = 0;i < m; i++)
 double[] c = new double[m + n];
 Console.Write("Введите К: ");
 int k = int.Parse(Console.ReadLine());
-Console.WriteLine("Полученный массив: ");
-for (int i = 0;i < m + n; i++)
+if (k  >= a.Length)
 {
-    if (i <= k)
+    Console.WriteLine("Невозможно вставить массив В в А, т.к К больше либо равен длине массива А.");
+}
+if (k < a.Length)
+{
+    Console.WriteLine("Полученный массив: ");
+    for (int i = 0; i < m + n; i++)
     {
-        c[i] = a[i];
+        if (i <= k)
+        {
+            c[i] = a[i];
+        }
+        if (i > k && i <= (k + m))
+        {
+            c[i] = b[i - k - 1];
+        }
+        if (i > k && i > (k + m))
+        {
+            c[i] = a[i - m - k + 1];
+        }
+        Console.Write(c[i] + " ");
     }
-    if (i > k && i <= (k + m)) 
-    {
-        c[i] = b[i - k - 1];
-    }
-    if (i > k && i > (k + m))
-    {
-        c[i] = a[i - m - k + 1];
-    }
-    Console.Write(c[i] + " ");
 }
 #endregion
 
@@ -1055,7 +1062,7 @@ Console.WriteLine();
 Console.WriteLine("3.2");
 Console.Write("Введите длину массива: ");
 int size = int.Parse(Console.ReadLine());
-double [] a = new double[size];
+double[] a = new double[size];
 double amax = -100000000000000000;
 for (int i = 0; i < size; i++)
 {
@@ -1066,10 +1073,11 @@ for (int i = 0; i < size; i++)
         amax = a[i];
     }
 }
+int k = 1;
 Console.WriteLine("Изменённый массив: ");
 for (int i = 0; i < size; i++)
 {
-    if (a[i] == amax) { a[i] += i + 1; }
+    if (a[i] == amax) { a[i] += k; k++; }
     Console.Write(a[i] + " ");
 }
 Console.WriteLine();
