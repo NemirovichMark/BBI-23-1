@@ -741,23 +741,16 @@ public class Program
                 p = mass[i];
             }
         }
-        if (I < 0)
-        {
-            for (int i = 0; i < mass.Length - 1; i++)
-            {
-                Console.Write("{0:f1}", mass[i] + " ");
-            }
-        }
-        else
+        if (I > 0)
         {
             for (int i = I + 1; i < mass.Length; i++)
             {
                 mass[i - 1] = mass[i];
             }
-            for (int i = 0; i < mass.Length - 1; i++)
-            {
-                Console.Write("{0:f1}", mass[i] + " ");
-            }
+        }
+        for (int i = 0; i < mass.Length - 1; i++)
+        {
+            Console.Write("{0:f1}", mass[i] + " ");
         }
         #endregion
         Console.WriteLine();
@@ -842,11 +835,7 @@ public class Program
                 break;
             }
         }
-        if ((I1 < 0) || (I < 0))
-        {
-            Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
-        }
-        else
+        if ((I1 > 0) || (I > 0))
         {
             for (int i = I + 1; i < mass.Length; i++)
             {
@@ -861,8 +850,8 @@ public class Program
                 }
             }
             mass[I1] = s;
-            Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
         }
+        Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
         #endregion
         Console.WriteLine();
 
@@ -910,11 +899,7 @@ public class Program
                 k = mass[i];
             }
         }
-        if ((I < 0) || (I1 < 0))
-        {
-            Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
-        }
-        else
+        if ((I > 0) || (I1 > 0))
         {
             for (int i = 0; i < mass.Length; i++)
             {
@@ -926,8 +911,8 @@ public class Program
             }
             mass[I] = mass[I1];
             mass[I1] = k;
-            Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
         }
+        Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass));
         #endregion
         Console.WriteLine();
 
@@ -946,7 +931,7 @@ public class Program
         Console.WriteLine("Введите длину массива B: ");
         int.TryParse(Console.ReadLine(), out n);
         mass1 = new double[n];
-        Console.WriteLine($"Введите {n} знач/ массива B: ");
+        Console.WriteLine($"Введите {n} знач. массива B: ");
         for (int i = 0; i < mass1.Length; i++)
         {
             double.TryParse(Console.ReadLine(), out a);
@@ -959,7 +944,8 @@ public class Program
         I1 = 0;
         s = 0;
         p = 0;
-        if(intK > mass.Length)
+        intK -= 1;
+        if (((intK + 1) > mass.Length) || ((intK == 1) & (mass.Length == 1)))
         {
             Console.WriteLine("Неверный ввод");
         }
@@ -975,16 +961,14 @@ public class Program
                 {
                     mass2[i] = mass1[i - intK - 1];
                 }
-                if (i > intK + mass1.Length)
+                if (i > (intK + mass1.Length))
                 {
-                    mass2[i] = mass[i - mass1.Length - 1];
+                    mass2[i] = mass[i - mass1.Length];
                 }
             }
         }
         Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", mass2));
         #endregion
-        Console.WriteLine();
-
 
         #region 2_16
         Console.WriteLine("2_16:");
@@ -1225,16 +1209,11 @@ public class Program
         #endregion
         Console.WriteLine();
 
-
         #region 3_1
-        Console.WriteLine("3_1:");
+        Console.WriteLine("3_2:");
         Console.WriteLine("Введите длину массива: ");
         int.TryParse(Console.ReadLine(), out n);
         mass = new double[n];
-        I = 0;
-        I1 = 0;
-        s = 0;
-        intK = 0;
         p = -Math.Pow(10, 20);
         Console.WriteLine($"Введите {n} знач. массива: ");
         for (int i = 0; i < mass.Length; i++)
@@ -1250,21 +1229,11 @@ public class Program
         {
             if (mass[i] == p)
             {
-                intK++;
+                mass[i] = mass[i] + (i + 1);
             }
         }
-        mass1 = new double[intK];
-        for (int i = 0; i < mass.Length; i++)
-        {
-            if (mass[i] == p)
-            {
-                mass1[I] = i;
-                I += 1;
-            }
-        }
-        Console.WriteLine("Ответ: " + "[{0}]", string.Join(';', mass1));
+        Console.Write("Ответ: " + "[{0}]", string.Join(';', mass));
         #endregion
-        Console.WriteLine();
 
         #region 3_2
         Console.WriteLine("3_3:");
@@ -1293,7 +1262,6 @@ public class Program
             kr = mass[i];
             mass[i] = mass[i + 1];
             mass[i + 1] = kr;
-
         }
         Console.Write("Ответ: " + "[{0}]", string.Join(';', mass));
         #endregion
