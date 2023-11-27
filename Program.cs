@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+
 class Program
 {
 
@@ -328,11 +328,11 @@ class Program
 
         #region 2_2
         //double su = 0;
-        //Console.WriteLine("2-2:");
         //Console.WriteLine("введите массив(через пробел):");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double[] arr = new double[masiv.Length];
+        //string [] masiv = str.Split(' ');
+
+        //double [] arr = new double[masiv.Length];
         //double maxim = -100000000000;
         //int k = 0;
         //for (int i = 0; i < masiv.Length; i++)
@@ -356,11 +356,10 @@ class Program
         #endregion 2_2
 
         #region 2_3
-        //Console.WriteLine("2-3:");
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double minim = 1000000000;
         //int k = 0;
         //for (int i = 0; i < masiv.Length; i++)
@@ -384,10 +383,10 @@ class Program
         #region 2_4
         //Console.WriteLine("Введите массив:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double maxim = -100000000000;
-        //int su = 0;
+        //double su = 0;
         //int k = 0;
         //for (int i = 0; i < masiv.Length; i++)
         //{
@@ -412,17 +411,17 @@ class Program
         #region 2_5
         //Console.WriteLine("Введите массив:");
         //string str = Console.ReadLine();
-        //string mass = str.Split(' ');
-        //double [] arr = new double[mass.Length];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double maxim = -100000000000;
         //double minim = 1000000000000;
-        //int su = 0;
+        //double su = 0;
         //int k = 0;
         //double g = 0, t = 0;
         //int maxxx, minnn;
-        //for (int i = 0; i < mass.Length; i++)
+        //for (int i = 0; i < masiv.Length; i++)
         //{
-        //    arr[i] = double.Parse(mass[i]);
+        //    arr[i] = double.Parse(masiv[i]);
         //    su += arr[i];
         //    if (maxim < arr[i])
         //    {
@@ -453,7 +452,7 @@ class Program
         //    }
         //}
         //double[] arr1 = new double[k];
-        //k= 0;
+        //k = 0;
         //for (int i = minnn + 1; i < maxxx; i++)
         //{
         //    if (arr[i] < 0)
@@ -474,12 +473,12 @@ class Program
         //Console.WriteLine("Введите число P:");
         //double minnn = 1000000000;
         //double P = double.Parse(Console.ReadLine());
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //double [] arr1 = new double[masiv.Length + 1];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
+        //double[] arr1 = new double[masiv.Length + 1];
         //int k = 0;
         //double minim = 1000000000;
-        //int su = 0;
+        //double su = 0;
         //for (int i = 0; i < masiv.Length; i++)
         //{
         //    arr[i] = double.Parse(masiv[i]);
@@ -516,9 +515,9 @@ class Program
         #region 2_7
         //Console.WriteLine("Введите массив:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
+        //string [] masiv = str.Split(' ');
         //double maxim = -10000000000;
-        //double [] arr = new double[masiv.Length];
+        //double[] arr = new double[masiv.Length];
         //int k = 0;
         //for (int i = 0; i < masiv.Length; i++)
         //{
@@ -537,13 +536,12 @@ class Program
         #endregion 2_7
 
         #region 2_8
-        //Console.WriteLine("2-8:");
         //Console.WriteLine("Введите массив:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
+        //string [] masiv = str.Split(' ');
         //double maxim = -10000000000;
         //double minim = 10000000000;
-        //double [] arr = new double[masiv.Length];
+        //double[] arr = new double[masiv.Length];
         //int minnn = 0;
         //int maxxx = 0;
         //for (int i = 0; i < masiv.Length; i++)
@@ -555,7 +553,7 @@ class Program
         //        maxxx = i;
         //    }
         //}
-        //for (int i = maxxx + 1; i < mass.Length; i++)
+        //for (int i = maxxx + 1; i < masiv.Length; i++)
         //{
         //    if (minim > arr[i])
         //    {
@@ -574,18 +572,18 @@ class Program
         #region 2_9
         //Console.WriteLine("Введите массив:");
         //string str = Console.ReadLine();
-        //string mass = str.Split(' ');
+        //string [] masiv = str.Split(' ');
         //double maxim = -10000000000;
         //double minim = 10000000000;
-        //double [] arr = new double[mass.Length];
+        //double[] arr = new double[masiv.Length];
         //int minnn = 0;
         //int maxxx = 0;
         //int v = 0;
         //int k = 0;
-        //int su = 0;
-        //for (int i = 0; i < mass.Length; i++)
+        //double su = 0;
+        //for (int i = 0; i < masiv.Length; i++)
         //{
-        //    arr[i] = double.Parse(mass[i]);
+        //    arr[i] = double.Parse(masiv[i]);
         //    if (maxim < arr[i])
         //    {
         //        maxim = arr[i];
@@ -620,11 +618,12 @@ class Program
         #region 2_10
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
+        //string[] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double minim = 1000000000;
         //int k = 0;
-        //double [] arr1 = new double[masiv.Length - 1];
+        //double[] arr1 = new double[masiv.Length - 1];
+
         //for (int i = 0; i < masiv.Length; i++)
         //{
         //    arr[i] = double.Parse(masiv[i]);
@@ -634,6 +633,7 @@ class Program
         //        k = i;
         //    }
         //}
+
         //for (int i = 0; i < masiv.Length; i++)
         //{
         //    if (i < k)
@@ -645,6 +645,7 @@ class Program
         //        arr1[i - 1] = arr[i];
         //    }
         //}
+
         //Console.WriteLine("Полученный массив:");
         //Console.WriteLine("[{0}]", string.Join(';', arr1));
         //Console.WriteLine();
@@ -652,80 +653,94 @@ class Program
         #endregion 2_10
 
         #region 2_11
+        //Console.WriteLine("Введите значение p:");
+        //int p = Convert.ToInt32(Console.ReadLine());
+        //Console.WriteLine("Введите размер массива:");
+        //int b = Convert.ToInt32(Console.ReadLine());
+        //double [] arr = new double[b];
+        //double []  arr1 = new double[b + 1];
+        //double h = 0;
+        //double o = 0;
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //Console.WriteLine("Введите число P");
-        //double P = double.Parse(Console.ReadLine());
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //int k = 0;
-        //double [] arr1 = new double[masiv.Length + 1];
-        //for (int i = 0; i < masiv.Length; i++)
+        //for (int i = 0; i < arr.Length; i++)
         //{
-        //    arr[i] = double.Parse(masiv[i]);
+        //    double a = Convert.ToDouble(Console.ReadLine());
+        //    arr[i] = a;
         //    if (arr[i] > 0)
         //    {
-        //        k = i;
+        //        h = i;
+        //        o = arr[i];
         //    }
         //}
-        //k++;
-        //arr1[k] = P;
-        //for (int i = 0; i < masiv.Length + 1; i++)
+        //for (int i = 0; i < arr.Length + 1; i++)
         //{
-        //    if (i < k)
+        //    if (i <= h)
         //    {
         //        arr1[i] = arr[i];
         //    }
-        //    if (i > k)
+        //    if (i == (h + 1))
+        //    {
+        //        arr1[i] = p;
+        //    }
+        //    if (i > (h + 1))
         //    {
         //        arr1[i] = arr[i - 1];
         //    }
         //}
+
         //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', arr1));
+        //Console.WriteLine("[{0}]", string.Join("; ", arr1));
         //Console.WriteLine();
         //Console.ReadLine();
 
         #endregion 2_11
 
         #region 2_12
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //double  minim = 1000000000;
-        //double maxim = -100000000000;
-        //int maxxx = 0;
-        //int k = -1;
-        //int su = 0;
-        //for (int i = 0; i < masiv.Length; i++)
+
+        //Console.WriteLine("Введите размер массива:");
+        //int b = Convert.ToInt32(Console.ReadLine());
+        //double [] arr = new double[b];
+        //double [] arr1 = new double[b + 1];
+        //int h = 0;
+        //int k = 0;
+        //double o = -Math.Pow(10, 20);
+        //double s = 0;
+        //double p = 0;
+        //Console.WriteLine("Введите массив");
+        //for (int i = 0; i < arr.Length; i++)
         //{
-        //    arr[i] = double.Parse(masiv[i]);
-        //    if (arr[i] > maxim)
+        //    double a = Convert.ToDouble(Console.ReadLine());
+        //    arr[i] = a;
+        //    if (arr[i] > o)
         //    {
-        //        maxim = arr[i];
-        //        maxxx = i;
+        //        h = i;
+        //        o = arr[i];
         //    }
-        //    if (k == -1 && arr[i] < 0)
+        //}
+        //for (int i = h + 1; i < arr.Length; i++)
+        //{
+        //    s += arr[i];
+        //}
+        //for (int i = 0; i < arr.Length; i++)
+        //{
+        //    if (arr[i] < 0)
         //    {
         //        k = i;
+        //        break;
         //    }
         //}
-        //for (int i = maxxx + 1; i < masiv.Length; i++)
-        //{
-        //    su += arr[i];
-        //}
-        //arr[k] = su;
-        //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', arr));
+        //arr[k] = s;
+
+        //Console.WriteLine("Результат:");
+        //Console.WriteLine("[{0}]", string.Join("; ", arr));
         //Console.WriteLine();
         //Console.ReadLine();
         #endregion 2_12
         #region 2_13
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
+        //Console.WriteLine("Введите массив");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double minim = 1000000000;
         //double maxim = -10000000000;
         //int k = 0;
@@ -746,86 +761,102 @@ class Program
         #endregion 2_13
 
         #region 2_14
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //string mass = str.Split(' ');
-        //double [] arr = new double[mass.Length];
-        //double minim = 1000000000;
-        //double maxim = -10000000000;
-        //int k = -1;
-        //int su = 0;
-        //for (int i = 0; i < mass.Length; i++)
+        //Console.WriteLine("Введите размер массива:");
+        //int b = Convert.ToInt32(Console.ReadLine());
+        //double [] arr = new double[b];
+        //int h = 0;
+        //int k = 0;
+        //double o = -Math.Pow(10, 20);
+
+        //Console.WriteLine("Введите массив");
+
+        //for (int i = 0; i < arr.Length; i++)
         //{
-        //    arr[i] = double.Parse(mass[i]);
-        //    if (arr[i] > maxim)
+        //    double a = Convert.ToDouble(Console.ReadLine());
+        //    arr[i] = a;
+        //    if (arr[i] > o)
         //    {
-        //        maxim = arr[i];
-        //        int maxxx = i;
-        //    }
-        //    if (k== -1 && arr[i] < 0)
-        //    {
-        //        k = i;
-        //        su = arr[i];
+        //        h = i;
+        //        o = arr[i];
         //    }
         //}
-        //arr[k] = maxim;
-        //arr[maxxx] = su;
-        //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', arr));
+        //for (int i = 0; i < arr.Length; i++)
+        //{
+        //    if (arr[i] < 0)
+        //    {
+        //        k = i;
+        //        break;
+        //    }
+        //}
+        //arr[h] = arr[k];
+        //arr[k] = o;
+        //Console.WriteLine("Результат:");
+        //Console.WriteLine("[{0}]", string.Join("; ", arr));
         //Console.WriteLine();
         //Console.ReadLine();
         #endregion 2_14
         #region 2_15
-        //Console.WriteLine("Введите размер массивa A:");
-        //int n = (int)Double.Parse(Console.ReadLine());
-        //Console.WriteLine("Введите размер массивa B:");
-        //int m = (int)Double.Parse(Console.ReadLine());
-        //double[] A = new double[n];
-        //double[] B = new double[m];
-        //double[] C = new double[n + m];
-        //Console.WriteLine("Введите k:");
-        //int k = (int)Double.Parse(Console.ReadLine());
-        //Console.WriteLine("Введите масив A:");
-        //for (int i = 0; i < n; i++)
+
+        //Console.WriteLine("Введите размер массива A:");
+        //int b = Convert.ToInt32(Console.ReadLine());
+        //double [] arr = new double[b];
+        //Console.WriteLine("Введите элементы массива A:");
+        //for (int i = 0; i < arr.Length; i++)
         //{
-        //    A[i] = double.Parse(Console.ReadLine());
+        //    double a = Convert.ToDouble(Console.ReadLine());
+        //    arr[i] = a;
         //}
-        //Console.WriteLine("Введите массив B:");
-        //for (int j = 0; j < m; j++)
+        //Console.WriteLine("Введите, пожалуйста, размер массива B:");
+        //b = Convert.ToInt32(Console.ReadLine());
+        //double [] arr1 = new double[b];
+        //Console.WriteLine("Введите, пожалуйста, элементы массива B:");
+
+        //for (int i = 0; i < arr1.Length; i++)
         //{
-        //    B[j] = double.Parse(Console.ReadLine());
+        //    double a = Convert.ToDouble(Console.ReadLine());
+        //    arr1[i] = a;
         //}
-        //for (int i = 0; i < C.Length; i++)
+        //Console.WriteLine("Введите, пожалуйста, значение k:");
+        //int K = Convert.ToInt32(Console.ReadLine());
+        //double [] arr2 = new double[arr.Length + arr1.Length];
+        //int h = 0;
+        //int k = 0;
+        //double s = 0;
+        //double p = 0;
+
+        //for (int i = 0; i < arr.Length + arr1.Length; i++)
         //{
-        //    if (i <= k)
+        //    if (i <= K)
         //    {
-        //        C[i] = A[i];
+        //        arr2[i] = arr[i];
         //    }
-        //    if (i > k && i <= (k + m))
+        //    if (i > K & i <= K + arr1.Length)
         //    {
-        //        C[i] = B[i - k - 1];
+        //        arr2[i] = arr1[i - K - 1];
         //    }
-        //    if (i > (k + m))
+        //    if (i > K + arr1.Length)
         //    {
-        //        C[i] = A[i - k - m + 2];
+        //        arr2[i] = arr[i - arr1.Length - 1];
         //    }
         //}
-        //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', C));
+
+        //Console.WriteLine("Результат:");
+        //Console.WriteLine("[{0}]", string.Join("; ", arr2));
         //Console.WriteLine();
         //Console.ReadLine();
+
         #endregion 2_15
         #region 2_16
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string mass = str.Split(' ');
-        //double [] arr = new double[mass.Length];
-        //int su = 0;
+        //string[] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
+        //double su = 0;
         //int k = 0;
         //int al = 0;
-        //for (int i = 0; i < mass.Length; i++)
+        //for (int i = 0; i < masiv.Length; i++)
         //{
-        //    arr[i] = double.Parse(mass[i]);
+        //    arr[i] = double.Parse(masiv[i]);
         //    su += arr[i];
         //}
         //su = su / arr.Length;
@@ -836,77 +867,80 @@ class Program
         //        k++;
         //    }
         //}
-        //double[] massivchik = new double[k];
+        //double[] massivv = new double[k];
         //for (int i = 0; i < arr.Length; i++)
         //{
         //    if (arr[i] < su)
         //    {
-        //        massivchik[al] = i;
+        //        massivv[al] = i;
         //        al++;
         //    }
         //}
         //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', massivchik));
+        //Console.WriteLine("[{0}]", string.Join(';', massivv));
         //Console.WriteLine();
+        //Console.ReadLine();
         #endregion 2_16
         #region 2_17
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //int minim = 1000000000;
-        //int maxim = -1000000000;
-        //int maxxx = 0;
-        //int minnn = 0;
-        //int k = 0;
-        //int su = 0;
-        //for (int i = 0; i < masiv.Length; i++)
+        //Console.WriteLine("Введите размер массива:");
+        //int b = Convert.ToInt32(Console.ReadLine());
+        //int n1 = int.Parse(Console.ReadLine());
+        //double [] a1 = new double[n1];
+        //int imax = 0;
+        //int imin = 0;
+        //double sp = 0;
+        //double so = 0;
+        //int ko = 0;
+        //int kp = 0;
+        //for (int i = 0; i < n1; i++)
         //{
-        //    arr[i] = double.Parse(masiv[i]);
-        //    if (maxim < arr[i])
+        //    a1[i] = double.Parse(Console.ReadLine());
+        //}
+
+        //for (int i = 0; i < n1; i++)
+        //{
+        //    Console.Write("{0} ", a1[i]);
+        //    if (a1[i] < a1[imin]) imin = i;
+        //    if (a1[i] > a1[imax]) imax = i;
+        //    if (a1[i] > 0)
         //    {
-        //        maxim = arr[i];
-        //        maxxx = i;
+        //        sp += a1[i];
+        //        kp++;
         //    }
-        //    if (minim > arr[i])
+        //    if (a1[i] < 0)
         //    {
-        //        minim = arr[i];
-        //        minnn = i;
+        //        so += a1[i];
+        //        ko++;
         //    }
         //}
-        //if (maxxx < minnn)
+        //Console.WriteLine();
+        //if (imin < imax)
         //{
-        //    for (int i = 0; i < masiv.Length; i++)
+        //    if (ko != 0)
         //    {
-        //        if (arr[i] > 0)
-        //        {
-        //            su += arr[i];
-        //            k++;
-        //        }
+        //        double otv = so / ko;
+        //        Console.WriteLine(otv);
         //    }
+        //    else Console.WriteLine();
         //}
         //else
         //{
-        //    for (int i = 0; i < masiv.Length; i++)
+        //    if (kp != 0)
         //    {
-        //        if (arr[i] < 0)
-        //        {
-        //            su += arr[i];
-        //            k++;
-        //        }
+        //        double otv = sp / kp;
+        //        Console.WriteLine(otv);
         //    }
+        //    else Console.WriteLine("Результат:");
         //}
-        //su = su / k;
-        //Console.WriteLine("Среднее арифметичсекое:");
-        //Console.WriteLine(su);
         //Console.WriteLine();
         //Console.ReadLine();
+
         #endregion 2_17
         #region 2_18
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
         //double maxim1 = -1000000000;
         //double maxim2 = -1000000000;
         //int chet = 0;
@@ -943,16 +977,17 @@ class Program
         //Console.WriteLine("Полученный массив:");
         //Console.WriteLine("[{0}]", string.Join(';', arr));
         //Console.WriteLine();
+        //Console.ReadLine();
         #endregion 2_18
 
         #region 2_19
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //int maxim = -1000000000;
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
+        //double maxim = -1000000000;
         //int k = 0;
-        //int su = 0;
+        //double su = 0;
         //for (int i = 0; i < masiv.Length; i++)
         //{
         //    arr[i] = double.Parse(masiv[i]);
@@ -978,12 +1013,12 @@ class Program
         #region 2_20
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string str = Console.ReadLine();
-        //string masiv = str.Split(' ');
-        //double [] arr = new double[masiv.Length];
-        //int minim = 1000000000;
+        //string [] masiv = str.Split(' ');
+        //double[] arr = new double[masiv.Length];
+        //double minim = 1000000000;
         //int k = -1;
         //int minnn = 0;
-        //int su = 0;
+        //double su = 0;
         //for (int i = 0; i < masiv.Length; i++)
         //{
         //    arr[i] = double.Parse(masiv[i]);
@@ -997,7 +1032,7 @@ class Program
         //        k = i;
         //    }
         //}
-        //if (k< minnn)
+        //if (k < minnn)
         //{
         //    for (int i = 0; i < masiv.Length; i += 2)
         //    {
@@ -1017,11 +1052,10 @@ class Program
         #endregion 2_20
 
         #region 3_2
-        //Console.WriteLine("3-2:");
         //Console.WriteLine("Введите массив,элементы вводите через пробел:");
         //string stroka = Console.ReadLine();
-        //string[] massiv = stroka.Split(' ');
-        //double[] array = new double[massiv.Length];
+        //string [] massiv = stroka.Split(' ');
+        //double [] array = new double[massiv.Length];
         //double maximum = -1000000000;
         //double mem = 1;
         //for (int i = 0; i < massiv.Length; i++)
@@ -1042,9 +1076,40 @@ class Program
         //}
         //Console.WriteLine("Полученный массив:");
         //Console.WriteLine("[{0}]", string.Join(';', array));
-        //Console.WriteLine();
         //Console.ReadLine();
-        #endregion 3_2 
+        #endregion 3_2
+        #region 3_3
+        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
+        //string stroka = Console.ReadLine();
+        //string []masiv = stroka.Split(' ');
+        //double [] array = new double[masiv.Length];
+        //double maximum = -1000000000;
+        //double mem = 0;
+        //double el = 0;
+        //for (int i = 0; i < masiv.Length; i++)
+        //{
+        //    array[i] = double.Parse(masiv[i]);
+        //    if (maximum < array[i])
+        //    {
+        //        maximum = array[i];
+        //        mem = i;
+        //    }
+        //}
+        //if (mem % 2 != 0)
+        //{
+        //    mem -= 1;
+        //}
+        //for (int i = 0; i < mem; i += 2)
+        //{
+        //    el = array[i];
+        //    array[i] = array[i + 1];
+        //    array[i + 1] = el;
+
+        //}
+        //Console.WriteLine("Полученный массив:");
+        //Console.WriteLine("[{0}]", string.Join(';', array));
+        //Console.WriteLine();
+        #endregion 3_3
 
 
     }
