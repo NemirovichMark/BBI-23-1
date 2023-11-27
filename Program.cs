@@ -614,28 +614,49 @@ Console.WriteLine(s);
 #region 2.10
 Console.WriteLine("2.10");
 
- a = new double[4] { 1, 2, -3, 4 };
- min = a[0];
+ a = new double[4] { -1, -2, -3, -4 };
+int cR = 0, pR = 0;
+ min = 100000000;
  imin = 0;
 for (int i = 0; i < 4; i++)
 {
     if (a[i] >= 0)
     {
-        if (a[i] < min)
-        {
-            min = a[i];
-            imin = i;
-
-        }
+        pR = i;
+        cR++;
     }
+
 }
-int kkk = imin;
-double nnn = 4;
-for (int i = kkk + 1; i < nnn; i++)
-    a[i - 1] = a[i];
-for (int i = 0; i < nnn - 1; i++)
-    Console.WriteLine("{0:f1}", a[i]);
-Console.WriteLine();
+for (int i = 0; i <= pR; i++)
+{
+    if (a[i] < min & a[i] > 0)
+    {
+
+
+
+        min = a[i];
+        imin = i;
+
+
+    }
+
+}
+
+if (cR == 0)
+{
+    Console.WriteLine("отсутствуют положительные элементы массива");
+}
+else
+{
+
+    int kkk = imin;
+    double nnn = 4;
+    for (int i = kkk + 1; i < nnn; i++)
+        a[i - 1] = a[i];
+    for (int i = 0; i < nnn - 1; i++)
+        Console.WriteLine("{0:f1}", a[i]);
+    Console.WriteLine();
+}
 #endregion
 
 
@@ -643,36 +664,59 @@ Console.WriteLine();
 
 #region 2.11
 Console.WriteLine("2.11");
+int m = 0;
 const int N = 6;
 int[] aA = new int[N];
 string sS;
+int ch = 0;
 Console.WriteLine("Введите элементы массива");
+
 for (int i = 0; i < N - 1; i++)
 {
     sS = Console.ReadLine();
     aA[i] = int.Parse(sS);
-}int PP = 52, m = 0;
-int mm = 0;
-Console.WriteLine("число Р={0}",PP);
-for (int i = N - 2; i >= 0; i--)
+}
+for (int i = 0; i < N - 1; i++)
 {
     if (aA[i] > 0)
     {
-        m = aA[i];
-        mm = i;
-        break;
+        ch++;
     }
+}
 
-}
-for (int i = N- 2; i >= mm + 1; i--)
+
+
+if (ch == 0)
 {
-    aA[i + 1] = aA[i];
+    Console.WriteLine("отсутствуют положительные элементы массива");
 }
-aA[mm + 1] = PP;
-Console.WriteLine("Полученный массив");
-for (int i = 0; i < N; i++)
-Console.Write("{0:d} ", aA[i]);
-Console.WriteLine();
+else
+{
+    int PP = 52;
+    m = 0;
+    int mm = 0;
+    Console.WriteLine("число Р={0}", PP);
+    for (int i = N - 2; i >= 0; i--)
+    {
+        if (aA[i] > 0)
+        {
+            m = aA[i];
+            mm = i;
+            break;
+        }
+
+    }
+    for (int i = N - 2; i >= mm + 1; i--)
+    {
+        aA[i + 1] = aA[i];
+    }
+    aA[mm + 1] = PP;
+    Console.WriteLine("Полученный массив");
+    for (int i = 0; i < N; i++)
+        Console.Write("{0:d} ", aA[i]);
+    Console.WriteLine();
+}
+
 #endregion
 
 
@@ -753,38 +797,54 @@ Console.WriteLine("[{0}]", string.Join(";", aa));
 
 #region 2.14
 Console.WriteLine("2.14");
- a = new double[5] { 1.0, 3.0, 4.0, -5.0, -7.0 };
+ a = new double[5] { 1.0, 3.0, 4.0, 5.0, 7.0 };
 
 double p;
 Console.WriteLine("Исходный массив:");
+int c = 0;
  k = 0;
- int sss = 0;
-imax = 0;
-maxx = a[0];
+int sss = 0;
+ imax = 0;
+ maxx = a[0];
 for (int i = 0; i < 5; i++)
-    
-Console.Write("{0:f1} ", a[i]);
-Console.WriteLine();
-for (int i = 0; i<5; i++)
-{
-    if (a[i]> maxx)
-    {
-        maxx = a[i];
-        imax = i;
-    }
-}
 
-for (int i = 0; i < 5; i++)
-    if (a[i] < 0)
-    {
-        k = i;
-        break;
-    }
-p = a[k]; a[k] = a[imax]; a[imax] = p;
-Console.WriteLine("Полученный массив:");
-for (int i = 0; i < 5; i++)
     Console.Write("{0:f1} ", a[i]);
 Console.WriteLine();
+for (int i = 0; i < 5; i++)
+{
+    if (a[i] < 0)
+    {
+        c++;
+    }
+}
+Console.WriteLine(c);
+if (c == 0)
+{
+    Console.WriteLine("отсутствуют отрицательные элементы массива");
+}
+else
+{
+    for (int i = 0; i < 5; i++)
+    {
+        if (a[i] > maxx)
+        {
+            maxx = a[i];
+            imax = i;
+        }
+    }
+
+    for (int i = 0; i < 5; i++)
+        if (a[i] < 0)
+        {
+            k = i;
+            break;
+        }
+    p = a[k]; a[k] = a[imax]; a[imax] = p;
+    Console.WriteLine("Полученный массив:");
+    for (int i = 0; i < 5; i++)
+        Console.Write("{0:f1} ", a[i]);
+    Console.WriteLine();
+}
 #endregion
 
 
@@ -800,7 +860,8 @@ double[] A = new double[nu];
 double[] B = new double[m];
 double[] C = new double[nu + m];
 Console.WriteLine("Введите k:");
- k = (int)Double.Parse(Console.ReadLine());
+k = (int)Double.Parse(Console.ReadLine());
+
 Console.WriteLine("Введите масив A:");
 for (int i = 0; i < nu; i++)
 {
@@ -811,31 +872,40 @@ for (int j = 0; j < m; j++)
 {
     B[j] = double.Parse(Console.ReadLine());
 }
-for (int i = 0; i < C.Length; i++)
+if (k > nu)
 {
-    if (i <= k)
-    {
-        C[i] = A[i];
-    }
-    if (i > k && i <= (k + m))
-    {
-        C[i] = B[i - k - 1];
-    }
-    if (i > (k + m))
-    {
-        C[i] = A[i - k - m + 2];
-    }
+    Console.WriteLine("k не входит в размер массива А");
 }
-Console.WriteLine("Полученный массив:");
-Console.WriteLine("[{0}]", string.Join(';', C));
-Console.WriteLine();
+else
+{
 
+
+    for (int i = 0; i < C.Length; i++)
+    {
+        if (i <= k)
+        {
+            C[i] = A[i];
+        }
+        if (i > k && i <= (k + m))
+        {
+            C[i] = B[i - k - 1];
+        }
+        if (i > (k + m))
+        {
+            C[i] = A[i - k - m + 2];
+        }
+    }
+    Console.WriteLine("Полученный массив:");
+    Console.WriteLine("[{0}]", string.Join(';', C));
+    Console.WriteLine();
+}
 
 
 
 #endregion
 #region 2.16
- a = new double[4] { 5, 2, 3, 4 };
+Console.WriteLine("2.16");
+a = new double[4] { 5, 2, 3, 4 };
  s = 0;
  k = 0;
 int tt = 0;
@@ -875,62 +945,82 @@ Console.WriteLine("[{0}]", string.Join(';', bm));
 
 #region 2.17
 Console.WriteLine("2.17");
-a = new double[5] { 1, 4, -1, -2, 3 };
-Console.WriteLine("исходный массив");
-Console.WriteLine("[{0}]", string.Join(";", a));
-double sr = 0, sm = 0;
-int ll = 0;
-    k = 0;
- maxx = a[0];
+Console.WriteLine("введите элементы массива через пробел");
+ str = Console.ReadLine();
+string[] aray = str.Split(' ');
+ int []at = new int[aray.Length];
+ min = 9000000;
+ maxx = 9000000;
  imax = 0;
- min = a[0];
  imin = 0;
-for (int i = 0; i < 5; i++)
+int count = 0;
+double sr = 0;
+for (int i = 0; i < aray.Length; i++)
 {
-    if (a[i] > maxx)
+    at[i] = int.Parse(aray[i]);
+    if (maxx < at[i])
     {
-        maxx = a[i];
+        maxx = at[i];
         imax = i;
     }
-    if (a[i] < min)
+    if (min > at[i])
     {
-        min = a[i];
+        min = at[i];
         imin = i;
     }
 }
-
-for (int i = 0; i < 5; i++)
+if (imax < imin)
 {
-    if (a[i] > 0)
+    for (int i = 0; i < aray.Length; i++)
     {
-        sr = sr + a[i];
-        ll++;
-
-
+        if (at[i] > 0)
+        {
+            sr += at[i];
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        Console.WriteLine("отсутсвуют положительные элементы");
     }
     else
     {
-        sm = sm + a[i];
-        k++;
-
+        sr /= count;
+        Console.WriteLine("Ср.Арифм: " + sr);
     }
 
 }
-if (imax < imin)
-{
-    sr /= ll;
-    Console.WriteLine(sr);
-}
 else
 {
-    sm /= k;
-    Console.WriteLine(sm);
+    for (int i = 0; i < aray.Length; i++)
+    {
+        if (at[i] < 0)
+        {
+            sr += at[i];
+            count++;
+        }
+    }
+    if (count == 0)
+    {
+        Console.WriteLine("отсутствуют отрицательные элементы");
+    }
+    else
+    {
+        sr /= count;
+        Console.WriteLine("Ср.Арифм.: " + sr);
+    }
+
 }
+Console.WriteLine();
+Console.ReadKey();
+
+
 #endregion
 
 
-#region 2.17
- a = new double[5] { 1, 2, 3, 6, 5 };
+#region 2.18
+Console.WriteLine("2.18");
+a = new double[5] { 1, 2, 3, 6, 5 };
  arr = new double[5];
 int chet = 0, nech = 0;
  maxx = a[0];
