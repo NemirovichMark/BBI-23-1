@@ -567,11 +567,8 @@ namespace project
                 }
             }
             Console.WriteLine("Введите массив состоящий из 5 элементов");
-            for (int i = 0; i < arr1.Length; i++)
-            {
-                a = Convert.ToDouble(Console.ReadLine());
-                arr1[i] = a;
-            }
+            str = Console.ReadLine();
+            arr1 = str.Split(' ').Select(double.Parse).ToArray();
             Console.WriteLine("Исходная матрица:");
             for (int i = 0; i < n; i++)
             {
