@@ -854,6 +854,7 @@ public class Program
                 if (mass[i] < 0)
                 {
                     I1 = i;
+                    mass[i] = s;
                     break;
                 }
             }
@@ -899,6 +900,7 @@ public class Program
         I = -1;
         I1 = -1;
         k = -Math.Pow(10, 20);
+        double b = 0;
         Console.WriteLine($"Введите {n} знач. массива: ");
         for (int i = 0; i < mass.Length; i++)
         {
@@ -917,6 +919,9 @@ public class Program
                 if (mass[i] < 0)
                 {
                     I1 = i;
+                    b = mass[i];
+                    mass[i] = k;
+                    mass[I] = b;
                     break;
                 }
             }
