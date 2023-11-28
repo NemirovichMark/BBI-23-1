@@ -685,8 +685,8 @@ namespace project
             Console.WriteLine();
 
 
-            /*#region 3_1 
-            Console.WriteLine("3_1:");
+            #region 3_2 
+            Console.WriteLine("3_2:");
             n = 7;
             m = 5;
             s = 0;
@@ -703,65 +703,52 @@ namespace project
             max = -Math.Pow(10, 20);
             min = Math.Pow(10, 20);
             min1 = Math.Pow(10, 20);
-            Console.WriteLine("Введите матрицу(Кол-во строк: " + n + "; Кол-во элементов в строке: " + m + ")");
-            for (int i = 0; i < n; i++)
+            Console.WriteLine("Введите первую строку матрицы: ");
+            str = Console.ReadLine();
+            double[] arr = str.Split(' ').Select(double.Parse).ToArray();
+            for (int j = 0; j < arr.Length; j++)
+            {
+                mtrx[0, j] = arr[j];
+            }
+            for (int i = 1; i < arr.Length; i++)
             {
                 str = Console.ReadLine();
-                double[] arr = str.Split(' ').Select(double.Parse).ToArray();
-                for (int j = 0; j < m; j++)
+                arr = str.Split(' ').Select(double.Parse).ToArray();
+                for (int j = 0; j < arr.Length; j++)
                 {
                     mtrx[i, j] = arr[j];
                 }
             }
             Console.WriteLine("Исходная матрица:");
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < arr.Length; j++)
                 {
                     Console.Write(mtrx[i, j] + " ");
                 }
                 Console.WriteLine();
             }
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                min = Math.Pow(10, 20);
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < arr.Length; j++)
                 {
-                    if (mtrx[i, j] > min)
+                    if (i==0 || i==(arr.Length-1) || j==0 || j==(arr.Length - 1))
                     {
-                        arr1[i] = mtrx[i, j];
-                        min = mtrx[i, j];
-                    }
-                }
-            }
-            for (int i = 1; i < n; i++)
-            {
-                for (int j = 1; j < m; j++)
-                {
-                    
-                }
-            }
-            for (int i = 1; i < n; i += 2)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    if ((mtrx[i, j] == arr1[i]))
-                    {
-                        mtrx[i, j] = arr1[i - 1];
+                        mtrx[i, j] = 0;
                     }
                 }
             }
             Console.WriteLine("Итоговая матрица:");
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < arr.Length; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < arr.Length; j++)
                 {
                     Console.Write(mtrx[i, j] + " ");
                 }
                 Console.WriteLine();
             }
             #endregion
-            Console.WriteLine();*/
+            Console.WriteLine();
         }
     }
 }
