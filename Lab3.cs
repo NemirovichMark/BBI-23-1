@@ -122,6 +122,7 @@ namespace project
             Console.WriteLine("Ответ:");
             Console.WriteLine(Math.Sqrt(l));
             #endregion
+
             #region 1_7
             Console.WriteLine("1_7:");
             arr = new double[7];
@@ -205,6 +206,7 @@ namespace project
             Console.WriteLine("Введите 10 элементов массива:");
             for (int i = 0; i < arr.Length; i++)
             {
+
                 double a = Convert.ToDouble(Console.ReadLine());
                 arr[i] = a;
                 if (arr[i] > p & arr[i] < q)
@@ -245,6 +247,7 @@ namespace project
             Console.WriteLine("[{0}]", string.Join("; ", arr1));
             Console.WriteLine();
             #endregion
+
             #region 1_12
             Console.WriteLine("1_12:");
             arr = new double[8];
@@ -695,7 +698,6 @@ namespace project
             #endregion
             Console.WriteLine();
 
-
             #region 2_10
             Console.WriteLine("2_10:");
             Console.WriteLine("Введите размер массива:");
@@ -703,6 +705,7 @@ namespace project
             arr = new double[b];
             p = Math.Pow(10, 20);
             h = 0;
+            bool flag = false;
             Console.WriteLine("Введите элементы массива:");
             for (int i = 0; i < arr.Length; i++)
             {
@@ -714,14 +717,32 @@ namespace project
                     p = arr[i];
                 }
             }
-            for (int i = h + 1; i < arr.Length; i++)
+            foreach (double elem in arr)
             {
-                arr[i - 1] = arr[i];
+                if (elem > 0)
+                {
+                    flag = true;
+                }
             }
-            Console.WriteLine("Ответ:");
-            for (int i = 0; i < arr.Length - 1; i++)
+            if (flag)
             {
-                Console.Write("{0:f1}", arr[i] + " ");
+                for (int i = h + 1; i < arr.Length; i++)
+                {
+                    arr[i - 1] = arr[i];
+                }
+                Console.WriteLine("Ответ:");
+                for (int i = 0; i < arr.Length - 1; i++)
+                {
+                    Console.Write("{0:f1}", arr[i] + " ");
+                }
+            }
+            else
+            {
+                foreach (double elem in arr)
+                {
+                    Console.Write(elem + " ");
+                }
+                Console.WriteLine();
             }
             #endregion
             Console.WriteLine();
@@ -736,7 +757,7 @@ namespace project
             arr = new double[b];
             arr1 = new double[b + 1];
             h = 0;
-            o = 0;
+            flag = false;
             Console.WriteLine("Введите элементы массива:");
             for (int i = 0; i < arr.Length; i++)
             {
@@ -745,26 +766,43 @@ namespace project
                 if (arr[i] > 0)
                 {
                     h = i;
-                    o = arr[i];
                 }
             }
-            for (int i = 0; i < arr.Length + 1; i++)
+            foreach (double elem in arr)
             {
-                if (i <= h)
+                if (elem > 0)
                 {
-                    arr1[i] = arr[i];
-                }
-                if (i == (h + 1))
-                {
-                    arr1[i] = p;
-                }
-                if (i > (h + 1))
-                {
-                    arr1[i] = arr[i - 1];
+                    flag = true;
                 }
             }
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join("; ", arr1));
+            if (flag)
+            {
+                for (int i = 0; i < arr.Length + 1; i++)
+                {
+                    if (i <= h)
+                    {
+                        arr1[i] = arr[i];
+                    }
+                    if (i == (h + 1))
+                    {
+                        arr1[i] = p;
+                    }
+                    if (i > (h + 1))
+                    {
+                        arr1[i] = arr[i - 1];
+                    }
+                }
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("[{0}]", string.Join("; ", arr1));
+            }
+            else
+            {
+                foreach (double elem in arr)
+                {
+                    Console.Write(elem + " ");
+                }
+                Console.WriteLine();
+            }
             #endregion
             Console.WriteLine();
 
@@ -774,12 +812,11 @@ namespace project
             Console.WriteLine("Введите размер массива:");
             b = Convert.ToInt32(Console.ReadLine());
             arr = new double[b];
-            arr1 = new double[b + 1];
             h = 0;
             k = 0;
             o = -Math.Pow(10, 20);
             s = 0;
-            p = 0;
+            flag = false;
             Console.WriteLine("Введите элементы массива:");
             for (int i = 0; i < arr.Length; i++)
             {
@@ -791,21 +828,39 @@ namespace project
                     o = arr[i];
                 }
             }
-            for (int i = h + 1; i < arr.Length; i++)
+            foreach (double elem in arr)
             {
-                s += arr[i];
-            }
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] < 0)
+                if (elem < 0)
                 {
-                    k = i;
-                    break;
+                    flag = true;
                 }
             }
-            arr[k] = s;
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join("; ", arr));
+            if (flag)
+            {
+                for (int i = h + 1; i < arr.Length; i++)
+                {
+                    s += arr[i];
+                }
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] < 0)
+                    {
+                        k = i;
+                        break;
+                    }
+                }
+                arr[k] = s;
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("[{0}]", string.Join("; ", arr));
+            }
+            else
+            {
+                foreach (double elem in arr)
+                {
+                    Console.Write(elem + " ");
+                }
+                Console.WriteLine();
+            }
             #endregion
             Console.WriteLine();
 
@@ -843,6 +898,7 @@ namespace project
             h = 0;
             k = 0;
             o = -Math.Pow(10, 20);
+            flag = false;
             Console.WriteLine("Введите элементы массива:");
             for (int i = 0; i < arr.Length; i++)
             {
@@ -854,66 +910,87 @@ namespace project
                     o = arr[i];
                 }
             }
-            for (int i = 0; i < arr.Length; i++)
+            foreach (double elem in arr)
             {
-                if (arr[i] < 0)
+                if (elem < 0)
                 {
-                    k = i;
-                    break;
+                    flag = true;
                 }
             }
-            arr[h] = arr[k];
-            arr[k] = o;
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join("; ", arr));
+            if (flag)
+            {
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] < 0)
+                    {
+                        k = i;
+                        break;
+                    }
+                }
+                arr[h] = arr[k];
+                arr[k] = o;
+                Console.WriteLine("Ответ:");
+                Console.WriteLine("[{0}]", string.Join("; ", arr));
+            }
+            else
+            {
+                foreach (double elem in arr)
+                {
+                    Console.Write(elem + " ");
+                }
+                Console.WriteLine();
+            }
             #endregion
             Console.WriteLine();
 
 
             #region 2_15
             Console.WriteLine("2_15:");
-            Console.WriteLine("Введите размер массива A:");
+            Console.WriteLine("Введите размер массива A: ");
             b = Convert.ToInt32(Console.ReadLine());
             arr = new double[b];
-            Console.WriteLine("Введите элементы массива A:");
+            Console.WriteLine("Введите элементы массива A: ");
             for (int i = 0; i < arr.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
                 arr[i] = a;
             }
-            Console.WriteLine("Введите размер массива B:");
-            b = Convert.ToInt32(Console.ReadLine());
-            arr1 = new double[b];
-            Console.WriteLine("Введите элементы массива B:");
+            Console.WriteLine("Введите размер массива B: ");
+            int n = int.Parse(Console.ReadLine());
+            arr1 = new double[n];
+            Console.WriteLine("Введите элементы массива B: ");
             for (int i = 0; i < arr1.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
                 arr1[i] = a;
             }
-            Console.WriteLine("Введите значение k:");
-            int K = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите значение k: ");
+            k = int.Parse(Console.ReadLine());
             arr2 = new double[arr.Length + arr1.Length];
-            h = 0;
-            k = 0;
-            s = 0;
-            p = 0;
-            for (int i = 0; i < arr.Length + arr1.Length; i++)
+            h -= 1;
+            if (((h + 1) > arr.Length) || ((h == 1) & (arr.Length == 1)))
             {
-                if (i <= K)
+                Console.WriteLine("Неверный ввод");
+            }
+            else
+            {
+                for (int i = 0; i < arr.Length + arr1.Length; i++)
                 {
-                    arr2[i] = arr[i];
-                }
-                if (i > K & i <= K + arr1.Length)
-                {
-                    arr2[i] = arr1[i - K - 1];
-                }
-                if (i > K + arr1.Length)
-                {
-                    arr2[i] = arr[i - arr1.Length - 1];
+                    if (i <= h)
+                    {
+                        arr2[i] = arr[i];
+                    }
+                    if (i > h & i <= h + arr1.Length)
+                    {
+                        arr2[i] = arr1[i - h - 1];
+                    }
+                    if (i > (h + arr1.Length))
+                    {
+                        arr2[i] = arr[i - arr1.Length];
+                    }
                 }
             }
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join("; ", arr2));
+            Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr2));
             #endregion
             Console.WriteLine();
 
@@ -925,8 +1002,7 @@ namespace project
             arr = new double[b];
             h = 0;
             s = 0;
-            sr = 0;
-            K = 0;
+            int K = 0;
             Console.WriteLine("Введите элементы массива:");
             for (int i = 0; i < arr.Length; i++)
             {
@@ -959,33 +1035,33 @@ namespace project
 
             #region 2_17
             Console.WriteLine("2_17:");
-            Console.WriteLine("Введите размер массива:");
-            b = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Введите размер массива: ");
+            b = int.Parse(Console.ReadLine());
             arr = new double[b];
-            h = 0;
-            k = 0;
+            int I = 0;
+            int I1 = 0;
             s = 0;
             sr = 0;
             q = 0;
-            o = Math.Pow(10, 20);
+            l = Math.Pow(10, 20);
             p = -Math.Pow(10, 20);
-            Console.WriteLine("Введите элементы массива:");
+            Console.WriteLine("Введите элементы массива: ");
             for (int i = 0; i < arr.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
                 arr[i] = a;
-                if (arr[i] < o)
+                if (arr[i] < l)
                 {
-                    h = i;
-                    o = arr[i];
+                    I = i;
+                    l = arr[i];
                 }
                 if (arr[i] > p)
                 {
-                    k = i;
+                    I1 = i;
                     p = arr[i];
                 }
             }
-            if (k < h)
+            if (I1 < I)
             {
                 for (int i = 0; i < arr.Length; i++)
                 {
@@ -997,7 +1073,7 @@ namespace project
                 }
                 sr = s / q;
             }
-            if (k > h)
+            if (I1 > I)
             {
                 for (int i = 0; i < arr.Length; i++)
                 {
@@ -1007,10 +1083,16 @@ namespace project
                         q += 1;
                     }
                 }
-                sr = s / q;
+                if (q == 0)
+                {
+                    Console.WriteLine("Ответ: 0");
+                }
+                else
+                {
+                    sr = s / q;
+                }
             }
-            Console.WriteLine("Ответ:");
-            Console.WriteLine(sr);
+            Console.WriteLine($"Ответ: {sr}");
             #endregion
             Console.WriteLine();
 
@@ -1102,7 +1184,7 @@ namespace project
                 arr[h] = 2 * arr[h];
             }
             Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join(';', arr));
+            Console.WriteLine("[{0}]", string.Join("; ", arr));
             #endregion
             Console.WriteLine();
 
@@ -1155,18 +1237,14 @@ namespace project
             #endregion
             Console.WriteLine();
 
-
-            #region 3_1
-            Console.WriteLine("3_1:");
-            Console.WriteLine("Введите размер массива:");
-            b = Convert.ToInt32(Console.ReadLine());
+            #region 3_2
+            Console.WriteLine("3_2:");
+            Console.WriteLine("Введите размер массива: ");
+            b = int.Parse(Console.ReadLine());
             arr = new double[b];
-            h = 0;
-            k = 0;
-            s = 0;
-            K = 0;
             p = -Math.Pow(10, 20);
-            Console.WriteLine("Введите элементы массива:");
+            double K = 1;
+            Console.WriteLine("Введите элементы массива: ");
             for (int i = 0; i < arr.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
@@ -1180,31 +1258,24 @@ namespace project
             {
                 if (arr[i] == p)
                 {
+                    arr[i] = arr[i] + K;
                     K++;
                 }
             }
-            arr1 = new double[K];
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (arr[i] == p)
-                {
-                    arr1[h] = i;
-                    h += 1;
-                }
-            }
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join(';', arr1));
+            Console.WriteLine("Ответ: ");
+            Console.Write("[{0}]", string.Join("; ", arr));
             #endregion
             Console.WriteLine();
 
-
-            #region 3_2
-            Console.WriteLine("3_2:");
-            Console.WriteLine("Введите размер массива:");
-            b = Convert.ToInt32(Console.ReadLine());
+            #region 3_3
+            Console.WriteLine("3_3:");
+            Console.WriteLine("Введите размер массива: ");
+            b = int.Parse(Console.ReadLine());
             arr = new double[b];
             p = -Math.Pow(10, 20);
-            Console.WriteLine("Введите элементы массива:");
+            I = 0;
+            double kr = 0;
+            Console.WriteLine("Введите элементы массива: ");
             for (int i = 0; i < arr.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
@@ -1214,17 +1285,19 @@ namespace project
                     p = arr[i];
                 }
             }
-            for (int i = 0; i < arr.Length; i++)
+            if (I % 2 != 0)
             {
-                if (arr[i] == p)
-                {
-                    arr[i] = arr[i] + i;
-                }
+                I -= 1;
             }
-            Console.WriteLine("Ответ:");
-            Console.WriteLine("[{0}]", string.Join(';', arr));
+            for (int i = 0; i < I; i += 2)
+            {
+                kr = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = kr;
+            }
+            Console.WriteLine("Ответ: ");
+            Console.Write("[{0}]", string.Join("; ", arr));
             #endregion
-            Console.WriteLine();
         }
     }
 }
