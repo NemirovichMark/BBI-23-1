@@ -790,18 +790,20 @@ namespace project
             }
             for (int i = 0; i < n; i++)
             {
+                min = Math.Pow(10, 20);
                 for (int j = 0; j < m; j++)
                 {
-                    if (mtrx[i,j] <min)
+                    if (mtrx[i, j] < min)
                     {
                         arr1[i] = mtrx[i, j];
-                        min = mtrx[i,j];
+                        min = mtrx[i, j];
                     }
                 }
             }
+            Console.WriteLine("1_1: " + "[{0}]", string.Join("; ", arr1));
             for (int i = 1; i < n; i++)
             {
-                for (int j = 0; j < n-1; j++)
+                for (int j = 0; j < n - 1; j++)
                 {
                     if (arr1[j] < arr1[j + 1])
                     {
