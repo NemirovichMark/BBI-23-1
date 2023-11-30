@@ -831,8 +831,8 @@ namespace project
             #endregion
             Console.WriteLine();
 
-            #region 3_2
-            Console.WriteLine("3_2:");
+            #region 3_8
+            Console.WriteLine("3_8:");
             n = 7;
             m = 5;
             s = 0;
