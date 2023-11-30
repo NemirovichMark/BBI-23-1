@@ -830,6 +830,79 @@ namespace project
             }
             #endregion
             Console.WriteLine();
+
+            #region 3_2
+            Console.WriteLine("3_2:");
+            n = 7;
+            m = 5;
+            s = 0;
+            I = -1;
+            I1 = 0;
+            q = 0;
+            K = 0;
+            arr1 = new double[7];
+            mtrx = new double[n, m];
+            min = Math.Pow(10, 20);
+            Console.WriteLine("Введите матрицу(Кол-во строк: " + n + "; Кол-во элементов в строке: " + m + ")");
+            for (int i = 0; i < n; i++)
+            {
+                str = Console.ReadLine();
+                double[] arr = str.Split(' ').Select(double.Parse).ToArray();
+                for (int j = 0; j < m; j++)
+                {
+                    mtrx[i, j] = arr[j];
+                }
+            }
+            Console.WriteLine("Исходная матрица:");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(mtrx[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            for (int i = 0; i < n; i++)
+            {
+                K = 0;
+                for (int j = 0; j < m; j++)
+                {
+                    if (mtrx[i, j] > 0)
+                    {
+                        K += 1;
+                        arr1[i] = K;
+                    }
+                }
+            }
+            for (int i = 1; i < n; i++)
+            {
+                for (int j = 0; j < n - 1; j++)
+                {
+                    if (arr1[j] < arr1[j + 1])
+                    {
+                        q = arr1[j];
+                        arr1[j] = arr1[j + 1];
+                        arr1[j + 1] = q;
+                        for (int k = 0; k < m; k++)
+                        {
+                            q = mtrx[j, k];
+                            mtrx[j, k] = mtrx[j + 1, k];
+                            mtrx[j + 1, k] = q;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Итоговая матрица:");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(mtrx[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            Console.WriteLine();
         }
     }
 }
