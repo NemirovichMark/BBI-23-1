@@ -1,110 +1,153 @@
 ﻿using System;
 
-class Program
+namespace ConsoleApp2
 {
-
-    public static void Main(string[] args)
+    class Program
     {
-        #region 2_10
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //string[] a = str.Split(' ');
-        //double[] arr = new double[a.Length];
-        //double[] ard = new double[a.Length - 1];
-        //double min = 10000;
-        //int t = 0;
-        //for (int i = 0; i < a.Length; i++)
-        //{
-        //    arr[i] = double.Parse(a[i]);
-        //    if (min > arr[i] && arr[i] > 0)
-        //    {
-        //        min = arr[i];
-        //        t = i;
-        //    }
-        //}
-        //for (int i = 0; i < a.Length; i++)
-        //{
-        //    if (i < t)
-        //    {
-        //        ard[i] = arr[i];
-        //    }
-        //    if (i > t)
-        //    {
-        //        ard[i - 1] = arr[i];
-        //    }
-        //}
-        //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', ard));
-        //Console.ReadLine();
-        #endregion 2_10
-        #region 2_11
-        //Console.Write("Введите P: ");
-        //double p = Double.Parse(Console.ReadLine());
-        //double[] arr = new double[] { -1, -2, -3, 4, -5, -6 };
-        //double ind = arr[0];
-        //for (int i = 0; i < arr.Length; i++)
-        //{
-        //    if (arr[i] > 0)
-        //    {
-        //        ind = i;
-        //    }
-        //}
-        //Console.WriteLine("Итоговый массив: ");
-        //for (int i = 0; i < arr.Length; i++)
-        //{
-        //    Console.Write("{0:f0} ", arr[i]);
-        //    if (i == ind) Console.Write("{0:f0} ", p);
-        //}
-        //Console.ReadLine();
-        #endregion 2_11
-        #region 2_12
-        //Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        //string str = Console.ReadLine();
-        //string[] a = str.Split(' ');
-        //double[] arr = new double[a.Length];
-        //double max = -10000;
-        //double min = 10000;
-        //double s = 0;
-        //int amax = 0;
-        //int t = -1;
-        //for (int i = 0; i < a.Length; i++)
-        //{
-        //    arr[i] = double.Parse(a[i]);
-        //    if (arr[i] > max)
-        //    {
-        //        max = arr[i];
-        //        amax = i;
-        //    }
-        //    if (t == -1 && arr[i] < 0)
-        //    {
-        //        t = i;
-        //    }
-        //}
-        //for (int i = amax + 1; i < a.Length; i++)
-        //{
-        //    s += arr[i];
-        //}
-        //arr[t] = s;
-        //Console.WriteLine("Полученный массив:");
-        //Console.WriteLine("[{0}]", string.Join(';', arr));
-        //Console.ReadLine();
-        #endregion 2_12
-        #region 2_15
-        //int k = 3;
-        //int n = 10;
-        //int m = 5;
-        //int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        //int[] B = new int[] { 999, 2, 3, 4, 999 };
-        //for (int i = 0; i < n; i++)
-        //{
-        //    Console.Write("{0:d} ", A[i]);
-        //    if (i == (k - 1))
-        //    {
-        //        for (int j = 0; j < m; j++) Console.Write("{0:d} ", B[j]);
-        //        Console.ReadLine();
-                #endregion 2_15
-
+        static void Main(string[] args)
+        {
+            #region 1_3
+            double a, b, c;
+            Console.WriteLine("Введите a:");
+            a = double.Parse(Console.ReadLine());
+            Console.WriteLine("Введите b:");
+            b = double.Parse(Console.ReadLine());
+            if (a > 0)
+            {
+                c = Math.Max(a, b);
             }
+            else
+            {
+                c = Math.Min(a, b);
+            }
+            Console.WriteLine(c);
+            Console.ReadLine();
+
+            #endregion
+
+            #region 1_61
+            //double r, s;
+            //r = 3.2;
+            //s = 3.5;
+            //if (2 * Math.Sqrt(r / Math.PI) < Math.Sqrt(s))
+            //{
+            //    Console.WriteLine("Поместится");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Не поместится");
+            //}
+            //Console.ReadLine();
+            #endregion
+
+            #region 1_62
+            //double r, s;
+            //r = 3.2;
+            //s = 4;
+            //if (2 * Math.Sqrt(r / Math.PI) < Math.Sqrt(s))
+            //{
+            //    Console.WriteLine("Поместится");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Не поместится");
+            //}
+            //Console.ReadLine();
+            #endregion
+
+            #region 1_63
+            //double r, s;
+            //r = 6;
+            //s = 9;
+            //if (2 * Math.Sqrt(r / Math.PI) < Math.Sqrt(s))
+            //{
+            //    Console.WriteLine("Поместится");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Не поместится");
+            //}
+            //Console.ReadLine();
+            #endregion
+
+            #region 1_9
+            //double y = 0;
+            //Console.WriteLine("Введите x,чтобы посчитать y:");
+            //double x = double.Parse(Console.ReadLine());
+            //if (x <= -1)
+            //{
+            //    y = 0;
+            //}
+            //else if (x > -1 & x <= 0)
+            //{
+            //    y = 1 + x;
+            //}
+            //else if (x > 0)
+            //{
+            //    y = 1;
+            //}
+            //Console.WriteLine("Значение функции:");
+            //Console.WriteLine(y);
+            //Console.ReadLine();
+            #endregion
+
+            #region 2_3
+            //Console.WriteLine("Введите число учеников:");
+            //int n = int.Parse(Console.ReadLine());
+            //double m = 0;
+            //double v;
+            //Console.WriteLine("Введите веc учеников:");
+            //for (int i = 0; i < n; i++)
+            //{
+            //    v = double.Parse(Console.ReadLine());
+            //    if (v < 30)
+            //    {
+            //        m = m + 0.2;
+            //    }
+            //}
+            //Console.WriteLine("Кол-во литров:");
+            //Console.WriteLine(m);
+            //Console.ReadLine();
+            #endregion
+
+            #region 2_6
+            //double x, y;
+            //int k = 0;
+            //Console.WriteLine("Введите количество координат");
+            //int n = int.Parse(Console.ReadLine());
+            //Console.WriteLine("Введите координаты x и y");
+            //for (int i = 1; i <= n; i++)
+            //{
+            //    x = double.Parse(Console.ReadLine());
+            //    y = double.Parse(Console.ReadLine());
+            //    if ((y >= 0) && (y <= Math.Sin(x)) && (x >= 0) && (x <= Math.PI))
+            //    {
+            //        k = k + 1;
+            //    }    
+            //}
+            //Console.WriteLine(k);
+            //Console.ReadLine();
+            #endregion
+
+            #region 2_9
+            //Console.WriteLine("Введите кол-во участников:");
+            //int n;
+            //n = int.Parse(Console.ReadLine());
+            //double best = 0;
+            //for (double i = 0; i < n; i++)
+            //{
+            //    double r;
+            //    r = double.Parse(Console.ReadLine());
+            //    if (i == 1) best = r;
+            //    else
+            //    {
+            //        if (r <= best) best = r;
+            //    }
+            //}
+            //Console.WriteLine("Лучший результат:");
+            //Console.WriteLine(best);
+            //Console.ReadLine();
+            #endregion
         }
     }
 }
