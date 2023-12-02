@@ -515,5 +515,192 @@ namespace lab4
                 Console.WriteLine();
             }
             #endregion
+            Console.WriteLine();
+            Console.WriteLine("3_1");
+            #region 3_1
+            n1=7; n2=5;
+            double [] e=new double [n1];
+            a=new double [n1,n2];
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         string s = Console.ReadLine();
+            //         a[i, j] = double.Parse(s);
+            //     }
+            // }
+            a=new double [,] {{9,2,3,4,5},{-4,4,7,1,8},{0,0,0,0,0},{3,5,7,8,-1},{9,2,3,4,5},{9,2,3,4,5},{9,2,3,4,5}};
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            for (int i = 0; i < n1; i++)
+            {
+                int imin=0;
+                for (int j=0;j<n2;j++)
+                {
+                    if (a[i,j]<a[i,imin]) imin=j;
+                }
+                e[i]=a[i,imin];
+            }
+            for (int i=0;i<n1-1;i++)
+            {
+                imax=i+1;
+                for (int j=i+1;j<n1;j++)
+                {
+                    if (e[j]>e[imax]) imax=j;
+                }
+                if (e[i]<e[imax])
+                {
+                    double p=e[i];
+                    e[i]=e[imax];
+                    e[imax]=p;
+                    for (int j=0;j<n2;j++)
+                    {
+                        double h=a[i,j];
+                        a[i,j]=a[imax,j];
+                        a[imax,j]=h;
+                    }
+                }
+                
+            }
+            Console.WriteLine("------>");
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            Console.WriteLine();
+            Console.WriteLine("3_8");
+            #region 3_8
+            n1=7; n2=5;
+            e=new double [n1];
+            a=new double [n1,n2];
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         string s = Console.ReadLine();
+            //         a[i, j] = double.Parse(s);
+            //     }
+            // }
+            a=new double [,] {{9,2,3,4,5},{-4,4,7,1,8},{0,0,0,0,0},{3,5,7,8,-1},{9,2,3,4,5},{9,2,3,4,5},{9,2,3,4,5}};
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            for (int i = 0; i < n1; i++)
+            {
+                int k=0;
+                for (int j=0;j<n2;j++)
+                {
+                    if (a[i,j]>0) k++;
+                }
+                e[i]=k;
+            }
+            for (int i=0;i<n1-1;i++)
+            {
+                imax=i+1;
+                for (int j=i+1;j<n1;j++)
+                {
+                    if (e[j]>e[imax]) imax=j;
+                }
+                if (e[i]<e[imax])
+                {
+                    double p=e[i];
+                    e[i]=e[imax];
+                    e[imax]=p;
+                    for (int j=0;j<n2;j++)
+                    {
+                        double h=a[i,j];
+                        a[i,j]=a[imax,j];
+                        a[imax,j]=h;
+                    }
+                }
+            }
+            Console.WriteLine("------>");
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            Console.WriteLine();
+            Console.WriteLine("3_9");
+            #region 3_9
+            n1=5;n2=7;
+            a= new double [n1,n2];
+            e=new double [n2];
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         string s = Console.ReadLine();
+            //         a[i, j] = double.Parse(s);
+            //     }
+            // }
+            a=new double [,] {{-1,-2,-3,4,5,-6,-7},{-2,2,-3,4,5,6,-7},{3,2,-3,4,5,6,7},{-4,2,-3,4,5,6,7},{5,2,-3,4,5,6,7}};
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            for (int j = 0; j < n2; j++)
+            {
+                int k=0;
+                for (int i = 0; i < n1; i++)
+                {
+                   if (a[i,j]<0) k++;
+                }
+                e[j]=k;
+            }
+            for (int j=0;j<n2-1;j++)
+            {
+                int imin=j+1;
+                for (int i=j+1;i<n2;i++)
+                {
+                    if (e[i]<e[imin]) imin=i;
+                }
+                if (e[j]>e[imin])
+                {
+                    double p=e[j];
+                    e[j]=e[imin];
+                    e[imin]=p;
+                    for (int i=0;i<n1;i++)
+                    {
+                        double h=a[i,imin];
+                        a[i,imin]=a[i,j];
+                        a[i,j]=h;
+                    }
+                }
+            }
+            Console.WriteLine("------>");
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
+            #endregion
         }
     }
