@@ -469,89 +469,127 @@ for (int i = 0;i < n; i++)
 
 #endregion
 
-#region 3.2
-
-Console.WriteLine("Введите количество строк квадратной матрицы: ");
-int n = int.Parse(Console.ReadLine());
-double[,] a = new double[n, n];
-Console.WriteLine($"Введите {n} строки по {n} элементов: ");
+#region 3.8
+int n = 7, m = 5;
+double[,] a = new double[n, m];
+int k = 0;//счётчик положительных элементов
+Console.WriteLine("Введите 7 строк по 5 элементов, раздлеяя их пробелом.");
 for (int i = 0; i < n; i++)
 {
     string s = Console.ReadLine();
     double[] b = s.Split(' ').Select(double.Parse).ToArray();
-    for (int j = 0; j < n; j++)
-    {
-    a[i,j] = b[j];
-    }
-}
-for (int i = 0; i < n; i++)
-{
-    for (int j = 0; j < n; j++)
-    {
-        if (i == 0 || i == n - 1)
-        {
-            a[i, j] = 0;
-        }
-        if (j == 0 || j == n - 1)
-        {
-            a[i, j] = 0;
-        }
-    }
-}
-Console.WriteLine("Изменённая матрица");
-for (int i = 0; i < n; i++)
-{
-    for (int j = 0; j < n; j++)
-    {
-        Console.Write(a[i, j] + " ");
-    }
-    Console.WriteLine();
-}
-
-#endregion
-
-#region 3.4
-Console.Write("Введите количество строк квадратной матрицы: ");
-int n = int.Parse(Console.ReadLine());
-double [,] a = new double[n, n];
-Console.WriteLine($"Введите {n} строк по {n} элементов, разделяя их пробелом");
-for (int i = 0; i < n; i++)
-{
-    string s = Console.ReadLine();
-    double[] b = s.Split(' ').Select(double.Parse).ToArray();
-    for (int j = 0; j < n; j++)
+    for (int j = 0; j < m; j++)
     {
         a[i, j] = b[j];
+        if (a[i, j] >= 0) { k++; }
     }
 }
-if (n % 2 == 0)
+if (k == 0)
 {
-    for (int i = n / 2; i < n; i++)
+    Console.WriteLine("В матрице отсутсвуют положительные элементы.");
+}
+if (k == m*n)
+{
+    Console.WriteLine("Все элементы матрицы положительны.");
+}
+if (k != 0 && k < n * m)
+{
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int j = 0; j <= i; j++)
+        for (int l = 0; l < n - i - 1; l++)
         {
-            a[i, j] = 1;
+            int po1 = 0, po2 = 0;
+            for (int j = 0; j < m; j++)
+            {
+                if (a[l, j] >= 0) { po1++; }
+                if (a[l + 1, j] >= 0) { po2++; }
+            }
+
+            if (po2 > po1)
+            {
+                // Обмен строк
+                for (int j = 0; j < m; j++)
+                {
+                    double t = a[l + 1, j];
+                    a[l + 1, j] = a[l, j];
+                    a[l, j] = t;
+                }
+            }
         }
+    }
+    Console.WriteLine("Изменённая матрица:");
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            Console.Write(a[i, j] + " ");
+        }
+        Console.WriteLine();
+    }  
+}
+#endregion
+
+#region 3.9
+int n = 5, m = 7;
+double[,] a = new double[n, m];
+int k = 0; // счетчик отрицательных элементов
+Console.WriteLine("Введите 5 строк по 7 элементов, разделяя их пробелом:");
+for (int i = 0; i < n; i++)
+{
+    string s = Console.ReadLine();
+    double[] b = s.Split(' ').Select(double.Parse).ToArray();
+    for (int j = 0; j < m; j++)
+    {
+        a[i, j] = b[j];
+        if (a[i, j] < 0) { k++; }
     }
 }
 
-if (n % 2 == 1)
+if (k == 0)
 {
-    for (int i = (n - 1) / 2; i < n; i++)
+    Console.WriteLine("В матрице отсутствуют отрицательные элементы");
+}
+else if (k == n * m)
+{
+    Console.WriteLine("Матрица полностью состоит из отрицательных элементов.");
+}
+else
+{
+    for (int j = 0; j < m - 1; j++)
     {
-        for (int j = 0; j <= i; j++)
+
+        for (int l = 0; l < m - 1 - j; l++)
         {
-            a[i, j] = 1;
+            int ot1 = 0;
+            int ot2 = 0;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (a[i, l] < 0) { ot1++; }
+                if (a[i, l + 1] < 0) { ot2++; }
+            }
+
+            if (ot1 > ot2)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    double t = a[i, l];
+                    a[i, l] = a[i, l + 1];
+                    a[i, l + 1] = t;
+                }
+            }
         }
     }
-}
-Console.WriteLine("Изменённая матрица:");
-for (int i = 0; i < n; i++)
-{
-    for (int j = 0; j < n; j++) 
+
+    Console.WriteLine("Изменённая матрица:");
+    for (int i = 0; i < n; i++)
     {
-        Console.Write(a[i, j] + " ");
+        for (int j = 0; j < m; j++)
+        {
+            Console.Write(a[i, j] + " ");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
 }
 #endregion
