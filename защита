@@ -76,9 +76,115 @@ namespace lab4
                     ie++;
                 }
             }
-            int i=1;
-            int nexti=i+1;
-            while (n1*n2)
+            Console.WriteLine();
+            // Сортировка вставками по возрастанию
+            // for (int i=1;i<n1*n2;i++)
+            // {
+            //     double x=e[i];
+            //     int j=i-1;
+            //     while (j>=0 && e[j]>x)
+            //     {
+            //         e[j+1]=e[j];
+            //         j--;
+            //     }
+            //     e[j+1]=x;
+            // }
+            // for (int i=0;i<(n1*n2);i++)
+            // {
+            //     Console.Write("{0} ", e[i]);
+            // }
+            // ie=n1*n2-n2;
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         a[i,j]=e[ie];
+            //         ie++;
+            //     }
+            //     ie-=2*n2;
+            // }
+            // Console.WriteLine();
+            // Console.WriteLine("------>");
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         Console.Write("{0} ", a[i, j]);
+            //     }
+            //     Console.WriteLine();
+            // }
+            // Сортировка вставками по убыванию
+            // for (int i=1;i<n1*n2;i++)
+            // {
+            //     double x=e[i];
+            //     int j=i-1;
+            //     while (j>=0 && e[j]<x)
+            //     {
+            //         e[j+1]=e[j];
+            //         j--;
+            //     }
+            //     e[j+1]=x;
+            // }
+            // for (int i=0;i<(n1*n2);i++)
+            // {
+            //     Console.Write("{0} ", e[i]);
+            // }
+            // ie=0;
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         a[i,j]=e[ie];
+            //         ie++;
+            //     }
+            // }
+            // Console.WriteLine();
+            // Console.WriteLine("------>");
+            // for (int i = 0; i < n1; i++)
+            // {
+            //     for (int j = 0; j < n2; j++)
+            //     {
+            //         Console.Write("{0} ", a[i, j]);
+            //     }
+            //     Console.WriteLine();
+            // }
+            //Гномья сортировка по возрастанию
+            for (int i=1;i<n1*n2;i++)
+            {
+                
+                int j=i;
+                while (j>0 && e[j-1]>e[j])
+                {
+                    double x=e[j-1];
+                    e[j-1]=e[j];
+                    e[j]=x;
+                    j--;
+                }
+            }
+            for (int i=0;i<(n1*n2);i++)
+            {
+                Console.Write("{0} ", e[i]);
+            }
+            ie=n1*n2-n2;
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    a[i,j]=e[ie];
+                    ie++;
+                }
+                ie-=2*n2;
+            }
+            Console.WriteLine();
+            Console.WriteLine("------>");
+            for (int i = 0; i < n1; i++)
+            {
+                for (int j = 0; j < n2; j++)
+                {
+                    Console.Write("{0} ", a[i, j]);
+                }
+                Console.WriteLine();
+            }
             #endregion
         }
     }
