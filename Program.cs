@@ -2,26 +2,79 @@
 
 class Program
 {
-    static void Main()
-
+    static void Main(string[] args)
     {
-        for (double x = 0.1; x <= 0.8; x += 0.1)
-{
-    double s = 0;
-    int i = 1;
-    double x2 = x; /*степень*/
-            while (x2 * Math.Sin((i * Math.PI) / 4) >= 0.0001)
-    {
-        s += x2 * Math.Sin((i * Math.PI) / 4);
-        i += 1;
-        x2 *= x; /*степень*/
-    }
-            double y = ((x * Math.Sin((Math.PI / 4))) /*числитель*/ / (1 - 2 * x * Math.Cos((Math.PI) / 4) + x * x)); /*знаменитель*/
-    Console.WriteLine($"{s} {y}");
+        #region 2.10
+        //Console.WriteLine("Введите размер массива ");
+        //int n = int.Parse(Console.ReadLine());
+        //double[] a = new double[n];
+        //int imin = 0;
+        //bool ok = true;
+        //for (int i = 0; i < n; i++)
+        //{
+        //    string s1 = Console.ReadLine();
+        //    a[i] = double.Parse(s1);
+        //}
+        //while ((imin < n) && (a[imin] <= 0))
+        //{
+        //    imin += 1;
+        //}
+        //if (imin == n) ok = false;
+        //Console.WriteLine();
+        //if (ok == false) Console.WriteLine("Положительных элементов нет");
+        //else
+        //{
+        //    for (int i = imin + 1; i < n; i++)
+        //    {
+        //        if ((a[i] < a[imin]) && (a[i] > 0)) imin = i;
+        //    }
+        //    if (ok == true)
+        //    {
+        //        for (int i = imin; i < n - 1; i++) a[i] = a[i + 1];
+        //    }
+        //    Console.Write("Удалить мин элемент среди положительных: ");
+        //    for (int i = 0; i < n - 1; i++)
+        //    {
+        //        Console.Write("{0} ", a[i]);
+        //    }
+        //}
 
-}
-Console.ReadLine();
+        //Console.ReadLine();
+        #endregion
+        #region 2_12
+        Console.WriteLine("Введите размер массива: ");
+        int n = int.Parse(Console.ReadLine());
+        int z = 0;
+        int amax = 0;
+        double s = 0;
+        bool ok = true;
+        double[] a = new double[n];
+        Console.WriteLine("Введите элементы массива:");
+        for (int i = 0; i < n; i++)
+        {
+            string s1 = Console.ReadLine();
+            a[i] = double.Parse(s1);
+            if (a[i] > a[amax])
+                amax = i;
+        }
+        while ((z < n) && (a[z] >= 0))
+            z += 1;
+        if (z == n) ok = false;
+        if (ok == false) Console.WriteLine("Отрицательных элементов нет");
+        else
+        {
+            for (int i = amax + 1; i < n; i++)
+                s += a[i];
+            a[z] = s;
+            Console.Write("Полученный массив: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("{0} ", a[i]);
+            }
+        }
+        Console.ReadLine();
+        #endregion
     }
-    
 }
+
 
