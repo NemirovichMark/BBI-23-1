@@ -199,7 +199,7 @@ namespace project
             mas = new double[8];
             h = 0;
             double r = 0;
-            for(int i = 0;i < mas.Length;i++)
+            for (int i = 0; i < mas.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine()); //вводим значения массива
                 mas[i] = a; //присваиваем значение массиву
@@ -214,20 +214,20 @@ namespace project
             #region 1-13
             mas = new double[10];
             k = 0;
-            h= 0;
+            h = 0;
             for (int i = 0; i < mas.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine()); //вводим значения массива
                 mas[i] = a; //присваиваем значение массиву
             }
             mas1 = new double[5];
-            for (int i = 0; i < mas.Length; i+=2)
+            for (int i = 0; i < mas.Length; i += 2)
             {
                 mas1[i] = mas[i]; //присваиваем значение массиву
                 k++;
             }
             mas2 = new double[5];
-            for (int i = 0; i < mas.Length; i+=2)
+            for (int i = 0; i < mas.Length; i += 2)
             {
                 mas2[i] = mas[i];
                 h++;
@@ -242,7 +242,7 @@ namespace project
             {
                 double a = Convert.ToDouble(Console.ReadLine()); //вводим значения массива
                 mas[i] = a; //присваиваем значение массиву
-                if (mas[i]<0)
+                if (mas[i] < 0)
                 {
                     sum += a * a;
                 }
@@ -587,7 +587,7 @@ namespace project
 
             #region 2_10
             b = Convert.ToInt32(Console.ReadLine());
-            mas  = new double[b];
+            mas = new double[b];
             p = Math.Pow(10, 20);
             h = 0;
             bool flag = false;
@@ -680,7 +680,7 @@ namespace project
                 }
                 Console.WriteLine();
             }
-            
+
             Console.WriteLine();
             #endregion
 
@@ -808,6 +808,7 @@ namespace project
 
             #region 2_15
             b = Convert.ToInt32(Console.ReadLine());
+            mas = new double[b];
             for (int i = 0; i < mas.Length; i++)
             {
                 double a = Convert.ToDouble(Console.ReadLine());
@@ -820,7 +821,7 @@ namespace project
                 double a = Convert.ToDouble(Console.ReadLine());
                 mas1[i] = a;
             }
-            k = int.Parse(Console.ReadLine());
+            h = int.Parse(Console.ReadLine());
             mas2 = new double[mas.Length + mas1.Length];
             h -= 1;
             if (((h + 1) > mas.Length) || ((h == 1) & (mas.Length == 1)))
@@ -844,7 +845,7 @@ namespace project
                     }
                 }
             }
-            Console.WriteLine( "[{0}]", string.Join("; ", mas2));
+            Console.WriteLine("[{0}]", string.Join("; ", mas2));
             Console.WriteLine();
             #endregion
 
@@ -1124,7 +1125,7 @@ namespace project
             }
             Console.Write("[{0}]", string.Join("; ", mas));
             Console.WriteLine();
-#endregion
+            #endregion
         }
     }
 }
