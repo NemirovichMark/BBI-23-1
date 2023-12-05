@@ -715,104 +715,146 @@ private static void Task2_2()
     }
     private static void Task2_10()
     {
-        Console.WriteLine("Введите массив:");
-        string str = Console.ReadLine();
-        string[] mass = str.Split(' ');
-        double [] arr = new double[mass.Length];
-        double minim = 1000000000;
-        int temp = 0;
-        double [] arr1 = new double[mass.Length - 1];
-        for (int i = 0; i < mass.Length; i++)
-        {
-            arr[i] = double.Parse(mass[i]);
-            if (minim > arr[i] && arr[i] > 0)
-            {
-                minim = arr[i];
-                temp = i;
-            }
-        }
-        for (int i = 0; i < mass.Length; i++)
-        {
-            if (i < temp)
-            {
-                arr1[i] = arr[i];
-            }
-            if (i > temp)
-            {
-                arr1[i - 1] = arr[i];
-            }
-        }
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', arr1));
+        Console.WriteLine("Введите длину массива: ");
+int n = 0;
+int.TryParse(Console.ReadLine(), out n);
+double[] arr = new double[n];
+double k = Math.Pow(10, 20);
+int x = -1;
+Console.WriteLine($"Введите {n} значение массива: ");
+for (int i = 0; i < arr.Length; i++)
+{
+    double.TryParse(Console.ReadLine(), out a);
+    arr[i] = a;
+    if ((arr[i] < k) & (arr[i] > 0))
+    {
+        x = i;
+        k = arr[i];
+    }
+}
+if (x < 0)
+{
+    for (int i = 0; i < arr.Length; i++)
+    {
+        Console.Write("{0:f1}", arr[i] + " ");
+    }
+}
+else
+{
+    for (int i = x + 1; i < arr.Length; i++)
+    {
+        arr[i - 1] = arr[i];
+    }
+    for (int i = 0; i < arr.Length - 1; i++)
+    {
+        Console.Write("{0:f1}", arr[i] + " ");
+    }
+}
         Console.WriteLine();
     }
     private static void Task2_11()
     {
-        Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        string str = Console.ReadLine();
-        Console.WriteLine("Введите число P");
-        double P = double.Parse(Console.ReadLine());
-        string[] mass = str.Split(' ');
-        double [] arr = new double[mass.Length];
-        int temp = 0;
-        double [] arr1 = new double[mass.Length + 1];
-        for (int i = 0; i < mass.Length; i++)
+        Console.WriteLine("Введите значение p: ");
+double p = 0;
+double.TryParse(Console.ReadLine(), out p);
+Console.WriteLine("Введите длину массива: ");
+int n = 0;
+int.TryParse(Console.ReadLine(), out n);
+double[] arr = new double[n];
+double[] arr1 = new double[n + 1];
+int x = -1;
+double k = 0;
+double a = 0;
+Console.WriteLine($"Введите {n} значение массива: ");
+for (int i = 0; i < arr.Length; i++)
+{
+    double.TryParse(Console.ReadLine(), out a);
+    arr[i] = a;
+    if (arr[i] > 0)
+    {
+        x = i;
+        k = arr[i];
+    }
+}
+if (x < 0)
+{
+    Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr));
+}
+else
+{
+
+    for (int i = 0; i < arr1.Length; i++)
+    {
+        if (i <= x)
         {
-            arr[i] = double.Parse(mass[i]);
-            if (arr[i] > 0)
-            {
-                temp = i;
-            }
+            arr1[i] = arr[i];
         }
-        temp++;
-        arr1[temp] = P;
-        for (int i = 0; i < mass.Length + 1; i++)
+        if (i == (x + 1))
         {
-            if (i < temp)
-            {
-                arr1[i] = arr[i];
-            }
-            if (i > temp)
-            {
-                arr1[i] = arr[i - 1];
-            }
+            arr1[i] = p;
         }
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', arr1));
-        Console.WriteLine();
+        if (i > (x + 1))
+        {
+            arr1[i] = arr[i - 1];
+        }
+    }
+    Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr1));
+}
+Console.WriteLine();
     }
     private static void Task2_12()
     {
-        Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        string str = Console.ReadLine();
-        string [] mass = str.Split(' ');
-        double [] arr = new double[mass.Length];
-        double minim = 1000000000;
-        double maxim = -100000000000;
-        int max = 0;
-        int temp = -1;
-        double sum = 0;
-        for (int i = 0; i < mass.Length; i++)
+        Console.WriteLine("Введите длину массива: ");
+int n = 0;
+int.TryParse(Console.ReadLine(), out n);
+double[] arr = new double[n];
+double[] arr1 = new double[n + 1];
+int x = -1;
+int x1 = -1;
+double k = -Math.Pow(10, 20);
+double s = 0;
+double a = 0;
+Console.WriteLine($"Введите {n} значение массива: ");
+for (int i = 0; i < arr.Length; i++)
+{
+    double.TryParse(Console.ReadLine(), out a);
+    arr[i] = a;
+    if (arr[i] > k)
+    {
+        x = i;
+        k = arr[i];
+    }
+}
+for (int i = 0; i < arr.Length; i++)
+{
+    if (arr[i] < 0)
+    {
+        x1 = i;
+        break;
+    }
+}
+if ((x1 >= 0) || (x >= 0))
+{
+    for (int i = x + 1; i < arr.Length; i++)
+    {
+        s += arr[i];
+    }
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i] < 0)
         {
-            arr[i] = double.Parse(mass[i]);
-            if (arr[i] > maxim)
-            {
-                maxim = arr[i];
-                max = i;
-            }
-            if (temp == -1 && arr[i] < 0)
-            {
-                temp = i;
-            }
+            x1 = i;
+            arr[i] = s;
+            break;
         }
-        for (int i = max + 1; i < mass.Length; i++)
-        {
-            sum += arr[i];
-        }
-        arr[temp] = sum;
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', arr));
-        Console.WriteLine();
+    }
+}
+else
+{
+    arr[x1] = s;
+}
+Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr));
+Console.WriteLine();
     }
     private static void Task2_13()
     {
@@ -839,74 +881,98 @@ private static void Task2_2()
     }
     private static void Task2_14()
     {
-        Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        string str = Console.ReadLine();
-        string [] mass = str.Split(' ');
-        double [] arr = new double[mass.Length];
-        double minim = 1000000000;
-        double maxim = -10000000000;
-        int temp = -1;
-        double sum = 0;
-        int max = 0;
-        for (int i = 0; i < mass.Length; i++)
+        Console.WriteLine("Введите длину массива: ");
+int n = 0;
+int.TryParse(Console.ReadLine(), out n);
+double[] arr = new double[n];
+int x = -1;
+int x1 = -1;
+double k = -Math.Pow(10, 20);
+double b = 0;
+double a = 0;
+Console.WriteLine($"Введите {n} значение массива: ");
+for (int i = 0; i < arr.Length; i++)
+{
+    double.TryParse(Console.ReadLine(), out a);
+    arr[i] = a;
+    if (arr[i] > k)
+    {
+        x = i;
+        k = arr[i];
+    }
+}
+if ((x >= 0) || (x1 >= 0))
+{
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i] < 0)
         {
-            arr[i] = double.Parse(mass[i]);
-            if (arr[i] > maxim)
-            {
-                maxim = arr[i];
-                max = i;
-            }
-            if (temp == -1 && arr[i] < 0)
-            {
-                temp = i;
-                sum = arr[i];
-            }
+            x1 = i;
+            b = arr[i];
+            arr[i] = k;
+            arr[x] = b;
+            break;
         }
-        arr[temp] = maxim;
-        arr[max] = sum;
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', arr));
-        Console.WriteLine();
+    }
+}
+else
+{
+    arr[x] = arr[x1];
+    arr[x1] = k;
+}
+Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr));
+Console.WriteLine();
     }
     private static void Task2_15()
     {
-        Console.WriteLine("Введите размер массивa A:");
-        int n = (int)Double.Parse(Console.ReadLine());
-        Console.WriteLine("Введите размер массивa B:");
-        int m = (int)Double.Parse(Console.ReadLine());
-        double[] A = new double[n];
-        double[] B = new double[m];
-        double[] C = new double[n + m];
-        Console.WriteLine("Введите k:");
-        int k = (int)Double.Parse(Console.ReadLine());
-        Console.WriteLine("Введите масив A:");
-        for (int i = 0; i < n; i++)
-        {
-            A[i] = double.Parse(Console.ReadLine());
-        }
-        Console.WriteLine("Введите массив B:");
-        for (int j = 0; j < m; j++)
-        {
-            B[j] = double.Parse(Console.ReadLine());
-        }
-        for (int i = 0; i < C.Length; i++)
-        {
-            if (i <= k)
-            {
-                C[i] = A[i];
-            }
-            if (i > k && i <= (k + m))
-            {
-                C[i] = B[i - k - 1];
-            }
-            if (i > (k + m))
-            {
-                C[i] = A[i - k - m + 2];
-            }
-        }
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', C));
-        Console.WriteLine();
+         Console.WriteLine("Введите длину массива A: ");
+ int n = 0;
+ int.TryParse(Console.ReadLine(), out n);
+ double [] arr = new double[n];
+ double a = 0;
+ Console.WriteLine($"Введите {n} знач. массива A: ");
+ for (int i = 0; i < arr.Length; i++)
+ {
+     double.TryParse(Console.ReadLine(), out a);
+     arr[i] = a;
+ }
+ Console.WriteLine("Введите длину массива B: ");
+ int.TryParse(Console.ReadLine(), out n);
+ double [] arr1 = new double[n];
+ Console.WriteLine($"Введите {n} знач. массива B: ");
+ for (int i = 0; i < arr1.Length; i++)
+ {
+     double.TryParse(Console.ReadLine(), out a);
+     arr1[i] = a;
+ }
+ Console.WriteLine("Введите значение k: ");
+ int.TryParse(Console.ReadLine(), out int intK);
+ double [] arr2 = new double[arr.Length + arr1.Length];
+ intK -= 1;
+ if (((intK + 1) > arr.Length) || ((intK == 1) & (arr.Length == 1)))
+ {
+     Console.WriteLine("Неверный ввод");
+ }
+ else
+ {
+     for (int i = 0; i < arr.Length + arr1.Length; i++)
+     {
+         if (i <= intK)
+         {
+             arr2[i] = arr[i];
+         }
+         if (i > intK & i <= intK + arr1.Length)
+         {
+             arr2[i] = arr1[i - intK - 1];
+         }
+         if (i > (intK + arr1.Length))
+         {
+             arr2[i] = arr[i - arr1.Length];
+         }
+     }
+ }
+ Console.WriteLine("Ответ: " + "[{0}]", string.Join("; ", arr2));
+ Console.WriteLine();
     }
     private static void Task2_16()
     {
@@ -945,56 +1011,67 @@ private static void Task2_2()
     }
     private static void Task2_17()
     {
-        Console.WriteLine("Введите массив,элементы вводите через пробел:");
-        string str = Console.ReadLine();
-        string [] mass = str.Split(' ');
-        double [] arr = new double[mass.Length];
-        double minim = 1000000000;
-        double maxim = -1000000000;
-        int max = 0;
-        int min = 0;
-        int temp = 0;
-        double sum = 0;
-        for (int i = 0; i < mass.Length; i++)
-        {
-            arr[i] = double.Parse(mass[i]);
-            if (maxim < arr[i])
-            {
-                maxim = arr[i];
-                max = i;
-            }
-            if (minim > arr[i])
-            {
-                minim = arr[i];
-                min = i;
-            }
-        }
-        if (max < min)
-        {
-            for (int i = 0; i < mass.Length; i++)
-            {
-                if (arr[i] > 0)
-                {
-                    sum += arr[i];
-                    temp++;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < mass.Length; i++)
-            {
-                if (arr[i] < 0)
-                {
-                    sum += arr[i];
-                    temp++;
-                }
-            }
-        }
-        sum = sum / temp;
-        Console.WriteLine("Среднее арифметичсекое:");
-        Console.WriteLine(sum);
-        Console.WriteLine();
+         Console.WriteLine("Введите длину массива: ");
+ int n = 0;
+ int.TryParse(Console.ReadLine(), out n);
+ double [] arr = new double[n];
+ int x = 0;
+ int x1 = 0;
+ double s = 0;
+ double arm = 0;
+ int w = 0;
+ int a = 0;
+ double k = Math.Pow(10, 20);
+ double p = -Math.Pow(10, 20);
+ Console.WriteLine($"Введите {n} значение массива: ");
+ for (int i = 0; i < arr.Length; i++)
+ {
+     double.TryParse(Console.ReadLine(), out a);
+     arr[i] = a;
+     if (arr[i] < k)
+     {
+         x = i;
+         k = arr[i];
+     }
+     if (arr[i] > p)
+     {
+         x1 = i;
+         p = arr[i];
+     }
+ }
+ if (x1 < x)
+ {
+     for (int i = 0; i < arr.Length; i++)
+     {
+         if (arr[i] > 0)
+         {
+             s += arr[i];
+             w += 1;
+         }
+     }
+     arm = s / w;
+ }
+ if (x1 > x)
+ {
+     for (int i = 0; i < arr.Length; i++)
+     {
+         if (arr[i] < 0)
+         {
+             s += arr[i];
+             w += 1;
+         }
+     }
+     if (w == 0)
+     {
+         Console.WriteLine("Ответ: 0");
+     }
+     else
+     {
+         arm = s / w;
+     }
+ }
+ Console.WriteLine($"Ответ: {arm}");
+ Console.WriteLine();
     }
     private static void Task2_18()
     {
