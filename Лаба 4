@@ -539,7 +539,6 @@ class Programm
             Console.WriteLine();
         }
         #endregion
-
         #region 3_8
         n = 7;
         m = 5;
