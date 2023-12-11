@@ -660,63 +660,83 @@ namespace project
            Console.WriteLine();
  
  
-           #region 3_3
-           int[,] a = new int[6, 6] {{1,2,3,4,5,6 },
-                                     {7,19,9,10,11,12},
-                                     {14,16,15,1,2,3},
-                                     {14,-15,-16,1,-2,-5},
-                                     {-1,4,3,-6,20,14},
-                                     {1,2,3,4,5,6 } };
-           //int[,] a = new int[4, 4] { { 1, 2, 3, 4 },
-           //                           { 1, 2, 3, 4 },
-           //                           { 1, 2, 3, 4 },
-           //                           { 1, 2, 3, 4 }};
-           int n = 6;
-           int[] b = new int[2 * n - 1];
-           int p = 0;
- 
-           Console.WriteLine("Вывод изначальной матрицы:");
-           for (int i = 0; i < n; i++)
-           {
-               for (int j = 0; j < n; j++)
-               {
-                   Console.Write($"{a[i, j],5}");
-               }
-               Console.WriteLine();
-           }
- 
-           Console.WriteLine();
- 
-           for (int i = n - 1; i != 0; i--)
-           {
-               int s = 0;
-               for (int j = 0; j + i != n; j++)
-               {
-                   s += a[i + j, j];
-               }
-               b[p] = s;
-               p++;
-           }
-           for (int i = n - 1; i != -1; i--)
-           {
-               int s = 0;
-               for (int j = 0; j + i != n; j++)
-               {
-                   s += a[j, j + i];
-               }
-               b[p] = s;
-               p++;
-           }
- 
-           Console.WriteLine("Полученный вектор:");
-           int sum = 0;
-           foreach (int i in b)
-           {
-               Console.Write($"{i} ");
-               sum += i;
-           }
-           Console.WriteLine();
-           Console.WriteLine($"Сумма: {sum}");
+           #region 3_1
+           Console.WriteLine("3_1:");
+            n = 7;
+            m = 5;
+            s = 0;
+            I = -1;
+            I1 = 0;
+            J = -1;
+            arm = 0;
+            q = 0;
+            arr1 = new double[7];
+            arr2 = new double[7];
+            arr3 = new double[7];
+            mtrx = new double[n, m];
+            mtrx1 = new double[n - 1, m];
+            max = -Math.Pow(10, 20);
+            min = Math.Pow(10, 20);
+            min1 = Math.Pow(10, 20);
+            Console.WriteLine("Введите матрицу(Кол-во строк: " + n + "; Кол-во элементов в строке: " + m + ")");
+            for (int i = 0; i < n; i++)
+            {
+                str = Console.ReadLine();
+                double[] arr = str.Split(' ').Select(double.Parse).ToArray();
+                for (int j = 0; j < m; j++)
+                {
+                    mtrx[i, j] = arr[j];
+                }
+            }
+            Console.WriteLine("Исходная матрица:");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(mtrx[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            for (int i = 0; i < n; i++)
+            {
+                min = Math.Pow(10, 20);
+                for (int j = 0; j < m; j++)
+                {
+                    if (mtrx[i, j] < min)
+                    {
+                        arr1[i] = mtrx[i, j];
+                        min = mtrx[i, j];
+                    }
+                }
+            }
+            Console.WriteLine("1_1: " + "[{0}]", string.Join("; ", arr1));
+            for (int i = 1; i < n; i++)
+            {
+                for (int j = 0; j < n - 1; j++)
+                {
+                    if (arr1[j] < arr1[j + 1])
+                    {
+                        q = arr1[j];
+                        arr1[j] = arr1[j + 1];
+                        arr1[j + 1] = q;
+                        for (int k = 0; k < m; k++)
+                        {
+                            q = mtrx[j, k];
+                            mtrx[j, k] = mtrx[j + 1, k];
+                            mtrx[j + 1, k] = q;
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("Итоговая матрица:");
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(mtrx[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
            #endregion
            Console.WriteLine();
  
