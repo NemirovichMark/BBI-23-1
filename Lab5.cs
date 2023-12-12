@@ -107,55 +107,55 @@ namespace project
             int J = 0;
             double s = 0;
             double max = -100000000000;
-            if (Imax != Imin)
+            if (CompareMinMax(Imax, Imin) == 2)
             {
                 double[,] mtrx1 = new double[a - 2, b];
-                if (Imax < Imin)
+                for (int i = 0; i < Imax; i++)
                 {
-                    for (int i = 0; i < Imax; i++)
+                    for (int j = 0; j < b; j++)
                     {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i,j];
-                        }
-                    }
-                    for (int i = Imax; i < Imin-1; i++)
-                    {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i+1, j];
-                        }
-                    }
-                    for (int i = Imin-1; i < a-2; i++)
-                    {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i + 2, j];
-                        }
+                        mtrx1[i, j] = mtrx[i, j];
                     }
                 }
-                if (Imax > Imin)
+                for (int i = Imax; i < Imin - 1; i++)
                 {
-                    for (int i = 0; i < Imin; i++)
+                    for (int j = 0; j < b; j++)
                     {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i, j];
-                        }
+                        mtrx1[i, j] = mtrx[i + 1, j];
                     }
-                    for (int i = Imin; i < Imax - 1; i++)
+                }
+                for (int i = Imin - 1; i < a - 2; i++)
+                {
+                    for (int j = 0; j < b; j++)
                     {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i + 1, j];
-                        }
+                        mtrx1[i, j] = mtrx[i + 2, j];
                     }
-                    for (int i = Imax - 1; i < a - 2; i++)
+                }
+                output(mtrx1, a - 2, b);
+                return mtrx1;
+            }
+            if (CompareMinMax(Imax, Imin)==1)
+            {
+                double[,] mtrx1 = new double[a - 2, b];
+                for (int i = 0; i < Imin; i++)
+                {
+                    for (int j = 0; j < b; j++)
                     {
-                        for (int j = 0; j < b; j++)
-                        {
-                            mtrx1[i, j] = mtrx[i + 2, j];
-                        }
+                        mtrx1[i, j] = mtrx[i, j];
+                    }
+                }
+                for (int i = Imin; i < Imax - 1; i++)
+                {
+                    for (int j = 0; j < b; j++)
+                    {
+                        mtrx1[i, j] = mtrx[i + 1, j];
+                    }
+                }
+                for (int i = Imax - 1; i < a - 2; i++)
+                {
+                    for (int j = 0; j < b; j++)
+                    {
+                        mtrx1[i, j] = mtrx[i + 2, j];
                     }
                 }
                 output(mtrx1, a - 2, b);
@@ -180,6 +180,21 @@ namespace project
                 }
                 output(mtrx1, a - 1, b);
                 return mtrx1;
+            }
+        }
+        public static int CompareMinMax(int Imax, int Imin)
+        {
+            if (Imax == Imin)
+            {
+                return 0;
+            }
+            if (Imax > Imin)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
             }
         }
         public static int[] MinMtrx(double[,] mtrx, int a, int b)
