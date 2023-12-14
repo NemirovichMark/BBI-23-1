@@ -1,0 +1,63 @@
+using System;
+namespace lab5
+{
+    class Program
+    {
+        static void Main()
+        {
+            #region 5
+            Console.WriteLine("№5");
+            int [,] m1 = new int [4, 6] { { 1, 1, 1, 11, 1, 1 }, { 2, 2, 2, 2, 2, 2 }, { 3, 3, 3, 3, 3, 3 }, { 4, 4, 4, 4, 4, 4 } };
+            int [,] m2 = new int [6, 6] { { 5, 5, 5, 5, 5, 5 }, { 6, 6, 6, 6, 6, 6 }, { 7, 7, 7, 7, 7, 7 }, { 0, 0, 0, 0, 0, 0 }, { -1, -1, -1, -1, -1, -1 }, { 9, 9, 9, 9, 9, 9 } };
+            int n;
+            Console.WriteLine("Матрица А:");
+            Console.WriteLine();
+            print(m1);
+            Console.WriteLine("Матрица В:");
+            Console.WriteLine();
+            print(m2);
+            Console.Write("Индекс столбца, в котором ищем максимальный эл-т: ");
+            n = int.Parse(Console.ReadLine());
+            int i1, i2;
+            i1 = pm(m1, n);
+            i2 = pm(m2, n);
+            for (int i = 0; i < m1.GetLength(1); i++)
+            {
+                int x = m1[i1, i];
+                m1[i1, i] = m2[i2, i];
+                m2[i2, i] = x;
+            }
+            Console.WriteLine("--->");
+            Console.WriteLine("Матрица А:");
+            Console.WriteLine();
+            print(m1);
+            Console.WriteLine("Матрица В:");
+            Console.WriteLine();
+            print(m2);
+            #endregion
+            #region 11
+            Console.WriteLine("№11");
+            #endregion
+        }
+        static int pm(int[,] a, int b)
+        {
+            int imax = 0;
+            for (int i = 1; i < a.GetLength(0); i++)
+            {
+                if (a[i, b] > a[imax, b]) imax = i;
+            }
+            return imax;
+        }
+        static void print(int[,] q)
+        {
+            for (int i = 0; i < q.GetLength(0); i++)
+            {
+                for (int j = 0; j < q.GetLength(1); j++)
+                {
+                    Console.Write("{0} ", q[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
