@@ -251,6 +251,40 @@ namespace project
             output(mtrx1, a, b);
             return I;
         }
+        private static int[] QuickSort(int[] array, int minIndex, int maxIndex)
+        {
+            if (minIndex >= maxIndex)
+            {
+                return array;
+            }
+            int pivotIndex = GetPivotIndex(array, minIndex, maxIndex);
+            QuickSort(array, minIndex, pivotIndex - 1);
+            QuickSort(array, pivotIndex + 1, maxIndex);
+            return array;
+        }
+
+        private static int GetPivotIndex(int[] array, int minIndex, int maxIndex)
+        {
+            int pivotIndex = minIndex - 1;
+            for (int i = minIndex; i <= maxIndex; i++)
+            {
+                if (array[i] < array[maxIndex])
+                {
+                    pivotIndex++;
+                    Swap(ref array[pivotIndex], ref array[i]);
+                }
+            }
+            pivotIndex++;
+            Swap(ref array[pivotIndex], ref array[maxIndex]);
+            return pivotIndex;
+        }
+        private static void Swap(ref int leftItem, ref int rightItem)
+        {
+            int temp = leftItem;
+            leftItem = rightItem;
+            rightItem = temp;
+        }
+        
 
 
 
@@ -283,6 +317,28 @@ namespace project
             int M = 0;
             int K = 0;
             string str = "";
+
+            #region protection
+            Random random = new Random();
+            int len = 0;
+            len = random.Next(5, 10);
+            int[] arr = new int[len];
+            for (int i = 0; i < len; i++)
+            {
+                arr[i] = random.Next(1, 100);
+            }
+            for (int i = 0; i < len; i++)
+            {
+                Console.Write(arr[i] + "  ");
+            }
+            QuickSort(arr, 0, len - 1);
+            Console.WriteLine();
+            for (int i = 0; i < len; i++)
+            {
+                Console.Write(arr[i] + "  ");
+            }
+            #endregion
+                
 
             #region 1
             Console.WriteLine("Задание 1: ");
