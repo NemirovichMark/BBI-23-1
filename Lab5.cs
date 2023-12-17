@@ -102,85 +102,27 @@ namespace project
             }
             return J;
         }
-        public static double[,] DelLine(double[,] mtrx, int a, int b, int Imax, int Imin)
+        public static double[,] DelLine(double[,] mtrx, int a, int b, int I)
         {
             int J = 0;
             double s = 0;
             double max = -100000000000;
-            if (CompareMinMax(Imax, Imin) == 2)
+            double[,] mtrx1 = new double[a - 1, b];
+            for (int i = 0; i < I; i++)
             {
-                double[,] mtrx1 = new double[a - 2, b];
-                for (int i = 0; i < Imax; i++)
+                for (int j = 0; j < b; j++)
                 {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i, j];
-                    }
+                    mtrx1[i, j] = mtrx[i, j];
                 }
-                for (int i = Imax; i < Imin - 1; i++)
-                {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i + 1, j];
-                    }
-                }
-                for (int i = Imin - 1; i < a - 2; i++)
-                {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i + 2, j];
-                    }
-                }
-                output(mtrx1, a - 2, b);
-                return mtrx1;
             }
-            if (CompareMinMax(Imax, Imin)==1)
+            for (int i = I; i < a-1; i++)
             {
-                double[,] mtrx1 = new double[a - 2, b];
-                for (int i = 0; i < Imin; i++)
+                for (int j = 0; j < b; j++)
                 {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i, j];
-                    }
+                    mtrx1[i, j] = mtrx[i + 1, j];
                 }
-                for (int i = Imin; i < Imax - 1; i++)
-                {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i + 1, j];
-                    }
-                }
-                for (int i = Imax - 1; i < a - 2; i++)
-                {
-                    for (int j = 0; j < b; j++)
-                    {
-                        mtrx1[i, j] = mtrx[i + 2, j];
-                    }
-                }
-                output(mtrx1, a - 2, b);
-                return mtrx1;
             }
-            else
-            {
-                double[,] mtrx1 = new double[a - 1, b];
-                for (int i = 0; i < a - 1; i++)
-                {
-                    for (int j = 0; j < b; j++)
-                    {
-                        if (i < Imax)
-                        {
-                            mtrx1[i, j] = mtrx[i, j];
-                        }
-                        if (i >= Imax)
-                        {
-                            mtrx1[i, j] = mtrx[i + 1, j];
-                        }
-                    }
-                }
-                output(mtrx1, a - 1, b);
-                return mtrx1;
-            }
+            return mtrx1;
         }
         public static int CompareMinMax(int Imax, int Imin)
         {
@@ -473,6 +415,14 @@ namespace project
             Console.WriteLine("Введите кол-во элементов в строке матрицы: ");
             m = Convert.ToInt32(Console.ReadLine());
             mtrx = new double[n, m];
+            if (n - 1 >= 0)
+            {
+                mtrx1 = new double[n - 1, m];
+            }
+            if (n - 2 >= 0)
+            {
+                mtrx2 = new double[n - 2, m];
+            }
             Console.WriteLine("Введите матрицу, где кол-во строк: " + n + "; и кол-во элементов в строке: " + m);
             for (int i = 0; i < n; i++)
             {
@@ -487,7 +437,27 @@ namespace project
             arr2 = MinMtrx(mtrx, n, m);
             I = arr1[0];
             I1 = arr2[0];
-            DelLine(mtrx, n, m, I, I1);
+            if (n > 0)
+            {
+                if (I == I1)
+                {
+                    mtrx1 = DelLine(mtrx, n, m, I);
+                    output(mtrx1, n - 1, m);
+                }
+                if (I < I1)
+                {
+                    I1 -= 1;
+                    mtrx1 = DelLine(mtrx, n, m, I);
+                    mtrx2 = DelLine(mtrx1, n - 1, m, I1);
+                    output(mtrx2, n - 2, m);
+                }
+                if (I > I1)
+                {
+                    mtrx1 = DelLine(mtrx, n, m, I);
+                    mtrx2 = DelLine(mtrx1, n - 1, m, I1);
+                    output(mtrx2, n - 2, m);
+                }
+            }
             #endregion
 
 
