@@ -101,48 +101,68 @@ int[,] matrixA = new int[5, 5] { {1, 2, 3, 4, 5},
 
 
 Console.WriteLine("номер 10");
+
+
+
 int[,] matrix = {
-            { 1, 2, 3, 4, 5 },
-            { 6, 7, 8, 9, 10 },
-            { 11, 12, 13, 14, 15 },
-            { 16, 17, 18, 19, 20 },
-            { 21, 22, 23, 24, 25 }
+            { 1,- 2, 3, 0 },
+            { 5, 6, 7, 8 },
+            { -9, 10, 11, 12 },
+            { 13, 114, 15, 16 }
         };
 
-int maxBelowDiagonal = int.MinValue;
-int minAboveDiagonal = int.MaxValue;
-int maxBelowDiagonalColumn = -1;
-int minAboveDiagonalColumn = -1;
+int maxB;
+int minA;
+int maxC;
+int minC;
 
+FindMinMaxAndIndexes(matrix, out maxB, out minA, out maxC, out minC);
+Console.WriteLine("Максимальный элемент ниже главной диагонали: " + maxB);
+Console.WriteLine("Минимальный элемент выше главной диагонали: " + minA);
 
-for (int i = 0; i < matrix.GetLength(0); i++)
+if (maxC != minC)
 {
-    for (int j = 0; j < matrix.GetLength(1); j++)
+    matrix = DeleteColumn(matrix, maxC);
+    if (maxC < minC)
     {
-        if (j >= i && matrix[i, j] > maxBelowDiagonal)
-        {
-            maxBelowDiagonal = matrix[i, j];
-            maxBelowDiagonalColumn = j;
-        }
-
-        if (j < i && matrix[i, j] < minAboveDiagonal)
-        {
-            minAboveDiagonal = matrix[i, j];
-            minAboveDiagonalColumn = j;
-        }
+        minC--; // adjust for the removed column
     }
+    matrix = DeleteColumn(matrix, minC);
 }
-
-Console.WriteLine("Максимальный элемент ниже главной диагонали: " + maxBelowDiagonal);
-Console.WriteLine("Минимальный элемент выше главной диагонали: " + minAboveDiagonal);
-
-
-matrix = DeleteColumn(matrix, maxBelowDiagonalColumn);
-matrix = DeleteColumn(matrix, minAboveDiagonalColumn);
+else
+{
+    matrix = DeleteColumn(matrix, maxC);
+}
 
 Console.WriteLine("Матрица после удаления столбцов:");
 
 
+
+static void FindMinMaxAndIndexes(int[,] matrix, out int maxB, out int minA, out int maxC, out int minC)
+{
+    maxB = int.MinValue;
+    minA = int.MaxValue;
+    maxC = -1;
+    minC = -1;
+
+    for (int i = 0; i < matrix.GetLength(0); i++)
+    {
+        for (int j = 0; j < matrix.GetLength(1); j++)
+        {
+            if (j <= i && matrix[i, j] > maxB)
+            {
+                maxB = matrix[i, j];
+                maxC = j;
+            }
+
+            if (j >= i && matrix[i, j] < minA)
+            {
+                minA = matrix[i, j];
+                minC = j;
+            }
+        }
+    }
+}
 
 static int[,] DeleteColumn(int[,] matrix, int columnIndex)
 {
@@ -164,15 +184,15 @@ static int[,] DeleteColumn(int[,] matrix, int columnIndex)
 }
 
 
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            Console.Write(matrix[i, j] + " ");
-        }
-        Console.WriteLine();
-    }
 
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(1); j++)
+    {
+        Console.Write(matrix[i, j] + " ");
+    }
+    Console.WriteLine();
+}
 
 
 
@@ -223,69 +243,71 @@ static void PrintArray(int[] array)
 #region
 Console.WriteLine("номер 22");
 int[,] matr = {
-            { 1, -2, 3, -4, 5 },
-            { 6, 7, -8, 9, -10 },
-            { 11, 12, -13, 14, 15 },
-            { -16, 17, 18, 19, -20 },
-            { 21, -22, 23, 24, -25 }
-        };
+    { 1, 0, 3, 0, 0 },
+    { 6, 7, -800, 9, -100000 },
+   { 11, 12, 13, 14, 15 },
+  { 16, 17, 18, 19, -20 },
+   { 21, -8, 23, 24, -25 }
+};
 
-int[] negativeCountPerRow = GetNegativeCountPerRow(matr);
-int[] maxNegativePerColumn = GetMaxNegativePerColumn(matr);
+int[] negativeE = CountNegativeElementsInRows(matr);
+int[] maxN = MaxNegativeInColumns(matr);
 
-Console.WriteLine("Количество отрицательных элементов в каждой строке:");
-PrintAray(negativeCountPerRow);
-Console.WriteLine("Максимальные среди отрицательных элементов в каждом столбце:");
-PrintAray(maxNegativePerColumn);
-    
+Console.WriteLine("Количество отрицательных элементов в строках:");
+PrintAray(negativeE);
+Console.WriteLine("Максимальный среди отрицательных элементов столбцов:");
+PrintAray(maxN);
 
-    static int[] GetNegativeCountPerRow(int[,] matrix)
+
+static int[] CountNegativeElementsInRows(int[,] matr)
 {
-    int ro = matrix.GetLength(0);
-    int[] res = new int[ro];
+    int[] result = new int[matr.GetLength(0)];
 
-    for (int i = 0; i < ro; i++)
+    for (int i = 0; i < matr.GetLength(0); i++)
     {
         int count = 0;
-        for (int j = 0; j < matrix.GetLength(1); j++)
+        for (int j = 0; j < matr.GetLength(1); j++)
         {
-            if (matrix[i, j] < 0)
+            if (matr[i, j] < 0)
             {
                 count++;
             }
         }
-        res[i] = count;
-    }
-
-    return res;
-}
-
-static int[] GetMaxNegativePerColumn(int[,] matrix)
-{
-    int cс = matrix.GetLength(1);
-    int[] result = new int[cс];
-
-    for (int j = 0; j < cс; j++)
-    {
-        int maxNegative = int.MinValue;
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            if (matrix[i, j] < 0 && matrix[i, j] > maxNegative)
-            {
-                maxNegative = matrix[i, j];
-            }
-        }
-        result[j] = maxNegative;
+        result[i] = count;
     }
 
     return result;
 }
 
-static void PrintAray(int[] array)
+static int[] MaxNegativeInColumns(int[,] matr)
 {
-    foreach (var element in array)
+    int[] result = new int[matr.GetLength(1)];
+
+    for (int j = 0; j < matr.GetLength(1); j++)
     {
-        Console.Write(element + " ");
+        int max = int.MinValue;
+        for (int i = 0; i < matr.GetLength(0); i++)
+        {
+            if (matr[i, j] < 0 && matr[i, j] > max)
+            {
+                max = matr[i, j];
+            }
+        }
+        if (max == int.MinValue)
+        {
+            max = 0;
+        }
+        result[j] = max;
+    }
+
+    return result;
+}
+
+static void PrintAray(int[] aray)
+{
+    foreach (var item in aray)
+    {
+        Console.Write(item + " ");
     }
     Console.WriteLine();
 }
