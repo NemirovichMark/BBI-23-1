@@ -1,0 +1,389 @@
+////номер 2
+//using System;
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        int[] A = { 1, 2, 3, 4, 5, 6, 9, 8, 0 };
+//        int[] B = { 9, 8, 7, 6, 5, 4, 3 };
+
+//        PA(A);
+//        PA(B);
+
+//        foreach (var e in A)
+//        {
+//            Console.Write(e + " ");
+//        }
+
+//        Console.WriteLine();
+//        foreach (var e in B)
+//        {
+//            Console.Write(e + " ");
+//        }
+//    }
+
+//    static void PA(int[] masiv)
+//    {
+//        int MI = FMI(masiv);
+
+//        if (MI < masiv.Length - 1)
+//        {
+//            int sum = 0;
+//            int K = 0;
+
+//            for (int i = MI + 1; i < masiv.Length; i++)
+//            {
+//                sum += masiv[i];
+//                K++;
+//            }
+
+//            double CP_ZNACH = (double)sum / K;
+//            masiv[MI] = (int)CP_ZNACH;
+//        }
+//    }
+
+//    static int FMI(int[] masiv)
+//    {
+//        int MI = 0;
+
+//        for (int i = 1; i < masiv.Length; i++)
+//        {
+//            if (masiv[i] > masiv[MI])
+//            {
+//                MI = i;
+//            }
+//        }
+
+//        return MI;
+//    }
+//}
+
+////номер 8
+//using System;
+
+//public class Example
+//{
+//    static void I_Sort(double[] masiv, int s_Index, int e_Index)
+//    {
+//        for (int i = s_Index + 1; i < e_Index; i++)
+//        {
+//            double currentElement = masiv[i];
+//            int j = i - 1;
+
+//            while (j >= s_Index && masiv[j] > currentElement)
+//            {
+//                masiv[j + 1] = masiv[j];
+//                j--;
+//            }
+
+//            masiv[j + 1] = currentElement;
+//        }
+//    }
+
+//    static void OAM(double[] array, int index)
+//    {
+//        I_Sort(array, index, array.Length);
+//    }
+
+//    static void Main()
+//    {
+//        double[] A = new double[9];
+//        double[] B = new double[11];
+//        Random random = new Random();
+
+//        Console.WriteLine("Массив A:");
+//        for (int i = 0; i < A.Length; i++)
+//        {
+//            A[i] = random.Next(-100, 100);
+//            Console.Write("{0:f0} ", A[i]);
+//        }
+
+//        double max_A = A[0];
+//        int maxA_Index = 0;
+//        for (int i = 1; i < A.Length; i++)
+//        {
+//            if (A[i] > max_A)
+//            {
+//                max_A = A[i];
+//                maxA_Index = i + 1;
+//            }
+//        }
+
+//        OAM(A, maxA_Index);
+
+//        Console.WriteLine("\nУпорядоченный массив A:");
+//        for (int i = 0; i < A.Length; i++)
+//        {
+//            Console.Write("{0:f0} ", A[i]);
+//        }
+
+//        Console.WriteLine("\n\nМассив B:");
+//        for (int i = 0; i < B.Length; i++)
+//        {
+//            B[i] = random.Next(-10, 10);
+//            Console.Write("{0:f0} ", B[i]);
+//        }
+
+//        double max_B = B[0];
+//        int max_B_Index = 0;
+//        for (int i = 1; i < B.Length; i++)
+//        {
+//            if (B[i] > max_B)
+//            {
+//                max_B = B[i];
+//                max_B_Index = i + 1;
+//            }
+//        }
+
+//        OAM(B, max_B_Index);
+
+//        Console.WriteLine("\nУпорядоченный массив B:");
+//        for (int i = 0; i < B.Length; i++)
+//        {
+//            Console.Write("{0:f0} ", B[i]);
+//        }
+//    }
+//}
+
+////номер   14
+//using System;
+//public class Example
+//{
+//    private static void sort(ref double[,] a)
+//    {
+//        for (int y = 0; y < a.GetLength(0); y++)
+//        {
+//            for (int x = 0; x < a.GetLength(1) - 1; x++)
+//            {
+//                for (int x1 = x + 1; x1 < a.GetLength(1); x1++)
+//                {
+//                    if (a[y, x] > a[y, x1])
+//                    {
+//                        double z = a[y, x1];
+//                        a[y, x1] = a[y, x];
+//                        a[y, x] = z;
+//                    }
+//                }
+//            }
+//        }
+
+//    }
+
+//    public static void Main()
+//    {
+//        double[,] a = new double[6, 6];
+//        Random k = new Random();
+//        for (int y = 0; y < 6; y++)
+//        {
+//            Console.Write("y");
+//            for (int x = 0; x < 6; x++)
+//            {
+//                a[y, x] = k.Next(-10, 10);
+//                Console.Write(" х=" + "{0:f0} ", a[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+//        Console.WriteLine();
+//        sort(ref a);
+//        for (int y = 0; y < a.GetLength(0); y++)
+//        {
+//            Console.Write("y");
+//            for (int x = 0; x < 6; x++)
+//            {
+//                Console.Write(" х=" + "{0:f0} ", a[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+//        Console.WriteLine();
+//    }
+//}
+
+////номер 20
+//using System;
+
+//public class MatrixExample
+//{
+//    private static void DeleteColumnsWithoutZeros(ref int[,] matrix)
+//    {
+//        int numRows = matrix.GetLength(0);  // Получаем количество строк в матрице
+//        int numCols = matrix.GetLength(1);  // Получаем количество столбцов в матрице
+//        for (int col = numCols - 1; col >= 0; col--)
+//        {
+//            bool containsZero = false;
+
+
+//            for (int row = 0; row < numRows; row++)
+//            {
+//                if (matrix[row, col] == 0)
+//                {
+//                    containsZero = true;
+//                    break;
+//                }
+//            }
+//            if (!containsZero)
+//            {
+//                DeleteColumn(ref matrix, col);
+//            }
+//        }
+//    }
+//    private static void DeleteColumn(ref int[,] matrix, int columnIndex)
+//    {
+//        int numRows = matrix.GetLength(0);
+//        int numCols = matrix.GetLength(1) - 1;
+
+//        int[,] newMatrix = new int[numRows, numCols];
+
+//        for (int row = 0; row < numRows; row++)
+//        {
+//            for (int col = 0, newCol = 0; col < matrix.GetLength(1); col++)
+//            {
+//                if (col != columnIndex)
+//                {
+//                    newMatrix[row, newCol] = matrix[row, col];
+//                    newCol++;
+//                }
+//            }
+//        }
+
+//        matrix = newMatrix;
+//    }
+//    private static void PrintMatrix(int[,] matrix)
+//    {
+//        int numRows = matrix.GetLength(0);
+//        int numCols = matrix.GetLength(1);
+//        for (int row = 0; row < numRows; row++)
+//        {
+//            Console.Write("Row {0}: ", row + 1);
+//            for (int col = 0; col < numCols; col++)
+//            {
+//                Console.Write("{0,4} ", matrix[row, col]);
+//            }
+//            Console.WriteLine();
+//        }
+//    }
+//    public static void Main()
+//    {
+//        int[,] matrix1 = {
+//            {1, 2, 0, 4},
+//            {5, 6, 7, 8},
+//            {9, 0, 11, 12},
+//            {13, 14, 15, 16}
+//        };
+
+//        Console.WriteLine("Оригинальная матрица 1:");
+//        PrintMatrix(matrix1);
+//        DeleteColumnsWithoutZeros(ref matrix1);
+//        Console.WriteLine("\nМатрица 1 после удаления столбцов без нулей:");
+//        PrintMatrix(matrix1);
+//        int[,] matrix2 = {
+//            {2, 0, 3},
+//            {0, 4, 5},
+//            {6, 7, 0}
+//        };
+
+//        Console.WriteLine("\nОригинальная матрица 2:");
+//        PrintMatrix(matrix2);
+//        DeleteColumnsWithoutZeros(ref matrix2);
+//        Console.WriteLine("\nМатрица 2 после удаления столбцов без нулей:");
+//        PrintMatrix(matrix2);
+//    }
+//}
+
+////номер 26
+//using System;
+
+//public class Example
+//{
+//    // Метод для нахождения строки с максимальным количеством отрицательных элементов
+//    private static int FindMaxNegativeRow(double[,] matrix)
+//    {
+//        int ymax = 0;
+//        int maxNegativeCount = 0;
+
+//        for (int y = 0; y < matrix.GetLength(0); y++)
+//        {
+//            int negativeCount = 0;
+
+//            for (int x = 0; x < matrix.GetLength(1); x++)
+//            {
+//                if (matrix[y, x] < 0)
+//                {
+//                    negativeCount++;
+//                }
+//            }
+
+//            if (negativeCount > maxNegativeCount)
+//            {
+//                maxNegativeCount = negativeCount;
+//                ymax = y;
+//            }
+//        }
+
+//        return ymax;
+//    }
+
+//    // Метод для обмена строками между матрицами
+//    private static void SwapRowsBetweenMatrices(double[,] matrix1, double[,] matrix2, int row1, int row2)
+//    {
+//        for (int x = 0; x < matrix1.GetLength(1); x++)
+//        {
+//            double temp = matrix1[row1, x];
+//            matrix1[row1, x] = matrix2[row2, x];
+//            matrix2[row2, x] = temp;
+//        }
+//    }
+
+//    public static void Main()
+//    {
+//        double[,] a = new double[5, 6];
+//        double[,] b = new double[5, 6];
+//        Random k = new Random();
+
+//        for (int y = 0; y < 5; y++)
+//        {
+//            for (int x = 0; x < 6; x++)
+//            {
+//                a[y, x] = k.Next(-10, 10);
+//                Console.Write("{0:f0} ", a[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+//        Console.WriteLine();
+
+//        for (int y = 0; y < 5; y++)
+//        {
+//            for (int x = 0; x < 6; x++)
+//            {
+//                b[y, x] = k.Next(-10, 10);
+//                Console.Write("{0:f0} ", b[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+
+//        int ymaxA = FindMaxNegativeRow(a);
+//        int ymaxB = FindMaxNegativeRow(b);
+
+//        SwapRowsBetweenMatrices(a, b, ymaxA, ymaxB);
+
+//        Console.WriteLine("Матрица A после обмена:");
+//        for (int y = 0; y < 5; y++)
+//        {
+//            for (int x = 0; x < 6; x++)
+//            {
+//                Console.Write("{0:f0} ", a[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+
+//        Console.WriteLine("Матрица B после обмена:");
+//        for (int y = 0; y < 5; y++)
+//        {
+//            for (int x = 0; x < 6; x++)
+//            {
+//                Console.Write("{0:f0} ", b[y, x]);
+//            }
+//            Console.WriteLine();
+//        }
+//    }
+//}
