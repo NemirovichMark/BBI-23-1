@@ -180,7 +180,10 @@ class Program
 {
     static void Main()
     {
-        int n = 5, m = 6;
+        Console.Write("Введите количество строк матрицы: ");
+        int n = int.Parse(Console.ReadLine()); 
+        Console.Write("Введите количество стлобцов матрицы: ");
+        int m = int.Parse(Console.ReadLine());
         double[,] a = new double[n, m];
         fillmatrix(a);
         Console.WriteLine("Матрица A:");
@@ -197,20 +200,29 @@ class Program
         printMatrix(c);
 
         double[] array = { sumMatrix(a), sumMatrix(b), sumMatrix(c) };
-        Console.WriteLine("Средние значения матриц: ");
-        printArray(array);
         if (array[0] > array[1] && array[1] > array[2])
         {
+            Console.WriteLine("Средние значения матриц без максимальных и минимальных элементов: ");
+            printArray(array);
             Console.WriteLine("Полученные значения образуют убывающую последовательность");
         }
         else if (array[0] < array[1] && array[1] < array[2])
         {
+            Console.WriteLine("Средние значения матриц без максимальных и минимальных элементов: ");
+            printArray(array);
             Console.WriteLine("Полученные значения образуют возрастающую последовательность");
+        }
+        else if (array[0] == 0 && array[1] == 0 && array[2] == 0)
+        {
+            Console.WriteLine("Матрицы состоят из двух элементов. Невозжно найти среднее значение элементов матрицы.");
         }
         else
         {
+            Console.WriteLine("Средние значения матриц без максимальных и мнимальных элементов: ");
+            printArray(array);
             Console.WriteLine("Полученные значения не образуют последовательность");
         }
+        
     }
 
     static void fillmatrix(double[,] matrix)
@@ -262,11 +274,14 @@ class Program
         double max = elements.Max();
         double min = elements.Min();
         double sum = elements.Sum() - max - min;
-        sum /= (elements.Length - 2);
-        return sum;
+        if (elements.Length - 2 != 0)
+        {
+            sum /= (elements.Length - 2);
+        }
+         return sum;
+        
     }
 }
-
 #endregion
 
 #region 21
