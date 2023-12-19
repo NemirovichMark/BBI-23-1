@@ -132,7 +132,9 @@ public class Program
         Console.WriteLine("1_15:");
         n = 5;
         m = 7;
+        max = int.MinValue;
         mtrx = new double[n, m];
+        index = 0;
         Console.WriteLine("Введите матрицу - 5 строк по 7 эллементов: ");
         for (int i = 0; i < n; i++)
         {
@@ -152,10 +154,10 @@ public class Program
                 if (mtrx[i, j] > max)
                 {
                     max = mtrx[i, j];
+                    index = j;
                 }
             }
-
-            mtrx[i, 0] = max * (i + 1);
+            mtrx[i, index] = max * (i + 1);
         }
 
         Console.WriteLine("Конечная матрица:");
@@ -178,6 +180,8 @@ public class Program
         n = int.Parse(Console.ReadLine());
         Console.WriteLine("Введите кол-во столбцов:");
         m = int.Parse(Console.ReadLine());
+        mtrx = new double[n, m];
+        max = int.MinValue;
         Console.WriteLine("Введите матрицу - " + n + " строк по " + m + " эллементов,через пробел:");
         for (int i = 0; i < n; i++)
         {
@@ -218,7 +222,7 @@ public class Program
 
             Console.WriteLine();
         }
-    #endregion
+        #endregion
         Console.WriteLine();
 
         #region 1_23
@@ -336,7 +340,7 @@ public class Program
 
             Console.WriteLine();
         }
-    #endregion
+        #endregion
         Console.WriteLine();
 
         #region 2_1
@@ -525,7 +529,7 @@ public class Program
         #region 3_8
         Console.WriteLine("3_8:");
         array = new double[7, 5];
-        Console.WriteLine("Введите матрицу 7x5: "); 
+        Console.WriteLine("Введите матрицу 7x5: ");
         for (int i = 0; i < array.GetLength(0); i++)
         {
             str = Console.ReadLine();
@@ -536,30 +540,30 @@ public class Program
             }
         }
 
-        for (int i = 0; i < array.GetLength(0) - 1; i++) 
+        for (int i = 0; i < array.GetLength(0) - 1; i++)
         {
             index = 0;
             int countM = 0;
-            for (int j = i; j < array.GetLength(0); j++) 
+            for (int j = i; j < array.GetLength(0); j++)
             {
                 int t = 0;
 
                 for (int k = 0; k < array.GetLength(1); k++)
                 {
-                    if (array[j, k] > 0) 
+                    if (array[j, k] > 0)
                     {
                         t++;
                     }
                 }
 
-                if (countM < t) 
+                if (countM < t)
                 {
                     countM = t;
                     index = j;
                 }
             }
             double[] line = new double[array.GetLength(1)];
-            for (int j = 0; j < array.GetLength(1); j++) 
+            for (int j = 0; j < array.GetLength(1); j++)
             {
                 line[j] = array[i, j];
                 array[i, j] = array[index, j];
@@ -567,7 +571,7 @@ public class Program
             }
         }
 
-        Console.WriteLine("Итоговая матрица:"); 
+        Console.WriteLine("Итоговая матрица:");
         for (int i = 0; i < array.GetLength(0); i++)
         {
             for (int j = 0; j < array.GetLength(1); j++)
