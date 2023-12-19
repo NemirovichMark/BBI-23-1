@@ -32,6 +32,12 @@ internal class Programm
         Console.WriteLine("---------------------------------------");
         Console.WriteLine("2_7:");
         Task2_7();
+        Console.WriteLine("---------------------------------------");
+        Console.WriteLine("3_1:");
+        Task3_1();
+        Console.WriteLine("---------------------------------------");
+        Console.WriteLine("3_8:");
+        Task3_8();
     }
     private static void Task1_3()
     {
