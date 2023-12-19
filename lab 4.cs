@@ -498,101 +498,149 @@ internal class Programm
         }
         Console.WriteLine();
     }
-    private static void Task3_2()
+    private static void Task3_1()
     {
-        Console.WriteLine("Введите кол-во строк:");
-        int x = int.Parse(Console.ReadLine());
-        Console.WriteLine("Введите кол-во столбцов:");
-        int y = int.Parse(Console.ReadLine());
-        double [,] arr = new double[x, y];
-        double[,] arr1 = new double[x, y];
-        Console.WriteLine("Введите матрицу: " + x + " строк по " + y + " эллементов,через пробел:");
-        for (int i = 0; i < x; i++)
+        int n = 7;
+        int m = 5;
+        int q = 0;
+        int [] arr1 = new int[7];
+        int [] arr2 = new int[7];
+        int [] arr3 = new int[7];
+        int [,] mtrx = new int[n, m];
+        int [,] mtrx1 = new int[n - 1, m];
+        double max = -Math.Pow(10, 20);
+        double min = Math.Pow(10, 20);
+        double min1 = Math.Pow(10, 20);
+        Console.WriteLine("Введите матрицу(Кол-во строк: " + n + "; Кол-во элементов в строке: " + m + ")");
+        for (int i = 0; i < n; i++)
         {
             string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < y; j++)
+            int[] arr = str.Split(' ').Select(int.Parse).ToArray();
+            for (int j = 0; j < m; j++)
             {
-                arr[i, j] = mass[j];
-                if (i == 0 || j == 0 || i == (x - 1) || j == (y - 1))
-                {
-                    arr1[i, j] = 0;
-                }
-                else
-                {
-                    arr1[i, j] = arr[i, j];
-                }
+                mtrx[i, j] = arr[j];
             }
         }
         Console.WriteLine("Исходная матрица:");
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < y; j++)
+            for (int j = 0; j < m; j++)
             {
-                Console.Write(arr[i, j] + " ");
+                Console.Write(mtrx[i, j] + " ");
             }
             Console.WriteLine();
         }
-        Console.WriteLine();
-        Console.WriteLine("Конечная матрица");
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < y; j++)
+            min = Math.Pow(10, 20);
+            for (int j = 0; j < m; j++)
             {
-                Console.Write(arr1[i, j] + " ");
+                if (mtrx[i, j] < min)
+                {
+                    arr1[i] = mtrx[i, j];
+                    min = mtrx[i, j];
+                }
+            }
+        }
+        Console.WriteLine("1_1: " + "[{0}]", string.Join("; ", arr1));
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < n - 1; j++)
+            {
+                if (arr1[j] < arr1[j + 1])
+                {
+                    q = arr1[j];
+                    arr1[j] = arr1[j + 1];
+                    arr1[j + 1] = q;
+                    for (int k = 0; k < m; k++)
+                    {
+                        q = mtrx[j, k];
+                        mtrx[j, k] = mtrx[j + 1, k];
+                        mtrx[j + 1, k] = q;
+                    }
+                }
+            }
+        }
+        Console.WriteLine("Итоговая матрица:");
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                Console.Write(mtrx[i, j] + " ");
             }
             Console.WriteLine();
-        }
-        Console.WriteLine();
     }
-    private static void Task3_4()
+    private static void Task3_8()
     {
-        Console.WriteLine("Введите кол-во строк:");
-        int x = int.Parse(Console.ReadLine());
-        Console.WriteLine("Введите кол-во столбцов:");
-        int y = int.Parse(Console.ReadLine());
-        double [,] arr = new double[x, y];
-        double [,] arr1 = new double[x, y];
-        int k = 0;
-        k = x / 2;
-        Console.WriteLine(k);
-        Console.WriteLine("Введите матрицу: " + x + " строк по " + y + " эллементов,через пробел:");
-        for (int i = 0; i < x; i++)
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < y; j++)
-            {
-                arr[i, j] = mass[j];
-                if (i >= k && j <= i)
-                {
-                    arr1[i, j] = 1;
-                }
-                else
-                {
-                    arr1[i, j] = arr[i, j];
-                }
-            }
-        }
-        Console.WriteLine("Исходная матрица:");
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < y; j++)
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        Console.WriteLine("Конечная матрица");
-        for (int i = 0; i < x; i++)
-        {
-            for (int j = 0; j < y; j++)
-            {
-                Console.Write(arr1[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
+         int n = 7;
+ int m = 5;
+ int q = 0;
+ int K = 0;
+ int[] arr1 = new int[7];
+ int[] arr2 = new int[7];
+ int[] arr3 = new int[7];
+ int[,] mtrx = new int[n, m];
+ int[,] mtrx1 = new int[n - 1, m];
+ double max = -Math.Pow(10, 20);
+ double min = Math.Pow(10, 20);
+ double min1 = Math.Pow(10, 20);
+ min = Math.Pow(10, 20);
+ Console.WriteLine("Введите матрицу(Кол-во строк: " + n + "; Кол-во элементов в строке: " + m + ")");
+ for (int i = 0; i < n; i++)
+ {
+     string str = Console.ReadLine();
+     int[] arr = str.Split(' ').Select(int.Parse).ToArray();
+     for (int j = 0; j < m; j++)
+     {
+         mtrx[i, j] = arr[j];
+     }
+ }
+ Console.WriteLine("Исходная матрица:");
+ for (int i = 0; i < n; i++)
+ {
+     for (int j = 0; j < m; j++)
+     {
+         Console.Write(mtrx[i, j] + " ");
+     }
+     Console.WriteLine();
+ }
+ for (int i = 0; i < n; i++)
+ {
+     K = 0;
+     for (int j = 0; j < m; j++)
+     {
+         if (mtrx[i, j] > 0)
+         {
+             K += 1;
+             arr1[i] = K;
+         }
+     }
+ }
+ for (int i = 1; i < n; i++)
+ {
+     for (int j = 0; j < n - 1; j++)
+     {
+         if (arr1[j] < arr1[j + 1])
+         {
+             q = arr1[j];
+             arr1[j] = arr1[j + 1];
+             arr1[j + 1] = q;
+             for (int k = 0; k < m; k++)
+             {
+                 q = mtrx[j, k];
+                 mtrx[j, k] = mtrx[j + 1, k];
+                 mtrx[j + 1, k] = q;
+             }
+         }
+     }
+ }
+ Console.WriteLine("Итоговая матрица:");
+ for (int i = 0; i < n; i++)
+ {
+     for (int j = 0; j < m; j++)
+     {
+         Console.Write(mtrx[i, j] + " ");
+     }
+     Console.WriteLine();
     }
 }
