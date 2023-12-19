@@ -542,7 +542,7 @@ internal class Programm
                 }
             }
         }
-        Console.WriteLine("1_1: " + "[{0}]", string.Join("; ", arr1));
+        Console.WriteLine("3_1: " + "[{0}]", string.Join("; ", arr1));
         for (int i = 1; i < n; i++)
         {
             for (int j = 0; j < n - 1; j++)
@@ -572,7 +572,7 @@ internal class Programm
     }
     private static void Task3_8()
     {
-         int n = 7;
+ int n = 7;
  int m = 5;
  int q = 0;
  int K = 0;
