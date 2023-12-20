@@ -5,54 +5,6 @@ namespace lab5
     {
         static void Main()
         {
-            // #region 5
-            // Console.WriteLine("№5");
-            // double [,] m1 = new double[4, 6] { { 1, 1, 1, 11, 1, 1 }, { 2, 2, 2, 2, 2, 2 }, { 3, 3, 3, 3, 3, 3 }, { 4, 4, 4, 4, 4, 4 } };
-            // double [,] m2 = new double [6, 6] { { 5, 5, 5, 5, 5, 5 }, { 6, 6, 6, 6, 6, 6 }, { 7, 7, 7, 7, 7, 7 }, { 0, 0, 0, 0, 0, 0 }, { -1, -1, -1, -1, -1, -1 }, { 9, 9, 9, 9, 9, 9 } };
-            // // int n;
-            // Console.WriteLine("Матрица А:");
-            // Console.WriteLine();
-            // print(m1);
-            // Console.WriteLine("Матрица В:");
-            // Console.WriteLine();
-            // print(m2);
-            // Console.Write("Индекс столбца, в котором ищем максимальный эл-т: ");
-            // n = int.Parse(Console.ReadLine());
-            // int i1, i2;
-            // i1 = pm(m1, n);
-            // i2 = pm(m2, n);
-            // for (int i = 0; i < m1.GetLength(1); i++)
-            // {
-            //     double x = m1[i1, i];
-            //     m1[i1, i] = m2[i2, i];
-            //     m2[i2, i] = x;
-            // }
-            // Console.WriteLine("--->");
-            // Console.WriteLine("Матрица А:");
-            // Console.WriteLine();
-            // print(m1);
-            // Console.WriteLine("Матрица В:");
-            // Console.WriteLine();
-            // print(m2);
-            // #endregion
-            // #region 11
-            // Console.WriteLine("№11");
-            // int n1,n2,n3,n4;
-            // int i3,i4;
-            // define(out n1, out n2, out n3, out n4, out m1, out m2);
-            // find_imax(m1, out i1, out i2);
-            // find_imax(m2, out i3, out i4);
-            // double p=m1[i1,i2];
-            // m1[i1,i2]=m2[i3,i4];
-            // m2[i3,i4]=p;
-            // Console.WriteLine("--->");
-            // Console.WriteLine("Матрица А:");
-            // Console.WriteLine();
-            // print(m1);
-            // Console.WriteLine("Матрица В:");
-            // Console.WriteLine();
-            // print(m2);
-            // #endregion
             #region 17
             int n1,n2,n3,n4;
             double [,] m1;
@@ -69,8 +21,8 @@ namespace lab5
             {
                 s2[i]=find_amax(m2, i);
             }
-            sort(ref m1, ref s1,0,s1.GetLength(0)-1);
-            sort(ref m2,ref s2,0,s2.GetLength(0)-1);
+            sort(m1, s1,0,s1.GetLength(0)-1);
+            sort(m2, s2,0,s2.GetLength(0)-1);
             Console.WriteLine("--->");
             Console.WriteLine("Матрица А:");
             Console.WriteLine();
@@ -79,32 +31,6 @@ namespace lab5
             Console.WriteLine();
             print(m2);
             #endregion
-            // #region 23
-            // Console.WriteLine("№23");
-            // define(out n1, out n2, out n3, out n4, out m1, out m2);
-            // if (((n1*n2)>=5) & ((n3*n4)>=5))
-            // {
-            //     change(ref m1);
-            //     change(ref m2);
-            //     Console.WriteLine("--->");
-            //     Console.WriteLine("Матрица А:");
-            //     Console.WriteLine();
-            //     print(m1);
-            //     Console.WriteLine("Матрица В:");
-            //     Console.WriteLine();
-            //     print(m2);
-            // }
-            // else Console.WriteLine("Ошибка: в одной из матриц меньше 5 элементов");
-            // #endregion
-        }
-        static int pm(double[,] a, int b)
-        {
-            int imax = 0;
-            for (int i = 1; i < a.GetLength(0); i++)
-            {
-                if (a[i, b] > a[imax, b]) imax = i;
-            }
-            return imax;
         }
         static void print(double[,] q)
         {
@@ -154,7 +80,7 @@ namespace lab5
             }
             return m[i1,i2];
         }
-        static void sort(ref double [,] m, ref double [] s, int n1, int n2)
+        static void sort(double [,] m, double [] s, int n1, int n2)
         {
             if (n1<n2)
             {
@@ -164,7 +90,7 @@ namespace lab5
                 {
                     while (s[n3]>x && (n3+1)<s.GetLength(0)) n3++;
                     while (s[n4]<x && (n4>0)) n4--;
-                    if (n3<n4)
+                    if (n3<=n4)
                     {
                         double y=s[n3];
                         s[n3]=s[n4];
@@ -179,8 +105,8 @@ namespace lab5
                         n4--;
                     }
                 }
-                sort (ref m, ref s, n1, n4);
-                sort ( ref m, ref s,  n3,  n2);
+                sort (m, s, n1, n4);
+                sort (m, s, n3, n2);
             }
         }
     }
