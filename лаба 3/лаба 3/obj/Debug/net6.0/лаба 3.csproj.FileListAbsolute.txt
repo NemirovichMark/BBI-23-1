@@ -1,0 +1,14 @@
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\bin\Debug\net6.0\лаба 3.exe
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\bin\Debug\net6.0\лаба 3.deps.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\bin\Debug\net6.0\лаба 3.runtimeconfig.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\bin\Debug\net6.0\лаба 3.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\bin\Debug\net6.0\лаба 3.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.AssemblyInfoInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.AssemblyInfo.cs
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.csproj.CoreCompileInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\refint\лаба 3.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\лаба 3.genruntimeconfig.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 3\лаба 3\obj\Debug\net6.0\ref\лаба 3.dll
