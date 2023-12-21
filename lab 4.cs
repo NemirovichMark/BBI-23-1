@@ -1,11 +1,10 @@
-using System;
+﻿using System;
 class Programm
 
 {
     //номер 22 (если считать с Карасевым) 
     //1 уровень: 3 7 11 15 19 23 27 31 
     //2 уровень: 3 7 
-    //3 уровень: 8 9
     static void Main(string[] args)
     {
         #region 1_3
@@ -562,7 +561,7 @@ class Programm
         Console.WriteLine();
         #endregion
 
-        #region 3_8
+        #region 3.8
         int e = 7, f = 5;
         double[,] a = new double[f, m];
         int k = 0;
@@ -622,7 +621,7 @@ class Programm
         }
         #endregion
 
-        #region 3_9
+        #region 3.9
         Console.WriteLine("Введите матрицу: 5 х 7 через пробел:");
         for (int i = 0; i < f; i++)
         {
