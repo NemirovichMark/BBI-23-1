@@ -17,9 +17,9 @@ namespace Programm
             };
             int[,] B = new int[3, 5]
             {
-            {4,-4,-7, 6, 2},
-            {-2, 8, 7, 0, 1},
-            {-6,-3,-5, -1, 2}
+                {4,-4,-7, 6, 2},
+                {-2, 8, 7, 0, 1},
+                {-6,-3,-5, -1, 2}
             };
             Console.WriteLine("Матрица A");
             for (int i = 0; i < 5; i++)
@@ -105,7 +105,7 @@ namespace Programm
     }
 }*/
 //7
-/*using System;
+/* using System;
 namespace ConsoleApplication1
 {
     class Program
@@ -113,35 +113,26 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             int i, j, k = 0, f = 0, f1 = 0, max, max1;
-            double[,] B = new double[4, 5]
-                     {{5,-4,-3, 1,-7},
-                      {-2,-8, 7,-5,-9},
-                      {-1,-3,-5, 6,-7},
-                      {8,-9,-5,-4,-2}};
+            double[,] B = new double[5, 5]
+            {
+                {5, -4, -3, 1, -7},
+                {-2, -8, 7, -5, -9},
+                {-1, -3, -5, 6, -7},
+                {8, -9, -5, -4, -2},
+                {0, 0, 0, 0, 0}
+            };
             double[,] C = new double[5, 6]
-                     {{4,-4,-7, 1,2,0},
-                     {-2, 8, 7,-5, 9, 1},
-                     {-6,-3,-5, 6,-7,-4},
-                     {8, 9,-5,-4, 2, 3},
-                     {10, 19,-5,-5, 2,-1}};
-            Console.WriteLine("Матрица В");
-            for ( i = 0; i < 4; i++)
             {
-                for ( j = 0; j < 5; j++)
-                {
-                    Console.Write(B[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
+                {4, -4, -7, 1, 2, 0},
+                {-2, 8, 7, -5, 9, 1},
+                {-6, -3, -5, 6, -7, -4},
+                {8, 9, -5, -4, 2, 3},
+                {10, 19, -5, -5, 2, -1}
+            };
+            Console.WriteLine("Матрица B");
+            PrintMatrix(B, 4, 5);
             Console.WriteLine("Матрица C");
-            for ( i = 0; i < 5; i++)
-            {
-                for ( j = 0; j < 6; j++)
-                {
-                    Console.Write(C[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
+            PrintMatrix(C, 5, 6);
             max = 0;
             for (j = 0; j < 4; j++)
             {
@@ -152,9 +143,13 @@ namespace ConsoleApplication1
                     f = j;
                 }
             }
-            for (i = 0; i > f; i--)
+            for (i = 4; i > f; i--)
+            {
                 for (j = 0; j < 5; j++)
+                {
                     B[i, j] = B[i - 1, j];
+                }
+            }
             max1 = 0;
             for (j = 0; j < 6; j++)
             {
@@ -166,14 +161,11 @@ namespace ConsoleApplication1
                 }
             }
             for (j = 0; j < 5; j++)
-                B[f + 1, j] = C[j, f1];
-            Console.WriteLine("Матрица В с включенным столбцом матрицы С");
-            for (i = 0; i < 4; i++)
             {
-                for (j = 0; j < 5; j++)
-                    Console.Write(B[i, j] + " ");
+                B[f + 1, j] = C[j, f1];
             }
-            Console.WriteLine();
+            Console.WriteLine("Матрица B с включенным столбцом матрицы C");
+            PrintMatrix(B, 5, 5);
         }
         static void Count(double[,] a, int n, int prs, int j, out int k)
         {
@@ -186,79 +178,111 @@ namespace ConsoleApplication1
                 if (l > 0) k++;
             }
         }
+        static void PrintMatrix(double[,] matrix, int rows, int columns)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write($"{matrix[i, j],4:f0}");
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }*/
 
 //13
-/*using System;
+/* using System;
 class Program
 {
     static void Main(string[] args)
     {
-        int[,] A = {
+        int[,] A = new int[,]
+        {
             { 1, 2, 3 },
             { 4, 5, 6 },
-            { 7, 8, 9 },
-            { 10, 11, 12 }
+            { 0, 8, 9 }
         };
-
-        int[,] newA = delstr(A);
 
         Console.WriteLine("Исходная матрица:");
         PrintMatrix(A);
 
-        Console.WriteLine("Матрица после удаления:");
-        PrintMatrix(newA);
+        A = delsrt(A);
+
+        Console.WriteLine("Матрица после удаления строк:");
+        PrintMatrix(A);
     }
 
-    static int[,] delstr(int[,] matrix)
+    static int[,] delsrt(int[,] matrix)
     {
         int rows = matrix.GetLength(0);
-        int columns = matrix.GetLength(1);
+        int cols = matrix.GetLength(1);
 
-        int minx = matrix[0, 0];
-        int maxx = matrix[0, 0];
+        int min = int.MaxValue;
+        int max = int.MinValue;
 
-        foreach (int x in matrix)
+        for (int i = 0; i < rows; i++)
         {
-            if (x < minx)
-                minx = x;
+            for (int j = 0; j < cols; j++)
+            {
+                if (matrix[i, j] < min)
+                    min = matrix[i, j];
 
-            if (x > maxx)
-                maxx = x;
+                if (matrix[i, j] > max)
+                    max = matrix[i, j];
+            }
         }
 
-        // Создаем новую матрицу без удаленных строк 
-        int[,] newA = new int[rows - 2, columns];
+        // Подсчитываем количество строк, которые нужно удалить
+        int rowsdel = 0;
+        for (int i = 0; i < rows; i++)
+        {
+            bool hasmin = false;
+            bool hasmax = false;
+
+            for (int j = 0; j < cols; j++)
+            {
+                if (matrix[i, j] == min)
+                    hasmin = true;
+
+                if (matrix[i, j] == max)
+                    hasmax = true;
+            }
+
+            if (hasmin && hasmax)
+                rowsdel++;
+        }
+
+        // Создаем новую матрицу с учетом удаленных строк
+        int[,] newA = new int[rows - rowsdel, cols];
         int newrow = 0;
 
         for (int i = 0; i < rows; i++)
         {
-            // Проверяем, является ли текущая строка строкой с максимальным или минимальным элементом
-            bool minormax = false;
+            bool hasmin = false;
+            bool hasmax = false;
 
-            for (int j = 0; j < columns; j++)
+            for (int j = 0; j < cols; j++)
             {
-                if (matrix[i, j] == minx || matrix[i, j] == maxx)
-                {
-                    minormax = true;
-                    break;
-                }
+                if (matrix[i, j] == min)
+                    hasmin = true;
+
+                if (matrix[i, j] == max)
+                    hasmax = true;
             }
-            // Если текущая строка не содержит максимальный или минимальный элемент, копируем ее в новую матрицу
-            if (!minormax)
+
+            if (!hasmin && !hasmax)
             {
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     newA[newrow, j] = matrix[i, j];
                 }
                 newrow++;
             }
         }
-
         return newA;
     }
-
     static void PrintMatrix(int[,] matrix)
     {
         int rows = matrix.GetLength(0);
