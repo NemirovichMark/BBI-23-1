@@ -137,8 +137,8 @@ namespace laba1
                     mindist = hypotenuse;
                  }
             }
-             Console.WriteLine("Номер ближайщей точки: " mindistnum);
-             Console.WriteLine("Расстояние ближайщей точки до начала координат: " mindist);
+             Console.WriteLine("Номер ближайщей точки: " + mindistnum);
+             Console.WriteLine("Расстояние ближайщей точки до начала координат: " + mindist);
             #endregion
         }
     }
