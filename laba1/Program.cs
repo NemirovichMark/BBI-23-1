@@ -285,6 +285,98 @@ namespace laba1
             for (int i = 0; i < mnidx; i++) newarray[i] = oldarray[i];
             for (int i = mnidx + 1; i < oldarray.Length; i++) newarray[i - 1] = oldarray[i];
             #endregion
+            # region "3.2lvl13"
+            int[] intarray = new int[] { 2, 10, 4, 5, 7, -1, 8 };
+            int indxmax = 0;
+            int valuemax = int.MinValue;
+            for (int i = 0; i < intarray.Length; i += 2)
+            {
+                if (intarray[i] > valuemax)
+                {
+                    valuemax = intarray[i];
+                    indxmax = i;
+                }
+            }
+            intarray[indxmax] = indxmax;
+            #endregion
+            # region "3.2lvl16"
+            double[] doublearr = new double[] { 2, -3, 8, 10, 14, -4, 6 };
+            int schetchik = 0;
+            double sredn = 0;
+            double obsh = 0;
+
+            for (int i = 0; i < doublearr.Length; i++)
+            {
+                obsh += doublearr[i];
+            }
+            sredn = obsh / doublearr.Length;
+            for (int i = 0; i < doublearr.Length; i++)
+            {
+                if (doublearr[i] < sredn) schetchik++;
+            }               
+            double[] resarray = new double[schetchik];
+            schetchik = 0;
+            for (int i = 0; i < doublearr.Length; i++)
+            {
+                if (doublearr[i] < sredn)
+                {
+                    resarray[schetchik] = doublearr[i];
+                    schetchik++;
+                }
+            }
+          #endregion
+            # region "3.2lvl19"
+            int[] masssivint = new int[] { 3, 6, 10, 90, 5, -2 };
+            int mxvlue = int.MinValue;
+            int indexmaximum = 0;
+            int cym = 0;
+            for (int i = 0; i < masssivint.Length; i++)
+            {
+                cym += masssivint[i];
+                if (masssivint[i] > mxvlue)
+                {
+                    indexmaximum = i;
+                    mxvlue = masssivint[i];
+                }
+            }
+            if (mxvlue > cym) masssivint[indexmaximum] = 0;
+            else masssivint[indexmaximum] = masssivint[indexmaximum] * 2;
+            #endregion
+            # region "3.3lvl2"
+           int[] maxsarray = new int[]{ 2, 12, 4, 12, 4, 6, 12 }; // принцип решения приблизительно такой за один цикл находим любой максимальный элемент а за второй сравнивая с ним прибавляем спец счетчиком к максимальным их порядковый номер
+            int maxcnt = 1;
+            int anymax = int.MinValue;
+            for (int i = 0; i < maxsarray.Length; i++)
+            {
+                if (maxsarray[i] > anymax)
+                {
+                    anymax = maxsarray[i];
+                }
+            }
+            for (int i = 0; i < maxsarray.Length; i++)
+            {
+                if (maxsarray[i] == anymax)
+                {
+                    maxsarray[i]+= maxcnt;
+                    maxcnt++;
+                }
+            }
+            #endregion
+            # region "3.3lvl5"
+            int[] vs = new int[] {8,4,2,-3,6,4}; //пузырьком сортируем четные элементы ( цикл в цикле)
+            for(int i = 0; i < vs.Length; i += 2)
+            {
+                for(int j = i; j < vs.Length-2; j += 2)
+                {
+                    if (vs[j] > vs[j + 2])
+                    {
+                        int temp = vs[j];
+                        vs[j]=vs[j+2];
+                        vs[j+2]=temp;
+                    }
+                }
+            }
+            #endregion
         }
     }
 }
