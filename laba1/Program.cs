@@ -377,6 +377,536 @@ namespace laba1
                 }
             }
             #endregion
+            # region "4.1.1"
+            int[,] a = new int[5, 7] { { 1, 3, 5, 78, 3, 5, 1 }, 
+            { 1, 3, 5, 78, 3, 5, 1 }, 
+            { 1, 3, 5, 78, 3, 5, 1 }, 
+            { 1, 3, 5, 78, 3, 5, 1 }, 
+            { 1, 3, 5, 78, 3, 5, 1 } };
+            int n = 5; int m = 7;
+            int s = 0;
+            for (int i = 0; i < n; i++)
+            {
+
+              for (int j = 0; j < m; j++)
+              s = s + a[i, j];
+            }
+            Console.WriteLine(s);
+            #endregion
+            #region "4.1.5"
+            int[,] a ={ { 1, 2, 3, -4 },
+              { 1, -2, 3, 4 },
+              { 1, 2, 3, 4 },
+              { -1, 2, 3, 4 },
+              { 1, 2, 3, 4 } };
+            int n = 5;
+            int m = 4;
+            int stolb = 2; // номер столбца, для которого мы ищем первый отрицательный элемент
+            int otr = 0; // значения по умолчанию, если отрицательный элемент не найден
+            int k = 0;
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                    if (a[i, 1] < 0)
+                    {
+                        otr = a[i, 1];
+                        k = i;
+                        break;
+
+                    }// выходим из цикла, как только нашли первый отрицательный элемент
+            }
+            Console.WriteLine("Значение первого отрицательного элемента в столбце {0}: {1}", stolb, otr);
+            Console.WriteLine("Номер строки этого элемента: {0}", k);
+            #endregion
+            #region "4.1.9"
+            int[,] a = new int[5, 7]
+                 {
+                  { 1, 2, 3, 4, 5, 6, 7 },
+                  { 1, 2, 3, 4, 5, 6, 7 },
+                  { 1, 2, 3, 4, 5, 6, 7 },
+                  { 1, 2, 3, 4, 5, 6, 7 },
+                  { 1, 2, 3, 4, 5, 6, 7 },
+                 };
+
+                int maxa = a[0, 0];
+                int maxb = 0;
+                int maxc = 0;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 7; j++)
+                    {
+                        if (a[i, j] > maxa)
+                        {
+                            maxa = a[i, j];
+                            maxb = i;
+                            maxc = j;
+                        }
+                    }
+                }
+
+                int temp = a[maxb, maxc];
+                a[maxb, maxc] = a[0, 0];
+                a[0, 0] = temp;
+
+                Console.WriteLine("Матрица после замены:");
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 7; j++)
+                    {
+                        Console.Write(a[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            #endregion
+            #region "4.1.13"
+            int n = 5; int m = 5;
+                int[,] a = new int[5, 5]{
+                   { 1, 2, 3, 4, 5}, 
+                   { 8, 9, 10, 11, 12},
+                   { 15, 16, 17, 18, 19 },
+                   { 22, 23, 24, 25, 26 },
+                   { 29, 30, 31, 32, 33 } };
+                int maxa = a[0, 0];
+                int maxi = 0;
+
+                // Находим максимальный элемент на диагонали
+                for (int i = 1; i < a.GetLength(0); i++)
+                {
+                    if (a[i, i] > maxa)
+                    {
+                        maxa = a[i, i];
+                        maxi = i;
+                    }
+                }
+
+                // Меняем местами 4-й столбец и столбец с максимальным элементом на диагонали
+                for (int i = 0; i < a.GetLength(0); i++)
+                {
+                    int temp = a[i, 3];
+                    a[i, 3] = a[i, maxi];
+                    a[i, maxi] = temp;
+                }
+                Console.WriteLine("Конечная матрица:");
+                for (int i = 0; i < n; i++)
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        Console.Write(a[i, j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
+            #endregion
+            #region "4.1.17" 
+            int n = 5; int m = 7;
+            int[,] B = new int[5, 7] {
+            { 8, 2, 3, 4, 5, 6, 7 },
+            { 10, 9, 10, 11, 12, 13, 14 },
+            { 55, 16, 17, 18, 19, 20, 21 },
+            { 57, 23, 24, 25, 26, 27, 28 },
+            { 93, 30, 31, 32, 33, 34, 35 }
+            };
+            
+            // матрица где хроняться минимальные элементы
+            int[] mini = new int[n];
+
+
+            for (int i = 0; i < n; i++)
+            {
+                int minB = 1000; // начальное значение минимального элемента
+
+                // Поиск минимального элемента в текущей строке
+                for (int j = 0; j < m; j++)
+                {
+                    if (B[i, j] < minB)
+                    {
+                        minB = B[i, j];
+                        mini[i] = j; // сохранение индекса минимального элемента
+                    }
+                }
+
+                // Перемещение минимального элемента в начало строки
+                if (mini[i] != 0)
+                {
+                    int temp = B[i, mini[i]];
+                    B[i, mini[i]] = B[i, 0];
+                    B[i, 0] = temp;
+                }
+
+            }
+
+            // Отображение матрицы с перемещенными минимальными элементами
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    Console.Write(B[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.1.21"
+            int[,] a = new int[5, 7];
+
+            Random random = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    a[i, j] = random.Next(1, 100); // Пример случайного числа от 1 до 100
+                }
+            }
+
+            // Заполнение предпоследнего столбца матрицы максимальными элементами строк
+
+            for (int i = 0; i < 5; i++)
+            {
+                int maxa = -1000;
+                for (int j = 0; j < 6; j++)
+                {
+                    if (a[i, j] > maxa)
+                    {
+                        maxa = a[i, j];
+                    }
+                }
+                a[i, 5] = maxa;
+            }
+
+            // Вывод матрицы на консоль для проверки результатов
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(a[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.1.25"
+            nt[,] a =
+{           { 1, 2, -3, 4, 5 },
+            { 8, -9, -10, 11, 12},
+            { -15, -16, -17, -18, -19},
+            { 22, 23, -24, 25, 26},
+            { 29, -30, -31, -32, 33},
+            { 57,58,59,-60,-61}
+};
+
+            // Поиск строк с минимальным и максимальным количеством отрицательных элементов
+            int mini = 0;
+            int maxj = 0;
+            int minCount = 0;
+            int maxCount = 0;
+
+            for (int i = 0; i < 6; i++)
+            {
+                int C = 0;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (a[i, j] < 0)
+                    {
+                        C++;
+                    }
+                }
+                if (C < minCount)
+                {
+                    mini = i;
+                    minCount = C;
+                }
+                if (C > maxCount)
+                {
+                    maxj = i;
+                    maxCount = C;
+                }
+            }
+
+            // Обмен местами строк с минимальным и максимальным количеством отрицательных элементов
+            for (int col = 0; col < 5; col++)
+            {
+                int temp = a[mini, col];
+                a[mini, col] = a[maxj, col];
+                a[maxj, col] = temp;
+            }
+
+            // Вывод 
+            for (int row = 0; row < 6; row++)
+            {
+                for (int col = 0; col < 5; col++)
+                {
+                    Console.Write(a[row, col] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.1.29"
+            int[,] a = {            
+            { 8, 2, 1, 4, 5, 6, 7 },
+            { 10, 9, 1, 11, 12, 13, 14 },
+            { 55, 16, 1, 18, 19, 20, 21 },
+            { 57, 23, 1, 25, 26, 27, 28 },
+            { 93, 30, 1, 32, 33, 34, 35 }};
+
+            int minj = 0;
+            int mina = 10000;
+
+            for (int j = 0; j < 7; j++)
+            {
+                int absValue = Math.Abs(a[1, j]);
+                if (absValue < mina)
+                {
+                    minj = j;
+                    mina = absValue;
+                }
+            }
+
+            // Удаление столбца после найденного столбца
+            int[,] newa = new int[5, 6];
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < minj; j++)
+                {
+                    newa[i, j] = a[i, j];
+                }
+                for (int j = minj + 1; j < 7; j++)
+                {
+                    newa[i, j - 1] = a[i, j];
+                }
+            }
+
+            // Вывод новой матрицы на консоль для проверки результатов
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    Console.Write(newa[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.1.33"
+            int[,] matrixA = {
+            { 8, -2, 3, 4, 5, 6, 7 },
+            { 10, 9, 7, 11, -12, 13, 14 },
+            { 55, 16, -17, 18, 19, -20, 21 },
+            { 57, -23, 24, 25, 26, -27, 28 },
+            { 93, 30, 31, 32, 33, 34, 35 } };
+            int ce = 0;
+
+            // Подсчет количества отрицательных элементов
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (matrixA[i, j] < 0)
+                    {
+                        ce++;
+                    }
+                }
+            }
+
+            int[] na = new int[ce]; // Создание одномерного массива нужного размера
+
+            int index = 0;
+
+            // одномерный массив пополнение 
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    if (matrixA[i, j] < 0)
+                    {
+                        na[index] = matrixA[i, j];
+                        index++;
+                    }
+                }
+            }
+            Console.WriteLine("Отрицательные элементы матрицы A:");
+            foreach (int elem in na)
+            {
+                Console.WriteLine(elem);
+            }
+            #endregion
+            #region "4.2.1"
+            int[,] a = new int[5, 7]{
+             { 1, 2, 3, 4, 5, 6, 7 },
+             { 8, 9, 10, 11, 12, 13, 14 },
+             { 15, 16, 17, 18, 19, 20, 21 },
+             { 22, 23, 24, 25, 26, 27, 28 },
+             { 29, 30, 31, 32, 33, 34, 35 }};
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                int maxi = 0;
+                int maxa = a[i, 0];
+
+
+                for (int j = 1; j < 7; j++)
+                {
+                    if (a[i, j] > maxa)
+                    {
+                        maxi = j;
+                        maxa = a[i, j];
+                    }
+                }
+
+                if (maxi > 0 && maxi < 6)
+                {
+                    // Сравниваем элементы, расположенные перед и после максимального элемента
+                    if (a[i, maxi - 1] < a[i, maxi + 1])
+                    {
+                        a[i, maxi - 1] *= 2;
+                    }
+                    else
+                    {
+                        a[i, maxi + 1] *= 2;
+                    }
+                }
+
+                else if (maxi == 0)
+                {
+                    a[i, maxi + 1] *= 2;
+                }
+
+                else if (maxi == 6)
+                {
+                    a[i, maxi - 1] *= 2;
+                }
+            }
+
+            // Вывод измененной матрицы на экран
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(a[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.2.5"
+            int[,] a = {
+            { 1, 2, 3, 4, 5 },
+            { 6, 7, 8, 9, 10 },
+            { 11, 12, 13, 14, 15 },
+            { 16, 17, 18, 19, 20 },
+            { 21, 22, 23, 24, 25 },
+            { 26, 27, 28, 29, 30 },
+            { 31, 32, 33, 34, 35 }};
+
+            int k = a.GetLength(0);
+            int c = a.GetLength(1);
+
+
+            for (int j = 0; j < c; j++)
+            {
+                int maxa = a[0, j];
+
+                // Находим максимальный элемент в столбце
+                for (int i = 1; i < k; i++)
+                {
+                    if (a[i, j] > maxa)
+                    {
+                        maxa = a[i, j];
+                    }
+                }
+
+                int hs = (a[0, j] + a[k - 1, j]) / 2;
+
+                // Заменяем максимальный элемент в столбце
+                if (maxa < hs)
+                {
+                    a[0, j] = a[k - 1, j] = hs;
+                }
+                else
+                {
+                    a[0, j] = a[k - 1, j] = j;
+                }
+            }
+
+            //  матрица
+            for (int i = 0; i < k; i++)
+            {
+                for (int j = 0; j < c; j++)
+                {
+                    Console.Write(a[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.2.9"
+            int[,] mat = {
+            { 1, 2, 3, 4, 5,7,9 },
+            { 6, 7, 8, 9, 10,9,3 },
+            { 11, 12, 13, 14, 15,4,5 },
+            { 16, 17, 18, 19, 20,7,5 },
+            { 21, 22, 23, 24, 25,7,8 },
+            { 26, 27, 28, 29, 30,9,7 },};
+
+            for (int i = 0; i < 6; i++)
+            {
+                int start = 0;
+                int end = 6;
+
+                while (start < end)
+                {
+                    // Обмен значений элементов строки
+                    int temp = mat[i, start];
+                    mat[i, start] = mat[i, end];
+                    mat[i, end] = temp;
+
+                    start++;
+                    end--;
+                }
+            }
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(mat[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            #endregion
+            #region "4.3.8"
+            int n = 7;
+            int m = 5;
+            int[,] a = new int[n, m];
+            Random bin = new Random();
+            for(int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < m; j++) a[i, j] = bin.Next(-10, 10);
+            }
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                int indexmax = 0;
+                int maxCounter = 0;
+                for (int j = i; j < n; j++)
+                {
+                    int tempCounter = 0;
+                    for (int k = 0; k < m; k++) //cчитаем количество положительных элементов
+                    {
+                        if (a[j, k] > 0)
+                            tempCounter++;
+                    }
+                    if (maxCounter < tempCounter)
+                    {
+                        maxCounter = tempCounter;
+                        indexmax = j;
+                    }
+                }
+                int[] tempLine = new int[m];
+                for (int j = 0; j < m; j++)
+                {
+                    tempLine[j] = a[i, j];
+                    a[i, j] = a[indexmax, j];
+                    a[indexmax, j] = tempLine[j];
+                }
+            }
+            #endregion
         }
     }
 }
