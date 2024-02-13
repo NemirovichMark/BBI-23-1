@@ -44,9 +44,3 @@ class Program
         Car.PrintCounter();
         Console.ReadKey(); // для ожидания нажатия кнопки для закрытия консоли
     }
-
-    void CalculateCost(Car car)
-    {
-        car.Print();
-    }
-}
