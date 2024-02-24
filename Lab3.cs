@@ -6,7 +6,7 @@ namespace project
         static void Main()
         {
             #region 1_1
-            Console.WriteLine("1_1:");
+            Console.WriteLine("1_111:");
             double s = 0;
             double[] arr = new double[6];
             Console.WriteLine("Введите 6 элементов массива:");
