@@ -1,76 +1,59 @@
-//using System;
+/*class WomenRunner
+{
+    private string surname;
+    private string group;
+    private string surnameTeacher;
+    private double rez;
+    public string standart;
 
-//struct WomenRunners
-//{
-//    private string surname;
-//    private string group;
-//    private string surnameTeacher;
-//    private double rez;
-//    public string standart;
+    public string Surname => surname;
+    public string Group => group;
+    public string SurnameTeacher => surnameTeacher;
+    public double Rez => rez;
+    public WomenRunner(string surname, string surnameTeacher, string group, double rez, string standart)
+    {
+        this.surname = surname;
+        this.surnameTeacher = surnameTeacher;
+        this.group = group;
+        this.rez = rez;
+    }
 
-//    public string Surname => surname;
-//    public string Group => group;
-//    public string SurnameTeacher => surnameTeacher;
-//    public double Rez => rez;
-//    public string Standart => standart;
+    public void PrintInfo()
+    {
+        Console.WriteLine("Фамилия: {0} \t Группа: {1} \t Тренер: {2} \t Результат: {3} \t Норматив (1.5 секунды): {4}",
+            Surname, Group, SurnameTeacher, Rez, standart);
+    }
+}
 
-//    public WomenRunners(string surname, string surnameTeacher, string group, double rez, string standart)
-//    {
-//        this.surname = surname;
-//        this.surnameTeacher = surnameTeacher;
-//        this.group = group;
-//        this.rez = rez;
-//        this.standart = standart;
-//    }
+class Program
+{
+    static void Main()
+    {
+        int passedCount = 0;
 
-//}
+        WomenRunner[] womenRunners = new WomenRunner[5];
+        womenRunners[0] = new WomenRunner("Губеева", "Тренеровна", "234", 1.50, "Не сдан");
+        womenRunners[1] = new WomenRunner("Капелина", "Гасанов", "666", 1.55, "Не сдан");
+        womenRunners[2] = new WomenRunner("Попова", "Кужель", "777", 1.47, "Не сдан");
+        womenRunners[3] = new WomenRunner("Орлова", "Лушина", "889", 1.46, "Не сдан");
+        womenRunners[4] = new WomenRunner("Коцарь", "Пушина", "995", 1.54, "Не сдан");
 
-//class Program1
-//{
-//    static void Main()
-//    {
-//        int c = 0;
-//        WomenRunners[] wr = new WomenRunners[5];
-//        wr[0] = new WomenRunners("Губеева", "Тренеровна ", "234", 1.50, "Не сдан");
-//        wr[1] = new WomenRunners("Капелина","Гасанов", "666", 1.55, "Не сдан");
-//        wr[2] = new WomenRunners("Попова", "Кужель", "777", 1.47, "Не сдан");
-//        wr[3] = new WomenRunners("Орлова", "Лушина", "889", 1.46, "Не сдан");
-//        wr[4] = new WomenRunners("Коцарь", "Пушина", "995", 1.54, "Не сдан");
+        Array.Sort(womenRunners, (x, y) => y.Rez.CompareTo(x.Rez));
 
+        for (int i = 0; i < womenRunners.Length; i++)
+        {
+            var runner = womenRunners[i];
+            if (runner.Rez <= 1.5)
+            {
+                passedCount++;
+                runner.standart = "Сдан";
+            }
+            runner.PrintInfo();
+        }
 
-//        for (int i = 0; i < wr.Length - 1; i++)
-//        {
-//            double amax = wr[i].Rez;
-//            int imax = i;
-//            for (int j = i + 1; j < wr.Length; j++)
-//            {
-//                if (wr[j].Rez > amax)
-//                {
-//                    amax = wr[j].Rez;
-//                    imax = j;
-//                }
-//            }
-//            WomenRunners temp;
-//            temp = wr[imax];
-//            wr[imax] = wr[i];
-//            wr[i] = temp;
-//        }
-//        for (int i = 0; i < wr.Length; i++)
-//        {
-//            if (wr[i].Rez <= 1.5)
-//            {
-//                wr[i].standart = "Сдан";
-//                c++;
-//            }
-//        }
-//        Console.WriteLine();
-//        for (int i = 0; i < wr.Length; i++)
-//        {
-//            Console.WriteLine("Фамилия: {0} \t Группа: {1} \t Тренер: {2} \t Результат: {3} \t Норматив (1.5 секунды): {4}", wr[i].Surname, wr[i].Group, wr[i].SurnameTeacher, wr[i].Rez, wr[i].standart);
-//        }
-//        Console.WriteLine("Человек сдало норматив: " + c);
-//    }
-//}
+        Console.WriteLine("Человек сдало норматив: " + passedCount);
+    }
+}*/
 
 
 
@@ -79,31 +62,33 @@
 
 
 /*using System;
+struct People
+{
+    private string surname;
+    private string name;
+    private int time;
+
+    public string Surname => surname;
+    public string Name => name;
+    public int Time => time;
+
+    public People(string surname, string name, int time)
+    {
+        this.surname = surname;
+        this.name = name;
+        this.time = time;
+    }
+
+    public void PrintInfo()
+    {
+        Console.WriteLine("Фамилия: {0} \t Имя: {1} \t Время: {2}", Surname, Name, Time);
+    }
+}
 
 class Program
 {
-    struct People
-    {
-        private string surname;
-        private string name;
-        private int time;
-
-        public string Surname => surname;
-        public string Name => name;
-
-        public int Time => time;
-
-        public People(string surname, string name, int time)
-        {
-
-            this.surname = surname;
-            this.name = name;
-            this.time = time;
-        }
-    }
     static void Main()
     {
-        int c = 0;
         People[] set = new People[30];
         set[0] = new People("Акинов", "Ваня", 2);
         set[1] = new People("Кольцов", "Даня", 5);
@@ -138,18 +123,16 @@ class Program
 
         Array.Sort(set, (x, y) => x.Time.CompareTo(y.Time));
 
-        for (int i = 0; i < set.Length; i++)
+        foreach (var person in set)
         {
-            if (set[i].Time < 10)
-
-
+            if (person.Time < 10)
             {
-                Console.WriteLine("Фамилия: {0} \t  Имя: {1} \t Время: {2}", set[i].Surname, set[i].Name, set[i].Time);
+                person.PrintInfo();
             }
         }
     }
-
 }*/
+
 
 
 //проведения первого этапа участники разбиваются на две группы по 12 команд.
