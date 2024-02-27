@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 struct Student
 {
@@ -42,7 +42,20 @@ class Program
             new Student("Ivan", 0, 20)
         };
 
-        Array.Sort(students, (x, y) => y.Miss.CompareTo(x.Miss));
+        int index = 0;
+        while (index < students.Length)
+        {
+            if (index == 0 || students[index - 1].Miss >= students[index].Miss)
+            {
+                index++;
+            }
+            else
+            {
+                (students[index - 1], students[index]) = (students[index], students[index - 1]);
+                index--;
+            }
+        }
+
 
         foreach (var student in students)
         {
