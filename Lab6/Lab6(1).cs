@@ -43,18 +43,26 @@ class Program
         };
 
         int index = 0;
-        while (index < students.Length)
+        int nextIndex = 1;
+        while (index < students.Length && nextIndex < students.Length)
         {
-            if (index == 0 || students[index - 1].Miss >= students[index].Miss)
+            if (index < 0)
             {
-                index++;
+                index = nextIndex;
+                nextIndex++;
+            }
+            if (students[index].Miss >= students[nextIndex].Miss)
+            {
+                index = nextIndex;
+                nextIndex++;
             }
             else
             {
-                (students[index - 1], students[index]) = (students[index], students[index - 1]);
+                (students[index], students[nextIndex]) = (students[nextIndex], students[index]);
                 index--;
             }
         }
+
 
 
         foreach (var student in students)
