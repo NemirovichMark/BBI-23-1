@@ -1,422 +1,325 @@
-﻿//3
+﻿# region 1_4
 //using System;
-//class Program
+//using System.Collections.Generic;
+//using System.Text;
+
+//public class Program
 //{
-//    static void Main()
+//    struct Ychastnik
 //    {
-//        int[,] matrixB = new int[5, 5]
+//        private string name;
+//        private int id;
+//        private int _bestres;
+
+//        public int Result { get { return _bestres; } }
+
+//        public Ychastnik(string name, int i, int bestres)
 //        {
-//            {1, 2, 3, 4, 5},
-//            {6, 7, 8, 9, 10},
-//            {11, 12, 13, 14, 15},
-//            {16, 17, 18, 19, 20},
-//            {21, 22, 23, 24, 25}
-//        };
+//            this.name = name;
+//            id = i;
+//            _bestres = bestres;
+//        }
 
-//        int[,] matrixC = new int[6, 6]
+//        public int ressec
 //        {
-//            {1, 2, 3, 4, 5, 6},
-//            {7, 8, 9, 10, 11, 12},
-//            {13, 14, 15, 16, 17, 18},
-//            {19, 20, 21, 22, 23, 24},
-//            {25, 26, 27, 28, 29, 30},
-//            {31, 32, 33, 34, 35, 36}
-//        };
+//            get { return _bestres; }
+//            set
+//            {
+//                if (value > _bestres) _bestres = value;
+//            }
+//        }
 
-//        DeleteRowWithMaxDiagonalElement(matrixB);
-//        DeleteRowWithMaxDiagonalElement(matrixC);
+//        public void Info()
+//        {
+//            Console.WriteLine($"результат: {_bestres} имя участника: {name} ");
+//        }
 
-//        Console.WriteLine("Матрица B после удаления строки с максимальным элементом на диагонали:");
-//        PrintMatrix(matrixB);
-
-//        Console.WriteLine("Матрица C после удаления строки с максимальным элементом на диагонали:");
-//        PrintMatrix(matrixC);
 //    }
 
-//    static void DeleteRowWithMaxDiagonalElement(int[,] matrix)
+//    static Ychastnik[] Sort(Ychastnik[] list)
 //    {
-//        int maxDiagonalElement = FindMaxDiagonalElement(matrix);
-
-//        for (int i = 0; i < matrix.GetLength(0); i++)
+//        for (int i = 0; i < list.Length; i++)
 //        {
-//            if (matrix[i, i] == maxDiagonalElement)
-//            {
-
-//                for (int j = i; j < matrix.GetLength(0) - 1; j++)
+//            for (int j = i; j < list.Length; j++)
+//                if (list[i].Result < list[j].Result)
 //                {
-//                    for (int k = 0; k < matrix.GetLength(1); k++)
-//                    {
-//                        matrix[j, k] = matrix[j + 1, k];
-//                    }
+//                    Ychastnik person_now = list[j];
+//                    list[j] = list[i]; 
+//                    list[i] = person_now; 
 //                }
-
-//                break;
-//            }
 //        }
-//    }
-
-//    static int FindMaxDiagonalElement(int[,] matrix)
-//    {
-//        int maxElement = matrix[0, 0];
-
-//        for (int i = 1; i < matrix.GetLength(0); i++)
-//        {
-//            if (matrix[i, i] > maxElement)
-//            {
-//                maxElement = matrix[i, i];
-//            }
-//        }
-
-//        return maxElement;
-//    }
-
-//    static void PrintMatrix(int[,] matrix)
-//    {
-//        for (int i = 0; i < matrix.GetLength(0); i++)
-//        {
-//            for (int j = 0; j < matrix.GetLength(1); j++)
-//            {
-//                Console.Write(matrix[i, j] + "\t");
-//            }
-//            Console.WriteLine();
-//        }
-//        Console.WriteLine();
-//        Console.ReadLine();
-//    }
-
-//}
-
-//9
-//using System;
-
-//class Program
-//{
-//    static void Main()
-//    {
-//        int[,] matrixA = new int[6, 5] {
-//            {-2, 1, -3, 4, 5},
-//            {6, -7, 8, -9, 10},
-//            {-11, 12, -13, 14, -15},
-//            {16, 17, -18, 19, -20},
-//            {-21, 22, -23, 24, -25},
-//            {26, -27, 28, -29, 30}
-//        };
-
-//        int[,] matrixC = new int[7, 4] {
-//            {-1, 2, -3, 4},
-//            {5, -6, 7, -8},
-//            {-9, 10, -11, 12},
-//            {13, -14, 15, -16},
-//            {-17, 18, -19, 20},
-//            {21, -22, 23, -24},
-//            {-25, 26, -27, 28}
-//        };
-
-//        int[] obmas = MergeArrays(matrixA, matrixC);
-
-//        Console.WriteLine("Объединенный массив:");
-//        PrintArray(obmas);
-//    }
-
-//    static int[] MergeArrays(int[,] matrixA, int[,] matrixC)
-//    {
-//        int stA = matrixA.GetLength(1);
-//        int stC = matrixC.GetLength(1);
-//        int[] obmas = new int[stA + stC];
-
-//        int obmasIndex = 0;
-
-
-//        for (int j = 0; j < stA; j++)
-//        {
-//            int stSum = 0;
-//            for (int i = 0; i < matrixA.GetLength(0); i++)
-//            {
-//                if (matrixA[i, j] > 0)
-//                {
-//                    stSum += matrixA[i, j];
-//                }
-//            }
-//            obmas[obmasIndex] = stSum;
-//            obmasIndex++;
-//        }
-
-
-//        for (int j = 0; j < stC; j++)
-//        {
-//            int stSum = 0;
-//            for (int i = 0; i < matrixC.GetLength(0); i++)
-//            {
-//                if (matrixC[i, j] > 0)
-//                {
-//                    stSum += matrixC[i, j];
-//                }
-//            }
-//            obmas[obmasIndex] = stSum;
-//            obmasIndex++;
-//        }
-
-//        return obmas;
-//    }
-
-//    static void PrintArray(int[] mass)
-//    {
-//        for (int i = 0; i < mass.Length; i++)
-//        {
-//            Console.Write(mass[i] + " ");
-//        }
-//        Console.WriteLine();
-//        Console.ReadLine();
-//    }
-//}
-
-//15
-//using System;
-
-//class Program
-//{
-//    static void Main()
-//    {
-
-//        int[,] matrix1 = {
-//            {10, 5, 7},
-//            {6, 12, 9},
-//            {3, 8, 15}
-//        };
-
-//        int[,] matrix2 = {
-//            {4, 1, 9},
-//            {2, 7, 11},
-//            {13, 6, 5}
-//        };
-
-//        int[,] matrix3 = {
-//            {8, 3, 11},
-//            {15, 2, 6},
-//            {4, 9, 7}
-//        };
-
-
-//        double[] mass = {
-//            CalculateAverage(matrix1),
-//            CalculateAverage(matrix2),
-//            CalculateAverage(matrix3)
-//        };
-
-
-//        bool vozr = CheckSequence(mass, true);
-//        bool ybv = CheckSequence(mass, false);
-
-//        Console.WriteLine("Средние значения элементов матриц:");
-//        for (int i = 0; i < mass.Length; i++)
-//        {
-//            Console.WriteLine($"Матрица {i + 1}: {mass[i]}");
-//        }
-
-//        if (vozr)
-//            Console.WriteLine("значения образуют возрастающую последовательность");
-//        else if (ybv)
-//            Console.WriteLine("значения образуют убывающую последовательность ");
-//        else
-//            Console.WriteLine("значения не образуют убывающую или возрастающую последовательность");
-//        Console.ReadLine();
+//        return list;
 //    }
 
 
-//    static double CalculateAverage(int[,] matrix)
+//    public static void Main(string[] args)
 //    {
-//        int strok = matrix.GetLength(0);
-//        int stolb = matrix.GetLength(1);
-
-//        int sum = 0;
-//        int count = 0;
-//        int max = int.MinValue;
-//        int min = int.MaxValue;
-
-
-//        foreach (int value in matrix)
-//        {
-//            sum += value;
-//            count++;
-
-//            if (value > max)
-//                max = value;
-
-//            if (value < min)
-//                min = value;
-//        }
-
-
-//        sum = sum - min - max;
-//        count = count - 2;
-
-
-//        return (double)sum / count;
-//    }
-
-
-//    static bool CheckSequence(double[] values, bool vozr)
-//    {
-//        for (int i = 1; i < values.Length; i++)
-//        {
-//            if (vozr)
-//            {
-//                if (values[i] <= values[i - 1])
-//                    return false;
-//            }
-//            else
-//            {
-//                if (values[i] >= values[i - 1])
-//                    return false;
-//            }
-//        }
-
-//        return true;
-//    }
-//}
-
-//номер 21
-//using System;
-
-//class Program
-//{
-//    static void Main()
-//    {
-
-//        int[,] matrix1 = {
-//            { 1, 2, 3 },
-//            { 4, 5, 6 },
-//            { 7, 8, 9 }
-//        };
-
-//        int[,] matrix2 = {
-//            { 9, 8, 7 },
-//            { 6, 5, 4 },
-//            { 3, 2, 1 }
-//        };
-
-
-//        int[] mass1 = GetMinimumsToRightOfDiagonal(matrix1);
-//        int[] mass2 = GetMinimumsToRightOfDiagonal(matrix2);
-
-
-//        Console.WriteLine("Массив 1:");
-//        PrintArray(mass1);
-
-//        Console.WriteLine("Массив 2:");
-//        PrintArray(mass2);
-//    }
-
-//    static int[] GetMinimumsToRightOfDiagonal(int[,] matrix)
-//    {
-//        int n = matrix.GetLength(0); 
-//        int[] mass = new int[n]; 
-
+//        int n = int.Parse(Console.ReadLine());
+//        Ychastnik[] peoplelist = new Ychastnik[n];
 
 //        for (int i = 0; i < n; i++)
 //        {
-//            int min = matrix[i, i]; 
-//            for (int j = i + 1; j < n; j++)
-//            {
-//                int a = matrix[i, j];
-//                if (a < min)
-//                {
-//                    min = a;
-//                }
-//            }
-//            mass[i] = min;
+//            string name_people = Console.ReadLine();
+//            int firstres = int.Parse(Console.ReadLine());
+//            int secondres = int.Parse(Console.ReadLine());
+
+//            Ychastnik Person = new Ychastnik(name_people, i + 1, firstres);
+//            Person.ressec = secondres;
+
+//            peoplelist[i] = Person;
 //        }
 
-//        return mass;
-//    }
+//        peoplelist = Sort(peoplelist);
 
-//    static void PrintArray(int[] mass)
-//    {
-//        for (int i = 0; i < mass.Length; i++)
+//        for (int i = 0; i < n; i++)
 //        {
-//            Console.Write(mass[i] + " ");
+//            Console.Write($"{i + 1} занятое место:"); ;
+//            peoplelist[i].Info();
+//            Console.WriteLine();
 //        }
 //        Console.WriteLine();
 //        Console.ReadLine();
 //    }
 //}
+#endregion
 
-//номер 27
+# region 2_4
 //using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-//class Program
+//struct Sportsman
 //{
-//    static void Main()
+//    private string name;
+//    private double jump1;
+//    private double jump2;
+//    private double jump3;
+//    private double jump4;
+
+//    public Sportsman(string name, double one, double two, double three, double four)
 //    {
-//        int[,] matrix1 = {
-//            { 1, 2, 3 },
-//            { 4, 5, 6 },
-//            { 7, 8, 9 }
-//        };
-
-//        int[,] matrix2 = {
-//            { 9, 8, 7 },
-//            { 6, 5, 4 },
-//            { 3, 2, 1 }
-//        };
-
-//        ReplaceMaxElements(matrix1);
-//        ReplaceMaxElements(matrix2);
-
-//        Console.WriteLine("Матрица 1 после замены:");
-//        PrintMatrix(matrix1);
-
-//        Console.WriteLine("Матрица 2 после замены:");
-//        PrintMatrix(matrix2);
+//        this.name = name;
+//        jump1 = one;
+//        jump2 = two;
+//        jump3 = three;
+//        jump4 = four;
 //    }
 
-//    static void ReplaceMaxElements(int[,] matrix)
+
+//    public double endresult()
 //    {
-//        int strok = matrix.GetLength(0); 
-//        int stolb = matrix.GetLength(1); 
-
-
-//        for (int i = 1; i < strok; i += 2)
-//        {
-//            int max = matrix[i, 0];
-//            int stolbIndex = 0; 
-
-//            for (int j = 1; j < stolb; j++)
-//            {
-//                if (matrix[i, j] > max)
-//                {
-//                    max = matrix[i, j];
-//                    stolbIndex = j;
-//                }
-//            }
-
-//            matrix[i, stolbIndex] = 0;
-//        }
-
-//        for (int i = 0; i < strok; i += 2)
-//        {
-//            for (int j = 0; j < stolb; j++)
-//            {
-//                matrix[i, j] *= j + 1;
-//            }
-//        }
+//        return jump1 + jump2 + jump3 + jump4;
 //    }
 
-//    static void PrintMatrix(int[,] matrix)
+//    public void Info()
 //    {
-//        int strok = matrix.GetLength(0); 
-//        int stolb = matrix.GetLength(1); 
-
-//        for (int i = 0; i < strok; i++)
-//        {
-//            for (int j = 0; j < stolb; j++)
-//            {
-//                Console.Write(matrix[i, j] + " ");
-//            }
-//            Console.WriteLine();
-
-//        }
-//    Console.ReadLine();
+//        Console.WriteLine($"результат: {jump1 + jump2 + jump3 + jump4} имя: {name} ");
 //    }
 //}
+
+//public class Program
+//{
+
+//    public static int[] SortedGolosa(int[] list, int n)
+//    {
+//        for (int i = 1; i < n; i++)
+//        {
+//            for (int j = 0; j < n - i; j++)
+//            {
+//                if (list[j + 1] > list[j])
+//                {
+//                    int now = list[j];
+//                    list[j] = list[j + 1];
+//                    list[j + 1] = now;
+//                }
+//            }
+//        }
+//        return list;
+//    }
+
+//    static Sportsman[] Sort(Sportsman[] list)
+//    {
+//        for (int i = 0; i < list.Length; i++)
+//        {
+//            for (int j = i; j < list.Length; j++)
+//                if (list[i].endresult() < list[j].endresult())
+//                {
+//                    Sportsman pers = list[j]; 
+//                    list[j] = list[i]; 
+//                    list[i] = pers; 
+//                }
+//        }
+//        return list;
+//    }
+
+
+//    public static void Main(string[] args)
+//    {
+//        int n = int.Parse(Console.ReadLine());
+//        Sportsman[] peoplelist = new Sportsman[n];
+
+//        for (int i = 0; i < n; i++)
+//        {
+//            string name_people = Console.ReadLine();
+//            double[] resjumps = new double[4];
+//            for (int j = 0; j < 4; j++) 
+//            {
+//                double koef = double.Parse(Console.ReadLine()); 
+//                int[] golosa = new int[7]; 
+//                for (int s = 0; s < 7; s++)
+//                {
+//                    int golos = int.Parse(Console.ReadLine());
+//                    golosa[s] = golos;
+//                }
+
+//                golosa = SortedGolosa(golosa, 7); 
+//                int sum_golos = 0;
+//                for (int k = 1; k < 6; k++)
+//                {
+//                    sum_golos += golosa[k];
+//                }
+
+//                resjumps[j] = sum_golos * koef; 
+//            }
+
+//            Sportsman pers = new Sportsman(name_people, resjumps[0], resjumps[1], resjumps[2], resjumps[3]);
+//            peoplelist[i] = pers;
+//        }
+
+//        peoplelist = Sort(peoplelist);
+
+//        for (int i = 0; i < n; i++)
+//        {
+//            Console.Write($"{i + 1} место:"); ;
+//            peoplelist[i].Info();
+//            Console.WriteLine();
+//        }
+//        Console.WriteLine();
+//        Console.ReadLine();
+//    }
+//}
+#endregion
+
+#region 3_4
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+public class Program
+{
+    struct Ychastnik
+    {
+        private string name;
+        private int result;
+
+        public int Result { get { return result; } }
+
+        public Ychastnik(string name, int res)
+        {
+            this.name = name;
+            result = res;
+        }
+
+        public void Info()
+        {
+            Console.WriteLine($"результат: {result} имя: {name} ");
+        }
+
+    }
+
+    static Ychastnik[] Sort(Ychastnik[] list)
+    {
+        for (int i = 0; i < list.Length; i++)
+        {
+            for (int j = i; j < list.Length; j++)
+                if (list[i].Result < list[j].Result)
+                {
+                    Ychastnik person_now = list[j]; 
+                    list[j] = list[i]; 
+                    list[i] = person_now;
+                }
+        }
+        return list;
+    }
+
+
+    public static void Main(string[] args)
+    {
+        int n1 = int.Parse(Console.ReadLine());
+        int n2 = int.Parse(Console.ReadLine());
+        Ychastnik[] onegr = new Ychastnik[n1];
+        Ychastnik[] twogr = new Ychastnik[n2];
+        Ychastnik[] allgr = new Ychastnik[n2 + n1];
+
+        for (int i = 0; i < n1; i++)
+        {
+            string name_ = Console.ReadLine();
+            int result_ = int.Parse(Console.ReadLine());
+
+            Ychastnik Person = new Ychastnik(name_, result_);
+
+            onegr[i] = Person;
+            allgr[i] = Person;
+        }
+
+        for (int i = 0; i < n2; i++)
+        {
+            string name_ = Console.ReadLine();
+            int result_ = int.Parse(Console.ReadLine());
+
+            Ychastnik Person = new Ychastnik(name_, result_);
+
+            twogr[i] = Person;
+            allgr[i + n1] = Person;
+        }
+
+        onegr = Sort(onegr);
+        twogr = Sort(twogr);
+        allgr = Sort(allgr);
+
+        Console.WriteLine("1 группа:");
+        for (int i = 0; i < n1; i++)
+        {
+            Console.Write($"{i + 1} место:"); ;
+            onegr[i].Info();
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("2 группа:");
+        for (int i = 0; i < n2; i++)
+        {
+            Console.Write($"{i + 1} место:"); ;
+            twogr[i].Info();
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("все участники:");
+        for (int i = 0; i < n1 + n2; i++)
+        {
+            Console.Write($"{i + 1} место:"); ;
+            allgr[i].Info();
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+        Console.ReadLine();
+    }
+}
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
