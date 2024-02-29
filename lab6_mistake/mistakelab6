@@ -1,4 +1,4 @@
-////1 уровень 4 задача
+////1 ГіГ°Г®ГўГҐГ­Гј 4 Г§Г Г¤Г Г·Г 
 //using System;
 //struct Participant
 //{
@@ -30,13 +30,13 @@
 //    static void Main(string[] args)
 //    {
 //        Participant [] pt = new Participant[4];
-//        pt[0] = new Participant("Чиченкова", 1.49, 1.52);
-//        pt[1] = new Participant("Виноградов", 1.61, 1.54);
-//        pt[2] = new Participant("Голубин", 1.38, 1.36);
-//        pt[3] = new Participant("Словогородская", 1.53, 1.40);
+//        pt[0] = new Participant("Г—ГЁГ·ГҐГ­ГЄГ®ГўГ ", 1.49, 1.52);
+//        pt[1] = new Participant("Г‚ГЁГ­Г®ГЈГ°Г Г¤Г®Гў", 1.61, 1.54);
+//        pt[2] = new Participant("ГѓГ®Г«ГіГЎГЁГ­", 1.38, 1.36);
+//        pt[3] = new Participant("Г‘Г«Г®ГўГ®ГЈГ®Г°Г®Г¤Г±ГЄГ Гї", 1.53, 1.40);
 //        for (int i = 0; i < pt.Length; i++)
 //        {
-//            Console.WriteLine("Фамилия {0}\t Результат {1:f2}", pt[i].Surname, pt[i].Result);
+//            Console.WriteLine("Г”Г Г¬ГЁГ«ГЁГї {0}\t ГђГҐГ§ГіГ«ГјГІГ ГІ {1:f2}", pt[i].Surname, pt[i].Result);
 //        }
 //        for (int i = 0; i < pt.Length - 1; i++)
 //        {
@@ -58,13 +58,13 @@
 //        Console.WriteLine();
 //        for (int i = 0; i < pt.Length; i++)
 //        {
-//            Console.WriteLine("Фамилия {0}\t  Результат  {1:f2}", pt[i].Surname,pt[i].Result);
+//            Console.WriteLine("Г”Г Г¬ГЁГ«ГЁГї {0}\t  ГђГҐГ§ГіГ«ГјГІГ ГІ  {1:f2}", pt[i].Surname,pt[i].Result);
 //        }
 //    }
 //}
 
 
-// 2 уровень 5 задача
+// 2 ГіГ°Г®ГўГҐГ­Гј 5 Г§Г Г¤Г Г·Г 
 //using System;
 
 //struct Participant
@@ -91,7 +91,7 @@
 
 //    public void PrintInfo()
 //    {
-//        Console.WriteLine($"Итоговый результат: {jump1 + jump2 + jump3 + jump4}  {name} ");
+//        Console.WriteLine($"Г€ГІГ®ГЈГ®ГўГ»Г© Г°ГҐГ§ГіГ«ГјГІГ ГІ: {jump1 + jump2 + jump3 + jump4}  {name} ");
 //    }
 //}
 
@@ -168,7 +168,7 @@
 
 //        for (int i = 0; i < n; i++)
 //        {
-//            Console.Write($"{i + 1} место:"); ;
+//            Console.Write($"{i + 1} Г¬ГҐГ±ГІГ®:"); ;
 //            peoplelist[i].PrintInfo();
 //            Console.WriteLine();
 //        }
@@ -176,7 +176,7 @@
 //    }
 //}
 
-// 3 уровень 5 задача
+// 3 ГіГ°Г®ГўГҐГ­Гј 5 Г§Г Г¤Г Г·Г 
 //using System;
 
 //class Program
@@ -196,10 +196,10 @@
 //    static void Main(string[] args)
 //    {
 //        Team[] teams = {
-//            new Team { team = "Команда 1", score = 2, misses = 1 },
-//            new Team { team = "Команда 2", score = 1, misses = 1 },
-//            new Team { team = "Команда 3", score = 0, misses = 3 },
-//            new Team { team = "Команда 4", score = 3, misses = 0 }
+//            new Team { team = "ГЉГ®Г¬Г Г­Г¤Г  1", score = 2, misses = 1 },
+//            new Team { team = "ГЉГ®Г¬Г Г­Г¤Г  2", score = 1, misses = 1 },
+//            new Team { team = "ГЉГ®Г¬Г Г­Г¤Г  3", score = 0, misses = 3 },
+//            new Team { team = "ГЉГ®Г¬Г Г­Г¤Г  4", score = 3, misses = 0 }
 //        };
 
 //        scores(teams);
@@ -232,8 +232,8 @@
 //    private static void result(Team[] teams)
 //    {
 
-//        Console.WriteLine("Итоговая таблица:");
-//        Console.WriteLine("Место\tКоманда\tОчки");
+//        Console.WriteLine("Г€ГІГ®ГЈГ®ГўГ Гї ГІГ ГЎГ«ГЁГ¶Г :");
+//        Console.WriteLine("ГЊГҐГ±ГІГ®\tГЉГ®Г¬Г Г­Г¤Г \tГЋГ·ГЄГЁ");
 //        for (int i = 0; i < teams.Length; i++)
 //        {
 //            teams[i].Printinfo(i + 1);
