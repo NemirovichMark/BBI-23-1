@@ -1,0 +1,83 @@
+using System;
+
+struct Team
+{
+    public string team;
+    public int Score;
+    public int Misses;
+    public int Points;
+
+    public Team(string name)
+    {
+        team = name;
+        Score = 0;
+        Misses = 0;
+        Points = 0;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Team[] teams = new Team[4];
+        teams[0] = new Team("Команда 1");
+        teams[1] = new Team("Команда 2");
+        teams[2] = new Team("Команда 3");
+        teams[3] = new Team("Команда 4");
+
+        // Результаты матчей
+        UpdateMatchResult(ref teams[0], ref teams[1], 2, 1); // Команда 1 - Команда 2
+        UpdateMatchResult(ref teams[0], ref teams[2], 3, 3); // Команда 1 - Команда 3
+        UpdateMatchResult(ref teams[0], ref teams[3], 2, 0); // Команда 1 - Команда 4
+        UpdateMatchResult(ref teams[1], ref teams[2], 1, 2); // Команда 2 - Команда 3
+        UpdateMatchResult(ref teams[1], ref teams[3], 0, 3); // Команда 2 - Команда 4
+        UpdateMatchResult(ref teams[2], ref teams[3], 3, 1); // Команда 3 - Команда 4
+
+        Array.Sort(teams, CompareTeams);
+
+        Console.WriteLine("Место\tКоманда\t\tОчки");
+        Console.WriteLine("-----------------------------");
+
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine($"{i + 1}\t{teams[i].team}\t\t{teams[i].Points}");
+        }
+    }
+
+    static void UpdateMatchResult(ref Team teamA, ref Team teamB, int ScoreA, int ScoreB)
+    {
+        teamA.Score += ScoreA;
+        teamA.Misses += ScoreB;
+        teamB.Score += ScoreB;
+        teamB.Misses += ScoreA;
+
+        if (ScoreA > ScoreB)
+        {
+            teamA.Points += 3;
+        }
+        else if (ScoreA < ScoreB)
+        {
+            teamB.Points += 3;
+        }
+        else
+        {
+            teamA.Points += 1;
+            teamB.Points += 1;
+        }
+    }
+
+    static int CompareTeams(Team team1, Team team2)
+    {
+        if (team1.Points != team2.Points)
+        {
+            return team2.Points.CompareTo(team1.Points);
+        }
+        else
+        {
+            int difference1 = team1.Score - team1.Misses;
+            int difference2 = team2.Score - team2.Misses;
+            return difference2.CompareTo(difference1);
+        }
+    }
+}
