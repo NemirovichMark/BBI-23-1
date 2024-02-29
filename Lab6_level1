@@ -7,36 +7,34 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
+    struct Sportswoman
+    {
+        const int norma = 110;
+        private string _surname;
+        private int _group;
+        private string _trainerName;
+        public int Sec;
+        public Sportswoman(string surname, int group, string trainerName, int sec)
+        {
+            _surname = surname;
+            _group = group;
+            _trainerName = trainerName;
+            Sec = sec;
+        }
+        public void ShowInfo()
+        {
+            Console.WriteLine($"Фамилия: {_surname}, группа: {_group}, имя тренера: {_trainerName}, резульат: {Sec} секунд, норматив сдан: {Sec<=norma}");
+        }
+    }
+    
     class Program
     {
-        struct Sportswoman
-        {
-            public string Surname;
-            public int Group;
-            public string TrainerName;
-            public int Sec;
-            public Sportswoman(string surname, int group, string trainerName, int sec)
-            {
-                Surname=surname;
-                Group=group;
-                TrainerName=trainerName;
-                Sec=sec;
-            }
-            public void ShowInfo()
-            {
-                Console.WriteLine($"Фамилия: {Surname}, группа: {Group}, имя тренера: {TrainerName}, резульат: {Sec} секунд, норматив сдан: {normaPassed(Sec)}");
-            }
-        }
         const int norma = 110;
-        static bool normaPassed(int sec)
-        {
-            return sec <= norma;
-        }
         static void quickSort(Sportswoman[] table, int left, int right)
         {
             if (left >= right) return;
-            int p = table[(left + right)/ 2].Sec;
-            int i= left;
+            int p = table[(left + right) / 2].Sec;
+            int i = left;
             int j = right;
             while (i <= j)
             {
@@ -58,13 +56,13 @@ namespace Lab6
         {
             Console.WriteLine($"Таблица результатов кросса на 500 м среди девушек, норматив - {norma} секунд");
             int count = 0;
-            Sportswoman[] table = new Sportswoman[5] {new Sportswoman("Кукушкина", 1, "Овечкин", 111), new Sportswoman("Соловьёва", 1, "Зверев", 107), new Sportswoman("Воробьёва", 2, "Козлов", 112), new Sportswoman("Синицына", 2, "Зайцев", 109), new Sportswoman("Орлова", 1, "Волков", 110)};
+            Sportswoman[] table = new Sportswoman[5] { new Sportswoman("Кукушкина", 1, "Овечкин", 111), new Sportswoman("Соловьёва", 1, "Зверев", 107), new Sportswoman("Воробьёва", 2, "Козлов", 112), new Sportswoman("Синицына", 2, "Зайцев", 109), new Sportswoman("Орлова", 1, "Волков", 110) };
             quickSort(table, 0, table.Length - 1);
-            for (int i = 0; i<table.Length; i++)
+            for (int i = 0; i < table.Length; i++)
             {
                 table[i].ShowInfo();
 
-                if (normaPassed(table[i].Sec)) count++;
+                if (table[i].Sec<=norma) count++;
             }
             Console.WriteLine($"Количество спортсменок, сдавших норматив: {count}");
             Console.ReadKey();
