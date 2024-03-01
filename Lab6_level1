@@ -15,7 +15,7 @@ namespace Lab6
         private string _trainerName;
         private int _sec;
         public int Sec { get { return _sec; } set {
-                if (_sec > 0)
+                if (value > 0)
                     _sec = value;
             } }
         public Sportswoman(string surname, int group, string trainerName, int sec)
