@@ -13,20 +13,24 @@ namespace Lab6
         private string _surname;
         private int _group;
         private string _trainerName;
-        public int Sec;
+        private int _sec;
+        public int Sec { get { return _sec; } set {
+                if (_sec > 0)
+                    _sec = value;
+            } }
         public Sportswoman(string surname, int group, string trainerName, int sec)
         {
             _surname = surname;
             _group = group;
             _trainerName = trainerName;
-            Sec = sec;
+            _sec = sec;
         }
         public void ShowInfo()
         {
-            Console.WriteLine($"Фамилия: {_surname}, группа: {_group}, имя тренера: {_trainerName}, резульат: {Sec} секунд, норматив сдан: {Sec<=norma}");
+            Console.WriteLine($"Фамилия: {_surname}, группа: {_group}, имя тренера: {_trainerName}, резульат: {_sec} секунд, норматив сдан: {_sec <= norma}");
         }
     }
-    
+
     class Program
     {
         const int norma = 110;
@@ -62,7 +66,7 @@ namespace Lab6
             {
                 table[i].ShowInfo();
 
-                if (table[i].Sec<=norma) count++;
+                if (table[i].Sec <= norma) count++;
             }
             Console.WriteLine($"Количество спортсменок, сдавших норматив: {count}");
             Console.ReadKey();
