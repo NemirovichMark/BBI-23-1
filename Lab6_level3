@@ -61,7 +61,7 @@ namespace Lab6
         {
             _point += n;
         }
-        public void Up(int score1, int score2)
+        public Team Up(int score1, int score2)
         {
             _goalsWon += score1;
             _goalsLost += score2;
@@ -73,6 +73,7 @@ namespace Lab6
             {
                 PlusN(1);
             }
+            return this;
         }
     }
     class Program
@@ -126,7 +127,7 @@ namespace Lab6
                     //Console.WriteLine("!!!");
                     //Console.WriteLine(teams[i].GoalsWon);
                     ok = true;
-                    teams[i].Up(score1, score2);
+                    teams[i]=teams[i].Up(score1, score2);
                     //Console.WriteLine(teams[i].GoalsWon);
                     break;
                 }
