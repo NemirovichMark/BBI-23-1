@@ -1,0 +1,84 @@
+using System;
+
+struct Team
+{
+    private string _name;
+    private int _goalsFor;
+    private int _goalsAgainst;
+    private int _points;
+
+    public Team(string name)
+    {
+        _name = name;
+        _goalsFor = 0;
+        _goalsAgainst = 0;
+        _points = 0;
+    }
+
+    public void AddResult(int goalsFor, int goalsAgainst)
+    {
+        _goalsFor += goalsFor;
+        _goalsAgainst += goalsAgainst;
+        if (goalsFor > goalsAgainst)
+        {
+            _points += 3; // выигрыш
+        }
+        else if (goalsFor == goalsAgainst)
+        {
+            _points += 1; // ничья
+        }
+        // для проигрыша очки остаются равными 0
+    }
+
+    public string Name { get { return _name; } }
+    public int GoalsFor { get { return _goalsFor; } }
+    public int GoalsAgainst { get { return _goalsAgainst; } }
+    public int Points { get { return _points; } }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Team[] teams = new Team[4];
+        teams[0] = new Team("Команда 1");
+        teams[1] = new Team("Команда 2");
+        teams[2] = new Team("Команда 3");
+        teams[3] = new Team("Команда 4");
+
+        // Результаты матчей
+        teams[0].AddResult(2, 1); // Команда 1 победила Команду 2
+        teams[0].AddResult(0, 0); // Команда 1 сыграла вничью с Командой 3
+        teams[0].AddResult(1, 3); // Команда 1 проиграла Команде 4
+        teams[1].AddResult(1, 2); // Команда 2 проиграла Команде 1
+        teams[1].AddResult(1, 1); // Команда 2 сыграла вничью с Командой 3
+        teams[1].AddResult(2, 0); // Команда 2 победила Команду 4
+        teams[2].AddResult(0, 0); // Команда 3 сыграла вничью с Командой 1
+        teams[2].AddResult(1, 1); // Команда 3 сыграла вничью с Командой 2
+        teams[2].AddResult(2, 1); // Команда 3 победила Команду 4
+        teams[3].AddResult(3, 1); // Команда 4 победила Команду 1
+        teams[3].AddResult(0, 2); // Команда 4 проиграла Команде 2
+        teams[3].AddResult(1, 2); // Команда 4 проиграла Команде 3
+
+        // Упорядочиваем результаты
+        for (int i = 0; i < teams.Length - 1; i++)
+        {
+            for (int j = i + 1; j < teams.Length; j++)
+            {
+                if (teams[j].Points > teams[i].Points || (teams[j].Points == teams[i].Points && (teams[j].GoalsFor - teams[j].GoalsAgainst) > (teams[i].GoalsFor - teams[i].GoalsAgainst)))
+                {
+                    Team temp = teams[i];
+                    teams[i] = teams[j];
+                    teams[j] = temp;
+                }
+            }
+        }
+
+        // Выводим итоговую таблицу
+        Console.WriteLine("Место\tКоманда\t\tОчки");
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine("{0}\t{1}\t\t{2}", i + 1, teams[i].Name, teams[i].Points);
+        }
+    }
+}
