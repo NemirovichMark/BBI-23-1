@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Lab6
+{
+    class Program
+    {
+        struct Info
+        {
+            private string _surname;
+            private int _penaltyTime;
+            public string Surname { get { return _surname; } private set { } }
+            public int PenaltyTime { get {return  _penaltyTime; }  set {
+                    if (value > 0)
+                        _penaltyTime = value;
+                } }
+            public void ShowInfo()
+            {
+                Console.WriteLine($"Фамилия: {Surname},  штрафное время: {PenaltyTime} мин");
+            }
+            public Info(string surname, int penaltyTime)
+            {
+                _surname = surname;
+                _penaltyTime = penaltyTime;
+            }
+
+        }
+        static void quickSort(Info[] sportsmen, int left, int right)
+        {
+            if (left >= right) return;
+            int p = sportsmen[(left + right) / 2].PenaltyTime;
+            int i = left;
+            int j = right;
+            while (i <= j)
+            {
+                while (sportsmen[i].PenaltyTime < p) i++;
+                while (sportsmen[j].PenaltyTime > p) j--;
+                if (i <= j)
+                {
+                    Info a = sportsmen[i];
+                    sportsmen[i] = sportsmen[j];
+                    sportsmen[j] = a;
+                    i++;
+                    j--;
+                }
+            }
+            quickSort(sportsmen, left, j);
+            quickSort(sportsmen, i, right);
+        }
+        static void Main()
+        {
+            int[,] table = { { 2, 2, 2, 5, 10, 2, 2, 5, 5, 5, 5, 5, 10, 2, 2, 2, 2, 2, 5, 10, 2, 2, 2, 5, 5, 5, 5, 10, 2, 2 },
+                { 2, 2, 2, 5, 10, 2, 5, 2, 5, 5, 5, 5, 10, 2, 2, 2, 2, 2, 5, 10, 2, 2, 2, 5, 5, 5, 5, 10, 2, 2 },
+                { 2, 2, 2, 5, 10, 2, 2, 2, 5, 5, 5, 5, 10, 2, 2, 2, 2, 2, 5, 10, 2, 2, 2, 5, 5, 5, 5, 10, 2, 2 },
+                { 2, 2, 2, 5, 10, 2, 5, 2, 5, 5, 5, 5, 10, 2, 2, 10, 2, 2, 5, 10, 2, 2, 2, 5, 5, 5, 5, 10, 2, 2 }};
+            string[] listSurname = new string[30] { "ddddd", "rrrrrr", "aaaaaa", "ssssss", "cccccc", "ooooooo", "qqqqq", "wwwwww", "bbbbb", "ccccc", "eeee", "ggggg", "hhhhh", "zzzz", "xxxx", "vvvvv", "nnnnn", "mmmm", "ffffff", "uuuuu", "iiiii", "tttt", "ppppp", "1111", "2222", "3333", "44444", "5555", "rt5", "fuuh" };
+            Info[] sportsmen = new Info[30];
+            int k = 0;
+            for (int i = 0; i < table.GetLength(1); i++)
+            {
+                bool dis = false;
+                int sumTime = 0;
+                for (int j = 0; j < table.GetLength(0); j++)
+                {
+                    if (table[j, i] == 10)
+                    {
+                        dis = true;
+                        break;
+                    }
+                    else
+                    {
+                        sumTime += table[j, i];
+                    }
+                }
+                if (dis == false)
+                {
+                    sportsmen[k] = new Info(listSurname[i], sumTime);
+                    k++;
+                }
+            }
+            quickSort(sportsmen, 0, k - 1);
+            for (int i = 0; i < k; i++)
+            {
+                sportsmen[i].ShowInfo();
+            }
+            Console.ReadKey();
+        }
+    }
+}
