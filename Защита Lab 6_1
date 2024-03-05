@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Lab6
+{
+    struct Sportswoman
+    {
+        const int norma = 110;
+        private string _surname;
+        private int _group;
+        private string _trainerName;
+        private int _sec;
+        private static int _counter;
+        public int Sec
+        {
+            get { return _sec; }
+            set
+            {
+                if (value > 0)
+                    _sec = value;
+            }
+        }
+        public int Counter { get { return _counter; } private set { } }
+        public Sportswoman(string surname, int group, string trainerName, int sec)
+        {
+            _surname = surname;
+            _group = group;
+            _trainerName = trainerName;
+            _sec = sec;
+        }
+        public void ShowInfo()
+        {
+            if (_sec<=norma) _counter++;
+            Console.WriteLine($"Фамилия: {_surname}, группа: {_group}, имя тренера: {_trainerName}, резульат: {_sec} секунд, норматив сдан: {_sec <= norma}");
+        }
+        public static void PrintCounter() => Console.WriteLine($"Количество спортсменок, сдавших норматив: {_counter}");
+    }
+
+    class Program
+    {
+        static void quickSort(Sportswoman[] table, int left, int right)
+        {
+            if (left >= right) return;
+            int p = table[(left + right) / 2].Sec;
+            int i = left;
+            int j = right;
+            while (i <= j)
+            {
+                while (table[i].Sec < p) i++;
+                while (table[j].Sec > p) j--;
+                if (i <= j)
+                {
+                    Sportswoman a = table[i];
+                    table[i] = table[j];
+                    table[j] = a;
+                    i++;
+                    j--;
+                }
+            }
+            quickSort(table, left, j);
+            quickSort(table, i, right);
+        }
+        static void Main()
+        {
+            Console.WriteLine($"Таблица результатов кросса на 500 м среди девушек, норматив - 110 секунд");
+            int count = 0;
+            Sportswoman[] table = new Sportswoman[5] { new Sportswoman("Кукушкина", 1, "Овечкин", 111), new Sportswoman("Соловьёва", 1, "Зверев", 107), new Sportswoman("Воробьёва", 2, "Козлов", 112), new Sportswoman("Синицына", 2, "Зайцев", 109), new Sportswoman("Орлова", 1, "Волков", 110) };
+            quickSort(table, 0, table.Length - 1);
+            for (int i = 0; i < table.Length; i++)
+            {
+                table[i].ShowInfo();
+            }
+            Sportswoman.PrintCounter();
+            Console.ReadKey();
+        }
+    }
+}
