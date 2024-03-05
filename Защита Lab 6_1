@@ -67,7 +67,6 @@ namespace Lab6
         static void Main()
         {
             Console.WriteLine($"Таблица результатов кросса на 500 м среди девушек, норматив - 110 секунд");
-            int count = 0;
             Sportswoman[] table = new Sportswoman[5] { new Sportswoman("Кукушкина", 1, "Овечкин", 111), new Sportswoman("Соловьёва", 1, "Зверев", 107), new Sportswoman("Воробьёва", 2, "Козлов", 112), new Sportswoman("Синицына", 2, "Зайцев", 109), new Sportswoman("Орлова", 1, "Волков", 110) };
             quickSort(table, 0, table.Length - 1);
             for (int i = 0; i < table.Length; i++)
