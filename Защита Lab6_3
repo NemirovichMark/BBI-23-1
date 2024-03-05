@@ -1,0 +1,158 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Lab6
+{
+    struct Team
+    {
+        private string _name;
+        private int _goalsWon;
+        private int _goalsLost;
+        private int _point;
+        /*public string Name { get { return _name; } set {
+                if (value != "")
+                    _name = value;
+            } }*/
+        public string Name { get { return _name; } private set { } }
+        /*public int GoalsWon
+        {
+            get { return _goalsWon; }
+            set
+            {
+                if (value > 0)
+                    _goalsWon = value;
+            }
+        }*/
+        public int GoalsWon { get { return _goalsWon; } private set { } }
+        /*public int GoalsLost
+        {
+            get { return _goalsLost; }
+            set
+            {
+                if (value > 0)
+                    _goalsLost = value;
+            }
+        }*/
+        public int GoalsLost { get { return _goalsLost; } private set { } }
+        public int Point { get { return _point; } private set { } }
+        /*public int Point
+        {
+            get { return _point; }
+            set
+            {
+                if (value > 0)
+                    _point = value;
+            }
+        }*/
+        public int Difference()
+        {
+            return (_goalsWon-_goalsLost);
+        }
+        public Team(string name, int goalsWon, int goalsLost, int point)
+        {
+            _name = name;
+            _goalsWon = goalsWon;
+            _goalsLost = goalsLost;
+            _point = point;
+        }
+        public void Show()
+        {
+            Console.WriteLine($"Команда: {Name}, забитые голы: {GoalsWon}, пропущенные голы: {GoalsLost}, общий счёт: {Point}");
+        }
+        public void PlusN(int n)
+        {
+            _point += n;
+        }
+        public Team Up(int score1, int score2)
+        {
+            _goalsWon += score1;
+            _goalsLost += score2;
+            if (score1 > score2)
+            {
+                PlusN(3);
+            }
+            else if (score1 == score2)
+            {
+                PlusN(1);
+            }
+            return this;
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            List<Team> teams = new List<Team>();
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine("Enter the name of the first team:");
+                string Name1 = Console.ReadLine();
+                Console.WriteLine("Enter the number of goals scored by the first team:");
+                int score1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter the name of the second team:");
+                string Name2 = Console.ReadLine();
+                Console.WriteLine("Enter the number of goals scored by the second team:");
+                int score2 = Convert.ToInt32(Console.ReadLine());
+                Update(teams, Name1, score1, score2);
+                Update(teams, Name2, score2, score1);
+                for (int i1 = 0; i1 < teams.Count; i1++)
+                {
+                    teams[i1].Show();
+                }
+            }
+            for (int i = 0; i < teams.Count - 1; i++)
+            {
+                for (int j = i + 1; j < teams.Count; j++)
+                {
+                    if (teams[j].Point > teams[i].Point || ((teams[j].Point == teams[i].Point) && (teams[j].Difference()) > (teams[i].Difference())))
+                    {
+                        Team a = teams[i];
+                        teams[i] = teams[j];
+                        teams[j] = a;
+                    }
+                }
+            }
+            Console.WriteLine("Таблица результатов:");
+            for (int i = 0; i < teams.Count; i++)
+            {
+                teams[i].Show();
+            }
+            Console.ReadKey();
+        }
+        static void Update(List<Team> teams, string name, int score1, int score2)
+        {
+            bool ok = false;
+            for (int i = 0; i < teams.Count; i++)
+            {
+                if (teams[i].Name == name)
+                {
+                    //Console.WriteLine("!!!");
+                    //Console.WriteLine(teams[i].GoalsWon);
+                    ok = true;
+                    teams[i]=teams[i].Up(score1, score2);
+                    //Console.WriteLine(teams[i].GoalsWon);
+                    break;
+                }
+            }
+            if (!ok)
+            {
+                Team team1 = new Team(name, score1, score2, 0);
+                if (score1 > score2)
+                {
+                    team1.PlusN(3);
+                }
+                else if (score1 == score2)
+                {
+                    team1.PlusN(1);
+                }
+                teams.Add(team1);
+            }
+        }
+    }
+}
