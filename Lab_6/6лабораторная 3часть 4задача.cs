@@ -1,5 +1,3 @@
-﻿using Structures;
-using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Lifetime;
 
@@ -35,44 +33,15 @@ namespace Structures
     {
         static void Main(string[] args)
         {
-            Person[] customers = new Person[6];
-            customers[0] = new Person("John", "A", 5);
-            customers[1] = new Person("Bob", "A", 6);
-            customers[2] = new Person("Mickle", "A", 8);
-            customers[3] = new Person("Luc", "B", 2);
-            customers[4] = new Person("Derec", "B", 9);
-            customers[5] = new Person("Aron", "B", 4);
+            Person[] customersA = new Person[3];
+            customersA[0] = new Person("John", "A", 5);
+            customersA[1] = new Person("Bob", "A", 6);
+            customersA[2] = new Person("Mickle", "A", 8);
 
-
-            int sumA = 0, sumB = 0;
-            for (int i = 0; i < customers.Length; i++)
-            {
-                if (customers[i].group == "A")
-                {
-                    sumA++;
-                }
-                if (customers[i].group == "B")
-                {
-                    sumB++;
-                }
-            }
-            Person[] customersA = new Person[sumA];
-            int IndA = 0;
-            Person[] customersB = new Person[sumB];
-            int IndB = 0;
-            for (int i = 0; i < customers.Length; i++)
-            {
-                if (customers[i].group == "A")
-                {
-                    customersA[IndA] = customers[i];
-                    IndA++;
-                }
-                if (customers[i].group == "B")
-                {
-                    customersB[IndB] = customers[i];
-                    IndB++;
-                }
-            }
+            Person[] customersB = new Person[3];
+            customersB[0] = new Person("Luc", "B", 2);
+            customersB[1] = new Person("Derec", "B", 9);
+            customersB[2] = new Person("Aron", "B", 4);
 
             Console.WriteLine("команда А");
             Sort(customersA);
@@ -87,17 +56,51 @@ namespace Structures
             {
                 customersB[i].Print();
             }
+
+
+
+            Person[] customers = new Person[customersA.Length + customersB.Length];
+            int theNumbweOfA = 0, theNumbweOfB = 0;
+            for (int i = 0; i < customers.Length; i++)
+            {
+                if (theNumbweOfA == customersA.Length)
+                {
+                    for (int j = i; j < customers.Length; j++)
+                    {
+                        customers[j] = customersB[theNumbweOfB];
+                        theNumbweOfB++;
+                    }
+                    break;
+                }
+                else if (theNumbweOfB == customersB.Length)
+                {
+                    for (int j = i; j < customers.Length; j++)
+                    {
+                        customers[j] = customersB[theNumbweOfB];
+                        theNumbweOfA++;
+                    }
+                    break;
+                }
+                else if (customersA[theNumbweOfA].result >= customersB[theNumbweOfB].result)
+                {
+                    customers[i] = customersA[theNumbweOfA];
+                    theNumbweOfA++;
+                }
+                else if (customersA[theNumbweOfA].result < customersB[theNumbweOfB].result)
+                {
+                    customers[i] = customersB[theNumbweOfB];
+                    theNumbweOfB++;
+                }
+            }
             Console.WriteLine();
             Console.WriteLine("команды А и В");
-            Sort(customers);
             for (int i = 0; i < customers.Length; i++)
             {
                 customers[i].Print();
             }
             Console.WriteLine();
-
         }
-        static void Sort(Person[] customers) 
+        static void Sort(Person[] customers)
         {
             for (int i = 1; i < customers.Length; i++)
             {
@@ -114,4 +117,3 @@ namespace Structures
         }
     }
 }
-
