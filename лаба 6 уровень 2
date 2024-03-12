@@ -1,0 +1,65 @@
+﻿public struct Sportsmens
+{
+    private string _name;
+    private double[] _scores;
+    private int _totalplace;
+
+    public Sportsmens(string name, double[] scores)
+    {
+        _name = name;
+        _scores = scores;
+        _totalplace = 0;
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Sportsmens[] rez = new Sportsmens[]
+                {
+                    new Sportsmens("Маша", new double[] {5.6, 5.3, 5.0, 5.8, 5.7, 5.5, 5.9}),
+                    new Sportsmens("Саша", new double[] {5.8, 5.7, 5.9, 5.5, 5.6, 5.6, 5.5}),
+                    new Sportsmens("Паша", new double[] {5.5, 5.8, 5.7, 5.6, 5.9, 5.4, 5.6})
+                };
+
+            AssignTotalPlaces(rez);
+
+            Array.Sort(rez, (x, y) => x._totalplace.CompareTo(y._totalplace));
+
+            Console.WriteLine("Результаты:");
+            foreach (var skater in rez)
+            {
+                Console.WriteLine($"{skater._name}: {skater._totalplace} место");
+            }
+        }
+        public static void AssignTotalPlaces(Sportsmens[] rez)
+        {
+            for (int i = 0; i < rez.Length; i++)
+            {
+                int totalPlace = 0;
+                for (int j = 0; j < rez.Length; j++)
+                {
+                    if (i != j && CalculateTotalScore(rez[i]._scores) < CalculateTotalScore(rez[j]._scores))
+                    {
+                        totalPlace++;
+                    }
+                }
+                rez[i]._totalplace = totalPlace + 1;
+            }
+        }
+
+        public static double CalculateTotalScore(double[] scores)
+        {
+            double total = 0;
+            foreach (double score in scores)
+            {
+                total += score;
+            }
+            return total;
+        }
+    }
+}
+
+
+
+
