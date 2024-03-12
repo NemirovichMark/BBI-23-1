@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
+
+struct RadioPoll
+{
+    private string _answer;
+    private int _count;
+    public string Answer => _answer;
+    public int Count => _count;
+    public RadioPoll(string answer, int count) 
+    {
+        _answer = answer;
+        _count = count;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        RadioPoll[] responses = new RadioPoll[5];
+
+        responses[0] = new RadioPoll("Эльон Маск", 120);
+        responses[1] = new RadioPoll("Грета Тунберг", 90);
+        responses[2] = new RadioPoll("Владимир Путин", 80);
+        responses[3] = new RadioPoll("Джо Байден", 70);
+        responses[4] = new RadioPoll("Анджелина Джоли", 60);
+
+        int totalVotes = 0;
+
+        foreach (var response in responses)
+        {
+            totalVotes += response.Count;
+        }
+
+
+        ShellSort(responses);
+
+        Console.WriteLine("Топ-5 человек года по результатам опроса:");
+
+        foreach (var response in responses)
+        {
+            double percentage = (double)response.Count / totalVotes * 100;
+            Console.WriteLine($"Ответ: {response.Answer} - {percentage:f2}% от общего количества ответов");
+        }
+    }
+    static void ShellSort(RadioPoll[] arr)
+    {
+        int n = arr.Length;
+        int gap = n / 2;
+
+        while (gap > 0)
+        {
+            for (int i = gap; i < n; i++)
+            {
+                RadioPoll t = arr[i];
+                int j = i;
+                while (j >= gap && arr[j - gap].Count < t.Count)
+                {
+                    arr[j] = arr[j - gap];
+                    j -= gap;
+                }
+                arr[j] = t;
+            }
+            gap /= 2;
+        }
+    }
+}
