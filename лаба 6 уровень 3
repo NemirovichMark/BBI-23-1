@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Xml.Linq;
 
 class Football
 {
@@ -8,8 +9,8 @@ class Football
         private int _totalScore;
         private int _goal;
         public string name { get { return _name; } }
-        public int score { get { return _totalScore; } set { _totalScore = value; } }
-        public int goals { get { return _goal; } set { _goal = value; } }
+        public int score { get { return _totalScore; } }
+        public int goals { get { return _goal; } }
 
         public FootballTeam(string name)
         {
@@ -22,9 +23,41 @@ class Football
         {
             Console.WriteLine(_name + ", " + _totalScore + " очков");
         }
+        public void Win(int goals)
+        {
+            _totalScore += 3;
+            _goal += goals;
+        }
+        public void Lose(int goals)
+        {
+            _goal -= goals;
+        }
+        public void Сounter()
+        {
+            _totalScore += 1;
+        }
 
     }
-
+    static void Match(ref FootballTeam team1, ref FootballTeam team2, int score1, int score2)
+    {
+        Console.WriteLine(team1.name + " - " + team2.name + " " + score1 + ":" + score2);
+        int goals = Math.Abs(score1 - score2);
+        if (score1 > score2)
+        {
+            team1.Win(goals);
+            team2.Lose(goals);
+        }
+        else if (score1 < score2)
+        {
+            team2.Win(goals);
+            team1.Lose(goals);
+        }
+        else
+        {
+            team1.Сounter();
+            team2.Сounter();
+        }
+    }
     static void Main()
     {
 
@@ -41,24 +74,7 @@ class Football
                 int score1 = random.Next(0, 5);
                 int score2 = random.Next(0, 5);
                 Console.WriteLine(teams[i].name + " - " + teams[j].name + " " + score1 + ":" + score2);
-                int goal = Math.Abs(score1 - score2);
-                if (score1 > score2)
-                {
-                    teams[i].score += 3;
-                    teams[i].goals += goal;
-                    teams[j].goals -= goal;
-                }
-                else if (score1 < score2)
-                {
-                    teams[j].score += 3;
-                    teams[j].goals += goal;
-                    teams[i].goals -= goal;
-                }
-                else
-                {
-                    teams[i].score += 1;
-                    teams[j].score += 1;
-                }
+                Match(ref teams[i], ref teams[j], score1, score2);
             }
         }
         FootballTeam t;
@@ -80,3 +96,4 @@ class Football
     }
 
 }
+
