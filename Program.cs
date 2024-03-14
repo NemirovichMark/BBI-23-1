@@ -1,13 +1,28 @@
-﻿//// See https://aka.ms/new-console-template for more information
+﻿// See https://aka.ms/new-console-template for more information
 
 //using System;
-////Первый уровень номер 2
+//using System.Collections.Generic;
+//using System.Diagnostics.Metrics;
+//using System.Xml.Linq;
 //struct Sportsmen
 //{
-//    public string famile;
-//    public double rez;
-//    public string prep;
-//    public int group;
+//    private string _famile;
+//    private double _rez;
+//    private string _prep;
+//    public string Famile => _famile;
+//    public double Rez => _rez;
+
+//    public string Prep => _prep;
+//    private int _group;
+//    public int Group => _group;
+//    public Sportsmen(string famile, double rez, string prep, int group)
+//    {
+//        _famile = famile;
+//        _rez = rez;
+//        _prep = prep;
+//        _group = group;
+//    }
+
 //}
 //class Program
 //{
@@ -18,80 +33,79 @@
 // "Иванова", "Петрова", "Сидорова",
 // "Кузнецова", "Макарова"};
 //        double[] r = new double[] {15,
-// 155, 99, 85, 101};
+// 155, 99, 85, 10};
 //        int ss = 0;
-//        int[]n= new int[] {1,2,3,4,5};
-//        string[] re = new string[] { "Фетодов", "Болт","Неймар","Месси","Роналду" };
+//        int[] n = new int[] { 1, 2, 3, 4, 5 };
+//        string[] re = new string[] { "Фетодов", "Болт", "Неймар", "Месси", "Роналду" };
 //        for (int i = 0; i < sp.Length; i++)
 //        {
-//            sp[i].famile = s[i];
-//            sp[i].rez = r[i];
-//            sp[i].prep = re[i];
-//            sp[i].group = n[i];
+
+//            sp[i] = new Sportsmen(s[i], r[i], re[i], n[i]);
 //            Console.WriteLine(
 //            "Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4}",
-//            sp[i].famile, sp[i].rez, sp[i].prep, sp[i].group);
+//            s[i], r[i], re[i], n[i]);
 //        }
 
-       
-//        for (int i = 0; i < sp.Length -1; i++)
+
+//        for (int i = 0; i < sp.Length - 1; i++)
 //        {
-//            double amax = sp[i].rez;
+//            Sportsmen amax = sp[i];
 //            int imax = i;
 //            for (int j = i + 1; j < sp.Length; j++)
 //            {
-//                if (sp[j].rez > amax)
+//                if (sp[j].Rez > amax.Rez)
 //                {
-//                    amax = sp[j].rez;
+//                    amax = sp[j];
 //                    imax = j;
 //                }
 //            }
-            
-//        Sportsmen temp;
+
+//            Sportsmen temp;
 //            temp = sp[imax];
 //            sp[imax] = sp[i];
 //            sp[i] = temp;
-            
-            
+
+
 //        }
 //        Console.WriteLine();
 //        for (int i = 0; i < sp.Length; i++)
 //        {
-           
+
 //            int nn = 0;
 //            int norma = 100;
-//            if (sp[i].rez <= norma)
+//            if (sp[i].Rez < norma)
 //            {
 //                nn++;
 //                Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4} \t норматив выполнен",
-//                sp[i].famile, sp[i].rez, sp[i].prep, sp[i].group);
-                
-               
+//                sp[i].Famile, sp[i].Rez, sp[i].Prep, sp[i].Group);
+
+
 //            }
 //            else
 //                Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4} \t ",
-//                sp[i].famile, sp[i].rez, sp[i].prep, sp[i].group);
-            
+//                 sp[i].Famile, sp[i].Rez, sp[i].Prep, sp[i].Group);
+
 
 
 //        }
 //        for (int i = 0; i < sp.Length; i++)
 //        {
-            
+
 //            int nn = 0;
 //            int norma = 100;
-//            if (sp[i].rez < norma)
+//            if (r[i] < norma)
 //            {
 //                nn++;
 //            }
 //            ss = ss + nn;
-        
-           
-        
-//        }Console.WriteLine(($"\nСуммарное количество участниц, выполнивших норматив:{ss}"));
 
 
-//}
+
+//        }
+//        Console.WriteLine(($"\nСуммарное количество участниц, выполнивших норматив:{ss}"));
+
+
+//    }
 //}
 
 ////второй уровень номер 1
@@ -101,18 +115,24 @@
 //{
 //    struct Struct1
 //    {
-//        public string famile;
-//        public double[] x;
-//        public double sred;
+//        private string _famile;
+//        public string Famile => _famile;
+
+//        private double[] _x;
+//        public double[] X => _x;
+//        private double _sred;
+//        public double Sred => _sred;
+
 //        public Struct1(string famile1, double[] x1)
 
 //        {
-//            sred = 0;
-//            famile = famile1;
-//            x = x1;
+//            _sred = 0;
+//            _famile = famile1;
+//            _x = x1;
 //            for (int i = 0; i < 4; i++)
-//                sred += x[i];
-//            sred /= 4;
+//                _sred += _x[i];
+
+//            _sred /= 4;
 //        }
 
 //    }
@@ -132,18 +152,21 @@
 //        cl[4] = new Struct1("Сидоров3",
 //        new double[] { 5.0, 3.0, 5.0, 5.0 });
 //        for (int i = 0; i < cl.Length; i++)
+//        {
+
 //            Console.WriteLine(
 //            "Фамилия {0}\t Средний балл {1,4:f2}",
-//            cl[i].famile, cl[i].sred);
+//            cl[i].Famile, cl[i].Sred);
+//        }
 //        for (int i = 0; i < cl.Length - 1; i++)
 //        {
-//            double amax = cl[i].sred;
+//            double amax = cl[i].Sred;
 //            int imax = i;
 //            for (int j = i + 1; j < cl.Length; j++)
 //            {
-//                if (cl[j].sred > amax)
+//                if (cl[j].Sred > amax)
 //                {
-//                    amax = cl[j].sred;
+//                    amax = cl[j].Sred;
 //                    imax = j;
 //                }
 //            }
@@ -156,17 +179,23 @@
 //        Console.WriteLine();
 //        for (int i = 0; i < cl.Length; i++)
 //        {
-//            if (cl[i].sred >= 4)
-//                Console.WriteLine("Фамилия {0}\t " + "Средний балл {1,4:f2}", cl[i].famile, cl[i].sred);
+//            if (cl[i].Sred >= 4)
+//                Console.WriteLine("Фамилия {0}\t " + "Средний балл {1,4:f2}", cl[i].Famile, cl[i].Sred);
 //        }
 //    }
 //}
 ////третий уровень номер 2
 //using System;
-
-//public struct Team
+//struct Team
 //{
-//    public string Name;
+//    private string _name;
+//    public string Name => _name;
+
+//    public Team(string name)
+//    {
+//        _name = name;
+//    }
+
 
 //}
 
@@ -179,7 +208,7 @@
 
 //        for (int i = 0; i < 24; i++)
 //        {
-//            teams[i].Name = "Команда " + (i + 1).ToString();
+//            teams[i] = new Team("Команда " + (i + 1).ToString());
 //        }
 
 
@@ -211,6 +240,7 @@
 
 //        Console.WriteLine("Список команд участников второго этапа:");
 //        Console.WriteLine("Группа 1:");
+
 //        for (int i = 0; i < 6; i++)
 //        {
 //            Console.WriteLine(topTeamsG1[i].Name);
@@ -220,6 +250,46 @@
 //        for (int i = 0; i < 6; i++)
 //        {
 //            Console.WriteLine(topTeamsG2[i].Name);
+//        }
+
+
+//        Team[] C = new Team[12];
+
+//        int hi = 0, j = 0, k = 0;
+
+//        while (hi < 6 && j < 6)
+//        {
+//            if (String.Compare(topTeamsG1[hi].Name, topTeamsG2[j].Name) >= 0)
+//            {
+//                C[k] = topTeamsG1[hi];
+//                hi++;
+//            }
+//            else
+//            {
+//                C[k] = topTeamsG2[j];
+//                j++;
+//            }
+//            k++;
+//        }
+
+
+//        while (hi < 6)
+//        {
+//            C[k] = topTeamsG1[hi];
+//            hi++;
+//            k++;
+//        }
+//        while (j < 6)
+//        {
+//            C[k] = topTeamsG2[j];
+//            j++;
+//            k++;
+//        }
+
+//        Console.WriteLine("Результат объединения:");
+//        foreach (Team team in C)
+//        {
+//            Console.WriteLine(team.Name);
 //        }
 //    }
 //}
