@@ -1,453 +1,161 @@
-
-#region 3
-class Program
-{
-    static void Main()
-    {
-        double[,] a = new double[5, 5];
-        double[,] b = new double[6, 6];
-
-        FillMatrix(a);
-        Console.WriteLine("Матрица A до удаления строки с максимальным элементом диагонали:");
-        PrintMatrix(a);
-
-        FillMatrix(b);
-        Console.WriteLine("Матрица B до удаления строки с максимальным элементом диагонали:");
-        PrintMatrix(b);
-
-        RemoveMax(ref a);
-        RemoveMax(ref b);
-
-        Console.WriteLine("Матрица A после удаления строки с максимальным элементом диагонали:");
-        PrintMatrix(a);
-
-        Console.WriteLine("Матрица B после удаления строки с максимальным элементом диагонали:");
-        PrintMatrix(b);
-    }
-
-    static void FillMatrix(double[,] matrix)
-    {
-        Random random = new Random();
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i, j] = random.Next(10);
-            }
-        }
-    }
-
-    static void PrintMatrix(double[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-    }
-
-    static void RemoveMax(ref double[,] matrix)
-    {
-        int maxIndex = FindMaxElement(matrix);
-        if (maxIndex != -1)
-        {
-            int rowCount = matrix.GetLength(0) - 1;
-            double[,] newMatrix = new double[rowCount, matrix.GetLength(1)];
-
-            for (int i = 0, newRow = 0; i < matrix.GetLength(0); i++)
-            {
-                if (i != maxIndex)
-                {
-                    for (int j = 0; j < matrix.GetLength(1); j++)
-                    {
-                        newMatrix[newRow, j] = matrix[i, j];
-                    }
-                    newRow++;
-                }
-            }
-
-            matrix = newMatrix;
-        }
-    }
-
-    static int FindMaxElement(double[,] matrix)
-    {
-        double maxElement = double.MinValue;
-        int maxIndex = -1;
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            if (matrix[i, i] > maxElement)
-            {
-                maxElement = matrix[i, i];
-                maxIndex = i;
-            }
-        }
-
-        return maxIndex;
-    }
-}
-
-#endregion
-
-#region 9
-
-class Program
-{
-    static void Main()
-    {
-        int[,] a = new int[6, 5];
-        int[,] c = new int[7, 4];
-
-        FillMatrix(a);
-        FillMatrix(c);
-
-        Console.WriteLine("Матрица A");
-        PrintMatrix(a);
-
-        Console.WriteLine("Матрица C");
-        PrintMatrix(c);
-
-        int[] array = SumMatrix(a).Concat(SumMatrix(c)).ToArray();
-
-        Console.WriteLine("Суммы положительных элементов столбцов матриц A и C");
-        PrintArray(array);
-    }
-
-    static void FillMatrix(int[,] matrix)
-    {
-        Random random = new Random();
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i, j] = random.Next(-10, 10);
-            }
-        }
-    }
-
-    static void PrintMatrix(int[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-    }
-
-    static void PrintArray(int[] array)
-    {
-        foreach (int element in array)
-        {
-            Console.Write(element + " ");
-        }
-        Console.WriteLine();
-    }
-
-    static int[] SumMatrix(int[,] matrix)
-    {
-        int[] result = new int[matrix.GetLength(1)];
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            int sum = 0;
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                if (matrix[i, j] > 0)
-                {
-                    sum += matrix[i, j];
-                }
-            }
-            result[j] = sum;
-        }
-        return result;
-    }
-}
-
-#endregion
-
-#region 15
-
+#region 1.5
 using System;
-using System.Linq;
+struct student
+{
+    public string famile; public int pass; public int grade;
+}
+class Program
+{
+    static void Main()
+    {
+        student[] students = new student[] 
+        {
+            new student { famile = "Шерстобитова", pass = 5, grade = 4 },            
+            new student { famile = "Клименко", pass = 10, grade = 2 },
+            new student { famile = "Крамер  ", pass = 13, grade = 2 },            
+            new student { famile = "Рудь    ", pass = 9, grade = 2 }
+        };
+        for (int i = 0; i < students.Length - 1; i++)
+        {
+            for (int j = 0; j < students.Length - 1 - i; j++)
+            {
+                if (students[j].pass < students[j + 1].pass)
+                {
+                    student temp = students[j]; students[j] = students[j + 1]; students[j + 1] = temp;
+                }
+            }
+        }
+        Console.WriteLine("Список неуспевающих студентов в порядке убывания их пропусков:");
+        Console.WriteLine("Фамилия \t" + "Пропуски \t"); Console.WriteLine();
+        for (int i = 0; i < students.Length; i++)
+        {
+            if (students[i].grade == 2)
+            {
+                Console.WriteLine("{0} \t" + "{1} \t ", students[i].famile, students[i].pass);
+            }
+        }
+    }
+}
+#endregion
+
+#region 2.5
+struct competitions
+{
+    public string name; public int meters;
+    public int[] score;
+    public int CanculateScore()
+    {
+        for (int i = 0; i < score.Length - 1; i++)
+        {
+            if (score[i] < score[i + 1])
+            {
+                int t = score[i]; score[i] = score[i + 1];
+                score[i + 1] = t;
+            }
+        };
+        int totalscore = 0;
+        for (int i = 1; i < score.Length - 1; i++)
+        {
+            totalscore += score[i];
+        }
+        int dastancepoint = 60 + (meters - 120) * 2; totalscore += dastancepoint;
+        return totalscore;
+    }
+}
+class program
+{
+    static void Main()
+    {
+        competitions[] competition = new competitions[]
+        {
+            new competitions {name = "Шерстобитова", meters = 126, score = new int[] {18, 17, 16, 19, 20} },            
+            new competitions {name = "Рудь        ", meters = 132, score = new int[] {16, 20, 15, 17, 16} },
+            new competitions {name = "Букин       ", meters = 115, score = new int [] {15, 16, 14, 17, 18} },            
+            new competitions {name = "Крамер      ", meters = 133, score = new int[] {12, 16, 17, 19, 16 } },
+            new competitions {name = "Клименко    ", meters = 125, score = new int[] { 13, 15, 13, 17, 20} }        
+        };
+        for (int i = 0; i < competition.Length - 1; i++)
+        {
+            for (int j = 0; j < competition.Length - 1 - i; j++)
+            {
+                if (competition[j].CanculateScore() < competition[j + 1].CanculateScore())
+                {
+                    competitions temp = competition[j]; competition[j] = competition[j + 1];
+                    competition[j + 1] = temp;
+                }
+            }
+        }
+        Console.WriteLine("Результаты совевнований: "); Console.WriteLine("Имя и Фамилия\t" + "Очки\t");
+        for (int i = 0; i < competition.Length; i++)
+        {
+            Console.WriteLine($"{i + 1}." + "{0}\t" + "{1}\t", competition[i].name, competition[i].CanculateScore());
+        }
+    }
+}
+#endregion
+
+#region 3.5
+using System;
+public struct Team
+{
+    public string Name;
+    public int GoalsFor;
+    public int GoalsAgainst;
+    public int Wins;
+    public int Draws;
+    public int Losses;
+
+    public int CalculatePoints()
+    {
+        int points = Wins * 3 + Draws;
+        return points;
+    }
+
+    public int GoalDifference()
+    {
+        int goals = Math.Abs(GoalsFor - GoalsAgainst);
+        return goals;
+    }
+}
 
 class Program
 {
     static void Main()
     {
-        Console.Write("Введите количество строк матрицы: ");
-        int n = int.Parse(Console.ReadLine()); 
-        Console.Write("Введите количество стлобцов матрицы: ");
-        int m = int.Parse(Console.ReadLine());
-        double[,] a = new double[n, m];
-        fillmatrix(a);
-        Console.WriteLine("Матрица A:");
-        printMatrix(a);
+        Team[] teams = new Team[]
+        {
+            new Team { Name = "Сморчи", GoalsFor = 10, GoalsAgainst = 5, Wins = 3, Draws = 1, Losses = 1 },
+            new Team { Name = "КардиБишники", GoalsFor = 8, GoalsAgainst = 7, Wins = 2, Draws = 3, Losses = 0 },
+            new Team { Name = "Генералы", GoalsFor = 12, GoalsAgainst = 4, Wins = 4, Draws = 0, Losses = 1 }
+        };
 
-        double[,] b = new double[n, m];
-        fillmatrix(b);
-        Console.WriteLine("Матрица B:");
-        printMatrix(b);
-
-        double[,] c = new double[n, m];
-        fillmatrix(c);
-        Console.WriteLine("Матрица C:");
-        printMatrix(c);
-
-        double[] array = { sumMatrix(a), sumMatrix(b), sumMatrix(c) };
-        if (array[0] > array[1] && array[1] > array[2])
+        for (int i = 0; i < teams.Length - 1; i++)
         {
-            Console.WriteLine("Средние значения матриц без максимальных и минимальных элементов: ");
-            printArray(array);
-            Console.WriteLine("Полученные значения образуют убывающую последовательность");
-        }
-        else if (array[0] < array[1] && array[1] < array[2])
-        {
-            Console.WriteLine("Средние значения матриц без максимальных и минимальных элементов: ");
-            printArray(array);
-            Console.WriteLine("Полученные значения образуют возрастающую последовательность");
-        }
-        else if (array[0] == 0 && array[1] == 0 && array[2] == 0)
-        {
-            Console.WriteLine("Матрицы состоят из двух элементов. Невозжно найти среднее значение элементов матрицы.");
-        }
-        else
-        {
-            Console.WriteLine("Средние значения матриц без максимальных и мнимальных элементов: ");
-            printArray(array);
-            Console.WriteLine("Полученные значения не образуют последовательность");
-        }
-        
-    }
-
-    static void fillmatrix(double[,] matrix)
-    {
-        Random random = new Random();
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
+            for (int j = 0; j < teams.Length - 1 - i; j++)
             {
-                matrix[i, j] = random.Next(-9, 9);
-            }
-        }
-    }
-
-    static void printMatrix(double[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-    }
-
-    static void printArray(double[] array)
-    {
-        foreach (double element in array)
-        {
-            Console.Write(element + " ");
-        }
-        Console.WriteLine();
-        Console.WriteLine();
-    }
-
-    static double sumMatrix(double[,] matrix)
-    {
-        double[] elements = new double[matrix.GetLength(0) * matrix.GetLength(1)];
-        int index = 0;
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                elements[index++] = matrix[i, j];
-            }
-        }
-        double max = elements.Max();
-        double min = elements.Min();
-        double sum = elements.Sum() - max - min;
-        if (elements.Length - 2 != 0)
-        {
-            sum /= (elements.Length - 2);
-        }
-         return sum;
-        
-    }
-}
-#endregion
-
-#region 21
-
-class Program
-{
-    static void Main()
-    {
-        int n = 5;
-
-        double[,] a = new double[n, n];
-        fillMatrix(a);
-        Console.WriteLine("Матрица А");
-        printMatrix(a);
-
-        double[,] b = new double[n, n];
-        fillMatrix(b);
-        Console.WriteLine("Матрица В");
-        printMatrix(b);
-
-        double[] arrayA = minArray(a);
-        Console.WriteLine("Массив, состоящий из минимальных элементов строк матрицы А справа от главной диагонали и включающий её");
-        printArray(arrayA);
-
-        double[] arrayB = minArray(b);
-        Console.WriteLine("Массив, состоящий из минимальных элементов строк матрицы В справа от главной диагонали и включающий её");
-        printArray(arrayB);
-    }
-
-    static void fillMatrix(double[,] matrix)
-    {
-        Random random = new Random();
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i, j] = random.Next(-9, 9);
-            }
-        }
-    }
-
-    static void printMatrix(double[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-    }
-
-    static void printArray(double[] array)
-    {
-        for (int i = 0; i < array.Length; i++)
-        {
-            Console.Write(array[i] + " ");
-        }
-        Console.WriteLine();
-    }
-
-    static double[] minArray(double[,] matrix)
-    {
-        int size = matrix.GetLength(0);
-        double[] resultArray = new double[size];
-        for (int i = 0; i < size; i++)
-        {
-            double min = double.MaxValue;
-            for (int j = i; j < matrix.GetLength(1); j++)
-            {
-                if (matrix[i, j] < min)
+                if (teams[j].CalculatePoints() < teams[j + 1].CalculatePoints())
                 {
-                    min = matrix[i, j];
+                    Team temp = teams[j];
+                    teams[j] = teams[j + 1];
+                    teams[j + 1] = temp;
                 }
-            }
-            resultArray[i] = min;
-        }
-        return resultArray;
-    }
-}
-
-#endregion
-
-#region 27
-class Sistem
-{
-    static void Main()
-    {
-        int n = 5, m = 8;
-
-        double[,] a = new double[n, m];
-        fillMatrix(a);
-        Console.WriteLine("Матрица А");
-        printMatrix(a);
-
-        double[,] b = new double[n, m];
-        fillMatrix(b);
-        Console.WriteLine("Матрица В");
-        printMatrix(b);
-
-        minelement(a);
-        Console.WriteLine("Изменённая матрица А");
-        printMatrix(a);
-
-        minelement(b);
-        Console.WriteLine("Изменённая матрица В");
-        printMatrix(b);
-    }
-
-    static void fillMatrix(double[,] matrix)
-    {
-        Random random = new Random();
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrix[i,j] = random.Next(-9,9);
-            }
-        }
-    }
-
-    static void printMatrix(double[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i,j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-    }
-
-    static void minelement(double[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            double max = double.MinValue;
-            int jmax = 0;
-            if (i % 2 == 0)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                if (teams[j].CalculatePoints() == teams[j + 1].CalculatePoints())
                 {
-                    if (matrix[i, j] > max)
+                    if (teams[j].GoalDifference() < teams[j + 1].GoalDifference())
                     {
-                        max = matrix[i, j]; 
-                        jmax = j;
+                        Team temp = teams[j];
+                        teams[j] = teams[j + 1];
+                        teams[j + 1] = temp;
                     }
                 }
-                matrix[i, jmax] = 0;
             }
-            else
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    if (matrix[i, j] > max)
-                    {
-                        max = matrix[i, j];
-                        jmax = j;
-                    }
-                }
-                matrix[i, jmax] *= (jmax + 1);
-            }
+        }
+        Console.WriteLine("Таблица результатов:");
+        Console.WriteLine("Команда   \t" + "Очки\t");
+        Console.WriteLine();
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine($"{i + 1} " + "{0}\t" + "{1}\t", teams[i].Name, teams[i].CalculatePoints());
         }
     }
 }
