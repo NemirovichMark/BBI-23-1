@@ -37,39 +37,18 @@ namespace Lab7_2
             protected Random _rand;
             protected string _gameName;
             protected Player[] _players;
-            protected List <Player> _result;
+            protected List<Player> _result;
             public Game(Random rand, string gameName, Player[] players)
             {
-                _rand= rand;
+                _rand = rand;
                 _gameName = gameName;
                 _players = players;
-                _result= new List <Player>();
+                _result = new List<Player>();
             }
 
             public abstract void ShowInfo();
             public abstract void AddScore(Player player);
-            private static void quickSort(Player[] sportsmen, int left, int right)
-            {
-                if (left >= right) return;
-                int p = sportsmen[(left + right) / 2].Score;
-                int i = left;
-                int j = right;
-                while (i <= j)
-                {
-                    while (sportsmen[i].Score < p) i++;
-                    while (sportsmen[j].Score > p) j--;
-                    if (i <= j)
-                    {
-                        Player a = sportsmen[i];
-                        sportsmen[i] = sportsmen[j];
-                        sportsmen[j] = a;
-                        i++;
-                        j--;
-                    }
-                }
-                quickSort(sportsmen, left, j);
-                quickSort(sportsmen, i, right);
-            }
+            
             public abstract void Clean();
             public void UpdateResult(Player player)
             {
@@ -126,21 +105,21 @@ namespace Lab7_2
                     for (int j = 0; j < n; j++)
                     {
                         int a = _players[i].Score;
-                        Console.WriteLine(_players[i].Score);
+                        //Console.WriteLine(_players[i].Score);
                         AddScore(_players[i]);
                         if ((_players[i].Score - a) == fail)
                         {
                             ok = false;
-                            Console.WriteLine(_players[i].Score);
-                            Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
+                            //Console.WriteLine(_players[i].Score);
+                            //Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
                             break;
                         }
                     }
                     if (ok == true)
                     {
-                        Console.WriteLine(_players[i].Score);
+                        //Console.WriteLine(_players[i].Score);
                         UpdateResult(_players[i]);
-                        Console.WriteLine($"{_players[i].Surname} в кандидатах!");
+                        //Console.WriteLine($"{_players[i].Surname} в кандидатах!");
                     }
 
                 }
@@ -168,27 +147,27 @@ namespace Lab7_2
             }
             public override void Clean()
             {
-                for(int i = 0; i < _players.Length; i++)
+                for (int i = 0; i < _players.Length; i++)
                 {
                     bool ok = true;
                     for (int j = 0; j < n; j++)
                     {
                         int a = _players[i].Score;
-                        Console.WriteLine(_players[i].Score);
+                        //Console.WriteLine(_players[i].Score);
                         AddScore(_players[i]);
                         if ((_players[i].Score - a) > maxFouls)
                         {
                             ok = false;
-                            Console.WriteLine(_players[i].Score);
-                            Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
+                            //Console.WriteLine(_players[i].Score);
+                            //Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
                             break;
                         }
                     }
-                    if (ok==true)
+                    if (ok == true)
                     {
-                        Console.WriteLine(_players[i].Score);
+                        //Console.WriteLine(_players[i].Score);
                         UpdateResult(_players[i]);
-                        Console.WriteLine($"{_players[i].Surname} в кандидатах!");
+                        //Console.WriteLine($"{_players[i].Surname} в кандидатах!");
                     }
 
                 }
@@ -205,7 +184,7 @@ namespace Lab7_2
 
         static void Main()
         {
-            Random rand=new Random();
+            Random rand = new Random();
             Player[] players1 = {new Player("Иванов"),
                             new Player("Петров"),
                             new Player("Семёнов"),
