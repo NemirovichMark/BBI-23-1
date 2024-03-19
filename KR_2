@@ -1,0 +1,151 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KR_1
+{
+    abstract class Shape
+    {
+        protected double _size;
+        public double Size { get { return _size; } private set { } }
+        public abstract void FindSize();
+        public abstract void Print();
+        public Shape()
+        {
+            _size = 0;
+        }
+    }
+    class Sphere : Shape
+    {
+        private int _r;
+        public Sphere(int r): base()
+        {
+            _r = r;
+        }
+
+        public override void FindSize()
+        {
+            _size=4/3*Math.PI*Math.Pow(_r,3);
+        }
+        public override void Print()
+        {
+            Console.WriteLine($"Сфера радиуса {_r}, Объем сферы: {_size}");
+        }
+
+    }
+    class Cube : Shape
+    {
+        private int _a;
+        public Cube(int a) : base()
+        {
+            _a = a;
+        }
+        public override void FindSize()
+        {
+            _size =Math.Pow(_a,3);
+        }
+        public override void Print()
+        {
+            Console.WriteLine($"Куб с длиной стороны {_a}, Объем куба: {_size}");
+        }
+
+    }
+    class Cylinder: Shape
+    {
+        private int _r;
+        private int _h;
+        public Cylinder(int r,int h) : base()
+        {
+            _r = r;
+            _h = h;
+        }
+        public override void FindSize()
+        {
+            _size =Math.PI*Math.Pow(_r,2)*_h;
+        }
+        public override void Print()
+        {
+            Console.WriteLine($"Цилиндр с радиусом {_r}, высотой {_h}, Объем цилиндра: {_size}");
+        }
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            
+            Sphere [] arr1 = {new Sphere(3),
+                new Sphere(2),
+                new Sphere(5),
+                new Sphere(8),
+                new Sphere(1)
+            };
+            Cube[] arr2 = { new Cube(4), new Cube(2), new Cube(5), new Cube(10), new Cube(20) };
+            Cylinder[] arr3 = { new Cylinder(2, 5), new Cylinder(1, 3), new Cylinder(5, 5), new Cylinder(8, 5), new Cylinder(17, 5), };
+            Console.WriteLine("Исходные массивы:");
+            Print(arr1);
+            Console.WriteLine();
+            Print(arr2);
+            Console.WriteLine();
+            Print(arr3);
+            Console.WriteLine();
+            Sort(arr1);
+            Sort(arr2);
+            Sort(arr3);
+            Console.WriteLine("Отсортированные массивы:");
+            Print(arr1);
+            Console.WriteLine();
+            Print(arr2);
+            Console.WriteLine();
+            Print(arr3);
+            Console.WriteLine();
+            Shape[] arr= new Shape[15];
+            for (int i = 0; i < 5; i++)
+            {
+                arr[i] = arr1[i];
+            }
+            for (int i = 5; i < 10; i++)
+            {
+                arr[i] = arr2[i-5];
+            }
+            for (int i = 10; i < 15; i++)
+            {
+                arr[i] = arr3[i-10];
+            }
+            Sort(arr);
+            Print(arr);
+            Console.ReadKey();
+        }
+
+        static void Sort(Shape[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                for (int j = i + 1; j < array.Length; j++)
+                {
+                    if (array[i].Size < array[j].Size)
+                    {
+                        Shape temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
+
+        }
+        static void Print(Shape[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                array[i].FindSize();
+                array[i].Print();
+                Console.WriteLine();
+            }
+
+        }
+
+    }
+}
