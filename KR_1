@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KR_1
+{
+    struct Dot
+    {
+        private int _x;
+        private int _y;
+        private int _z;
+        public Dot(int[] array)
+        {
+            _x = array[0];
+            _y = array[1];
+            _z = array[2];
+        }
+        public int X { get { return _x; } }
+        public int Y { get { return _y; } }
+        public int Z { get { return _z; } }
+        //public void Print() => Console.WriteLine($"{_x};{_y};{_z}");
+       
+    }
+    struct Vector
+    {
+        private Dot _dot1;
+        private Dot _dot2;
+        private double _length;
+        public double Length { get { return _length; } private set { } }
+        public Dot Dot1 { get { return _dot1; } private set { } }
+        public Dot Dot2 { get { return _dot2; } private set { } }
+        public Vector(int[,] array)
+        { 
+            
+            int[] arr1 = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                arr1[i]= array[0,i];
+            }
+            _dot1 = new Dot(arr1);
+            int[] arr2 = new int[3];
+            for (int i = 0; i < 3; i++)
+            {
+                arr2[i] = array[1,i];
+            }
+            _dot2 = new Dot(arr2);
+            _length = FindLength(_dot1, _dot2);
+
+        }
+        private static double FindLength(Dot Dot1, Dot Dot2)
+        {
+            return (Math.Sqrt(Math.Pow((Dot1.X - Dot2.X),2) + Math.Pow((Dot1.Y - Dot2.Y), 2) + Math.Pow((Dot1.Z - Dot2.Z),2)));
+        }
+        public void Print() => Console.WriteLine($"Координаты начала: {_dot1.X};{_dot1.Y};{_dot1.Z}, координаты конца:  {_dot2.X};{_dot2.Y};{_dot2.Z}, длина вектора: {_length}");
+
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] arr1 = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+            int[,] arr2 = new int[,] { { 1,4,7 }, { 4, 5, 6 } };
+            int[,] arr3 = new int[,] { { 2,8,9 }, { 4, 5, 6 } };
+            int[,] arr4 = new int[,] { { 0,2,-7 }, { 4, 5, 6 } };
+            int[,] arr5 = new int[,] { { -2,7,4 }, { 4, 5, 6 } };
+
+
+            Vector[] vectors = {new Vector(arr1),
+                                new Vector(arr2),
+                                new Vector(arr3),
+                                new Vector(arr4),
+                                new Vector(arr5)
+            };
+            Console.WriteLine("Исходный массив:");
+            Print(vectors);
+            Sort(vectors);
+            Console.WriteLine("Отсортированный массив:");
+            Print(vectors);
+            Console.ReadKey();
+        }
+
+        static void Sort(Vector[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                for (int j = i + 1; j < array.Length; j++)
+                {
+                    if (array[i].Length < array[j].Length)
+                    {
+                        Vector temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+            }
+
+        }
+        static void Print(Vector[] array)
+        {
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                array[i].Print();
+                Console.WriteLine();
+            }
+
+        }
+
+    }
+}
