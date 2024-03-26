@@ -1,6 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿//// See https://aka.ms/new-console-template for more information
 
-//using System;
+///using System;
 //using System.Collections.Generic;
 //using System.Diagnostics.Metrics;
 //using System.Xml.Linq;
@@ -9,12 +9,15 @@
 //    private string _famile;
 //    private double _rez;
 //    private string _prep;
+//    private int _group;
+
 //    public string Famile => _famile;
 //    public double Rez => _rez;
-
 //    public string Prep => _prep;
-//    private int _group;
 //    public int Group => _group;
+
+//    private const int Norma = 100;
+
 //    public Sportsmen(string famile, double rez, string prep, int group)
 //    {
 //        _famile = famile;
@@ -23,6 +26,19 @@
 //        _group = group;
 //    }
 
+//    public void DisplayInfo()
+//    {
+//        if (_rez < Norma)
+//        {
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t Преподаватель {2:f3} \t Группа {3:f4} \t Норматив выполнен",
+//                Famile, Rez, Prep, Group);
+//        }
+//        else
+//        {
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t Преподаватель {2:f3} \t Группа {3:f4}",
+//                Famile, Rez, Prep, Group);
+//        }
+//    }
 //}
 //class Program
 //{
@@ -32,17 +48,16 @@
 //        string[] s = new string[] {
 // "Иванова", "Петрова", "Сидорова",
 // "Кузнецова", "Макарова"};
-//        double[] r = new double[] {15,
-// 155, 99, 85, 10};
+//        double[] r = new double[] {100,
+// 155, 999, 85, 10};
 //        int ss = 0;
 //        int[] n = new int[] { 1, 2, 3, 4, 5 };
-//        string[] re = new string[] { "Фетодов", "Болт", "Неймар", "Месси", "Роналду" };
+//        string[] re = new string[] { "Федотов", "Болт", "Неймар", "Месси", "Роналду" };
 //        for (int i = 0; i < sp.Length; i++)
 //        {
 
 //            sp[i] = new Sportsmen(s[i], r[i], re[i], n[i]);
-//            Console.WriteLine(
-//            "Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4}",
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4}",
 //            s[i], r[i], re[i], n[i]);
 //        }
 
@@ -67,7 +82,7 @@
 
 
 //        }
-//        Console.WriteLine();
+//        Console.WriteLine("-----------------------------------------------------------------------------------------");
 //        for (int i = 0; i < sp.Length; i++)
 //        {
 
@@ -76,14 +91,12 @@
 //            if (sp[i].Rez < norma)
 //            {
 //                nn++;
-//                Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4} \t норматив выполнен",
-//                sp[i].Famile, sp[i].Rez, sp[i].Prep, sp[i].Group);
+//                sp[i].DisplayInfo();
 
 
 //            }
 //            else
-//                Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4} \t ",
-//                 sp[i].Famile, sp[i].Rez, sp[i].Prep, sp[i].Group);
+//                sp[i].DisplayInfo();
 
 
 
@@ -107,9 +120,9 @@
 
 //    }
 //}
-
-////второй уровень номер 1
+//второй уровень номер 1
 //using System;
+//using System.Text.RegularExpressions;
 
 //class Program
 //{
@@ -134,9 +147,15 @@
 
 //            _sred /= 4;
 //        }
+//        public void DisplayInfo()
+//        {
 
+
+//            Console.WriteLine("Фамилия {0} \t Cреднее{1}",
+//                Famile, Sred);
+
+//        }
 //    }
-
 //    static void Main(string[] args)
 //    {
 
@@ -153,10 +172,8 @@
 //        new double[] { 5.0, 3.0, 5.0, 5.0 });
 //        for (int i = 0; i < cl.Length; i++)
 //        {
+//            cl[i].DisplayInfo();
 
-//            Console.WriteLine(
-//            "Фамилия {0}\t Средний балл {1,4:f2}",
-//            cl[i].Famile, cl[i].Sred);
 //        }
 //        for (int i = 0; i < cl.Length - 1; i++)
 //        {
@@ -180,11 +197,12 @@
 //        for (int i = 0; i < cl.Length; i++)
 //        {
 //            if (cl[i].Sred >= 4)
-//                Console.WriteLine("Фамилия {0}\t " + "Средний балл {1,4:f2}", cl[i].Famile, cl[i].Sred);
+//                cl[i].DisplayInfo();
 //        }
 //    }
 //}
-////третий уровень номер 2
+//}
+//////третий уровень номер 2
 //using System;
 //struct Team
 //{
@@ -230,7 +248,7 @@
 //        Team[] topTeamsG1 = new Team[6];
 //        Team[] topTeamsG2 = new Team[6];
 
-//        // Предположим, что лучшие команды - это первые 6 команд в каждой группе
+        
 //        for (int i = 0; i < 6; i++)
 //        {
 //            topTeamsG1[i] = group1[i];
