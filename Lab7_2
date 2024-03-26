@@ -1,0 +1,207 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Lab7_2
+{
+    class Program
+    {
+        class Player
+        {
+            private string _surname;
+            private int _score;
+            public int Score
+            {
+                get { return _score; }
+                set
+                {
+                    if (value >= 0)
+                        _score = value;
+                }
+            }
+            public string Surname { get { return _surname; } private set { } }
+            public Player(string surname)
+            {
+                _surname = surname;
+                _score = 0;
+            }
+        }
+        abstract class Game
+        {
+            protected Random _rand;
+            protected string _gameName;
+            protected Player[] _players;
+            protected List<Player> _result;
+            public Game(Random rand, string gameName, Player[] players)
+            {
+                _rand = rand;
+                _gameName = gameName;
+                _players = players;
+                _result = new List<Player>();
+            }
+
+            public abstract void ShowInfo();
+            public abstract void AddScore(Player player);
+            
+            public abstract void Clean();
+            public void UpdateResult(Player player)
+            {
+                _result.Add(player);
+            }
+            public void Sort()
+            {
+                bool swap;
+                int n = _result.Count;
+
+                do
+                {
+                    swap = false;
+                    for (int i = 1; i < n; i++)
+                    {
+                        if (_result[i - 1].Score > _result[i].Score)
+                        {
+                            Player temp = _result[i - 1];
+                            _result[i - 1] = _result[i];
+                            _result[i] = temp;
+                            swap = true;
+                        }
+                    }
+                    n--;
+                } while (swap);
+            }
+            public void HoldGame()
+            {
+                Console.WriteLine("Новая игра:");
+                Clean();
+                Sort();
+                ShowInfo();
+            }
+        }
+        class Hockey : Game
+        {
+            readonly int n = 2; //количество игр 
+            readonly int fail = 10;
+            public Hockey(Random rand, string gameName, Player[] players) : base(rand, gameName, players)
+            {
+
+            }
+            public override void AddScore(Player player)
+            {
+                int[] list = new int[3] { 2, 5, 10 };
+                player.Score += list[_rand.Next(list.Length)];
+                //Console.WriteLine(player.Score);
+            }
+            public override void Clean()
+            {
+                for (int i = 0; i < _players.Length; i++)
+                {
+                    bool ok = true;
+                    for (int j = 0; j < n; j++)
+                    {
+                        int a = _players[i].Score;
+                        //Console.WriteLine(_players[i].Score);
+                        AddScore(_players[i]);
+                        if ((_players[i].Score - a) == fail)
+                        {
+                            ok = false;
+                            //Console.WriteLine(_players[i].Score);
+                            //Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
+                            break;
+                        }
+                    }
+                    if (ok == true)
+                    {
+                        //Console.WriteLine(_players[i].Score);
+                        UpdateResult(_players[i]);
+                        //Console.WriteLine($"{_players[i].Surname} в кандидатах!");
+                    }
+
+                }
+            }
+            public override void ShowInfo()
+            {
+                Console.WriteLine("Хоккейный матч:");
+                foreach (var player in _result)
+                {
+                    Console.WriteLine($"Фамилия: {player.Surname}, суммарное штрафное время: {player.Score} сек");
+                }
+            }
+        }
+        class Basketball : Game
+        {
+            readonly int n = 3;//количество игр
+            readonly int maxFouls = 3;
+            public Basketball(Random rand, string gameName, Player[] players) : base(rand, gameName, players)
+            {
+
+            }
+            public override void AddScore(Player player)
+            {
+                player.Score += _rand.Next(6);
+            }
+            public override void Clean()
+            {
+                for (int i = 0; i < _players.Length; i++)
+                {
+                    bool ok = true;
+                    for (int j = 0; j < n; j++)
+                    {
+                        int a = _players[i].Score;
+                        //Console.WriteLine(_players[i].Score);
+                        AddScore(_players[i]);
+                        if ((_players[i].Score - a) > maxFouls)
+                        {
+                            ok = false;
+                            //Console.WriteLine(_players[i].Score);
+                            //Console.WriteLine($"{_players[i].Surname} больше не в кандидатах!");
+                            break;
+                        }
+                    }
+                    if (ok == true)
+                    {
+                        //Console.WriteLine(_players[i].Score);
+                        UpdateResult(_players[i]);
+                        //Console.WriteLine($"{_players[i].Surname} в кандидатах!");
+                    }
+
+                }
+            }
+            public override void ShowInfo()
+            {
+                Console.WriteLine("Баскетбольный матч:");
+                foreach (var player in _result)
+                {
+                    Console.WriteLine($"Фамилия: {player.Surname}, суммарное количество фолов: {player.Score} шт");
+                }
+            }
+        }
+
+        static void Main()
+        {
+            Random rand = new Random();
+            Player[] players1 = {new Player("Иванов"),
+                            new Player("Петров"),
+                            new Player("Семёнов"),
+                            new Player("Сидоров"),
+                            new Player("Чернов")
+            };
+            Basketball game1 = new Basketball(rand, "Basketball match", players1);
+            game1.HoldGame();
+            Player[] players2 = {new Player("Зайцев"),
+                            new Player("Медведев"),
+                            new Player("Волков"),
+                            new Player("Козлов"),
+                            new Player("Жабов")
+            };
+            Hockey game2 = new Hockey(rand, "Hockey match", players2);
+            game2.HoldGame();
+            Console.ReadKey();
+        }
+    }
+}
