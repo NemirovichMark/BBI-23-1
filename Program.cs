@@ -1,315 +1,313 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("порядковый номер 9");
-#region
-
+﻿//// See https://aka.ms/new-console-template for more information
+
+///using System;
+//using System.Collections.Generic;
+//using System.Diagnostics.Metrics;
+//using System.Xml.Linq;
+//struct Sportsmen
+//{
+//    private string _famile;
+//    private double _rez;
+//    private string _prep;
+//    private int _group;
+
+//    public string Famile => _famile;
+//    public double Rez => _rez;
+//    public string Prep => _prep;
+//    public int Group => _group;
+
+//    private const int Norma = 100;
+
+//    public Sportsmen(string famile, double rez, string prep, int group)
+//    {
+//        _famile = famile;
+//        _rez = rez;
+//        _prep = prep;
+//        _group = group;
+//    }
+
+//    public void DisplayInfo()
+//    {
+//        if (_rez < Norma)
+//        {
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t Преподаватель {2:f3} \t Группа {3:f4} \t Норматив выполнен",
+//                Famile, Rez, Prep, Group);
+//        }
+//        else
+//        {
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t Преподаватель {2:f3} \t Группа {3:f4}",
+//                Famile, Rez, Prep, Group);
+//        }
+//    }
+//}
+//class Program
+//{
+//    static void Main()
+//    {
+//        Sportsmen[] sp = new Sportsmen[5];
+//        string[] s = new string[] {
+// "Иванова", "Петрова", "Сидорова",
+// "Кузнецова", "Макарова"};
+//        double[] r = new double[] {100,
+// 155, 999, 85, 10};
+//        int ss = 0;
+//        int[] n = new int[] { 1, 2, 3, 4, 5 };
+//        string[] re = new string[] { "Федотов", "Болт", "Неймар", "Месси", "Роналду" };
+//        for (int i = 0; i < sp.Length; i++)
+//        {
+
+//            sp[i] = new Sportsmen(s[i], r[i], re[i], n[i]);
+//            Console.WriteLine("Фамилия {0} \t Результат {1:f2} \t преподаватель {2:f3} \t группа {3:f4}",
+//            s[i], r[i], re[i], n[i]);
+//        }
+
+
+//        for (int i = 0; i < sp.Length - 1; i++)
+//        {
+//            Sportsmen amax = sp[i];
+//            int imax = i;
+//            for (int j = i + 1; j < sp.Length; j++)
+//            {
+//                if (sp[j].Rez > amax.Rez)
+//                {
+//                    amax = sp[j];
+//                    imax = j;
+//                }
+//            }
+
+//            Sportsmen temp;
+//            temp = sp[imax];
+//            sp[imax] = sp[i];
+//            sp[i] = temp;
+
+
+//        }
+//        Console.WriteLine("-----------------------------------------------------------------------------------------");
+//        for (int i = 0; i < sp.Length; i++)
+//        {
+
+//            int nn = 0;
+//            int norma = 100;
+//            if (sp[i].Rez < norma)
+//            {
+//                nn++;
+//                sp[i].DisplayInfo();
+
+
+//            }
+//            else
+//                sp[i].DisplayInfo();
+
+
 
-
-Console.WriteLine("номер 4");
-
-
-
-
-
-int[,] matrixA = new int[5, 5] { {1, 2, 3, 4, 5},
-                                 {6, 7, 8, 9, 10},
-                                 {11, 12, 13, 14, 15},
-                                 {16, 17, 18, 19, 20},
-                                 {21, 22, 23, 24, 25} };
-
-        int[,] matrixB = new int[5, 5] { {26, 27, 28, 29, 30},
-                                         {31, 32, 33, 34, 35},
-                                         {36, 37, 38, 39, 40},
-                                         {41, 42, 43, 44, 45},
-                                         {46, 47, 48, 49, 50} };
-
-        SwapMaxDiagonalElements(matrixA, matrixB);
-
-        Console.WriteLine("полученная матрица А");
-        PrintMatrix(matrixA);
-
-        Console.WriteLine("полученная матрица B");
-        PrintMatrix(matrixB);
-    
-
-    static void SwapMaxDiagonalElements(int[,] matrixA, int[,] matrixB)
-    {
-        int maxA = FindMaxOnDiagonal(matrixA);
-        int maxB = FindMaxOnDiagonal(matrixB);
-
-        int maxAIndex = -1;
-        int maxBIndex = -1;
-
-        for (int i = 0; i < matrixA.GetLength(0); i++)
-        {
-            if (matrixA[i, i] == maxA)
-            {
-                maxAIndex = i;
-            }
-            if (matrixB[i, i] == maxB)
-            {
-                maxBIndex = i;
-            }
-            if (maxAIndex != -1 && maxBIndex != -1)
-            {
-                break;
-            }
-        }
-
-        if (maxAIndex != -1 && maxBIndex != -1)
-        {
-            
-            for (int j = 0; j < matrixA.GetLength(1); j++)
-            {
-                int temp = matrixA[maxAIndex, j];
-                matrixA[maxAIndex, j] = matrixB[j, maxBIndex];
-                matrixB[j, maxBIndex] = temp;
-            }
-        }
-    }
-
-    static int FindMaxOnDiagonal(int[,] matrix)
-    {
-        int max = matrix[0, 0];
-        for (int i = 1; i < matrix.GetLength(0); i++)
-        {
-            if (matrix[i, i] > max)
-            {
-                max = matrix[i, i];
-            }
-        }
-        return max;
-    }
-
-    static void PrintMatrix(int[,] matrix)
-    {
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                Console.Write(matrix[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-    }
-
-
-
-#endregion
-
-#region
-
-
-
-Console.WriteLine("номер 10");
-
-
-
-int[,] matrix = {
-            { 1,- 2, 3, 0 },
-            { 5, 6, 7, 8 },
-            { -9, 10, 11, 12 },
-            { 13, 114, 15, 16 }
-        };
-
-int maxB;
-int minA;
-int maxC;
-int minC;
-
-FindMinMaxAndIndexes(matrix, out maxB, out minA, out maxC, out minC);
-Console.WriteLine("Максимальный элемент ниже главной диагонали: " + maxB);
-Console.WriteLine("Минимальный элемент выше главной диагонали: " + minA);
-
-if (maxC != minC)
-{
-    matrix = DeleteColumn(matrix, maxC);
-    if (maxC < minC)
-    {
-        minC--; // adjust for the removed column
-    }
-    matrix = DeleteColumn(matrix, minC);
-}
-else
-{
-    matrix = DeleteColumn(matrix, maxC);
-}
-
-Console.WriteLine("Матрица после удаления столбцов:");
-
-
-
-static void FindMinMaxAndIndexes(int[,] matrix, out int maxB, out int minA, out int maxC, out int minC)
-{
-    maxB = int.MinValue;
-    minA = int.MaxValue;
-    maxC = -1;
-    minC = -1;
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        for (int j = 0; j < matrix.GetLength(1); j++)
-        {
-            if (j <= i && matrix[i, j] > maxB)
-            {
-                maxB = matrix[i, j];
-                maxC = j;
-            }
-
-            if (j >= i && matrix[i, j] < minA)
-            {
-                minA = matrix[i, j];
-                minC = j;
-            }
-        }
-    }
-}
-
-static int[,] DeleteColumn(int[,] matrix, int columnIndex)
-{
-    int[,] result = new int[matrix.GetLength(0), matrix.GetLength(1) - 1];
-
-    for (int i = 0; i < matrix.GetLength(0); i++)
-    {
-        for (int j = 0, k = 0; j < matrix.GetLength(1); j++)
-        {
-            if (j != columnIndex)
-            {
-                result[i, k] = matrix[i, j];
-                k++;
-            }
-        }
-    }
-
-    return result;
-}
-
-
-
-for (int i = 0; i < matrix.GetLength(0); i++)
-{
-    for (int j = 0; j < matrix.GetLength(1); j++)
-    {
-        Console.Write(matrix[i, j] + " ");
-    }
-    Console.WriteLine();
-}
-
-
-
-#endregion
-
-#region
-Console.WriteLine("номер 16");
-int[] a1 = { 3, -5, 2, -8, 7, -4 };
-int[] a2 = { -1, 6, -3, 9, -2 };
-
-SortNegativesDescending(a1);
-SortNegativesDescending(a2);
-
-Console.WriteLine(" первый массив после упорядочевания");
-PrintArray(a1);
-
-Console.WriteLine("второй массив после упорядочевания");
-PrintArray(a2);
-    
-
-    static void SortNegativesDescending(int[] array)
-{
-    int[] negatives = Array.FindAll(array, element => element < 0);
-    Array.Sort(negatives);
-    Array.Reverse(negatives);
-
-    int negativeIndex = 0;
-    for (int i = 0; i < array.Length; i++)
-    {
-        if (array[i] < 0)
-        {
-            array[i] = negatives[negativeIndex];
-            negativeIndex++;
-        }
-    }
-}
-
-static void PrintArray(int[] array)
-{
-    foreach (int element in array)
-    {
-        Console.Write(element + " ");
-    }
-    Console.WriteLine();
-}
-#endregion
-
-#region
-Console.WriteLine("номер 22");
-int[,] matr = {
-    { 1, 0, 3, 0, 0 },
-    { 6, 7, -800, 9, -100000 },
-   { 11, 12, 13, 14, 15 },
-  { 16, 17, 18, 19, -20 },
-   { 21, -8, 23, 24, -25 }
-};
-
-int[] negativeE = CountNegativeElementsInRows(matr);
-int[] maxN = MaxNegativeInColumns(matr);
-
-Console.WriteLine("Количество отрицательных элементов в строках:");
-PrintAray(negativeE);
-Console.WriteLine("Максимальный среди отрицательных элементов столбцов:");
-PrintAray(maxN);
-
-
-static int[] CountNegativeElementsInRows(int[,] matr)
-{
-    int[] result = new int[matr.GetLength(0)];
-
-    for (int i = 0; i < matr.GetLength(0); i++)
-    {
-        int count = 0;
-        for (int j = 0; j < matr.GetLength(1); j++)
-        {
-            if (matr[i, j] < 0)
-            {
-                count++;
-            }
-        }
-        result[i] = count;
-    }
-
-    return result;
-}
-
-static int[] MaxNegativeInColumns(int[,] matr)
-{
-    int[] result = new int[matr.GetLength(1)];
-
-    for (int j = 0; j < matr.GetLength(1); j++)
-    {
-        int max = int.MinValue;
-        for (int i = 0; i < matr.GetLength(0); i++)
-        {
-            if (matr[i, j] < 0 && matr[i, j] > max)
-            {
-                max = matr[i, j];
-            }
-        }
-        if (max == int.MinValue)
-        {
-            max = 0;
-        }
-        result[j] = max;
-    }
-
-    return result;
-}
-
-static void PrintAray(int[] aray)
-{
-    foreach (var item in aray)
-    {
-        Console.Write(item + " ");
-    }
-    Console.WriteLine();
-}
-
-#endregion
+//        }
+//        for (int i = 0; i < sp.Length; i++)
+//        {
+
+//            int nn = 0;
+//            int norma = 100;
+//            if (r[i] < norma)
+//            {
+//                nn++;
+//            }
+//            ss = ss + nn;
+
+
+
+//        }
+//        Console.WriteLine(($"\nСуммарное количество участниц, выполнивших норматив:{ss}"));
+
+
+//    }
+//}
+//второй уровень номер 1
+//using System;
+//using System.Text.RegularExpressions;
+
+//class Program
+//{
+//    struct Struct1
+//    {
+//        private string _famile;
+//        public string Famile => _famile;
+
+//        private double[] _x;
+//        public double[] X => _x;
+//        private double _sred;
+//        public double Sred => _sred;
+
+//        public Struct1(string famile1, double[] x1)
+
+//        {
+//            _sred = 0;
+//            _famile = famile1;
+//            _x = x1;
+//            for (int i = 0; i < 4; i++)
+//                _sred += _x[i];
+
+//            _sred /= 4;
+//        }
+//        public void DisplayInfo()
+//        {
+
+
+//            Console.WriteLine("Фамилия {0} \t Cреднее{1}",
+//                Famile, Sred);
+
+//        }
+//    }
+//    static void Main(string[] args)
+//    {
+
+//        Struct1[] cl = new Struct1[5];
+//        cl[0] = new Struct1("Иванов",
+//        new double[] { 3.0, 5.0, 2.0, 3.0 });
+//        cl[1] = new Struct1("Петров",
+//        new double[] { 5.0, 4.0, 5.0, 3.0 });
+//        cl[2] = new Struct1("Сидоров",
+//        new double[] { 5.0, 4.0, 5.0, 5.0 });
+//        cl[3] = new Struct1("Сидоров2",
+//        new double[] { 5.0, 5.0, 5.0, 5.0 });
+//        cl[4] = new Struct1("Сидоров3",
+//        new double[] { 5.0, 3.0, 5.0, 5.0 });
+//        for (int i = 0; i < cl.Length; i++)
+//        {
+//            cl[i].DisplayInfo();
+
+//        }
+//        for (int i = 0; i < cl.Length - 1; i++)
+//        {
+//            double amax = cl[i].Sred;
+//            int imax = i;
+//            for (int j = i + 1; j < cl.Length; j++)
+//            {
+//                if (cl[j].Sred > amax)
+//                {
+//                    amax = cl[j].Sred;
+//                    imax = j;
+//                }
+//            }
+
+//            Struct1 temp;
+//            temp = cl[imax];
+//            cl[imax] = cl[i];
+//            cl[i] = temp;
+//        }
+//        Console.WriteLine();
+//        for (int i = 0; i < cl.Length; i++)
+//        {
+//            if (cl[i].Sred >= 4)
+//                cl[i].DisplayInfo();
+//        }
+//    }
+//}
+//}
+//////третий уровень номер 2
+//using System;
+//struct Team
+//{
+//    private string _name;
+//    public string Name => _name;
+
+//    public Team(string name)
+//    {
+//        _name = name;
+//    }
+
+
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Team[] teams = new Team[24];
+
+
+//        for (int i = 0; i < 24; i++)
+//        {
+//            teams[i] = new Team("Команда " + (i + 1).ToString());
+//        }
+
+
+//        Team[] group1 = new Team[12];
+//        Team[] group2 = new Team[12];
+
+
+//        for (int i = 0; i < 12; i++)
+//        {
+//            group1[i] = teams[i];
+//        }
+
+//        for (int i = 0; i < 12; i++)
+//        {
+//            group2[i] = teams[i + 12];
+//        }
+
+
+//        Team[] topTeamsG1 = new Team[6];
+//        Team[] topTeamsG2 = new Team[6];
+
+        
+//        for (int i = 0; i < 6; i++)
+//        {
+//            topTeamsG1[i] = group1[i];
+//            topTeamsG2[i] = group2[i];
+//        }
+
+
+//        Console.WriteLine("Список команд участников второго этапа:");
+//        Console.WriteLine("Группа 1:");
+
+//        for (int i = 0; i < 6; i++)
+//        {
+//            Console.WriteLine(topTeamsG1[i].Name);
+//        }
+
+//        Console.WriteLine("Группа 2:");
+//        for (int i = 0; i < 6; i++)
+//        {
+//            Console.WriteLine(topTeamsG2[i].Name);
+//        }
+
+
+//        Team[] C = new Team[12];
+
+//        int hi = 0, j = 0, k = 0;
+
+//        while (hi < 6 && j < 6)
+//        {
+//            if (String.Compare(topTeamsG1[hi].Name, topTeamsG2[j].Name) >= 0)
+//            {
+//                C[k] = topTeamsG1[hi];
+//                hi++;
+//            }
+//            else
+//            {
+//                C[k] = topTeamsG2[j];
+//                j++;
+//            }
+//            k++;
+//        }
+
+
+//        while (hi < 6)
+//        {
+//            C[k] = topTeamsG1[hi];
+//            hi++;
+//            k++;
+//        }
+//        while (j < 6)
+//        {
+//            C[k] = topTeamsG2[j];
+//            j++;
+//            k++;
+//        }
+
+//        Console.WriteLine("Результат объединения:");
+//        foreach (Team team in C)
+//        {
+//            Console.WriteLine(team.Name);
+//        }
+//    }
+//}
