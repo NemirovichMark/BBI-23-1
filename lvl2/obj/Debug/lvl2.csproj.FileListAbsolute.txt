@@ -1,0 +1,7 @@
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\bin\Debug\lvl2.exe.config
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\bin\Debug\lvl2.exe
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\bin\Debug\lvl2.pdb
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.AssemblyReference.cache
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.CoreCompileInputs.cache
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.exe
+C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.pdb
