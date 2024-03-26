@@ -1,0 +1,188 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Lab7_3
+{
+    class Team
+    {
+        protected string _name;
+        protected int _goalsWon;
+        protected int _goalsLost;
+        protected int _point;
+        protected static int _counter = 0;
+        protected int Difference()
+        {
+            return (_goalsWon - _goalsLost);
+        }
+        public Team(string name, int goalsWon, int goalsLost, int point)
+        {
+            _name = name;
+            _goalsWon = goalsWon;
+            _goalsLost = goalsLost;
+            _point = point;
+        }
+        public Team()
+        {
+            _name = " ";
+            _goalsWon = 0;
+            _goalsLost = 0;
+            _point = 0;
+        }
+        protected virtual void Show()
+        {
+            _counter++;
+            Console.WriteLine($"{_counter}. Команда: {_name}, общий счёт: {_point}");
+        }
+        protected void PlusN(int n)
+        {
+            _point += n;
+        }
+        protected void Up(int score1, int score2)
+        {
+            _goalsWon += score1;
+            _goalsLost += score2;
+            if (score1 > score2)
+            {
+                PlusN(3);
+            }
+            else if (score1 == score2)
+            {
+                PlusN(1);
+            }
+        }
+        protected void SetName(string name)
+        {
+            _name = name;
+        }
+        public static void ShowList(Team[] teams)
+        {
+            for (int i1 = 0; i1 < teams.Length; i1++)
+            {
+                teams[i1].Show();
+            }
+        }
+        public static void Update(Team[] teams, string name, int score1, int score2)
+        {
+            bool ok = false;
+            for (int i = 0; i < teams.Length; i++)
+            {
+                if (teams[i]._name == name)
+                {
+                    ok = true;
+                    teams[i].Up(score1, score2);
+                    break;
+                }
+            }
+            if (ok == false)
+            {
+                for (int i = 0; i < teams.Length; i++)
+                {
+                    if (teams[i]._name == " ")
+                    {
+                        teams[i].SetName(name);
+                        teams[i].Up(score1, score2);
+                        break;
+                    }
+                }
+            }
+        }
+        public static void Sort(Team[] teams)
+        {
+            for (int i = 0; i < teams.Length - 1; i++)
+            {
+                for (int j = i + 1; j < teams.Length; j++)
+                {
+                    if (teams[j]._point > teams[i]._point || ((teams[j]._point == teams[i]._point) && (teams[j].Difference()) > (teams[i].Difference())))
+                    {
+                        Team a = teams[i];
+                        teams[i] = teams[j];
+                        teams[j] = a;
+                    }
+                }
+            }
+        }
+    }
+    class WomensTeam : Team
+    {
+        protected override void Show()
+        {
+            _counter++;
+            Console.WriteLine($"{_counter}. {_name}, женская команда, общий счёт: {_point}");
+        }
+        public WomensTeam() : base()
+        {
+        }
+        public WomensTeam(string name, int goalsWon, int goalsLost, int point) : base(name, goalsWon, goalsLost, point)
+        {
+        }
+    }
+    class MensTeam : Team
+    {
+        protected override void Show()
+        {
+            _counter++;
+            Console.WriteLine($"{_counter}. {_name}, мужская команда, общий счёт: {_point}");
+        }
+        public MensTeam(string name, int goalsWon, int goalsLost, int point) : base(name, goalsWon, goalsLost, point)
+        {
+        }
+        public MensTeam() : base()
+        {
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Введите количество мужских команд");
+            int n1 = int.Parse(Console.ReadLine());
+            MensTeam[] men = new MensTeam[n1];
+            for (int i = 0; i < n1; i++) men[i] = new MensTeam();
+            Console.WriteLine("Введите количество игр, проведенных среди мужских команд");
+            int n2 = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n2; i++)
+            {
+                Console.WriteLine("Enter the name of the first team, the number of goals scored by the first team,\n" +
+                    "the name of the second team, the number of goals scored by the second team:");
+
+                string[] parts = Console.ReadLine().Split(' ');
+
+                Team.Update(men, parts[0], int.Parse(parts[1]), int.Parse(parts[3]));
+                Team.Update(men, parts[2], int.Parse(parts[3]), int.Parse(parts[1]));
+            }
+            Console.WriteLine("Введите количество женских команд");
+            int n3 = int.Parse(Console.ReadLine());
+            WomensTeam[] women = new WomensTeam[n3];
+            for (int i = 0; i < n3; i++) women[i] = new WomensTeam();
+            Console.WriteLine("Введите количество игр, проведенных среди женских команд");
+            int n4 = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n4; i++)
+            {
+                Console.WriteLine("Enter the name of the first team, the number of goals scored by the first team,\n" +
+                    "the name of the second team, the number of goals scored by the second team:");
+                string[] parts = Console.ReadLine().Split(' ');
+                Team.Update(women, parts[0], int.Parse(parts[1]), int.Parse(parts[3]));
+                Team.Update(women, parts[2], int.Parse(parts[3]), int.Parse(parts[1]));
+            }
+            Team[] all = new Team[men.Length + women.Length];
+            for (int i = 0; i < men.Length; i++)
+            {
+                all[i] = men[i];
+            }
+            for (int i = men.Length; i < men.Length + women.Length; i++)
+            {
+                all[i] = women[i - men.Length];
+            }
+            Team.Sort(all);
+            Console.WriteLine("Таблица результатов:");
+            Team.ShowList(all);
+            Console.ReadKey();
+        }
+    }
+}
