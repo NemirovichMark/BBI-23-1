@@ -1,34 +1,40 @@
-﻿using System;
+using System;
+using System.Diagnostics.Metrics;
 
 public abstract class RadioPoll
 {
-    protected string _answer;
-    protected int _count;
+    private static int _totalVotes = 0;
+    private string _answer;
+    private int _count;
     public string Answer { get { return _answer; } }
     public int Count { get { return _count; } }
+    public static int TotalVotes { get { return _totalVotes; } }
     public RadioPoll(string answer, int count)
     {
         _answer = answer;
         _count = count;
+        _totalVotes += count;
+    }
+    public virtual void Print()
+    {
+        double percentage = (double)Count / TotalVotes * 100;
+        Console.WriteLine($"Ответ: {Answer} - {percentage:f2}% от общего количества ответов");
     }
 }
 class Man : RadioPoll
 {
     public Man(string answer, int count) : base(answer, count)
     {
-        _answer = answer;
-        _count = count;
+
     }
 }
 class Opening : RadioPoll
 {
     public Opening(string answer, int count) : base(answer, count)
     {
-        _answer = answer;
-        _count = count;
+
     }
 }
-
 
 class Program
 {
@@ -56,47 +62,34 @@ class Program
 
         Sort(openings);
 
-        int totalVotes = 0;
 
-        foreach (var man in mans)
-        {
-            totalVotes += man.Count;
-        }
-        foreach (var opening in openings)
-        {
-            totalVotes += opening.Count;
-        }
-        static void Sort(RadioPoll[] mans) // converts any heir class to the base / преобразует любой класс-наследник в базовый
-        {
-            for (int i = 0; i < mans.Length - 1; i++) // from 1 to n-1
-            {
-                for (int j = i + 1; j < mans.Length; j++) // from next to n
-                {
-                    if (mans[i].Count > mans[j].Count)
-                    {
-                        RadioPoll t = mans[i];
-                        mans[i] = mans[j];
-                        mans[j] = t;
-                    }
-                }
-            }
-        }
         Console.WriteLine("Топ-5 человек года по результатам опроса:");
-
         foreach (var man in mans)
         {
-            double percentage = (double)man.Count / totalVotes * 100;
-            Console.WriteLine($"Ответ: {man.Answer} - {percentage:f2}% от общего количества ответов");
+            man.Print();
         }
 
         Console.WriteLine();
 
         Console.WriteLine("Топ-5 открытий года по результатам опроса:");
-
         foreach (var opening in openings)
         {
-            double percentage = (double)opening.Count / totalVotes * 100;
-            Console.WriteLine($"Ответ: {opening.Answer} - {percentage:f2}% от общего количества ответов");
+            opening.Print();
+        }
+    }
+    static void Sort(RadioPoll[] mans)
+    {
+        for (int i = 0; i < mans.Length - 1; i++)
+        {
+            for (int j = i + 1; j < mans.Length; j++)
+            {
+                if (mans[i].Count > mans[j].Count)
+                {
+                    RadioPoll t = mans[i];
+                    mans[i] = mans[j];
+                    mans[j] = t;
+                }
+            }
         }
     }
 }
