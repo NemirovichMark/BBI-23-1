@@ -115,102 +115,94 @@ class Program
 }
 */
 
-//using System;
+/*using System;
 
-//abstract class SportPlayer
-//{
-//    protected string surname;
-//    protected string name;
-//    protected int penalty;
+abstract class SportPlayer
+{
+    protected string surname;
+    protected string name;
 
-//    public string Surname => surname;
-//    public string Name => name;
-//    public int Penalty => penalty;
+    public string Surname => surname;
+    public string Name => name;
 
-//    public SportPlayer(string surname, string name, int penalty)
-//    {
-//        this.surname = surname;
-//        this.name = name;
-//        this.penalty = penalty;
-//    }
+    public abstract bool IsExcluded();
+    public abstract void PrintInfo();
+}
 
-//    public abstract void AddPenalty();
-//}
+class HockeyPlayer : SportPlayer
+{
+    private int penaltyTime;
 
-//class HockeyPlayer : SportPlayer
-//{
-//    public HockeyPlayer(string surname, string name, int penalty) : base(surname, name, penalty) { }
+    public HockeyPlayer(string surname, string name, int penaltyTime)
+    {
+        this.surname = surname;
+        this.name = name;
+        this.penaltyTime = penaltyTime;
+    }
 
-//    public override void AddPenalty()
-//    {
-//        penalty++;
-//    }
-//}
+    public void AddPenalty()
+    {
+        penaltyTime += 2; // Пример: за каждый штраф 2 минуты
+    }
 
-//class BasketballPlayer : SportPlayer
-//{
-//    private int fouls;
+    public override bool IsExcluded()
+    {
+        return false; // В хоккее нет исключений
+    }
 
-//    public int Fouls => fouls;
+    public override void PrintInfo()
+    {
+        Console.WriteLine("Хоккеист - Фамилия: {0} \t Имя: {1} \t Штрафное время: {2} мин", Surname, Name, penaltyTime);
+    }
+}
 
-//    public BasketballPlayer(string surname, string name, int fouls) : base(surname, name, 0)
-//    {
-//        this.fouls = fouls;
-//    }
+class BasketballPlayer : SportPlayer
+{
+    private int fouls;
 
-//    public override void AddPenalty()
-//    {
-//        fouls++;
-//    }
-//}
+    public BasketballPlayer(string surname, string name, int fouls)
+    {
+        this.surname = surname;
+        this.name = name;
+        this.fouls = fouls;
+    }
 
-//class Program
-//{
-//    static void Main()
-//    {
-//        SportPlayer[] set = new SportPlayer[30];
-//        set[0] = new HockeyPlayer("Акинов", "Ваня", 2);
-//        set[1] = new HockeyPlayer("Кольцов", "Даня", 5);
-//        set[2] = new HockeyPlayer("Носов", "Миша", 10);
-//        set[3] = new HockeyPlayer("Осипов", "Паша", 5);
-//        set[4] = new HockeyPlayer("Кузьмин", "Саша", 2);
-//        set[5] = new HockeyPlayer("Пугачев", "Ваня", 10);
-//        set[6] = new BasketballPlayer("Киркоров", "Даня", 2);
-//        set[7] = new BasketballPlayer("Эминем", "Миша", 5);
-//        set[8] = new HockeyPlayer("Иванов", "Паша", 2);
-//        set[9] = new HockeyPlayer("Петров", "Саша", 2);
-//        set[10] = new HockeyPlayer("Cидаров", "Ваня", 2);
-//        set[11] = new HockeyPlayer("Михайлов", "Даня", 2);
-//        set[12] = new HockeyPlayer("Козлов", "Ваня", 2);
-//        set[13] = new HockeyPlayer("Воробьев", "Паша", 2);
-//        set[14] = new HockeyPlayer("Таранов", "Миша", 2);
-//        set[15] = new BasketballPlayer("Огнезов", "Саша", 2);
-//        set[16] = new HockeyPlayer("Попов", "Ваня", 2);
-//        set[17] = new HockeyPlayer("Третьяков", "Даня", 10);
-//        set[18] = new HockeyPlayer("Черкасов", "Миша", 2);
-//        set[19] = new HockeyPlayer("Князев", "Паша", 2);
-//        set[20] = new HockeyPlayer("Ногинов", "Саша", 2);
-//        set[21] = new HockeyPlayer("Казанцев", "Ваня", 10);
-//        set[22] = new HockeyPlayer("Лунин", "Ваня", 2);
-//        set[23] = new HockeyPlayer("Стоценко", "Даня", 10);
-//        set[24] = new HockeyPlayer("Глазков", "Паша", 10);
-//        set[25] = new HockeyPlayer("Подвальников", "Ваня", 5);
-//        set[26] = new HockeyPlayer("Ежков", "Сережа", 10);
-//        set[27] = new HockeyPlayer("Туренко", "Даня", 2);
-//        set[28] = new HockeyPlayer("Мухин", "Ваня", 2);
-//        set[29] = new HockeyPlayer("Григорян", "Даня", 10);
+    public void AddPenalty()
+    {
+        fouls++;
+    }
 
-//        Array.Sort(set, (x, y) => x.Penalty.CompareTo(y.Penalty));
+    public override bool IsExcluded()
+    {
+        return fouls >= 4; // Игрок будет исключен, если у него 4 или более фолов
+    }
 
-//        foreach (var player in set)
-//        {
-//            if (player.Penalty < 4)
-//            {
-//                Console.WriteLine($"Фамилия: {player.Surname} \t Имя: {player.Name} \t Штраф: {player.Penalty}");
-//            }
-//        }
-//    }
-//}
+    public override void PrintInfo()
+    {
+        Console.WriteLine("Баскетболист - Фамилия: {0} \t Имя: {1} \t Количество фолов: {2}", Surname, Name, fouls);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        SportPlayer[] players = new SportPlayer[5];
+        players[0] = new HockeyPlayer("Иванов", "Вася", 2);
+        players[1] = new HockeyPlayer("Петров", "Петя", 3);
+        players[2] = new BasketballPlayer("Сидоров", "Дима", 4);
+        players[3] = new BasketballPlayer("Козлов", "Саша", 5);
+        players[4] = new BasketballPlayer("Николаев", "Андрей", 3);
+
+        foreach (var player in players)
+        {
+            //player.AddPenalty(); // Убрали вызов метода AddPenalty
+            if (!player.IsExcluded())
+                player.PrintInfo();
+        }
+    }
+}
+*/
 
 
 using System;
