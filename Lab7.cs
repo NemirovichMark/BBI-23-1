@@ -206,83 +206,110 @@ class Program
 
 
 using System;
+using System.Collections.Generic;
 
 class FootballTeam
 {
     protected string teamName;
-    protected string gender;
-    protected int totalPoints;
+    protected int points;
 
-    public string TeamName => teamName;
-    public string Gender => gender;
-    public int TotalPoints => totalPoints;
+    public int Points => points;
 
-    public FootballTeam(string teamName, string gender, int totalPoints)
+    public FootballTeam(string teamName, int points)
     {
         this.teamName = teamName;
-        this.gender = gender;
-        this.totalPoints = totalPoints;
+        this.points = points;
+    }
+
+    public virtual string GetTeamInfo()
+    {
+        return $"{teamName} - {points} баллов";
     }
 }
 
 class WomenFootballTeam : FootballTeam
 {
-    public WomenFootballTeam(string teamName, int totalPoints) : base(teamName, "Женская", totalPoints) { }
+    public WomenFootballTeam(string teamName, int points) : base(teamName, points)
+    {
+    }
+
+    public override string GetTeamInfo()
+    {
+        return $"Женская команда {base.GetTeamInfo()}";
+    }
 }
 
 class MenFootballTeam : FootballTeam
 {
-    public MenFootballTeam(string teamName, int totalPoints) : base(teamName, "Мужская", totalPoints) { }
+    public MenFootballTeam(string teamName, int points) : base(teamName, points)
+    {
+    }
+
+    public override string GetTeamInfo()
+    {
+        return $"Мужская команда {base.GetTeamInfo()}";
+    }
 }
 
 class Program
 {
     static void Main()
     {
-        FootballTeam[] teams = new FootballTeam[24];
-        teams[0] = new MenFootballTeam("A", 88);
-        teams[1] = new MenFootballTeam("D", 77);
-        teams[2] = new MenFootballTeam("C", 90);
-        teams[3] = new MenFootballTeam("V", 89);
-        teams[4] = new MenFootballTeam("N", 20);
-        teams[5] = new MenFootballTeam("F", 66);
-        teams[6] = new MenFootballTeam("Y", 10);
-        teams[7] = new MenFootballTeam("B", 35);
-        teams[8] = new MenFootballTeam("z", 26);
-        teams[9] = new MenFootballTeam("W", 57);
-        teams[10] = new MenFootballTeam("X", 71);
-        teams[11] = new MenFootballTeam("Q", 16);
-        teams[12] = new WomenFootballTeam("A1", 56);
-        teams[13] = new WomenFootballTeam("B1", 61);
-        teams[14] = new WomenFootballTeam("D1", 66);
-        teams[15] = new WomenFootballTeam("C1", 11);
-        teams[16] = new WomenFootballTeam("V1", 12);
-        teams[17] = new WomenFootballTeam("N1", 13);
-        teams[18] = new WomenFootballTeam("F1", 41);
-        teams[19] = new WomenFootballTeam("Y1", 51);
-        teams[20] = new WomenFootballTeam("Z1", 81);
-        teams[21] = new WomenFootballTeam("W1", 80);
-        teams[22] = new WomenFootballTeam("X1", 19);
-        teams[23] = new WomenFootballTeam("Q1", 15);
+        List<FootballTeam> teams = new List<FootballTeam>();
 
+        // Создаем женские команды
+        WomenFootballTeam women1 = new WomenFootballTeam("A", 88);
+        WomenFootballTeam women2 = new WomenFootballTeam("V", 89);
+        WomenFootballTeam women3 = new WomenFootballTeam("C", 90);
+        WomenFootballTeam women4 = new WomenFootballTeam("N", 20);
+        WomenFootballTeam women5 = new WomenFootballTeam("F", 66);
+        WomenFootballTeam women6 = new WomenFootballTeam("Y", 10);
+        WomenFootballTeam women7 = new WomenFootballTeam("Z", 26);
+        WomenFootballTeam women8 = new WomenFootballTeam("W", 57);
+        WomenFootballTeam women9 = new WomenFootballTeam("X", 71);
+        WomenFootballTeam women10 = new WomenFootballTeam("Q", 16);
+        teams.Add(women1);
+        teams.Add(women2);
+        teams.Add(women3);
+        teams.Add(women4);
+        teams.Add(women5);
+        teams.Add(women6);
+        teams.Add(women7);
+        teams.Add(women8);
+        teams.Add(women9);
+        teams.Add(women10);
 
-        Array.Sort(teams, (x, y) => y.TotalPoints.CompareTo(x.TotalPoints));
+        // Создаем мужские команды
+        MenFootballTeam men1 = new MenFootballTeam("D", 77);
+        MenFootballTeam men2 = new MenFootballTeam("B", 35);
+        MenFootballTeam men3 = new MenFootballTeam("Z", 26);
+        MenFootballTeam men4 = new MenFootballTeam("W", 57);
+        MenFootballTeam men5 = new MenFootballTeam("X", 71);
+        MenFootballTeam men6 = new MenFootballTeam("Q", 16);
+        MenFootballTeam men7 = new MenFootballTeam("L", 32);
+        MenFootballTeam men8 = new MenFootballTeam("E", 48);
+        MenFootballTeam men9 = new MenFootballTeam("M", 25);
+        MenFootballTeam men10 = new MenFootballTeam("T", 63);
+        teams.Add(men1);
+        teams.Add(men2);
+        teams.Add(men3);
+        teams.Add(men4);
+        teams.Add(men5);
+        teams.Add(men6);
+        teams.Add(men7);
+        teams.Add(men8);
+        teams.Add(men9);
+        teams.Add(men10);
 
-        Console.WriteLine("Таблица лучших команд:");
-        int womenCount = 0;
-        int menCount = 0;
-        for (int i = 0; i < 23; i++)
+        // Сортируем команды по очкам
+        teams.Sort((x, y) => y.Points.CompareTo(x.Points));
+
+        // Выводим 12 лучших команд
+        Console.WriteLine("Таблица результатов:");
+        for (int i = 0; i < 12; i++)
         {
-            if (teams[i] is MenFootballTeam && menCount < 6)
-            {
-                Console.WriteLine($"\tМужская команда: {teams[i].TeamName} (очки: {teams[i].TotalPoints})");
-                menCount++;
-            }
-            if (teams[i] is WomenFootballTeam && womenCount < 6)
-            {
-                Console.WriteLine($"\tЖенская команда: {teams[i].TeamName} (очки: {teams[i].TotalPoints})");
-                womenCount++;
-            }
+            Console.WriteLine($"{i + 1}. {teams[i].GetTeamInfo()}");
         }
     }
 }
+
