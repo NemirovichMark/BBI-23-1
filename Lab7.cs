@@ -1,85 +1,119 @@
-//using System;
+/*using System;
+using System.Collections.Generic;
 
-//abstract class EventOfYear
-//{
-//    protected string _name;
-//    protected string _category;
-//    protected string _date;
+abstract class Runner
+{
+    protected string surname;
+    protected string group;
+    protected string surnameTeacher;
+    protected double rez;
+    public string standart;
 
-//    public EventOfYear(string name, string category, string date)
-//    {
-//        _name = name;
-//        _category = category;
-//        _date = date;
-//    }
+    public string Surname => surname;
+    public string Group => group;
+    public string SurnameTeacher => surnameTeacher;
+    public double Rez => rez;
 
-//    public abstract void PrintInfo();
-//}
+    public abstract string GetTitle();
+}
 
-//class HumanOfYear : EventOfYear
-//{
-//    public HumanOfYear(string name, string date) : base(name, "Человек года", date) { }
+class PersonOfYear : Runner
+{
+    public override string GetTitle()
+    {
+        return "Человек Года";
+    }
 
-//    public override void PrintInfo()
-//    {
-//        Console.WriteLine("Название: {0} \t Категория: {1} \t Дата: {2}", _name, _category, _date);
-//    }
-//}
+    public PersonOfYear(string surname, string surnameTeacher, string group, double rez)
+    {
+        this.surname = surname;
+        this.surnameTeacher = surnameTeacher;
+        this.group = group;
+        this.rez = rez;
+    }
+}
 
-//class DiscoveryOfYear : EventOfYear
-//{
-//    public DiscoveryOfYear(string name, string date) : base(name, "Открытие года", date) { }
+class DiscoveryOfYear : Runner
+{
+    public override string GetTitle()
+    {
+        return "Открытие Года";
+    }
 
-//    public override void PrintInfo()
-//    {
-//        Console.WriteLine("Название: {0} \t Категория: {1} \t Дата: {2}", _name, _category, _date);
-//    }
-//}
+    public DiscoveryOfYear(string surname, string surnameTeacher, string group, double rez)
+    {
+        this.surname = surname;
+        this.surnameTeacher = surnameTeacher;
+        this.group = group;
+        this.rez = rez;
+    }
+}
 
-//class Program
-//{
-//    static void Main()
-//    {
-//        int passedCount = 0;
+class Program
+{
+    static void Main()
+    {
+        List<PersonOfYear> personsOfYear = new List<PersonOfYear>();
+        List<DiscoveryOfYear> discoveriesOfYear = new List<DiscoveryOfYear>();
 
-//        // Оставляем текущую реализацию создания структуры WomenRunner без изменений
+        int passedPersonCount = 0;
+        int passedDiscoveryCount = 0;
 
-//        WomenRunner[] womenRunners = new WomenRunner[5];
-//        womenRunners[0] = new WomenRunner("Губеева", "Тренеровна", "234", 1.50, "Не сдан");
-//        womenRunners[1] = new WomenRunner("Капелина", "Гасанов", "666", 1.55, "Не сдан");
-//        womenRunners[2] = new WomenRunner("Попова", "Кужель", "777", 1.47, "Не сдан");
-//        womenRunners[3] = new WomenRunner("Орлова", "Лушина", "889", 1.46, "Не сдан");
-//        womenRunners[4] = new WomenRunner("Коцарь", "Пушина", "995", 1.54, "Не сдан");
+        Runner[] runners = new Runner[5];
+        runners[0] = new PersonOfYear("Губеева", "Тренеровна", "234", 1.50);
+        runners[1] = new PersonOfYear("Капелина", "Гасанов", "666", 1.55);
+        runners[2] = new PersonOfYear("Попова", "Кужель", "777", 1.47);
+        runners[3] = new DiscoveryOfYear("Орлова", "Лушина", "889", 1.46);
+        runners[4] = new DiscoveryOfYear("Коцарь", "Пушина", "995", 1.54);
 
-//        Array.Sort(womenRunners, (x, y) => y.Rez.CompareTo(x.Rez));
+        Array.Sort(runners, (x, y) => y.Rez.CompareTo(x.Rez));
 
-//        for (int i = 0; i < womenRunners.Length; i++)
-//        {
-//            var runner = womenRunners[i];
-//            if (runner.Rez <= 1.5)
-//            {
-//                passedCount++;
-//                runner.Standart = "Сдан";
-//            }
-//            runner.PrintInfo();
-//        }
+        Console.WriteLine("Таблица 'Человек Года'");
+        Console.WriteLine("Фамилия\tГруппа\tТренер\tРезультат\tНорматив (1.5 секунды)");
 
-//        Console.WriteLine("Человек сдало норматив: " + passedCount);
+        foreach (var runner in runners)
+        {
+            if (runner is PersonOfYear person)
+            {
+                if (person.Rez <= 1.5)
+                {
+                    passedPersonCount++;
+                    person.standart = "Сдан";
+                }
+                personsOfYear.Add(person);
+            }
+            else if (runner is DiscoveryOfYear discovery)
+            {
+                if (discovery.Rez <= 1.5)
+                {
+                    passedDiscoveryCount++;
+                    discovery.standart = "Сдан";
+                }
+                discoveriesOfYear.Add(discovery);
+            }
+        }
 
-//        // Создание таблиц с ответами и вывод результатов
-//        EventOfYear[] events = new EventOfYear[]
-//        {
-//            new HumanOfYear("Человек года 2022", "10.03.2022"),
-//            new DiscoveryOfYear("Открытие года 2022", "15.04.2022")
-//        };
+        foreach (var person in personsOfYear)
+        {
+            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}",
+                person.Surname, person.Group, person.SurnameTeacher, person.Rez, person.standart);
+        }
 
-//        Console.WriteLine("\nТаблица событий года:");
-//        foreach (var evnt in events)
-//        {
-//            evnt.PrintInfo();
-//        }
-//    }
-//}
+        Console.WriteLine("Человек сдало норматив: " + passedPersonCount);
+
+        Console.WriteLine("\nТаблица 'Открытие Года'");
+        Console.WriteLine("Фамилия\tГруппа\tТренер\tРезультат\tНорматив (1.5 секунды)");
+
+        foreach (var discovery in discoveriesOfYear)
+        {
+            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}",
+                discovery.Surname, discovery.Group, discovery.SurnameTeacher, discovery.Rez, discovery.standart);
+        }
+
+        Console.WriteLine("Открытий сдало норматив: " + passedDiscoveryCount);
+    }
+}
+*/
 
 //using System;
 
