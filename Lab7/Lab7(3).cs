@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 struct Participant
 {
@@ -21,7 +22,6 @@ struct Participant
         }
     }
 }
-
 class Team
 {
     protected string name;
@@ -64,7 +64,6 @@ class MenTeam : Team
     {
     }
 }
-
 class Program
 {
     static void Main()
@@ -94,17 +93,72 @@ class Program
         int womenScore = womenTeam.CalculateScore();
         int menScore = menTeam.CalculateScore();
 
+        Team winner;
+
         if (womenScore > menScore)
         {
             Console.WriteLine($"Победила женская команда '{womenTeam.Name}' с {womenScore} баллами!");
+            SortTeamsByScore(womenResults);
+            winner = womenTeam;
         }
         else if (menScore > womenScore)
         {
             Console.WriteLine($"Победила мужская команда '{menTeam.Name}' с {menScore} баллами!");
+            SortTeamsByScore(menResults);
+            winner = menTeam;
         }
         else
         {
             Console.WriteLine("Ничья!");
+            return;
+        }
+
+        Console.WriteLine("Таблица результатов:");
+        Console.WriteLine("Команда\t\tУчастники\t\tОчки");
+
+        DisplayTeamResults(winner);
+    }
+
+    static void DisplayTeamResults(Team team)
+    {
+        foreach (var participant in team.Participants)
+        {
+            Console.Write($"{team.Name}\t\t{participant.Name}\t\t{participant.Place}\n");
+        }
+    }
+
+    static void SortTeamsByScore(Participant[,] teamResults)
+    {
+        int rowCount = teamResults.GetLength(0);
+        int colCount = teamResults.GetLength(1);
+        Participant[] tempArray = new Participant[rowCount * colCount];
+
+        int index = 0;
+        for (int i = 0; i < rowCount; i++)
+        {
+            for (int j = 0; j < colCount; j++)
+            {
+                tempArray[index++] = teamResults[i, j];
+            }
+        }
+
+        Array.Sort(tempArray, (x, y) => y.Place.CompareTo(x.Place));
+
+        index = 0;
+        for (int i = 0; i < rowCount; i++)
+        {
+            for (int j = 0; j < colCount; j++)
+            {
+                teamResults[i, j] = tempArray[index++];
+            }
+        }
+    }
+
+    static void DisplaySortedResults(Participant[,] teamResults, string teamName)
+    {
+        foreach (var participant in teamResults)
+        {
+            Console.Write($"{teamName}\t\t{participant.Name}\t\t{participant.Place}\n");
         }
     }
 }
