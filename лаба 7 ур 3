@@ -86,17 +86,17 @@ class Program
     static void Main()
     {
 
-        FootballTeam[] teams = new FootballTeam[8];
-        FootballTeam[] manteams = new FootballTeam[4];
-        FootballTeam[] womanteams = new FootballTeam[4];
+        FootballTeam[] teams = new FootballTeam[10];
+        FootballTeam[] manteams = new FootballTeam[5];
+        FootballTeam[] womanteams = new FootballTeam[5];
         Random random = new Random();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             manteams[i] = new ManTeam("Команда " + (i + 1));
         }
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
-            for (int j = i + 1; j < 4; j++)
+            for (int j = i + 1; j < 5; j++)
             {
                 int score1 = random.Next(0, 5);
                 int score2 = random.Next(0, 5);
@@ -104,14 +104,14 @@ class Program
             }
         }
         Console.WriteLine();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             womanteams[i] = new WomanTeam("Команда " + (i + 1));
         }
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
-            for (int j = i + 1; j < 4; j++)
+            for (int j = i + 1; j < 5; j++)
             {
                 int score1 = random.Next(0, 5);
                 int score2 = random.Next(0, 5);
@@ -121,17 +121,17 @@ class Program
         }
         Console.WriteLine();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             teams[i] = manteams[i];
         }
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
-            teams[i + 4] = womanteams[i];
+            teams[i + 5] = womanteams[i];
         }
         Sort(teams);
         Console.WriteLine();
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 10; i++)
         {
             Console.Write((i + 1) + " место - ");
             teams[i].Print();
