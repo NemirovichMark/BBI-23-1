@@ -99,13 +99,13 @@ class Program
         {
             Console.WriteLine($"Победила женская команда '{womenTeam.Name}' с {womenScore} баллами!");
             SortTeamsByScore(womenResults);
-            winner = womenTeam;
+            dynamic winner = womenTeam;
         }
         else if (menScore > womenScore)
         {
             Console.WriteLine($"Победила мужская команда '{menTeam.Name}' с {menScore} баллами!");
             SortTeamsByScore(menResults);
-            winner = menTeam;
+            dynamic winner = menTeam;
         }
         else
         {
