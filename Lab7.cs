@@ -1,51 +1,51 @@
 /*using System;
-using System.Collections.Generic;
 
 abstract class Runner
 {
     protected string surname;
+    protected string coachSurname;
     protected string group;
-    protected string surnameTeacher;
-    protected double rez;
-    public string standart;
+    protected double result;
 
     public string Surname => surname;
+    public string CoachSurname => coachSurname;
     public string Group => group;
-    public string SurnameTeacher => surnameTeacher;
-    public double Rez => rez;
+    public double Result => result;
 
-    public abstract string GetTitle();
-}
-
-class PersonOfYear : Runner
-{
-    public override string GetTitle()
-    {
-        return "Человек Года";
-    }
-
-    public PersonOfYear(string surname, string surnameTeacher, string group, double rez)
+    public Runner(string surname, string coachSurname, string group, double result)
     {
         this.surname = surname;
-        this.surnameTeacher = surnameTeacher;
+        this.coachSurname = coachSurname;
         this.group = group;
-        this.rez = rez;
+        this.result = result;
+    }
+
+    public abstract string Standard { get; }
+
+    public virtual void PrintInfo()
+    {
+        Console.WriteLine("Фамилия: {0} \t Группа: {1} \t Тренер: {2} \t Результат: {3} \t Норматив: {4}",
+            Surname, Group, CoachSurname, Result, Standard);
     }
 }
 
-class DiscoveryOfYear : Runner
+class Runner100m : Runner
 {
-    public override string GetTitle()
-    {
-        return "Открытие Года";
-    }
+    public override string Standard => "1.5 секунды";
 
-    public DiscoveryOfYear(string surname, string surnameTeacher, string group, double rez)
+    public Runner100m(string surname, string coachSurname, string group, double result)
+        : base(surname, coachSurname, group, result)
     {
-        this.surname = surname;
-        this.surnameTeacher = surnameTeacher;
-        this.group = group;
-        this.rez = rez;
+    }
+}
+
+class Runner500m : Runner
+{
+    public override string Standard => "3 минуты";
+
+    public Runner500m(string surname, string coachSurname, string group, double result)
+        : base(surname, coachSurname, group, result)
+    {
     }
 }
 
@@ -53,67 +53,59 @@ class Program
 {
     static void Main()
     {
-        List<PersonOfYear> personsOfYear = new List<PersonOfYear>();
-        List<DiscoveryOfYear> discoveriesOfYear = new List<DiscoveryOfYear>();
-
-        int passedPersonCount = 0;
-        int passedDiscoveryCount = 0;
+        int passedCount100m = 0;
+        int passedCount500m = 0;
 
         Runner[] runners = new Runner[5];
-        runners[0] = new PersonOfYear("Губеева", "Тренеровна", "234", 1.50);
-        runners[1] = new PersonOfYear("Капелина", "Гасанов", "666", 1.55);
-        runners[2] = new PersonOfYear("Попова", "Кужель", "777", 1.47);
-        runners[3] = new DiscoveryOfYear("Орлова", "Лушина", "889", 1.46);
-        runners[4] = new DiscoveryOfYear("Коцарь", "Пушина", "995", 1.54);
+        runners[0] = new Runner100m("Губеева", "Тренеровна", "234", 1.50);
+        runners[1] = new Runner100m("Капелина", "Гасанов", "666", 1.55);
+        runners[2] = new Runner100m("Попова", "Кужель", "777", 1.47);
+        runners[3] = new Runner100m("Орлова", "Лушина", "889", 1.46);
+        runners[4] = new Runner100m("Коцарь", "Пушина", "995", 1.54);
 
-        Array.Sort(runners, (x, y) => y.Rez.CompareTo(x.Rez));
+        Array.Sort(runners, (x, y) => y.Result.CompareTo(x.Result));
 
-        Console.WriteLine("Таблица 'Человек Года'");
-        Console.WriteLine("Фамилия\tГруппа\tТренер\tРезультат\tНорматив (1.5 секунды)");
-
-        foreach (var runner in runners)
+        Console.WriteLine("Таблица результатов бега на 100 м:");
+        for (int i = 0; i < runners.Length; i++)
         {
-            if (runner is PersonOfYear person)
+            var runner = runners[i] as Runner100m;
+            if (runner != null)
             {
-                if (person.Rez <= 1.5)
+                if (runner.Result <= 1.5)
                 {
-                    passedPersonCount++;
-                    person.standart = "Сдан";
+                    passedCount100m++;
                 }
-                personsOfYear.Add(person);
-            }
-            else if (runner is DiscoveryOfYear discovery)
-            {
-                if (discovery.Rez <= 1.5)
-                {
-                    passedDiscoveryCount++;
-                    discovery.standart = "Сдан";
-                }
-                discoveriesOfYear.Add(discovery);
+                runner.PrintInfo();
             }
         }
 
-        foreach (var person in personsOfYear)
+        runners[0] = new Runner500m("Иванова", "Тренеровна", "234", 2.50);
+        runners[1] = new Runner500m("Петрова", "Гасанов", "666", 3.05);
+        runners[2] = new Runner500m("Сидорова", "Кужель", "777", 2.57);
+        runners[3] = new Runner500m("Кузнецова", "Лушина", "889", 2.46);
+        runners[4] = new Runner500m("Смирнова", "Пушина", "995", 3.04);
+
+        Array.Sort(runners, (x, y) => y.Result.CompareTo(x.Result));
+
+        Console.WriteLine("\nТаблица результатов бега на 500 м:");
+        for (int i = 0; i < runners.Length; i++)
         {
-            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}",
-                person.Surname, person.Group, person.SurnameTeacher, person.Rez, person.standart);
+            var runner = runners[i] as Runner500m;
+            if (runner != null)
+            {
+                if (runner.Result <= 3.0)
+                {
+                    passedCount500m++;
+                }
+                runner.PrintInfo();
+            }
         }
 
-        Console.WriteLine("Человек сдало норматив: " + passedPersonCount);
-
-        Console.WriteLine("\nТаблица 'Открытие Года'");
-        Console.WriteLine("Фамилия\tГруппа\tТренер\tРезультат\tНорматив (1.5 секунды)");
-
-        foreach (var discovery in discoveriesOfYear)
-        {
-            Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}",
-                discovery.Surname, discovery.Group, discovery.SurnameTeacher, discovery.Rez, discovery.standart);
-        }
-
-        Console.WriteLine("Открытий сдало норматив: " + passedDiscoveryCount);
+        Console.WriteLine("\nЛюди, сдавшие норматив на 100 м: " + passedCount100m);
+        Console.WriteLine("Люди, сдавшие норматив на 500 м: " + passedCount500m);
     }
-}
-*/
+}*/
+
 
 /*using System;
 
