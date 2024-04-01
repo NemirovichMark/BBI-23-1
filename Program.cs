@@ -1,686 +1,143 @@
+﻿#region 2_1
+/*
 using System;
-class Programm
-
+class Program
 {
-    //номер 22 (если считать с Карасевым) 
-    //1 уровень: 3 7 11 15 19 23 27 31 
-    //2 уровень: 3 7 
-    //3 уровень: 8 9
-    static void Main(string[] args)
+    struct Student
     {
-        #region 1_3
-        int n = 4, m = 4;
-        double[,] arr = new double[n, m];
-        double su = 0;
-        Console.WriteLine("Введите матрицу: 4 х 4 через пробел:");
-        for (int i = 0; i < n; i++)
+        private string famile;
+        private double mark;
+
+        public Student(string f, int mark1, int mark2, int mark3, int mark4)
         {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m; j++)
-            {
-                arr[i, j] = mass[j];
-            }
+            famile = f;
+            mark = (double)(mark1 + mark2 + mark3 + mark4) / 4;
 
         }
-        Console.WriteLine("Исходная матрица:");
-        for (int i = 0; i < n; i++)
+        public void Print()
         {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-
-            Console.WriteLine();
-        }
-        for (int i = 0; i < n; i++)
-        {
-            su = su + arr[i, i] + arr[i, (n - 1) - i];
-        }
-        Console.WriteLine("Сумма диагональных элементов:");
-        Console.WriteLine(su);
-        Console.WriteLine();
-        #endregion
-
-        #region 1_7
-        n = 3;
-        m = 5;
-        double max = -Math.Pow(10, 20);
-        int ind = 0;
-        double[] mas = new double[m];
-        arr = new double[n, m];
-        Console.WriteLine("Введите матрицу: 3 х 5 через пробел:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m; j++)
-
-            {
-                arr[i, j] = mass[j];
-            }
+            Console.WriteLine($" {famile}\tбалл  {mark}");
         }
 
-        for (int j = 0; j < m; j++)
 
+        public string Famile
         {
-            for (int i = 0; i < n; i++)
+            get { return famile; }
+        }
 
+        public double Mark
+        {
+            get { return mark; }
+        }
+    }
+
+    static void Main()
+    {
+        Student[] st = new Student[5];
+        st[0] = new Student("студент1", 5, 5, 2, 5);
+        st[1] = new Student("студент2", 5, 4, 5, 5);
+        st[2] = new Student("студент3", 3, 2, 3, 4);
+        st[3] = new Student("студент4", 4, 2, 5, 5);
+        st[4] = new Student("студент5", 3, 5, 4, 3);
+
+        for (int i = 0; i < st.Length; i++)
+        {
+            for (int j = 0; j < st.Length - 1; j++)
             {
-                if (arr[i, j] > max)
-
+                if (st[j].Mark < st[j + 1].Mark)
                 {
-                    max = arr[i, j];
+                    (st[j], st[j + 1]) = (st[j + 1], st[j]);
                 }
             }
-            mas[j] = max;
-            max = -10000000000;
-        }
-        Console.WriteLine("Исходная матрица:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        Console.WriteLine("Полученный массив:");
-        Console.WriteLine("[{0}]", string.Join(';', mas));
-        Console.WriteLine();
-        #endregion
-
-        #region 1_11
-        n = 5;
-        m = 7;
-        double min = Math.Pow(10, 20);
-        arr = new double[n, m];
-        double[,] array = new double[n - 1, m];
-        ind = 0;
-        double maxim = -Math.Pow(10, 20);
-        Console.WriteLine("Введите матрицу: 5 х 7 через пробел:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-
-            for (int j = 0; j < m; j++)
-
-            {
-                arr[i, j] = mass[j];
-                if (mass[j] < min && j == 0)
-
-                {
-                    min = mass[j];
-                    ind = i;
-                }
-            }
-        }
-        Console.WriteLine("Исходная матрица:");
-
-        for (int i = 0; i < n; i++)
-
-            Console.WriteLine();
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-            {
-                if (i < ind)
-
-                {
-                    array[i, j] = arr[i, j];
-                }
-                if (i > ind)
-
-                {
-                    array[i - 1, j] = arr[i, j];
-                }
-            }
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n - 1; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                Console.Write(array[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-        
-        #region 1_15
-        n = 5;
-        m = 7;
-        arr = new double[n, m];
-        double[,] arr1 = new double[n, m];
-        Console.WriteLine("Введите матрицу: 5 х 7 через пробел:");
-        for (int i = 0; i < n; i++)
-
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            
-            for (int j = 0; j < m; j++)
-            {
-                arr[i, j] = mass[j];
-                arr1[i, j] = arr[i, j] * (i + 1);
-            }
-        }
-        Console.WriteLine("Исходная матрица:");
-
-        for (int i = 0; i < n; i++)
-        {
-
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n - 1; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr1[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-        
-        #region 1_19
-        Console.WriteLine("Введите кол-во строк:");
-        n = int.Parse(Console.ReadLine());
-        Console.WriteLine("Введите кол-во столбцов:");
-        m = int.Parse(Console.ReadLine());
-        arr = new double[n, m];
-        int[] x = new int[n];
-        max = -Math.Pow(10, 20);
-        ind = 0;
-        Console.WriteLine("Введите матрицу через пробел:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-
-            for (int j = 0; j < m; j++)
-            {
-                arr[i, j] = mass[j];
-                if (mass[j] > max)
-                {
-                    max = mass[j];
-                    ind = j;
-                }
-            }
-            x[i] = ind;
-            max = -Math.Pow(10, 20);
-            ind = 0;
-        }
-        Console.WriteLine("Исходная матрица:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-            {
-                if (arr[i, j] < 0 && j < x[i])
-                {
-                    arr[i, j] = arr[i, j] / arr[i, x[i]];
-                }
-            }
-        }
-        Console.WriteLine("Итоговая матрица");
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-        
-        #region 1-23
-
-        n = 5;
-        m = 7;
-        arr = new double[n, m];
-        arr1 = new double[n, m];
-        x = new int[n];
-        max = -Math.Pow(10, 20);
-        ind = 0;
-        Console.WriteLine("Введите матрицу через пробел:");
-
-        for (int i = 0; i < n; i++)
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-
-            for (int j = 0; j < m - 1; j++)
-            {
-                arr[i, j] = mass[j];
-                if (arr[i, j] > max)
-                {
-                    max = mass[j];
-                    ind = j;
-                }
-            }
-            x[i] = ind;
-            ind = 0;
-            max = -Math.Pow(10, 20);
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                if (j <= x[i])
-
-                {
-                    arr1[i, j] = arr[i, j];
-                }
-
-                if ((j - 1) == x[i])
-
-                {
-                    arr1[i, j] = arr[i, j - 1];
-                }
-
-                if ((j - 1) > x[i])
-
-                {
-                    arr1[i, j] = arr[i, j - 1];
-                }
-            }
-        }
-        Console.WriteLine("Итоговая матрица");
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr1[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-        
-        #region 1_27
-        n = 5;
-        m = 7;
-        arr = new double[n, m];
-        x = new int[n];
-        max = -Math.Pow(10, 20);
-        ind = 0;
-        Console.WriteLine("Введите матрицу через пробел:");
-        
-        for (int i = 0; i < n; i++)
-        {
-            string str = Console.ReadLine();
-            double[] mass = str.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < m; j++)
-
-            {
-                arr[i, j] = mass[j];
-                if (arr[i, j] > max)
-
-                {
-                    max = mass[j];
-                    ind = j;
-                }
-            }
-            x[i] = ind;
-            ind = 0;
-            max = -Math.Pow(10, 20);
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-
-        for (int i = 0; i < n; i++)
-
-        {
-            arr[i, 3] = arr[i, x[i]];
-        }
-
-        Console.WriteLine("Итоговая матрица");
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-
-        #region 2_3
-        n = 10;
-        m = 5;
-        ind = 0;
-        su = 0;
-        arr = new double[n, m];
-        max = -Math.Pow(10, 20);
-        Console.WriteLine("Введите матрицу через пробел");
-
-        for (int i = 0; i < n; i++)
-        {
-            string str1 = Console.ReadLine();
-            double[] mass = str1.Split(' ').Select(double.Parse).ToArray();
-
-            for (int j = 0; j < m; j++)
-
-            {
-                arr[i, j] = mass[j];
-            }
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-
-            Console.WriteLine();
-        }
-
-        for (int j = 0; j < m; j++)
-
-        {
-            max = -Math.Pow(10, 20);
-            ind = 0;
-            su = 0;
-
-            for (int i = 0; i < n; i++)
-
-            {
-                if (arr[i, j] > max)
-
-                {
-                    max = arr[i, j];
-                    ind = i;
-                }
-            }
-
-            if (ind <= 4)
-
-            {
-                for (int i = ind + 1; i < n; i++)
-
-                {
-                    su += arr[i, j];
-                }
-
-                arr[0, j] = su;
-            }
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-
-            Console.WriteLine();
-        }
-        Console.WriteLine();
-        #endregion
-
-        #region 2_7
-        n = 6;
-        m = 6;
-        ind = 0;
-        su = 0;
-        arr = new double[n, m];
-        max = -Math.Pow(10, 20);
-        Console.WriteLine("Введите матрицу через пробел");
-
-        for (int i = 0; i < n; i++)
-        {
-            string str1 = Console.ReadLine();
-            double[] mass = str1.Split(' ').Select(double.Parse).ToArray();
-
-            for (int j = 0; j < m; j++)
-
-            {
-                arr[i, j] = mass[j];
-            }
-        }
-        Console.WriteLine("Исходная матрица:");
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
-        }
-
-        for (int i = 0; i < n; i++)
-
-        {
-            if (arr[i, i] > max)
-            {
-                max = arr[i, i];
-                ind = i;
-            }
-        }
-        for (int i = 0; i < n; i++)
-
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                if ((i < ind) & (j > i))
-                {
-                    arr[i, j] = 0;
-                }
-            }
-        }
-        Console.WriteLine("Итоговая матрица:");
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-
-            {
-                Console.Write(arr[i, j] + " ");
-            }
-            Console.WriteLine();
         }
 
         Console.WriteLine();
-        #endregion
-
-        #region 3_8
-        int e = 7, f = 5;
-        double[,] a = new double[f, m];
-        int k = 0;
-        Console.WriteLine("Введите матрицу: 7 х 5 через пробел:");
-        for (int i = 0; i < f; i++)
+        Console.WriteLine(" Студенты ");
+        for (int i = 0; i < st.Length; i++)
         {
-            string s = Console.ReadLine();
-            double[] b = s.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < e; j++)
+            if (st[i].Mark >= 4)
             {
-                a[i, j] = b[j];
-                if (a[i, j] >= 0) { k++; }
+                st[i].Print();
             }
         }
-        if (k == 0)
-        {
-            Console.WriteLine("В матрице отсутсвуют положительные элементы.");
-        }
-        if (k == e * f)
-        {
-            Console.WriteLine("Все элементы матрицы положительны.");
-        }
-        if (k != 0 && k < e * f)
-        {
-            for (int i = 0; i < f - 1; i++)
-            {
-                for (int l = 0; l < f - i - 1; l++)
-                {
-                    int pol1 = 0, pol2 = 0;
-                    for (int j = 0; j < e; j++)
-                    {
-                        if (a[l, j] >= 0) { pol1++; }
-                        if (a[l + 1, j] >= 0) { pol2++; }
-                    }
-
-                    if (pol2 > pol1)
-                    {
-                        for (int j = 0; j < e; j++)
-                        {
-                            double t = a[l + 1, j];
-                            a[l + 1, j] = a[l, j];
-                            a[l, j] = t;
-                        }
-                    }
-                }
-            }
-            Console.WriteLine("Итоговая матрица:");
-
-            for (int i = 0; i < f; i++)
-            {
-                for (int j = 0; j < e; j++)
-                {
-                    Console.Write(a[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
-        }
-        #endregion
-
-        #region 3_9
-        Console.WriteLine("Введите матрицу: 5 х 7 через пробел:");
-        for (int i = 0; i < f; i++)
-        {
-            string s = Console.ReadLine();
-            double[] b = s.Split(' ').Select(double.Parse).ToArray();
-            for (int j = 0; j < e; j++)
-            {
-                a[i, j] = b[j];
-                if (a[i, j] < 0) { k++; }
-            }
-        }
-
-        if (k == 0)
-        {
-            Console.WriteLine("В матрице отсутствуют отриц. элементы.");
-        }
-        else if (k == f * m)
-        {
-            Console.WriteLine("Все элементы матрицы отрицательны.");
-        }
-        else
-        {
-            for (int j = 0; j < m - 1; j++)
-            {
-
-                for (int l = 0; l < m - 1 - j; l++)
-                {
-                    int otr1 = 0;
-                    int otr2 = 0;
-
-                    for (int i = 0; i < f; i++)
-                    {
-                        if (a[i, l] < 0) { otr1++; }
-                        if (a[i, l + 1] < 0) { otr2++; }
-                    }
-
-                    if (otr1 > otr2)
-                    {
-                        for (int i = 0; i < m; i++)
-                        {
-                            double t = a[i, l];
-                            a[i, l] = a[i, l + 1];
-                            a[i, l + 1] = t;
-                        }
-                    }
-                }
-            }
-
-            Console.WriteLine("Итоговая матрица:");
-            for (int i = 0; i < m; i++)
-            {
-                for (int j = 0; j < n; j++)
-                {
-                    Console.Write(a[i, j] + " ");
-                }
-                Console.WriteLine();
-            }
-        }
-        #endregion
     }
 }
+*/
+#endregion
+
+#region 3_5
+/*
+struct FootballTeam
+{
+    private string name;
+    private int Scored;
+    private int Failed; 
+    private int points;
+    public FootballTeam(string name)
+    {
+        this.name = name;
+        Scored = 0; 
+        Failed = 0;
+        points = 0;
+    }
+    public string Name { get { return name; } set { name = value; } }
+    public void Result(int scored, int conceded)
+    {
+        Scored += scored;
+        Failed += conceded; 
+        if (scored > conceded) points += 3;
+        else if (scored == conceded) points += 1;
+    }
+    public int Points { get { return points; } }
+    public int Difference { get { return Scored - Failed; } }
+    public static void Print(FootballTeam[] teams)
+    {
+        Console.WriteLine("  Place      Team          Points");
+        for (int i = 0; i < teams.Length; i++)
+        {
+            Console.WriteLine("{0,5}     {1,-6}      {2} ", i + 1, teams[i].Name, teams[i].Points);
+        }
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        FootballTeam[] teams = new FootballTeam[]        
+        {
+            new FootballTeam("Барселона"),            
+            new FootballTeam("Реал Мадрид"),
+            new FootballTeam("Дерби Каунти")        
+        };
+        Match(ref teams[0], ref teams[1]);
+        Match(ref teams[0], ref teams[2]);
+        Match(ref teams[1], ref teams[0]);
+        Match(ref teams[1], ref teams[2]);
+        Sort(teams); FootballTeam.Print(teams);
+    }
+    static void Match(ref FootballTeam team1, ref FootballTeam team2)
+    {
+        Random random = new Random(); 
+        int scored = random.Next(0, 5);
+        int conceded = random.Next(0, 5);
+        team1.Result(scored, conceded);
+        team2.Result(conceded, scored);
+    }
+    static void Sort(FootballTeam[] teams)
+    {
+        int n = teams.Length;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (teams[j].Points < teams[j + 1].Points || (teams[j].Points == teams[j + 1].Points && teams[j].Difference < teams[j + 1].Difference))
+                {
+                    FootballTeam temp = teams[j];
+                    teams[j] = teams[j + 1]; teams[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
+*/
+#endregion
