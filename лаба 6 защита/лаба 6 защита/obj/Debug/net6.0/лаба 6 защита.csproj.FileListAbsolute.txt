@@ -1,0 +1,14 @@
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\bin\Debug\net6.0\лаба 6 защита.exe
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\bin\Debug\net6.0\лаба 6 защита.deps.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\bin\Debug\net6.0\лаба 6 защита.runtimeconfig.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\bin\Debug\net6.0\лаба 6 защита.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\bin\Debug\net6.0\лаба 6 защита.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.AssemblyInfoInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.AssemblyInfo.cs
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.csproj.CoreCompileInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\refint\лаба 6 защита.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\лаба 6 защита.genruntimeconfig.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 6 защита\лаба 6 защита\obj\Debug\net6.0\ref\лаба 6 защита.dll
