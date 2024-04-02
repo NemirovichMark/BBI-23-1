@@ -205,6 +205,7 @@ class Program
 
 
 using System;
+using System.Linq;
 
 abstract class FootballTeam
 {
@@ -251,40 +252,47 @@ class Program
 {
     static void Main()
     {
-        FootballTeam[] teams = new FootballTeam[24];
+        FootballTeam[] womenTeams = new FootballTeam[12];
+        FootballTeam[] menTeams = new FootballTeam[12];
 
-        teams[0] = new WomenFootballTeam("A", 88);
-        teams[1] = new MenFootballTeam("D", 77);
-        teams[2] = new MenFootballTeam("C", 90);
-        teams[3] = new MenFootballTeam("V", 89);
-        teams[4] = new MenFootballTeam("N", 20);
-        teams[5] = new WomenFootballTeam("F", 66);
-        teams[6] = new MenFootballTeam("Y", 10);
-        teams[7] = new MenFootballTeam("B", 35);
-        teams[8] = new MenFootballTeam("Z", 26);
-        teams[9] = new WomenFootballTeam("W", 57);
-        teams[10] = new WomenFootballTeam("X", 71);
-        teams[11] = new MenFootballTeam("Q", 16);
-        teams[12] = new MenFootballTeam("A1", 56);
-        teams[13] = new MenFootballTeam("D1", 66);
-        teams[14] = new MenFootballTeam("C1", 11);
-        teams[15] = new MenFootballTeam("V1", 12);
-        teams[16] = new MenFootballTeam("N1", 13);
-        teams[17] = new WomenFootballTeam("F1", 41);
-        teams[18] = new WomenFootballTeam("Y1", 51);
-        teams[19] = new MenFootballTeam("B1", 61);
-        teams[20] = new MenFootballTeam("Z1", 81);
-        teams[21] = new WomenFootballTeam("W1", 80);
-        teams[22] = new WomenFootballTeam("X1", 19);
-        teams[23] = new MenFootballTeam("Q1", 15);
+        womenTeams[0] = new WomenFootballTeam("A", 88);
+        womenTeams[1] = new WomenFootballTeam("B2", 78);
+        womenTeams[2] = new WomenFootballTeam("C2", 65);
+        womenTeams[3] = new WomenFootballTeam("A2", 36);
+        womenTeams[4] = new WomenFootballTeam("D2", 55);
+        womenTeams[5] = new WomenFootballTeam("F", 47);
+        womenTeams[6] = new WomenFootballTeam("W", 57);
+        womenTeams[7] = new WomenFootballTeam("X", 71);
+        womenTeams[8] = new WomenFootballTeam("F1", 41);
+        womenTeams[9] = new WomenFootballTeam("Y1", 51);
+        womenTeams[10] = new WomenFootballTeam("W1", 80);
+        womenTeams[11] = new WomenFootballTeam("X1", 19);
 
-        Array.Sort(teams, (x, y) => y.Points.CompareTo(x.Points));
+        menTeams[0] = new MenFootballTeam("D", 77);
+        menTeams[1] = new MenFootballTeam("C", 90);
+        menTeams[2] = new MenFootballTeam("V", 89);
+        menTeams[3] = new MenFootballTeam("N", 20);
+        menTeams[4] = new MenFootballTeam("Y", 10);
+        menTeams[5] = new MenFootballTeam("B", 35);
+        menTeams[6] = new MenFootballTeam("Z", 26);
+        menTeams[7] = new MenFootballTeam("Q", 16);
+        menTeams[8] = new MenFootballTeam("A1", 56);
+        menTeams[9] = new MenFootballTeam("D1", 66);
+        menTeams[10] = new MenFootballTeam("B1", 61);
+        menTeams[11] = new MenFootballTeam("Z1", 81);
 
-        for (int i = 0; i < 6; i++)
+        Array.Sort(womenTeams, (x, y) => y.Points.CompareTo(x.Points));
+        Array.Sort(menTeams, (x, y) => y.Points.CompareTo(x.Points));
+
+        FootballTeam[] topTeams = womenTeams.Take(6).Concat(menTeams.Take(6)).ToArray();
+
+        Console.WriteLine("Top 6 Football Teams:");
+        for (int i = 0; i < topTeams.Length; i++)
         {
-            Console.WriteLine($"{i + 1}. {teams[i]}");
+            Console.WriteLine($"{i + 1}. {topTeams[i]}");
         }
     }
 }
+
 
 
