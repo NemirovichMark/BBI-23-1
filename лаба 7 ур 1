@@ -1,0 +1,95 @@
+using System;
+using System.Diagnostics.Metrics;
+
+public abstract class RadioPoll
+{
+    private static int _totalVotes = 0;
+    private string _answer;
+    private int _count;
+    public string Answer { get { return _answer; } }
+    public int Count { get { return _count; } }
+    public static int TotalVotes { get { return _totalVotes; } }
+    public RadioPoll(string answer, int count)
+    {
+        _answer = answer;
+        _count = count;
+        _totalVotes += count;
+    }
+    public virtual void Print()
+    {
+        double percentage = (double)Count / TotalVotes * 100;
+        Console.WriteLine($"Ответ: {Answer} - {percentage:f2}% от общего количества ответов");
+    }
+}
+class Man : RadioPoll
+{
+    public Man(string answer, int count) : base(answer, count)
+    {
+
+    }
+}
+class Opening : RadioPoll
+{
+    public Opening(string answer, int count) : base(answer, count)
+    {
+
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Man[] mans = new Man[5]
+            {
+                new Man("Эльон Маск", 120),
+                new Man("Грета Тунберг", 90),
+                new Man("Владимир Путин", 80),
+                new Man("Джо Байден", 70),
+                new Man("Анджелина Джоли", 60),
+            };
+
+        Opening[] openings = new Opening[5]
+            {
+                new Opening("The sunken ship Endurance", 70),
+                new Opening("Artificial intelligence", 90),
+                new Opening("Brain Decoder", 110),
+                new Opening("The Ancient Whale", 50),
+                new Opening("Living robot", 80),
+            };
+
+        Sort(mans);
+
+        Sort(openings);
+
+
+        Console.WriteLine("Топ-5 человек года по результатам опроса:");
+        foreach (var man in mans)
+        {
+            man.Print();
+        }
+
+        Console.WriteLine();
+
+        Console.WriteLine("Топ-5 открытий года по результатам опроса:");
+        foreach (var opening in openings)
+        {
+            opening.Print();
+        }
+    }
+    static void Sort(RadioPoll[] mans)
+    {
+        for (int i = 0; i < mans.Length - 1; i++)
+        {
+            for (int j = i + 1; j < mans.Length; j++)
+            {
+                if (mans[i].Count > mans[j].Count)
+                {
+                    RadioPoll t = mans[i];
+                    mans[i] = mans[j];
+                    mans[j] = t;
+                }
+            }
+        }
+    }
+}
