@@ -118,7 +118,6 @@ abstract class SportPlayer
     public string Surname => surname;
     public string Name => name;
 
-    public abstract bool IsExcluded();
     public abstract void PrintInfo();
 
     public void IncrementPassedNorms()
@@ -138,16 +137,6 @@ class HockeyPlayer : SportPlayer
         this.penaltyTime = penaltyTime;
     }
 
-    public void AddPenalty()
-    {
-        penaltyTime += 2; // Пример: за каждый штраф 2 минуты
-    }
-
-    public override bool IsExcluded()
-    {
-        return false; // В хоккее нет исключений
-    }
-
     public override void PrintInfo()
     {
         Console.WriteLine("Хоккеист - Фамилия: {0} \t Имя: {1} \t Штрафное время: {2} мин \t Прошел нормативов: {3}", Surname, Name, penaltyTime, passedNorms);
@@ -158,21 +147,13 @@ class BasketballPlayer : SportPlayer
 {
     private int fouls;
 
+    public int Fouls => fouls;
+
     public BasketballPlayer(string surname, string name, int fouls)
     {
         this.surname = surname;
         this.name = name;
         this.fouls = fouls;
-    }
-
-    public void AddPenalty()
-    {
-        fouls++;
-    }
-
-    public override bool IsExcluded()
-    {
-        return fouls >= 4; // Игрок будет исключен, если у него 4 или более фолов
     }
 
     public override void PrintInfo()
@@ -195,12 +176,21 @@ class Program
         foreach (var player in players)
         {
             player.IncrementPassedNorms();
-            //player.AddPenalty(); // Убрали вызов метода AddPenalty
-            if (!player.IsExcluded())
-                player.PrintInfo();
+            if (player is HockeyPlayer hockeyPlayer)
+            {
+                hockeyPlayer.PrintInfo();
+            }
+            else if (player is BasketballPlayer basketballPlayer)
+            {
+                if (basketballPlayer.Fouls < 4)
+                {
+                    basketballPlayer.PrintInfo();
+                }
+            }
         }
     }
 }*/
+
 
 
 
