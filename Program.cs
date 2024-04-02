@@ -65,13 +65,13 @@ class Program
             for (int i = step; i < sp.Length; i++)
             {
                 int j = i;
-                while (j >= step && sp[j - step].Rez < sp[j].Rez)
+                Sportsmen current = sp[i];
+                while (j >= step && sp[j - step].Rez < current.Rez)
                 {
-                    Sportsmen temp = sp[j - step];
-                    sp[j - step] = sp[j];
-                    sp[j] = temp;
+                    sp[j] = sp[j - step];
                     j -= step;
                 }
+                sp[j] = current;
             }
             step /= 2;
         }
