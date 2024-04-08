@@ -1,0 +1,7 @@
+C:\Users\Пользователь\source\repos\laba6new\bin\Debug\laba6new.exe.config
+C:\Users\Пользователь\source\repos\laba6new\bin\Debug\laba6new.exe
+C:\Users\Пользователь\source\repos\laba6new\bin\Debug\laba6new.pdb
+C:\Users\Пользователь\source\repos\laba6new\obj\Debug\laba6new.csproj.AssemblyReference.cache
+C:\Users\Пользователь\source\repos\laba6new\obj\Debug\laba6new.csproj.CoreCompileInputs.cache
+C:\Users\Пользователь\source\repos\laba6new\obj\Debug\laba6new.exe
+C:\Users\Пользователь\source\repos\laba6new\obj\Debug\laba6new.pdb
