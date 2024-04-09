@@ -154,8 +154,7 @@ class Team
         foreach (var participant in participants)
         {
             int place = participant.Place; // Получаем место участника
-            // За каждое место начисляем определенное количество очков
-            score += (place == 1) ? 5 : (place == 2) ? 4 : (place == 3) ? 3 : (place == 4) ? 2 : (place == 5) ? 1 : 0;
+            score += Math.Max(0, 6 - place);
         }
         return score; // Возвращаем общий счет команды
     }
