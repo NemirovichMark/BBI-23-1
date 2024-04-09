@@ -1,5 +1,5 @@
 ﻿#region 1.1 lab 7
-/*
+/
 
 using System;
 
@@ -10,7 +10,8 @@ public class JumpResult
     public double Result1 { get; private set; }
     public double Result2 { get; private set; }
     public double TotalResult { get; private set; }
-    public bool IsDisqualified { get; private set; }
+    // Объявление публичного свойства IsDisqualified с доступом на чтение и приватным доступом на запись
+    public bool IsDisqualified { get; private set; }  
 
     public JumpResult(string lastName, string society, double result1, double result2)
     {
@@ -22,11 +23,13 @@ public class JumpResult
         IsDisqualified = false;
     }
 
+    //Объявление публичного метода Disqualify без параметров
     public void Disqualify()
     {
+        //Присваивание логического значения true свойству IsDisqualified
         IsDisqualified = true;
     }
-
+    //Переопределение метода ToString для класса JumpResult
     public override string ToString()
     {
         return string.Format("{0,-15} {1,-15} {2,10} {3,10} {4,10}", LastName, Society, Result1, Result2, TotalResult);
@@ -80,12 +83,12 @@ class JumpCompetition
         }
     }
 }
+
 */
 
 
 #region 2.7 lab 7
-/*
- 
+/
 using System;
 
 class Program
@@ -94,11 +97,11 @@ class Program
     {
         Sportsman[] players = new Sportsman[5];
 
-        players[0] = new Sportsman("Чичинкова", 1, "12345");
-        players[1] = new Sportsman("Бычкова", 0.5, "54321");
-        players[2] = new Sportsman("Куулар", 0, "98765");
-        players[3] = new Sportsman("Агапова", 1, "45678");
-        players[4] = new Sportsman("Чайкина", 0.5, "67890");
+        players[0] = new Sportsman("Чичинкова", 1);
+        players[1] = new Sportsman("Бычкова", 0.5);
+        players[2] = new Sportsman("Куулар", 0);
+        players[3] = new Sportsman("Агапова", 1);
+        players[4] = new Sportsman("Чайкина", 0.5);
 
         Array.Sort(players, (x, y) => y.Score.CompareTo(x.Score));
 
@@ -125,22 +128,125 @@ public class Human
 public class Sportsman : Human
 {
     private double _score;
+    private static int nextId = 1;
     private string _id;
 
-    public Sportsman(string fullName, double score, string id) : base(fullName)
+    public Sportsman(string fullName, double score) : base(fullName)
     {
         _score = score;
-        _id = id;
+        _id = "ID" + nextId;
+        nextId++;
     }
 
     public double Score { get { return _score; } }
     public string Id { get { return _id; } }
 }
+
 */
+
+#region 2.7 защита 
+
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Sportsman[] players = new Sportsman[5];
+
+        players[0] = new Sportsman("Чичинкова", 1);
+        players[1] = new Sportsman("Бычкова", 0.5);
+        players[2] = new Sportsman("Куулар", 0);
+        players[3] = new Sportsman("Агапова", 1);
+        players[4] = new Sportsman("Чайкина", 0.5);
+
+        // Вызов статического метода квиксорт класса спортсмене для сортировки массива плээрс методом быстрой сортировки
+        Sportsman.QuickSort(players, 0, players.Length - 1);
+
+        Console.WriteLine("Турнирная таблица:");
+
+        foreach (var player in players)
+        {
+            Console.WriteLine(player.GetInfo());
+        }
+    }
+}
+//Объявление класса, который представляет общие характеристики для человека 
+public class Human
+{
+    protected string _fullName;
+
+    public Human(string fullName)
+    {
+        _fullName = fullName;
+    }
+
+    public string FullName { get { return _fullName; } }
+}
+
+public class Sportsman : Human
+{
+    private double _score;
+    private static int nextId = 1;
+    private string _id;
+
+    public Sportsman(string fullName, double score) : base(fullName)
+    {
+        _score = score;
+        _id = "ID" + nextId;
+        nextId++;
+    }
+
+    public double Score { get { return _score; } }
+    public string Id { get { return _id; } }
+
+    public string GetInfo()
+    {
+        return $"{FullName} ({Id}) - {Score} очка";
+    }
+
+    //Определение статического метода, который выполняе быструю сортировку массива спортсменов arr в диапозоне от индекса left до индекса right 
+    public static void QuickSort(Sportsman[] arr, int left, int right)
+    {
+        if (left < right)
+        {
+            int pivotIndex = Partition(arr, left, right);
+            QuickSort(arr, left, pivotIndex - 1);
+            QuickSort(arr, pivotIndex + 1, right);
+        }
+    }
+
+    // Определение приватноого статического метода Partition, который используется внутри метода Quicksort для разделения массива на две части относительно опорного элемента pivot
+    private static int Partition(Sportsman[] arr, int left, int right)
+    {
+        double pivot = arr[right].Score;
+        int i = left - 1;
+
+        for (int j = left; j < right; j++)
+        {
+            if (arr[j].Score >= pivot)
+            {
+                i++;
+                Swap(arr, i, j);
+            }
+        }
+
+        Swap(arr, i + 1, right);
+        return i + 1;
+    }
+
+   //  Определение приватного статического метода Swap, который меняет местами два элемента в массиве спортсменов
+    private static void Swap(Sportsman[] arr, int i, int j)
+    {
+        Sportsman temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
 
 
 #region 3.4 lab 7
-/*
+/
 
 using System;
 
