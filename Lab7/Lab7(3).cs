@@ -82,7 +82,7 @@ class Program
         Array.Sort(team.Participants); // Сортировка участников команды по их местам
     }
 
-    static T DetermineWinner<T>(params T[] teams) where T : Team
+    static T DetermineWinner<T>(params T[] teams) where T : Team //T - это тип, производный от класса Team; Этот параметр типа params позволяет передавать переменное количество аргументов типа T в метод
     {
         T winner = teams[0]; // Предполагаем, что первая команда из переданных является победителем
         foreach (var team in teams)
