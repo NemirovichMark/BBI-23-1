@@ -92,10 +92,87 @@ class Program
             Console.WriteLine($"Фамилия: {Surname} Результат: {CalculateFinalResult()}");
             diving.PrintDisciplineInfo();
         }
-    }
 
-    // Главный метод программы
-    static void Main()
+        // Сортировка слиянием массива результатов спортсменов
+        public static void MergeSort(Person[] arr, int left, int right)
+        {
+            // Проверяем базовый случай: если левая граница меньше правой, то массив еще не отсортирован
+            if (left < right)
+            {
+                // Находим средний индекс массива
+                int middle = (left + right) / 2;
+
+                // Рекурсивно вызываем MergeSort для левой половины массива
+                MergeSort(arr, left, middle);
+                // Рекурсивно вызываем MergeSort для правой половины массива
+                MergeSort(arr, middle + 1, right);
+
+                // Объединяем отсортированные левую и правую половины массива
+                Merge(arr, left, middle, right);
+            }
+        }
+
+        // Объединение двух сортированных частей массива
+        private static void Merge(Person[] arr, int left, int middle, int right)
+        {
+            // Определяем размеры временных массивов для левой и правой частей
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+
+            // Создаем временные массивы для левой и правой частей
+            Person[] L = new Person[n1];
+            Person[] R = new Person[n2];
+
+            // Копируем элементы из основного массива во временные массивы
+            for (int i = 0; i < n1; ++i)
+            {
+                L[i] = arr[left + i];
+            }
+            for (int j = 0; j < n2; ++j)
+            {
+                R[j] = arr[middle + 1 + j];
+            }
+
+            // Индексы временных массивов и основного массива
+            int iLeft = 0, iRight = 0;
+            int k = left;
+
+            // Слияние временных массивов обратно в основной массив
+            while (iLeft < n1 && iRight < n2)
+            {
+                // Сравниваем результаты спортсменов и помещаем их в основной массив в правильном порядке
+                if (L[iLeft].CalculateFinalResult() >= R[iRight].CalculateFinalResult())
+                {
+                    arr[k] = L[iLeft];
+                    iLeft++;
+                }
+                else
+                {
+                    arr[k] = R[iRight];
+                    iRight++;
+                }
+                k++;
+            }
+
+            // Копируем оставшиеся элементы из временного массива L (если они есть)
+            while (iLeft < n1)
+            {
+                arr[k] = L[iLeft];
+                iLeft++;
+                k++;
+            }
+
+            // Копируем оставшиеся элементы из временного массива R (если они есть)
+            while (iRight < n2)
+            {
+                arr[k] = R[iRight];
+                iRight++;
+                k++;
+            }
+        }
+    }
+        // Главный метод программы
+        static void Main()
     {
         // Создание объектов для спортсменов с присвоением атрибутов прыжков в воду
         Diving diving1 = new DivingWith3M("Дисциплина 1");
@@ -113,7 +190,7 @@ class Program
         sportik[4] = new Person("Kapelina", new int[] { 4, 5, 5, 4, 4, 5, 5, 4, 4, 5 }, diving5);
 
         // Сортировка массива спортсменов по убыванию результатов
-        Array.Sort(sportik, (x, y) => y.CalculateFinalResult().CompareTo(x.CalculateFinalResult()));
+        Person.MergeSort(sportik, 0, sportik.Length - 1);
 
         // Вывод информации о спортсменах
         for (int i = 0; i < sportik.Length; i++)
