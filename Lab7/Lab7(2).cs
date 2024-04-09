@@ -1,5 +1,4 @@
 using System;
-
 // Создание абстрактного класса Diving
 abstract class Diving
 {
@@ -61,6 +60,7 @@ class Program
         private string surname;
         private int[] refs;
         private Diving diving;
+        private int finalResult;
 
         // Публичные свойства Surname, Refs и Diving
         public string Surname => surname;
@@ -84,6 +84,14 @@ class Program
                 sum += reference;
             }
             return sum;
+        }
+        public void CalculateAndSaveFinalResult()
+        {
+            finalResult = CalculateFinalResult();
+        }
+        public int GetFinalResult()
+        {
+            return finalResult;
         }
 
         // Метод PrintInfo для вывода информации о спортсмене
@@ -171,8 +179,8 @@ class Program
             }
         }
     }
-        // Главный метод программы
-        static void Main()
+    // Главный метод программы
+    static void Main()
     {
         // Создание объектов для спортсменов с присвоением атрибутов прыжков в воду
         Diving diving1 = new DivingWith3M("Дисциплина 1");
@@ -188,6 +196,11 @@ class Program
         sportik[2] = new Person("Machkalyan", new int[] { 1, 2, 1, 1, 3, 3, 4, 4, 2, 4 }, diving3);
         sportik[3] = new Person("Gubeeva", new int[] { 5, 5, 5, 5, 5, 5, 5, 5, 5, 5 }, diving4);
         sportik[4] = new Person("Kapelina", new int[] { 4, 5, 5, 4, 4, 5, 5, 4, 4, 5 }, diving5);
+
+        foreach (var person in sportik)
+        {
+            person.CalculateAndSaveFinalResult();
+        }
 
         // Сортировка массива спортсменов по убыванию результатов
         Person.MergeSort(sportik, 0, sportik.Length - 1);
