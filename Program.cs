@@ -121,6 +121,8 @@
 
 
 ////2уровень 1номер
+//using System;
+
 //class Person
 //{
 //    private string Name;
@@ -138,13 +140,17 @@
 
 //class Student : Person
 //{
+//    private static int NextStudentId = 1; 
+
 //    private string StudentId;
 //    private double[] Grades;
 //    private double SrGrade;
 
-//    public Student(string fullName, string studentId, double[] grades) : base(fullName)
+//    public Student(string fullName, double[] grades) : base(fullName)
 //    {
-//        StudentId = studentId;
+//        StudentId = "00" + NextStudentId.ToString("D2"); 
+//        NextStudentId++;
+
 //        Grades = grades;
 
 //        double sum = 0;
@@ -172,11 +178,12 @@
 //    static void Main(string[] args)
 //    {
 //        Student[] students = new Student[5];
-//        students[0] = new Student("Иванов", "001", new double[] { 3.0, 5.0, 2.0, 3.0 });
-//        students[1] = new Student("Петров", "002", new double[] { 5.0, 4.0, 5.0, 3.0 });
-//        students[2] = new Student("Сидоров", "003", new double[] { 5.0, 4.0, 5.0, 5.0 });
-//        students[3] = new Student("Сидоров2", "004", new double[] { 5.0, 5.0, 5.0, 5.0 });
-//        students[4] = new Student("Сидоров3", "005", new double[] { 5.0, 3.0, 5.0, 5.0 });
+
+//        students[0] = new Student("Иванов", new double[] { 3.0, 5.0, 2.0, 3.0 });
+//        students[1] = new Student("Петров", new double[] { 5.0, 4.0, 5.0, 3.0 });
+//        students[2] = new Student("Сидоров", new double[] { 5.0, 4.0, 5.0, 5.0 });
+//        students[3] = new Student("Сидоров2", new double[] { 5.0, 5.0, 5.0, 5.0 });
+//        students[4] = new Student("Сидоров3", new double[] { 5.0, 3.0, 5.0, 5.0 });
 
 //        foreach (Student student in students)
 //        {
@@ -207,10 +214,6 @@
 //        }
 //    }
 //}
-
-
-
-
 
 
 
