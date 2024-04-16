@@ -78,11 +78,11 @@ namespace laba6new
 
             //creating an array of object of class ExamResults
             ExamResults[] results = new ExamResults[]
-            {
-            new ExamResults { GroupName = "Group 1", ExamScores = new int[] {80, 85, 90, 75, 88} },
-            new ExamResults { GroupName = "Group 2", ExamScores = new int[] {70, 75, 85, 80, 78} },
-            new ExamResults { GroupName = "Group 3", ExamScores = new int[] {90, 95, 92, 88, 87} }
-            };
+        {
+            new ExamResults("Group 1", new int[] {80, 85, 90, 75, 88}),
+            new ExamResults("Group 2", new int[] {70, 75, 85, 80, 78}),
+            new ExamResults("Group 3", new int[] {90, 95, 92, 88, 87})
+        };
 
             //sorting average grades by descending
             var sortedResults = results.OrderByDescending(r => r.GetAverageScore());
@@ -101,7 +101,7 @@ namespace laba6new
         }
     }
     //level 1 ex4
-    public struct Participant
+    struct Participant
     {
         public string Name { get; private set; }
         public double BestHeight { get; private set; }
@@ -121,9 +121,9 @@ namespace laba6new
         }
     }
 
-    public struct Competition
+    struct Competition
     {
-        public List<Participant> Participants;
+        private List<Participant> Participants;
 
         public Competition(List<Participant> participants)
         {
@@ -144,21 +144,34 @@ namespace laba6new
 
         }
 
-        public void DisplayResults() //method to display results of participants in console
+        public void DisplayResults() //Lab6 defense task: make the method with Insert sort
         {
-            Participants.Sort((p1, p2) => p2.BestHeight.CompareTo(p1.BestHeight));
+            for (int i = 1; i < Participants.Count; i++)
+            {
+                Participant savedEl = Participants[i];
+                int j = i - 1;
+
+                while (j >= 0 && Participants[j].BestHeight < savedEl.BestHeight)
+                {
+                    Participants[j + 1] = Participants[j];
+                    j = j - 1;
+                }
+
+                Participants[j + 1] = savedEl;
+            }
+
             Console.WriteLine("Results of a high jumps competition:");
             foreach (Participant participant in Participants)
             {
-                Console.WriteLine($"Participants: {participant.Name}, Best height: {participant.BestHeight}");
+                Console.WriteLine($"Participant: {participant.Name}, Best height: {participant.BestHeight}");
             }
         }
     }
     //level 2 ex 1
-    public struct Student
+    struct Student
     {
-        public string Name;
-        public int[] ExamResults;
+        public string Name { get; private set; }
+        private int[] ExamResults;
 
         public Student(string name, int[] examResults)
         {
@@ -172,10 +185,16 @@ namespace laba6new
         }
     }
     //level 3 ex 1
-    public struct ExamResults
+    struct ExamResults
     {
-        public string GroupName;
-        public int[] ExamScores;
+        public string GroupName { get; private set; }
+        private int[] ExamScores;
+
+        public ExamResults(string groupName, int[] examScores) : this()
+        {
+            GroupName = groupName;
+            ExamScores = examScores;
+        }
 
         public double GetAverageScore() //method to calculate average grade of a group
         {
