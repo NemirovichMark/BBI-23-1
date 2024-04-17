@@ -1,0 +1,8 @@
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\bin\Debug\lvl3.exe.config
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\bin\Debug\lvl3.exe
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\bin\Debug\lvl3.pdb
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\obj\Debug\lvl3.csproj.AssemblyReference.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\obj\Debug\lvl3.csproj.SuggestedBindingRedirects.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\obj\Debug\lvl3.csproj.CoreCompileInputs.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\obj\Debug\lvl3.exe
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl3\obj\Debug\lvl3.pdb
