@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -324,14 +324,7 @@ class Task_13 : Task
         {
             if (!letters.ContainsKey(words[i][0]))
             {
-                if ((((int)(words[i][0]) > 64) && ((int)(words[i][1]) < 91)) || (((int)(words[i][0]) > 96) && ((int)(words[i][1]) < 123)))
-                {
-                    letters.Add(words[i][0], 0);
-                }
-                else if (((int)(words[i][0]) > 1039) && ((int)(words[i][1]) < 1106))
-                {
-                    letters.Add(words[i][0], 0);
-                }
+                letters.Add(words[i][0], 0);
             }
         }
         return letters;
@@ -348,7 +341,7 @@ class Task_13 : Task
     {
         foreach (var i in letters)
         {
-            Console.WriteLine($"Буква: {i.Key}, Процент встреч: {(i.Value * 100) / words.Length}%");
+            Console.WriteLine($"Буква: {i.Key}, Процент встреч: {100 * i.Value / words.Length}%");
         }
     }
 }
