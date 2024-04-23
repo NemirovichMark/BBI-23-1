@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+class Program
+{
+    static void Main()
+    {
+        string text = "Октябрь. Деревья давно сбросили желтые листья. В лесу идет дождь, и листва на дорожках не шуршит под ногами. Дрозды кружились над рябиной. Они клевали гроздья ягод. В дубках кричали сойки. Над елью пискнула синичка. Рябчики пролетели в лесную чащу.";
+
+        PCCounter counter = new PCCounter();
+        int count = counter.CountSingle(text);
+
+        Console.WriteLine($"Количество предлогов и союзов длиной в одну букву в тексте: {count}");
+    }
+}
+
+class PCCounter
+{
+    private static readonly Regex Prep = new Regex(@"\b(?:к|в|а|с|у|о|и|)\b", RegexOptions.IgnoreCase);
+
+    public int CountSingle(string text)
+    {
+        int count = 0;
+        MatchCollection matches = Prep.Matches(text);
+
+        foreach (Match match in matches)
+        {
+            if (match.Length == 1)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
