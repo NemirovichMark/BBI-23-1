@@ -139,26 +139,52 @@ class FormatTextTask : Task
     {
         int maxLineLength = 50;
 
-        string[] words = input.Split(' ');
+        string[] words = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         StringBuilder outputText = new StringBuilder();
+        StringBuilder currentLine = new StringBuilder();
 
-        int currentLineLength = 0;
         foreach (string word in words)
         {
-            if (currentLineLength + word.Length + 1 > maxLineLength)
+            if ((currentLine.Length + word.Length + 1) > maxLineLength)
             {
-                outputText.AppendLine();
-                currentLineLength = 0;
+                AddSpacesToLine(currentLine, maxLineLength);
+                outputText.AppendLine(currentLine.ToString().TrimEnd());
+                currentLine.Clear();
             }
 
-            outputText.Append(word);
-            outputText.Append(' ');
-            currentLineLength += word.Length + 1;
+            currentLine.Append(word);
+            currentLine.Append(' ');
+        }
+
+        if (currentLine.Length > 0)
+        {
+            AddSpacesToLine(currentLine, maxLineLength);
+            outputText.Append(currentLine.ToString().TrimEnd());
         }
 
         return outputText.ToString();
     }
+
+    private void AddSpacesToLine(StringBuilder line, int targetLength)
+    {
+        int spacesNeeded = targetLength - line.Length;
+        if (spacesNeeded > 0)
+        {
+            int wordCount = line.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
+            int spacesPerWord = wordCount > 0 ? spacesNeeded / wordCount : spacesNeeded;
+
+            int extraSpaces = spacesNeeded - (spacesPerWord * wordCount);
+
+            string spaces = new string(' ', spacesPerWord);
+            for (int i = 0; i < extraSpaces; i++)
+            {
+                line.Replace(" ", spaces + " ", 0, 1);
+            }
+            line.Replace(" ", spaces, 0, line.Length);
+        }
+    }
 }
+
 
 class TextCompressionDecompressionTask : Task
 {
