@@ -1,120 +1,293 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Analiztext
+// Абстрактный класс "Задание"
+public abstract class Zadanie
 {
-    abstract class Analyz
+    protected string text;
+
+    public Zadanie(string text)
     {
-        protected string[] SplitText(string text)
-        {
-            return text.Split(new char[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-        }
-
-        protected bool Hhhjhhh(string word)
-        {
-            HashSet<char> letters = new HashSet<char>();
-
-            foreach (char letter in word)
-            {
-                if (!letters.Contains(letter))
-                {
-                    letters.Add(letter);
-                }
-            }
-
-            return letters.Count == word.Length;
-        }
-
-        public abstract List<string> Analyze(string text);
+        this.text = text;
     }
 
-    class Prep : Analyz
+    public abstract void Reshit();
+    public override abstract string ToString();
+}
+
+// Первое задание (№1)
+public class ChastotaBukv : Zadanie
+{
+    private int[] chastota = new int[33];
+
+    public ChastotaBukv(string text) : base(text) { }
+
+    public override void Reshit()
     {
-        private readonly string[] vowels = { "а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я" };
 
-        private bool I(string word)
+        int totalBukv = 0;
+
+        foreach (char c in text.ToLower())
         {
-            return word == "и" || word == "или" || word == "но" || word == "а" || word == "ибо"
-                || word == "чтобы" || word == "потому" || word == "что" || word == "если" || word == "когда"
-                || word == "где" || word == "который" || word == "от" || word == "до" || word == "для" || word == "в"
-                || word == "на" || word == "у" || word == "с" || word == "о" || word == "за" || word == "перед"
-                || word == "под" || word == "над" || word == "около" || word == "по" || word == "без" || word == "про"
-                || word == "со" || word == "из" || word == "за" || word == "при";
+            if (char.IsLetter(c))
+            {
+                chastota[c - 'а']++;
+                totalBukv++;
+            }
         }
 
-        private bool CVowel(string word)
+        for (int i = 0; i < chastota.Length; i++)
         {
-            foreach (string v in vowels)
-            {
-                if (word.Contains(v))
-                {
-                    return true;
-                }
-            }
-            return false;
+            chastota[i] = (int)((double)chastota[i] / totalBukv * 100);
         }
 
-        public override List<string> Analyze(string text)
+
+    }
+
+    public override string ToString()
+    {
+        string result = "";
+        for (int i = 0; i < 33; i++)
         {
-            List<string> result = new List<string>();
-            string[] words = SplitText(text);
+            char bukva = (char)('а' + i);
+            result += $"{bukva}: {chastota[i]}% ";
+        }
+        return result;
+    }
 
-            foreach (string word in words)
+}
+
+
+
+// Второе задание (№3)
+public class RazbienieNaStroki : Zadanie
+{
+    private List<string> stroki = new List<string>();
+    public RazbienieNaStroki(string text) : base(text) { }
+
+    public override void Reshit()
+    {
+        string[] slova = text.Split(' ');
+        string stroka = "";
+
+
+        foreach (string slovo in slova)
+        {
+            if (stroka.Length + slovo.Length + 1 <= 50)
             {
-                string low = word.ToLower();
+                stroka += slovo + " ";
+            }
+            else
+            {
+                stroki.Add(stroka.Trim());
+                stroka = slovo + " ";
+            }
+        }
+        stroki.Add(stroka.Trim());
 
-                if (I(low) && !CVowel(low))
+
+    }
+
+    public override string ToString()
+    {
+        string result = "";
+        foreach (string stroka in stroki)
+        {
+            result += stroka + "\n";
+        }
+        return result;
+    }
+}
+
+
+
+// 3 задание (№5)
+public class ChastotaNachalnyhBukv : Zadanie
+{
+    private int[] chastota = new int[33];
+    public ChastotaNachalnyhBukv(string text) : base(text) { }
+
+    public override void Reshit()
+    {
+
+        string[] slova = text.Split(' ', '.', ',', '!', '?', ':', ';');
+
+        foreach (string slovo in slova)
+        {
+            if (slovo.Length > 0)
+            {
+                char firstChar = char.ToLower(slovo[0]);
+                if (char.IsLetter(firstChar))
                 {
-                    result.Add(word);
+                    chastota[firstChar - 'а']++;
                 }
             }
+        }
 
-            return result;
+
+    }
+
+    public override string ToString()
+    {
+        string result = "";
+        for (int i = 0; i < 33; i++)
+        {
+            if (chastota[i] > 0)
+            {
+                char bukva = (char)('а' + i);
+                result += $"{bukva} ";
+            }
+        }
+        return result;
+    }
+}
+//4 задние(№7)
+public class PoiskOdnokorennyhSlov : Zadanie
+{
+    private string koren;
+    List<string> naĭdennyeSlova = new List<string>();
+    public PoiskOdnokorennyhSlov(string text, string koren) : base(text)
+    {
+        this.koren = koren.ToLower();
+
+    }
+    public override void Reshit()
+    {
+        string[] slova = text.ToLower().Split(' ', '.', ',', '!', '?', ':', ';');
+
+
+        foreach (string slovo in slova)
+        {
+            if (IsOdnokorennoe(slovo, koren))
+            {
+                naĭdennyeSlova.Add(slovo);
+            }
+        }
+
+
+    }
+
+    private bool IsOdnokorennoe(string slovo, string koren)
+    {
+
+        return slovo.StartsWith(koren) && slovo.Length > koren.Length;
+    }
+
+
+
+
+    public override string ToString()
+    {
+        string result = "Найденные однокоренные слова: ";
+        foreach (string slovo in naĭdennyeSlova)
+        {
+            result += slovo + " ";
+        }
+        return result;
+    }
+}
+
+//5 задание (№14)
+public class SummaChisel : Zadanie
+{
+    private int summa;
+
+    public SummaChisel(string text) : base(text) { }
+
+    public override void Reshit()
+    {
+        string[] slova = text.Split(' ', '.', ',', '!', '?', ':', ';');
+        summa = 0;
+
+        foreach (string slovo in slova)
+        {
+            if (int.TryParse(slovo, out int chislo) && chislo >= 1 && chislo <= 10)
+            {
+                summa += chislo;
+            }
         }
     }
 
-    class WordAnalyzer : Analyz
+    public override string ToString()
     {
-        public override List<string> Analyze(string text)
-        {
-            List<string> result = new List<string>();
-            string[] words = SplitText(text);
+        return $"Сумма чисел от 1 до 10 в тексте: {summa}";
+    }
+}
+//6 задание (#11)
+public class SortirovkaFamilij : Zadanie
+{
+    private string[] Items;
 
-            foreach (string word in words)
+    public SortirovkaFamilij(string text) : base(text) { }
+
+    public override void Reshit()
+    {
+        Items = text.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+        for (int i = 0; i < Items.Length - 1; i++)
+        {
+            for (int j = 0; j < Items.Length - i - 1; j++)
             {
-                if (Hhhjhhh(word.ToLower()))
+                if (string.Compare(Items[j], Items[j + 1], StringComparison.CurrentCultureIgnoreCase) > 0)
                 {
-                    result.Add(word);
+                    string temp = Items[j];
+                    Items[j] = Items[j + 1];
+                    Items[j + 1] = temp;
                 }
             }
-
-            return result;
         }
     }
 
-    class Program
+    public override string ToString()
     {
-        static void Main(string[] args)
-        {
-            string text = "Привет как дела что делаешь чем живешь";
+        return string.Join(", ", Items);
+    }
+}
 
-            Analyz prep = new Prep();
-            List<string> asd = prep.Analyze(text);
+// Пример использования
+public class Program
+{
+    static void Main(string[] args)
+    {
 
-            Console.WriteLine("Предлоги и союзы без гласных букв в тексте:");
-            foreach (string word in asd)
-            {
-                Console.WriteLine(word);
-            }
+        string text = "международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов. ";
+        string koren = "вод";
+        Console.WriteLine("Первое");
+        Zadanie zadanie1 = new ChastotaBukv(text);
+        zadanie1.Reshit();
+        Console.WriteLine(zadanie1);
 
-            Analyz wordAnalyzer = new WordAnalyzer();
-            List<string> Diflet = wordAnalyzer.Analyze(text);
+        Console.WriteLine("Второе");
+        Zadanie zadanie2 = new RazbienieNaStroki(text);
+        zadanie2.Reshit();
+        Console.WriteLine(zadanie2);
 
-            Console.WriteLine("Слова с разными буквами в тексте:");
-            foreach (string word in Diflet)
-            {
-                Console.WriteLine(word);
-            }
-        }
+        Console.WriteLine("Третье");
+        Zadanie zadanie3 = new ChastotaNachalnyhBukv(text);
+        zadanie3.Reshit();
+        Console.WriteLine(zadanie3);
+
+
+        string text1 = "Водопад это вода.Водная гладь прекрасна";
+        Console.WriteLine("Четвертое");
+        Zadanie zadanie4 = new PoiskOdnokorennyhSlov(text1, koren);
+        zadanie4.Reshit();
+        Console.WriteLine(zadanie4);
+
+
+
+        Console.WriteLine("Пятое");
+
+
+        string input = "Текст содержит 1 слово, 2 числа и 3 знака препинания. Сумма: 9 !";
+        Zadanie zadanie6 = new SummaChisel(input);
+        zadanie6.Reshit();
+        Console.WriteLine(zadanie6);
+
+        Console.WriteLine("Шестое");
+        string input5 = "Иванов, Абрамов, Ян, Петров, Абвалов, Genri, Gehri, Adams, Jons";
+        Zadanie task5 = new SortirovkaFamilij(input5);
+        task5.Reshit();
+        Console.WriteLine(task5.ToString());
     }
 }
