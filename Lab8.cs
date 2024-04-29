@@ -181,66 +181,102 @@ class FormatTextTask : Task
 }
 
 
-class TextCompressionDecompressionTask : Task
+class TextCompressionTask : Task
 {
-    public override string Process(string input)
+    public override string Process(string originalText)
     {
-        string text = "После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.";
+        Console.WriteLine("Оригинальный текст:");
+        Console.WriteLine(originalText);
 
-        Dictionary<string, char> codeTable = new Dictionary<string, char>();
-        StringBuilder compressedText = new StringBuilder();
-        StringBuilder decompressedText = new StringBuilder();
+        Dictionary<string, char> codeTable;
+        string compressedText = CompressText(originalText, out codeTable);
+        Console.WriteLine("\nСжатый текст:");
+        Console.WriteLine(compressedText);
 
-        char code = 'a';
+        Console.WriteLine("\nТаблица кодов:");
+        foreach (var pair in codeTable)
+        {
+            Console.WriteLine($"{pair.Key} : {pair.Value}");
+        }
 
-        // Сжатие текста
+        string decompressedText = DecompressText(compressedText, codeTable);
+        Console.WriteLine("\nДекомпрессированный текст:");
+        Console.WriteLine(decompressedText);
+
+        return "Текст успешно сжат и затем декомпрессирован.";
+    }
+
+    static string CompressText(string text, out Dictionary<string, char> codeTable)
+    {
+        codeTable = new Dictionary<string, char>();
+        Dictionary<string, int> pairCount = new Dictionary<string, int>();
+        char code = 'a'; // начинаем с кода 'a'
+
+        // Подсчет количества вхождений каждой пары букв
         for (int i = 0; i < text.Length - 1; i++)
         {
-            string sequence = text.Substring(i, 2);
-            if (!codeTable.ContainsKey(sequence))
+            string pair = text.Substring(i, 2);
+            if (!pairCount.ContainsKey(pair))
             {
-                codeTable.Add(sequence, code);
-                compressedText.Append(code);
-                code++;
+                pairCount.Add(pair, 1);
             }
             else
             {
-                compressedText.Append(codeTable[sequence]);
+                pairCount[pair]++;
             }
         }
-        Console.WriteLine("Текст после сжатия: " + compressedText.ToString());
 
-        Console.WriteLine("Таблица кодов:");
-        foreach (var pair in codeTable)
+        // Выбор пяти самых часто встречающихся пар
+        var topPairs = pairCount.OrderByDescending(pair => pair.Value).Take(5);
+
+        // Создание кодов для выбранных пар
+        foreach (var pair in topPairs)
         {
-            Console.WriteLine(pair.Key + " -> " + pair.Value);
+            codeTable.Add(pair.Key, code++);
         }
 
-        Console.WriteLine("\nВведите сжатый текст:");
-        string inputCompressedText = compressedText.ToString(); // используем сжатый текст из первой программы
-        Console.WriteLine(inputCompressedText);
+        // Сжатие текста
+        StringBuilder compressedText = new StringBuilder();
+        int index = 0;
 
-        // Декодирование сжатого текста
-        Dictionary<char, string> decodeTable = new Dictionary<char, string>();
-        foreach (var pair in codeTable)
+        while (index < text.Length - 1)
         {
-            decodeTable.Add(pair.Value, pair.Key);
-        }
-
-        for (int i = 0; i < inputCompressedText.Length; i++)
-        {
-            char inputCode = inputCompressedText[i];
-            if (decodeTable.ContainsKey(inputCode))
+            string pair = text.Substring(index, 2);
+            if (codeTable.ContainsKey(pair))
             {
-                decompressedText.Append(decodeTable[inputCode]);
+                compressedText.Append(codeTable[pair]);
             }
             else
             {
-                return $"Ошибка: код '{inputCode}' отсутствует в таблице кодов.";
+                compressedText.Append(pair);
             }
+            index += 2;
         }
 
-        return "Текст после декодирования: " + decompressedText.ToString();
+        return compressedText.ToString();
+    }
+
+    static string DecompressText(string compressedText, Dictionary<string, char> codeTable)
+    {
+        StringBuilder decompressedText = new StringBuilder();
+        int index = 0;
+
+        while (index < compressedText.Length)
+        {
+            char code = compressedText[index];
+            string pair = codeTable.FirstOrDefault(x => x.Value == code).Key;
+            if (pair != null)
+            {
+                decompressedText.Append(pair);
+            }
+            else
+            {
+                decompressedText.Append(code);
+            }
+            index++;
+        }
+
+        return decompressedText.ToString();
     }
 }
 
@@ -274,7 +310,7 @@ class Program
         }
         else if (choice == 5)
         {
-            task = new TextCompressionDecompressionTask();
+            task = new TextCompressionTask();
         }
         else
         {
