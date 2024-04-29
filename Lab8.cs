@@ -137,51 +137,46 @@ class FormatTextTask : Task
 {
     public override string Process(string input)
     {
-        int maxLineLength = 50;
+        int pageWidth = 80; // Ширина страницы
 
-        string[] words = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        StringBuilder outputText = new StringBuilder();
-        StringBuilder currentLine = new StringBuilder();
-
+        string[] words = input.Split(' ');
+        StringBuilder lineBuilder = new StringBuilder();
         foreach (string word in words)
         {
-            if ((currentLine.Length + word.Length + 1) > maxLineLength)
+            if (lineBuilder.Length + word.Length >= pageWidth)
             {
-                AddSpacesToLine(currentLine, maxLineLength);
-                outputText.AppendLine(currentLine.ToString().TrimEnd());
-                currentLine.Clear();
+                Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
+                lineBuilder.Clear();
             }
-
-            currentLine.Append(word);
-            currentLine.Append(' ');
+            lineBuilder.Append(word + " ");
         }
-
-        if (currentLine.Length > 0)
+        if (lineBuilder.Length > 0)
         {
-            AddSpacesToLine(currentLine, maxLineLength);
-            outputText.Append(currentLine.ToString().TrimEnd());
+            Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
         }
 
-        return outputText.ToString();
+        return "Текст успешно отформатирован.";
     }
 
-    private void AddSpacesToLine(StringBuilder line, int targetLength)
+    static string AlignText(string text, int width)
     {
-        int spacesNeeded = targetLength - line.Length;
-        if (spacesNeeded > 0)
+        int spacesToAdd = width - text.Replace(" ", "").Length;
+        int wordCount = text.Split(' ').Length;
+        int regularSpaces = spacesToAdd / (wordCount - 1);
+        int extraSpaces = spacesToAdd % (wordCount - 1);
+
+        string[] words = text.Split(' ');
+        StringBuilder alignedText = new StringBuilder();
+        for (int i = 0; i < words.Length; i++)
         {
-            int wordCount = line.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length - 1;
-            int spacesPerWord = wordCount > 0 ? spacesNeeded / wordCount : spacesNeeded;
-
-            int extraSpaces = spacesNeeded - (spacesPerWord * wordCount);
-
-            string spaces = new string(' ', spacesPerWord);
-            for (int i = 0; i < extraSpaces; i++)
+            alignedText.Append(words[i]);
+            if (i < words.Length - 1)
             {
-                line.Replace(" ", spaces + " ", 0, 1);
+                int spaces = i < extraSpaces ? regularSpaces + 1 : regularSpaces;
+                alignedText.Append(new string(' ', spaces));
             }
-            line.Replace(" ", spaces, 0, line.Length);
         }
+        return alignedText.ToString();
     }
 }
 
