@@ -11,20 +11,39 @@ class EncryptionTask : Task
 {
     public override string Process(string input)
     {
-        string[] words = input.Split(' ');
-        System.Text.StringBuilder encryptedMessage = new System.Text.StringBuilder();
+        // Разделяем слова и знаки препинания с помощью регулярного выражения
+        string[] parts = Regex.Split(input, @"(\W)");
 
-        foreach (string word in words)
+        // Обрабатываем каждую часть (слово или знак препинания) отдельно
+        StringBuilder encryptedMessage = new StringBuilder();
+        StringBuilder decryptedMessage = new StringBuilder();
+        foreach (string part in parts)
         {
-            char[] chars = word.ToCharArray();
-            Array.Reverse(chars);
-            encryptedMessage.Append(chars);
-            encryptedMessage.Append(" ");
+            // Если текущая часть - слово, шифруем его и расшифровываем
+            if (!string.IsNullOrWhiteSpace(part))
+            {
+                char[] chars = part.ToCharArray();
+                Array.Reverse(chars);
+                encryptedMessage.Append(chars);
+                Array.Reverse(chars); // Обратная операция для расшифровки
+                decryptedMessage.Append(chars);
+            }
+            else // Если текущая часть - знак препинания, добавляем его без изменений
+            {
+                encryptedMessage.Append(part);
+                decryptedMessage.Append(part);
+            }
         }
 
-        return encryptedMessage.ToString().Trim();
+        return $"Зашифрованное сообщение: {encryptedMessage.ToString()}\nРасшифрованное сообщение: {decryptedMessage.ToString()}";
+    }
+
+    public override string ToString()
+    {
+        return "Шифрование сообщения";
     }
 }
+
 
 class ComplexityTask : Task
 {
