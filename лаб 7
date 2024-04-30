@@ -1,0 +1,250 @@
+//задача 1
+using System;
+
+class Athlete
+{
+    private string _lastName;
+    private string _club;
+    private double _firstAttempt;
+    private double _secondAttempt;
+    private bool _disqualified;
+
+    public string LastName => _lastName;
+    public string Club => _club;
+    public double FirstAttempt => _firstAttempt;
+    public double SecondAttempt => _secondAttempt;
+    public double TotalDistance => _firstAttempt + _secondAttempt;
+    public bool Disqualified => _disqualified;
+
+    public void Disqualify()
+    {
+        _disqualified = true;
+    }
+
+    public Athlete(string lastName, string club, double firstAttempt, double secondAttempt)
+    {
+        _lastName = lastName;
+        _club = club;
+        _firstAttempt = firstAttempt;
+        _secondAttempt = secondAttempt;
+        _disqualified = false;
+    }
+
+    public void Display(int place)
+    {
+        if (!_disqualified)
+        {
+            Console.WriteLine($"| {place + 1,4} | {_lastName,-11} | {_club,-10} | {_firstAttempt,-11:F1} | {_secondAttempt,-11:F1} | {TotalDistance,-18:F1} |");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Athlete[] athletes = new Athlete[]
+        {
+            new Athlete("Иванов", "Снежок", 6.5, 7.2),
+            new Athlete("Губеев", "Баскет", 7.1, 7.5),
+            new Athlete("Енукидзе", "ПВА", 6.3, 6.7),
+            new Athlete("Жуков", "РСКА", 6.6, 6.9),
+            new Athlete("Капелин", "Барса", 8.5, 7.0)
+        };
+
+        athletes[2].Disqualify();
+
+        Array.Sort(athletes, (x, y) => y.TotalDistance.CompareTo(x.TotalDistance));
+
+        Console.WriteLine("| Место |   Фамилия   |  Клуб      |  Попытка 1  |  Попытка 2  |  Итоговый результат |");
+        Console.WriteLine("|-------|-------------|------------|-------------|-------------|---------------------|");
+
+        for (int i = 0; i < athletes.Length; i++)
+        {
+            athletes[i].Display(i);
+        }
+
+        Console.WriteLine();
+    }
+}
+
+//задача 2
+using System;
+
+class Person
+{
+    private string _fullName;
+
+    public string FullName => _fullName;
+
+    public Person(string fullName)
+    {
+        _fullName = fullName;
+    }
+}
+
+class Student : Person
+{
+    private static int _nextStudentId = 10000; // Start with a base student ID
+
+    private int _studentId;
+    private double _mathGrade;
+    private double _physicsGrade;
+    private double _programmingGrade;
+
+    public int StudentId => _studentId;
+    public double MathGrade => _mathGrade;
+    public double PhysicsGrade => _physicsGrade;
+    public double ProgrammingGrade => _programmingGrade;
+    public double AverageGrade => (_mathGrade + _physicsGrade + _programmingGrade) / 3;
+
+    public Student(string fullName, double mathGrade, double physicsGrade, double programmingGrade) : base(fullName)
+    {
+        _studentId = _nextStudentId++;
+        _mathGrade = mathGrade;
+        _physicsGrade = physicsGrade;
+        _programmingGrade = programmingGrade;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Student[] students = new Student[]
+        {
+            new Student("Иванов Иван Иванович", 4, 5, 4),
+            new Student("Губеев Виталий Денисович", 4, 5, 4),
+            new Student("Енукидзе Гиви Гивиевич", 3, 4, 5),
+            new Student("Жуков Андрей Александрович", 4, 3, 5),
+            new Student("Капелин Илья Викторович", 5, 5, 5)
+        };
+
+        Array.Sort(students, (x, y) => y.AverageGrade.CompareTo(x.AverageGrade));
+
+        Console.WriteLine("Список успешно сдавших экзамены студентов, отсортированный по убыванию среднего балла:");
+        Console.WriteLine("|   ФИО               |  № студ. билета |  Средний балл |");
+        Console.WriteLine("|---------------------|-----------------|----------------|");
+
+        foreach (var student in students)
+        {
+            Console.WriteLine($"| {student.FullName,-20} | {student.StudentId,-15} | {student.AverageGrade,-13:F2} |");
+        }
+    }
+}
+
+
+//задача 5
+using System;
+
+abstract class FootballTeam
+{
+    protected string _name;
+    protected int _goalsFor;
+    protected int _goalsAgainst;
+    protected int _points;
+    protected string _gender;
+
+    public FootballTeam(string name, string gender)
+    {
+        _name = name;
+        _gender = gender;
+        _goalsFor = 0;
+        _goalsAgainst = 0;
+        _points = 0;
+    }
+
+    public void AddResult(int goalsFor, int goalsAgainst)
+    {
+        _goalsFor += goalsFor;
+        _goalsAgainst += goalsAgainst;
+        if (goalsFor > goalsAgainst)
+        {
+            _points += 3; // выигрыш
+        }
+        else if (goalsFor == goalsAgainst)
+        {
+            _points += 1; // ничья
+        }
+    }
+
+    public string Name => _name;
+    public int GoalsFor => _goalsFor;
+    public int GoalsAgainst => _goalsAgainst;
+    public int Points => _points;
+    public string Gender => _gender;
+
+    // Метод для вывода информации о команде
+    public void DisplayTeamInfo(int rank)
+    {
+        Console.WriteLine($"{rank + 1}\t{Name}\t\t{Points}\t{Gender}");
+    }
+}
+
+class FemaleFootballTeam : FootballTeam
+{
+    public FemaleFootballTeam(string name) : base(name, "женская") { }
+}
+
+class MaleFootballTeam : FootballTeam
+{
+    public MaleFootballTeam(string name) : base(name, "мужская") { }
+}
+
+class Program
+{
+    // Метод для проведения матча между двумя командами
+    static void PlayMatch(FootballTeam team1, FootballTeam team2)
+    {
+        Random random = new Random();
+        int goalsForTeam1 = random.Next(0, 5); // Случайное количество голов для первой команды
+        int goalsForTeam2 = random.Next(0, 5); // Случайное количество голов для второй команды
+
+        team1.AddResult(goalsForTeam1, goalsForTeam2);
+        team2.AddResult(goalsForTeam2, goalsForTeam1);
+    }
+
+    static void Main()
+    {
+        FootballTeam[] femaleTeams = new FootballTeam[]
+        {
+            new FemaleFootballTeam("ЦСКА"),
+            new FemaleFootballTeam("Спартак")
+        };
+
+        FootballTeam[] maleTeams = new FootballTeam[]
+        {
+            new MaleFootballTeam("Динамо"),
+            new MaleFootballTeam("Локомотив"),
+            new MaleFootballTeam("Зенит")
+        };
+
+        // Объединение женских и мужских команд в один массив
+        FootballTeam[] allTeams = new FootballTeam[femaleTeams.Length + maleTeams.Length];
+        femaleTeams.CopyTo(allTeams, 0);
+        maleTeams.CopyTo(allTeams, femaleTeams.Length);
+
+        // Проведение матчей между командами
+        Random random = new Random();
+        for (int i = 0; i < allTeams.Length; i++)
+        {
+            for (int j = i + 1; j < allTeams.Length; j++)
+            {
+                PlayMatch(allTeams[i], allTeams[j]);
+            }
+        }
+
+        // Сортировка команд по общему количеству баллов
+        Array.Sort(allTeams, (x, y) => y.Points.CompareTo(x.Points));
+
+        Console.WriteLine("Место\tКоманда\t\tОчки\tПол");
+        Console.WriteLine("------\t--------------\t----\t---");
+
+        // Вывод информации о командах
+        for (int i = 0; i < allTeams.Length; i++)
+        {
+            allTeams[i].DisplayTeamInfo(i);
+        }
+    }
+}
+
