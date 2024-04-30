@@ -7,54 +7,75 @@ using System.Web;
 
 namespace lvl2
 {
-    struct Graduate
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Web;
+
+    namespace lvl2
     {
-        public string Name;
-        private int MarkMath;
-        private int MarkPhys;
-        private int MarkRus;
-        public double AvgMark;
-        public bool IsPastExm;
-
-        public Graduate(string name, int markmat, int markphys, int markrus)
+        struct Graduate
         {
-            Name = name;
-            MarkMath = markmat;
-            MarkPhys = markphys;
-            MarkRus = markrus;
-            AvgMark = (MarkMath + MarkPhys + MarkRus) / 3.0;
-            IsPastExm = (MarkMath + MarkPhys + MarkRus)/3 >= 3;
+            private string _name;
+            private int _markMath;
+            private int _markPhys;
+            private int _markRus;
+            private double _avgMark;
+            private bool _isPastExm;
 
-        }
-    }
-
-
-    class Program
-    {
-        static void Main()
-        {
-            Graduate[] graduates = new Graduate[]
+            public Graduate(string name, int markmat, int markphys, int markrus)
             {
-            new Graduate("Иван", 3, 5, 5),
-            new Graduate("Сергей", 3, 3, 3),
-            new Graduate("Колян", 3, 4, 2),
-            new Graduate("Сеня", 3, 4, 4),
-            new Graduate("ВВП", 5, 5, 5),
-            new Graduate("Ждан", 3, 4, 4)
-
-            };
-
-            var passedGraduates = graduates.Where(g => g.IsPastExm).ToArray();
-
-            var sortedGraduates = passedGraduates.OrderByDescending(g => g.AvgMark).ToArray();
-
-            foreach (var graduate in sortedGraduates)
-            {
-                Console.WriteLine($"{graduate.Name}: {graduate.AvgMark}");
-
+                _name = name;
+                _markMath = markmat;
+                _markPhys = markphys;
+                _markRus = markrus;
+                _avgMark = (_markMath + _markPhys + _markRus) / 3.0;
+                _isPastExm = (_markMath >= 3 && _markPhys >= 3 && _markRus >= 3);
 
             }
-            Console.ReadLine();
+
+            public string Name => _name;
+            public int MarkMath => _markMath;
+            public int MarkPhys => _markPhys;
+            public int MarkRus => _markRus;
+            public double AvgMark => _avgMark;
+            public bool IsPastExm => _isPastExm;
+
+            public void Print()
+            {
+                Console.WriteLine($"{Name}, {MarkMath}, {MarkPhys}, {MarkRus}");
+            }
+
+        }
+
+
+        class Program
+        {
+            static void Main()
+            {
+                Graduate[] graduates = new Graduate[]
+                {
+                new Graduate("Иван", 3, 5, 5),
+                new Graduate("Сергей", 3, 3, 3),
+                new Graduate("Колян", 3, 4, 2),
+                new Graduate("Сеня", 3, 4, 4),
+                new Graduate("ВВП", 5, 5, 5),
+                new Graduate("Ждан", 3, 4, 4)
+
+                };
+
+                var passedGraduates = graduates.Where(g => g.IsPastExm).ToArray();
+
+                var sortedGraduates = passedGraduates.OrderByDescending(g => g.AvgMark).ToArray();
+
+                foreach (var graduate in sortedGraduates)
+                {
+                    graduate.Print();
+                }
+                Console.ReadKey();
+            }
         }
     }
 }
