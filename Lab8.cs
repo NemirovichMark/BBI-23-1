@@ -210,7 +210,7 @@ class TextCompressionTask : Task
     {
         codeTable = new Dictionary<string, char>();
         Dictionary<string, int> pairCount = new Dictionary<string, int>();
-        char code = 'a'; // начинаем с кода 'a'
+        char code = '1'; // начинаем с кода 'a'
 
         // Подсчет количества вхождений каждой пары букв
         for (int i = 0; i < text.Length - 1; i++)
