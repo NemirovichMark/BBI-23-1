@@ -7,23 +7,37 @@ using System.Threading.Tasks;
 
 namespace lab_6_Alekseev
 {
-    public struct Paticapant
+    
+        public struct Paticapant
     {
-        public string Surname;
-        public string Group;
-        public string TeacherSurname;
-        public double Result;
-        public bool IsNormative;
+        private string _surname;
+        private string _group;
+        private string _teacherSurname;
+        private double _result;
+        private bool _isNormative;
 
-        public Paticapant(string surname, string group, string teachersurname, double resoult)
+        public Paticapant(string surname, string group, string teacherSurname, double result)
         {
-            Surname = surname;
-            Group = group;
-            TeacherSurname = teachersurname;
-            Result = resoult;
-            IsNormative = Result <= 110; // В секундах 
+            _surname = surname;
+            _group = group;
+            _teacherSurname = teacherSurname;
+            _result = result;
+            _isNormative = _result <= 110; // В секундах
+        }
 
+        public string Surname { get { return _surname; } }
 
+        public string Group { get { return _group; } }
+
+        public string TeacherSurname { get { return _teacherSurname; } }
+
+        public double Result { get { return _result; } }
+
+        public bool IsNormative { get { return _isNormative; } }
+
+        public void Print()
+        {
+            Console.WriteLine($"{Surname,15} | {Group,10} | {TeacherSurname,15} | {Result,10:F2} | {(IsNormative ? "Да" : "Нет"),10}");
         }
     }
 
@@ -46,7 +60,7 @@ namespace lab_6_Alekseev
 
             foreach (var participant in paticapants)
             {
-                Console.WriteLine("{0,15} | {1,10} | {2,15} | {3,10:F2} | {4,10}", participant.Surname, participant.Group, participant.TeacherSurname, participant.Result, participant.IsNormative ? "Да" : "Нет");
+                participant.Print();
             }
 
 
@@ -58,6 +72,7 @@ namespace lab_6_Alekseev
         }
     }
 }
+
 
  
 
