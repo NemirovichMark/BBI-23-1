@@ -1,0 +1,155 @@
+﻿//1 уровень 4 задача
+//using System;
+//using System.Collections.Generic;
+//struct Participant
+//{
+//    private string surname;
+//    private double result1, result2, result;
+//    public Double Result { get { return result; } }
+//    public String Surname { get { return surname; } }
+//    private double Max(double x, double y)
+//    {
+//        if (x > y)
+//        {
+//            return x;
+//        }
+//        else
+//        {
+//            return y;
+//        }
+//    }
+
+//    public static void Sort(Participant[] pt)
+//    {
+//        int i = 1;
+//        int j = 2;
+//        while (i < pt.Length)
+//        {
+//            if (pt[i - 1].Result >= pt[i].Result)
+//            {
+//                i = j;
+//                j++;
+//            }
+//            else
+//            {
+//                Participant temp = pt[i - 1];
+//                pt[i - 1] = pt[i];
+//                pt[i] = temp;
+//                i--;
+//                if (i == 0)
+//                {
+//                    i = j;
+//                    j++;
+//                }
+//            }
+//        }
+//    }
+//    public Participant(string surname1, double Result1, double Result2)
+//    {
+//        surname = surname1;
+//        result1 = Result1;
+//        result2 = Result2;
+//        result = 0;
+//        result = Max(result1, result2);
+//    }
+//}
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        Participant[] pt = new Participant[4];
+//        pt[0] = new Participant("Чиченкова", 1.49, 1.52);
+//        pt[1] = new Participant("Виноградов", 1.61, 1.54);
+//        pt[2] = new Participant("Голубин", 1.38, 1.36);
+//        pt[3] = new Participant("Словогородская", 1.53, 1.40);
+//        for (int i = 0; i < pt.Length; i++)
+//        {
+//            Console.WriteLine("Фамилия {0}\t Результат {1:f2}", pt[i].Surname, pt[i].Result);
+//        }
+//        Participant.Sort(pt);
+//        Console.WriteLine();
+//        for (int i = 0; i < pt.Length; i++)
+//        {
+//            Console.WriteLine("Фамилия {0}\t  Результат  {1:f2}", pt[i].Surname, pt[i].Result);
+//        }
+//        Console.ReadKey();
+//    }
+//}
+//3 уровень 5 задача
+//using System;
+//using System.Reflection;
+//using System.Runtime.InteropServices.ComTypes;
+
+//class Program
+//{
+//    private struct Team
+//    {
+//        private string _name;
+//        private int _score;
+//        private int _misses;
+//        private int _points;
+//        public string Name { get { return _name; } }
+//        public int Score { get { return _score; } }
+//        public int Misses { get { return _misses; } }
+//        public int Points { get { return _points; } set { } } 
+//        public Team(string name, int score, int misses)
+//        {
+//            _name = name;
+//            _score = score;
+//            _misses = misses;
+//            _points = 0;
+//        }
+
+//        public void Printinfo(int place)
+//        {
+//            Console.WriteLine($"{place}\t{_name}\t{_points}");
+//        }
+//    }
+//    static void Main(string[] args)
+//    {
+//        Team[] teams = {
+//                new Team("Команда 1",2,1),
+//                new Team("Команда 2",1,1),
+//                new Team ("Команда 3", 0,  3 ),
+//                new Team ( "Команда 4", 3,0 )
+//            };
+
+//        CountScores(teams);
+//        Sort(teams);
+//        Result(teams);
+//    }
+
+//    private static void CountScores(Team[] teams)
+//    {
+//        for (int i = 0; i < teams.Length; i++)
+//        {
+//            teams[i].Points = teams[i].Score > teams[i].Misses ? 3 : teams[i].Score == teams[i].Misses ? 1 : 0;
+//        }
+//    }
+//    private static void Sort(Team[] teams)
+//    {
+//        for (int i = 0; i < teams.Length - 1; i++)
+//        {
+//            for (int j = 0; j < teams.Length - i - 1; j++)
+//            {
+//                if (teams[j].Points < teams[j + 1].Points || (teams[j].Points == teams[j + 1].Points && (teams[j].Score - teams[j].Misses) < (teams[j + 1].Score - teams[j + 1].Misses)))
+//                {
+//                    Team t = teams[j];
+//                    teams[j] = teams[j + 1];
+//                    teams[j + 1] = t;
+//                }
+//            }
+//        }
+//    }
+//    private static void Result(Team[] teams)
+//    {
+
+//        Console.WriteLine("Итоговая таблица:");
+//        Console.WriteLine("Место\tКоманда\tОчки");
+//        for (int i = 0; i < teams.Length; i++)
+//        {
+//            teams[i].Printinfo(i + 1);
+//        }
+//    }
+//}
+
