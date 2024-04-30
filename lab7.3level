@@ -1,0 +1,134 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+class FootballTeam
+{
+    protected string _teamName;
+    private int _goalsScored;
+    private int _goalsConceded;
+    protected int _points;
+    protected static int _counter = 0;
+
+    public FootballTeam(string teamName)
+    {
+        _teamName = teamName;
+        _goalsScored = 0;
+        _goalsConceded = 0;
+        _points = 0;
+    }
+    private int GoalDifference()
+    {
+        return _goalsScored - _goalsConceded;
+    }
+    protected virtual void Show()
+    {
+        _counter++;
+        Console.WriteLine($"{_counter} место - Команда: {_teamName}, сумма очков: {_points}");
+    }
+    private void Calculate(int a, int b)
+    {
+        _goalsConceded += b;
+        _goalsScored += a;
+        if (a > b)
+        {
+            _points += 3;
+        }
+        else if (a == b)
+        {
+            _points += 1;
+        }
+    }
+    public static FootballTeam[] UpdateList(FootballTeam[] teamlist, string name1, string name2, int x, int y)
+    {
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < teamlist.Length; i++)
+        {
+            if (teamlist[i]._teamName == name1) a = i;
+            if (teamlist[i]._teamName == name2) b = i;
+        }
+        teamlist[a].Calculate(x, y);
+        teamlist[b].Calculate(y, x);
+        return teamlist;
+    }
+    public static void Sort(FootballTeam[] teams)
+    {
+        for (int i = 0; i < teams.Length - 1; i++)
+        {
+            for (int j = i + 1; j < teams.Length; j++)
+            {
+                if (teams[j]._points > teams[i]._points || ((teams[j]._points == teams[i]._points) && (teams[j].GoalDifference()) > (teams[i].GoalDifference())))
+                {
+                    FootballTeam a = teams[i];
+                    teams[i] = teams[j];
+                    teams[j] = a;
+                }
+            }
+        }
+    }
+    public static void ShowList(FootballTeam[] teams)
+    {
+        foreach (var team in teams)
+        {
+            team.Show();
+        }
+    }
+}
+
+class WomenFootballTeam : FootballTeam
+{
+    public WomenFootballTeam(string teamName) : base(teamName)
+    {
+    }
+    protected override void Show()
+    {
+        _counter++;
+        Console.WriteLine($"{_counter} место -  женская команда {_teamName}, сумма очков: {_points}");
+    }
+}
+
+class MenFootballTeam : FootballTeam
+{
+    public MenFootballTeam(string teamName) : base(teamName)
+    {
+    }
+    protected override void Show()
+    {
+        _counter++;
+        Console.WriteLine($"{_counter} место -  мужская команда {_teamName}, сумма очков: {_points}");
+    }
+}
+class Program
+{
+    public static void Main()
+    {
+        MenFootballTeam[] menteams = new MenFootballTeam[] { new MenFootballTeam("team F"), new MenFootballTeam("team B"), new MenFootballTeam("team C"), new MenFootballTeam("team D"), new MenFootballTeam("team G") };
+        WomenFootballTeam[] womenteams = new WomenFootballTeam[] { new WomenFootballTeam("team A"), new WomenFootballTeam("team U"), new WomenFootballTeam("team O"), new WomenFootballTeam("Women"), new WomenFootballTeam("Mummy") };
+        menteams = (MenFootballTeam[])FootballTeam.UpdateList(menteams, "team F", "team B", 4, 7);
+        menteams = (MenFootballTeam[])FootballTeam.UpdateList(menteams, "team B", "team C", 5, 5);
+        menteams = (MenFootballTeam[])FootballTeam.UpdateList(menteams, "team D", "team G", 5, 5);
+        womenteams = (WomenFootballTeam[])FootballTeam.UpdateList(womenteams, "team A", "team U", 3, 6);
+        womenteams = (WomenFootballTeam[])FootballTeam.UpdateList(womenteams, "team O", "team A", 2, 9);
+        womenteams = (WomenFootballTeam[])FootballTeam.UpdateList(womenteams, "Women", "Mummy", 2, 9);
+        FootballTeam[] teams = new FootballTeam[menteams.Length + womenteams.Length];
+        for (int i = 0; i < menteams.Length; i++)
+        {
+            teams[i] = menteams[i];
+        }
+        for (int i = 0; i < womenteams.Length; i++)
+        {
+            teams[menteams.Length + i] = womenteams[i];
+        }
+        Console.WriteLine(teams.Length);
+        FootballTeam.Sort(teams);
+        FootballTeam.ShowList(teams);
+        Console.ReadKey();
+    }
+}
+
