@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.Metrics;
 
 public abstract class RadioPoll
 {
@@ -9,18 +8,68 @@ public abstract class RadioPoll
     public string Answer { get { return _answer; } }
     public int Count { get { return _count; } }
     public static int TotalVotes { get { return _totalVotes; } }
+
     public RadioPoll(string answer, int count)
     {
         _answer = answer;
         _count = count;
         _totalVotes += count;
     }
+
     public virtual void Print()
     {
         double percentage = (double)Count / TotalVotes * 100;
         Console.WriteLine($"Ответ: {Answer} - {percentage:f2}% от общего количества ответов");
     }
+
+    public static void MergeSort(RadioPoll[] polls)
+    {
+        if (polls.Length < 2)
+            return;
+
+        int mid = polls.Length / 2;
+        RadioPoll[] leftPolls = new RadioPoll[mid];
+        RadioPoll[] rightPolls = new RadioPoll[polls.Length - mid];
+
+        Array.Copy(polls, 0, leftPolls, 0, mid);
+        Array.Copy(polls, mid, rightPolls, 0, polls.Length - mid);
+
+        MergeSort(leftPolls);
+        MergeSort(rightPolls);
+
+        Merge(polls, leftPolls, rightPolls);
+    }
+
+    private static void Merge(RadioPoll[] polls, RadioPoll[] leftP, RadioPoll[] rightP)
+    {
+        int leftI = 0;
+        int rightI = 0;
+        int pollsI = 0;
+
+        while (leftI < leftP.Length && rightI < rightP.Length)
+        {
+            if (leftP[leftI].Count >= rightP[rightI].Count)
+            {
+                polls[pollsI++] = leftP[leftI++];
+            }
+            else
+            {
+                polls[pollsI++] = rightP[rightI++];
+            }
+        }
+
+        while (leftI < leftP.Length)
+        {
+            polls[pollsI++] = leftP[leftI++];
+        }
+
+        while (rightI < rightP.Length)
+        {
+            polls[pollsI++] = rightP[rightI++];
+        }
+    }
 }
+
 class Man : RadioPoll
 {
     public Man(string answer, int count) : base(answer, count)
@@ -28,6 +77,7 @@ class Man : RadioPoll
 
     }
 }
+
 class Opening : RadioPoll
 {
     public Opening(string answer, int count) : base(answer, count)
@@ -40,28 +90,26 @@ class Program
 {
     static void Main()
     {
-        Man[] mans = new Man[5]
-            {
-                new Man("Эльон Маск", 120),
-                new Man("Грета Тунберг", 90),
-                new Man("Владимир Путин", 80),
-                new Man("Джо Байден", 70),
-                new Man("Анджелина Джоли", 60),
-            };
+        Man[] mans = new Man[]
+        {
+            new Man("Эльон Маск", 10),
+            new Man("Грета Тунберг", 90),
+            new Man("Владимир Путин", 110),
+            new Man("Джо Байден", 70),
+            new Man("Анджелина Джоли", 60),
+        };
 
-        Opening[] openings = new Opening[5]
-            {
-                new Opening("The sunken ship Endurance", 70),
-                new Opening("Artificial intelligence", 90),
-                new Opening("Brain Decoder", 110),
-                new Opening("The Ancient Whale", 50),
-                new Opening("Living robot", 80),
-            };
+        Opening[] openings = new Opening[]
+        {
+            new Opening("The sunken ship Endurance", 70),
+            new Opening("Artificial intelligence", 90),
+            new Opening("Brain Decoder", 110),
+            new Opening("The Ancient Whale", 50),
+            new Opening("Living robot", 10),
+        };
 
-        Sort(mans);
-
-        Sort(openings);
-
+        RadioPoll.MergeSort(mans);
+        RadioPoll.MergeSort(openings);
 
         Console.WriteLine("Топ-5 человек года по результатам опроса:");
         foreach (var man in mans)
@@ -75,21 +123,6 @@ class Program
         foreach (var opening in openings)
         {
             opening.Print();
-        }
-    }
-    static void Sort(RadioPoll[] mans)
-    {
-        for (int i = 0; i < mans.Length - 1; i++)
-        {
-            for (int j = i + 1; j < mans.Length; j++)
-            {
-                if (mans[i].Count > mans[j].Count)
-                {
-                    RadioPoll t = mans[i];
-                    mans[i] = mans[j];
-                    mans[j] = t;
-                }
-            }
         }
     }
 }
