@@ -5,3 +5,8 @@ C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.As
 C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.CoreCompileInputs.cache
 C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.exe
 C:\Users\artem\Source\Repos\alekseevart3m\BBI-23-1\lvl2\obj\Debug\lvl2.pdb
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.AssemblyReference.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.SuggestedBindingRedirects.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl2\obj\Debug\lvl2.csproj.CoreCompileInputs.cache
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl2\obj\Debug\lvl2.exe
+C:\Users\m2207365\Source\Repos\BBI-23-1\lvl2\obj\Debug\lvl2.pdb

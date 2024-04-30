@@ -68,13 +68,37 @@ namespace lvl2
 
                 var passedGraduates = graduates.Where(g => g.IsPastExm).ToArray();
 
-                var sortedGraduates = passedGraduates.OrderByDescending(g => g.AvgMark).ToArray();
+                var sortedGraduates = InsertionSort(passedGraduates)
 
                 foreach (var graduate in sortedGraduates)
                 {
                     graduate.Print();
                 }
-                Console.ReadKey();
+                Console.ReadKey()
+
+
+                static void Swap(ref int e1, ref int e2)
+                {
+                    var temp = e1;
+                    e1 = e2;
+                    e2 = temp;
+                }
+
+                static int[] InsertionSort(int[] array)
+                {
+                    for ( int i = 1; i < array.Length; i++ )
+                    {
+                        var k = array[i];
+                        var j = k; 
+                        while ((j > 1) && (array[j - 1] > k))
+                        {
+                            Swap(ref array[j - 1], ref array[j]);
+                            j--
+                        }
+                        array[j] = k
+                    }
+                    return array;
+                }
             }
         }
     }
