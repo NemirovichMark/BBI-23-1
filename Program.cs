@@ -1,293 +1,135 @@
 ﻿using System;
-using System.Collections.Generic;
 
-// Абстрактный класс "Задание"
-public abstract class Zadanie
+abstract class Runner
 {
-    protected string text;
+    protected string _surname;
+    protected internal double _result;
+    protected string _coach;
+    protected int _group;
 
-    public Zadanie(string text)
+    public Runner(string surname, double result, string coach, int group)
     {
-        this.text = text;
+        _surname = surname;
+        _result = result;
+        _coach = coach;
+        _group = group;
     }
 
-    public abstract void Reshit();
-    public override abstract string ToString();
-}
+    public abstract void DisplayInfo();
 
-// Первое задание (№1)
-public class ChastotaBukv : Zadanie
-{
-    private int[] chastota = new int[33];
-
-    public ChastotaBukv(string text) : base(text) { }
-
-    public override void Reshit()
+    
+    public static void Qsort(FootballTeam[] a, int low, int high)
     {
-
-        int totalBukv = 0;
-
-        foreach (char c in text.ToLower())
+        if (low < high)
         {
-            if (char.IsLetter(c))
+            int pi = Prtition(a, low, high);
+
+            Qsort(a, low, pi - 1);
+            Qsort(a, pi + 1, high);
+        }
+    }
+
+    private static int Prtition(FootballTeam[] a, int low, int high)
+    {
+        int pivot = a[high].Ball;
+        int i = low - 1;
+
+        for (int j = low; j < high; j++)
+        {
+            if (a[j].Ball > pivot)
             {
-                chastota[c - 'а']++;
-                totalBukv++;
+                i++;
+                FootballTeam temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
             }
         }
 
-        for (int i = 0; i < chastota.Length; i++)
-        {
-            chastota[i] = (int)((double)chastota[i] / totalBukv * 100);
-        }
+        FootballTeam temp2 = a[i + 1];
+        a[i + 1] = a[high];
+        a[high] = temp2;
 
-
-    }
-
-    public override string ToString()
-    {
-        string result = "";
-        for (int i = 0; i < 33; i++)
-        {
-            char bukva = (char)('а' + i);
-            result += $"{bukva}: {chastota[i]}% ";
-        }
-        return result;
-    }
-
-}
-
-
-
-// Второе задание (№3)
-public class RazbienieNaStroki : Zadanie
-{
-    private List<string> stroki = new List<string>();
-    public RazbienieNaStroki(string text) : base(text) { }
-
-    public override void Reshit()
-    {
-        string[] slova = text.Split(' ');
-        string stroka = "";
-
-
-        foreach (string slovo in slova)
-        {
-            if (stroka.Length + slovo.Length + 1 <= 50)
-            {
-                stroka += slovo + " ";
-            }
-            else
-            {
-                stroki.Add(stroka.Trim());
-                stroka = slovo + " ";
-            }
-        }
-        stroki.Add(stroka.Trim());
-
-
-    }
-
-    public override string ToString()
-    {
-        string result = "";
-        foreach (string stroka in stroki)
-        {
-            result += stroka + "\n";
-        }
-        return result;
+        return i + 1;
     }
 }
 
-
-
-// 3 задание (№5)
-public class ChastotaNachalnyhBukv : Zadanie
+class FootballTeam
 {
-    private int[] chastota = new int[33];
-    public ChastotaNachalnyhBukv(string text) : base(text) { }
+    public string ClubName { get; protected set; }
+    public int Ball { get; protected set; }
 
-    public override void Reshit()
+    public FootballTeam(string clubName, int points)
     {
-
-        string[] slova = text.Split(' ', '.', ',', '!', '?', ':', ';');
-
-        foreach (string slovo in slova)
-        {
-            if (slovo.Length > 0)
-            {
-                char firstChar = char.ToLower(slovo[0]);
-                if (char.IsLetter(firstChar))
-                {
-                    chastota[firstChar - 'а']++;
-                }
-            }
-        }
-
-
+        ClubName = clubName;
+        Ball = points;
     }
 
-    public override string ToString()
+    public virtual void DisplayInfo()
     {
-        string result = "";
-        for (int i = 0; i < 33; i++)
-        {
-            if (chastota[i] > 0)
-            {
-                char bukva = (char)('а' + i);
-                result += $"{bukva} ";
-            }
-        }
-        return result;
-    }
-}
-//4 задние(№7)
-public class PoiskOdnokorennyhSlov : Zadanie
-{
-    private string koren;
-    List<string> naĭdennyeSlova = new List<string>();
-    public PoiskOdnokorennyhSlov(string text, string koren) : base(text)
-    {
-        this.koren = koren.ToLower();
-
-    }
-    public override void Reshit()
-    {
-        string[] slova = text.ToLower().Split(' ', '.', ',', '!', '?', ':', ';');
-
-
-        foreach (string slovo in slova)
-        {
-            if (IsOdnokorennoe(slovo, koren))
-            {
-                naĭdennyeSlova.Add(slovo);
-            }
-        }
-
-
-    }
-
-    private bool IsOdnokorennoe(string slovo, string koren)
-    {
-
-        return slovo.StartsWith(koren) && slovo.Length > koren.Length;
-    }
-
-
-
-
-    public override string ToString()
-    {
-        string result = "Найденные однокоренные слова: ";
-        foreach (string slovo in naĭdennyeSlova)
-        {
-            result += slovo + " ";
-        }
-        return result;
+        Console.WriteLine($"{ClubName} {this.GetType().Name}: {Ball} points");
     }
 }
 
-//5 задание (№14)
-public class SummaChisel : Zadanie
+class WomenFootballTeam : FootballTeam
 {
-    private int summa;
-
-    public SummaChisel(string text) : base(text) { }
-
-    public override void Reshit()
+    public WomenFootballTeam(string clubName, int points) : base(clubName, points)
     {
-        string[] slova = text.Split(' ', '.', ',', '!', '?', ':', ';');
-        summa = 0;
-
-        foreach (string slovo in slova)
-        {
-            if (int.TryParse(slovo, out int chislo) && chislo >= 1 && chislo <= 10)
-            {
-                summa += chislo;
-            }
-        }
-    }
-
-    public override string ToString()
-    {
-        return $"Сумма чисел от 1 до 10 в тексте: {summa}";
-    }
-}
-//6 задание (#11)
-public class SortirovkaFamilij : Zadanie
-{
-    private string[] Items;
-
-    public SortirovkaFamilij(string text) : base(text) { }
-
-    public override void Reshit()
-    {
-        Items = text.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-        for (int i = 0; i < Items.Length - 1; i++)
-        {
-            for (int j = 0; j < Items.Length - i - 1; j++)
-            {
-                if (string.Compare(Items[j], Items[j + 1], StringComparison.CurrentCultureIgnoreCase) > 0)
-                {
-                    string temp = Items[j];
-                    Items[j] = Items[j + 1];
-                    Items[j + 1] = temp;
-                }
-            }
-        }
-    }
-
-    public override string ToString()
-    {
-        return string.Join(", ", Items);
     }
 }
 
-// Пример использования
-public class Program
+class MenFootballTeam : FootballTeam
 {
-    static void Main(string[] args)
+    public MenFootballTeam(string clubName, int points) : base(clubName, points)
     {
+    }
+}
 
-        string text = "международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов. ";
-        string koren = "вод";
-        Console.WriteLine("Первое");
-        Zadanie zadanie1 = new ChastotaBukv(text);
-        zadanie1.Reshit();
-        Console.WriteLine(zadanie1);
+class Program
+{
+    static void Main()
+    {
+        FootballTeam[] womenClubs = new FootballTeam[]
+        {
+            new WomenFootballTeam("Spartak", 15),
+            new WomenFootballTeam("Zenit", 12),
+            new WomenFootballTeam("Loko", 18),
+            new WomenFootballTeam("CSKA", 20),
+            new WomenFootballTeam("Dynamo", 16),
+            new WomenFootballTeam("Torpedo", 14)
+        };
 
-        Console.WriteLine("Второе");
-        Zadanie zadanie2 = new RazbienieNaStroki(text);
-        zadanie2.Reshit();
-        Console.WriteLine(zadanie2);
+        FootballTeam[] menClubs = new FootballTeam[]
+        {
+            new MenFootballTeam("Anzhi", 22),
+            new MenFootballTeam("Ural", 19),
+            new MenFootballTeam("Rubin", 17),
+            new MenFootballTeam("Arsenal", 21),
+            new MenFootballTeam("Fakel", 16),
+            new MenFootballTeam("Krasnodar", 18)
+        };
 
-        Console.WriteLine("Третье");
-        Zadanie zadanie3 = new ChastotaNachalnyhBukv(text);
-        zadanie3.Reshit();
-        Console.WriteLine(zadanie3);
+        FootballTeam[] combClubs = new FootballTeam[12];
+        int i = 0;
 
+        foreach (FootballTeam club in womenClubs)
+        {
+            combClubs[i] = club;
+            i++;
+        }
 
-        string text1 = "Водопад это вода.Водная гладь прекрасна";
-        Console.WriteLine("Четвертое");
-        Zadanie zadanie4 = new PoiskOdnokorennyhSlov(text1, koren);
-        zadanie4.Reshit();
-        Console.WriteLine(zadanie4);
+        foreach (FootballTeam club in menClubs)
+        {
+            combClubs[i] = club;
+            i++;
+        }
 
+        Console.WriteLine("Top teams:");
+        Runner.Qsort(combClubs, 0, combClubs.Length - 1);
 
-
-        Console.WriteLine("Пятое");
-
-
-        string input = "Текст содержит 1 слово, 2 числа и 3 знака препинания. Сумма: 9 !";
-        Zadanie zadanie6 = new SummaChisel(input);
-        zadanie6.Reshit();
-        Console.WriteLine(zadanie6);
-
-        Console.WriteLine("Шестое");
-        string input5 = "Иванов, Абрамов, Ян, Петров, Абвалов, Genri, Gehri, Adams, Jons";
-        Zadanie task5 = new SortirovkaFamilij(input5);
-        task5.Reshit();
-        Console.WriteLine(task5.ToString());
+        for (int j = 0; j < combClubs.Length; j++)
+        {
+            Console.WriteLine($"{j + 1}. ");
+            combClubs[j].DisplayInfo();
+        }
     }
 }
