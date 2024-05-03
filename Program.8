@@ -1,0 +1,435 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+
+namespace ConsoleApp1
+{
+    abstract class BaseTask
+    {
+        protected static string sourceText;
+
+        public BaseTask(string text)
+        {
+            sourceText = text;
+        }
+
+        public virtual void ParseText()
+        {
+            sourceText += " ";
+            StringBuilder outputText = new StringBuilder();
+            StringBuilder currentWord = new StringBuilder();
+
+            for (int i = 0; i < sourceText.Length; i++)
+            {
+                char currentChar = sourceText[i];
+
+                if (char.IsLetter(currentChar))
+                {
+                    currentWord.Append(currentChar);
+                }
+                else
+                {
+                    if (currentWord.Length > 0)
+                    {
+                        outputText.Append(TransformWord(currentWord.ToString()));
+                        currentWord.Clear();
+                    }
+                    outputText.Append(currentChar);
+                }
+            }
+
+            sourceText = outputText.ToString();
+        }
+
+        private static string TransformWord(string word)
+        {
+            char[] charArray = word.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
+    }
+
+    class Task_2 : BaseTask
+    {
+        private const string TaskName = "Задание 2";
+
+        public Task_2(string text) : base(text)
+        {
+            Console.WriteLine();
+            Console.WriteLine(TaskName);
+        }
+
+        public override string ToString()
+        {
+            return sourceText;
+        }
+    }
+
+    class Task_4 : BaseTask
+    {
+        private const string TaskName = "Задание 4";
+
+        public Task_4(string text) : base(text)
+        {
+            Console.WriteLine();
+            Console.WriteLine(TaskName);
+        }
+
+        public override string ToString()
+        {
+            return sourceText;
+        }
+
+        public override void ParseText()
+        {
+            StringBuilder outputText = new StringBuilder();
+            StringBuilder currentWord = new StringBuilder();
+            int wordCount = 0;
+            int punctuationCount = 0;
+
+            for (int i = 0; i < sourceText.Length; i++)
+            {
+                char currentChar = sourceText[i];
+                outputText.Append(currentChar);
+
+                if (char.IsLetterOrDigit(currentChar))
+                {
+                    currentWord.Append(currentChar);
+                }
+                else
+                {
+                    if (currentWord.Length > 0)
+                    {
+                        wordCount++;
+                        currentWord.Clear();
+                    }
+
+                    if (".,!?;".Contains(currentChar))
+                    {
+                        punctuationCount++;
+                    }
+
+                    if (".!?".Contains(currentChar))
+                    {
+                        Console.WriteLine(outputText.ToString());
+                        Console.WriteLine($"Сложность: {wordCount + punctuationCount}");
+                        outputText.Clear();
+                        wordCount = 0;
+                        punctuationCount = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    class Task_6 : BaseTask
+    {
+        private const string TaskName = "Задание 6";
+        private const string AllVowels = "AaEeIiOoUuYyАаЕеЁёИиОоУуЫыЭэЮюЯя";
+        private int[] syllableCounts = new int[20];
+
+        public Task_6(string text) : base(text)
+        {
+            Console.WriteLine();
+            Console.WriteLine(TaskName);
+        }
+
+        public override string ToString()
+        {
+            return sourceText;
+        }
+
+        private void CalculateSyllables(string text)
+        {
+            int syllableCount = 0;
+
+            foreach (char c in text)
+            {
+                if (AllVowels.Contains(c))
+                {
+                    syllableCount++;
+                }
+            }
+
+            if (syllableCount > 0 && syllableCount <= syllableCounts.Length)
+            {
+                syllableCounts[syllableCount - 1]++;
+            }
+        }
+
+        public override void ParseText()
+        {
+            sourceText += " ";
+            StringBuilder currentWord = new StringBuilder();
+
+            for (int i = 0; i < sourceText.Length; i++)
+            {
+                char currentChar = sourceText[i];
+
+                if (char.IsLetter(currentChar))
+                {
+                    currentWord.Append(currentChar);
+                }
+                else
+                {
+                    if (currentWord.Length > 0)
+                    {
+                        CalculateSyllables(currentWord.ToString());
+                        currentWord.Clear();
+                    }
+                }
+            }
+            Console.WriteLine("Слогов  слов");
+            for (int i = 0; i < currentWord.Length; i++)
+            {
+                if (currentWord[i] > 0)
+                    Console.WriteLine("{0}       {1}", i + 1, currentWord[i]);
+
+            }
+
+        }
+    }
+    class Task_8 : BaseTask
+    {
+        private const string TaskName = "Задание 8";
+        public Task_8(string text) : base(text)
+        {
+            Console.WriteLine();
+            Console.WriteLine(TaskName);
+        }
+        public override string ToString()
+        {
+            return sourceText;
+        }
+
+
+        public override void ParseText()
+        {
+            string Ssout = "";
+            do
+            {
+
+                string sout = "";
+                int nKol = 0;
+                if (sourceText.Length >= 50)
+                    sout = sourceText.Substring(0, 50);
+                else
+                    sout = sourceText + " ";
+
+                for (int i = sout.Length - 1; i > 0; i--)
+                {
+                    nKol = i;
+                    if (sout[i] == ' ') break;
+                }
+                sout = sout.Substring(0, nKol);
+
+                if (sourceText.Length >= 50)
+                    sourceText = sourceText.Substring(nKol + 1, sourceText.Length - nKol - 1);
+                else
+                    sourceText = "";
+
+                string[] words = sout.Split(' ');
+                int addSpace = 50 - nKol;
+                for (int i = 0; i < words.Length; i++) nKol -= words[i].Length;
+                nKol += addSpace;
+                if (words.Length > 1)
+                {
+                    int k = nKol / (words.Length - 1);
+                    int m = nKol % (words.Length - 1);
+                    sout = "";
+                    for (int i = 0; i < words.Length - 1; i++)
+                    {
+                        sout = sout + words[i] + new string(' ', k);
+                        if (i < m) sout = sout + " ";
+                    }
+                    sout += words[words.Length - 1];
+                }
+
+                Ssout += sout + (char)10 + (char)13;
+            }
+            while (sourceText.Length > 1);
+            sourceText = Ssout;
+
+
+        }
+    }
+    public struct CodePaar
+    {
+        public string TwoChars;
+        public int count;
+        public char key;
+    }
+
+    class Task_9_10 : BaseTask
+    {
+        private static CodePaar[] cp = new CodePaar[1000];
+        private static int Ncp = 0;
+        private static int Nchars = 0;
+
+
+        private const string TaskName = "Задание 9";
+        public Task_9_10(string text) : base(text)
+        {
+            Console.WriteLine();
+            Console.WriteLine(TaskName);
+        }
+        public override string ToString()
+        {
+            return sourceText;
+        }
+
+        private static bool FoundCP(string str)
+        {
+            for (int i = 0; i < Ncp; i++)
+            {
+                if (String.Equals(str, cp[i].TwoChars, StringComparison.Ordinal)) { return true; }
+            }
+            return false;
+        }
+        private void setTwoChars(char ch)
+        {
+            int k = Nchars;
+            for (int i = k; i < Ncp; i++)
+            {
+                Nchars++;
+                if (sourceText.Contains(cp[i].TwoChars))
+                {
+                    cp[i].key = ch;
+                    break;
+
+                }
+            }
+        }
+        private void TestChars()
+        {
+            for (int i = 32; i < 255; i++)
+            {
+                char ch = (char)i;
+                bool isUseChar = sourceText.Contains(ch);
+                if (!isUseChar)
+                {
+                    setTwoChars(ch);
+
+                }
+
+            }
+
+        }
+
+        private void SortCP()
+        {
+            int imax;
+            for (int i = 0; i < Ncp - 1; i++)
+            {
+                imax = i;
+                for (int j = i + 1; j < Ncp; j++)
+                    if (cp[j].count > cp[imax].count) imax = j;
+                CodePaar tmp = new CodePaar();
+                tmp = cp[i];
+                cp[i] = cp[imax]; cp[imax] = tmp;
+
+            }
+
+        }
+        private void EncodeText()
+        {
+            for (int i = 0; i < Ncp; i++)
+            {
+                if (cp[i].key > (char)10)
+                {
+                    string ss = cp[i].key.ToString();
+                    sourceText = sourceText.Replace(cp[i].TwoChars, ss);
+
+                }
+            }
+        }
+        public void DecodeText()
+        {
+            for (int i = 0; i < Ncp; i++)
+            {
+                if (cp[i].key > (char)10)
+                {
+                    string ss = cp[i].key.ToString();
+                    sourceText = sourceText.Replace(ss, cp[i].TwoChars);
+
+                }
+            }
+        }
+        public override void ParseText()
+        {
+            for (int i = 0; i < sourceText.Length - 1; i++)
+            {
+                string obr = sourceText.Substring(i, 2);
+                if (!FoundCP(obr))
+                {
+
+                    cp[Ncp].TwoChars = obr;
+                    cp[Ncp].count = (sourceText.Length - sourceText.Replace(obr, "").Length) / obr.Length;
+                    cp[Ncp].key = (char)10;
+
+                    Ncp++;
+                }
+            }
+
+            SortCP();
+            TestChars();
+            EncodeText();
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] tests = new string[]
+                {"После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.",
+                 "Двигатель самолета – это сложная инженерная конструкция, обеспечивающая подъем, управление и движение в воздухе. Он состоит из множества компонентов, каждый из которых играет важную роль в общей работе механизма. Внутреннее устройство двигателя включает в себя компрессор, камеру сгорания, турбину и системы управления и охлаждения. Принцип работы основан на воздушно-топливной смеси, которая подвергается сжатию, воспламенению и расширению, обеспечивая движение воздушного судна.",
+                "1 июля 2015 года Греция объявила о дефолте по государственному долгу, став первой развитой страной в истории, которая не смогла выплатить свои долговые обязательства в полном объеме. Сумма дефолта составила порядка 1,6 миллиарда евро. Этому предшествовали долгие переговоры с международными кредиторами, такими как Международный валютный фонд (МВФ), Европейский центральный банк (ЕЦБ) и Европейская комиссия (ЕК), о программах финансовой помощи и реструктуризации долга. Основными причинами дефолта стали недостаточная эффективность реформ, направленных на улучшение финансовой стабильности страны, а также политическая нестабильность, что вызвало потерю доверия со стороны международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов.",
+                "Фьорды – это ущелья, формирующиеся ледниками и заполняющиеся морской водой. Название происходит от древнескандинавского слова \"fjǫrðr\". Эти глубокие заливы, окруженные высокими горами, представляют захватывающие виды и природную красоту. Они популярны среди туристов и известны под разными названиями: в Норвегии – \"фьорды\", в Шотландии – \"фьордс\", в Исландии – \"фьордар\". Фьорды играют важную роль в культуре и туризме региона, продолжая вдохновлять людей со всего мира.",
+                "William Shakespeare, widely regarded as one of the greatest writers in the English language, authored a total of 37 plays, along with numerous poems and sonnets. He was born in Stratford-upon-Avon, England, in 1564, and died in 1616. Shakespeare's most famous works, including \"Romeo and Juliet,\" \"Hamlet,\" \"Macbeth,\" and \"Othello,\" were written during the late 16th and early 17th centuries. \"Romeo and Juliet,\" a tragic tale of young love, was penned around 1595. \"Hamlet,\" one of his most celebrated tragedies, was written in the early 1600s, followed by \"Macbeth,\" a gripping drama exploring themes of ambition and power, around 1606. \"Othello,\" a tragedy revolving around jealousy and deceit, was also composed during this period, believed to be around 1603.",
+                "Первое кругосветное путешествие было осуществлено флотом, возглавляемым португальским исследователем Фернаном Магелланом. Путешествие началось 20 сентября 1519 года, когда флот, состоящий из пяти кораблей и примерно 270 человек, отправился из порту Сан-Лукас в Испании. Хотя Магеллан не закончил свое путешествие из-за гибели в битве на Филиппинах в 1521 году, его экспедиция стала первой, которая успешно обогнула Землю и доказала ее круглую форму. Это путешествие открыло новые морские пути и имело огромное значение для картографии и географических открытий."
+
+                };
+
+            string inpStr = "";
+            Console.Write("Задайте 0..5 или текст для обработки =>");
+            inpStr = Console.ReadLine();
+            if (inpStr[0] <= '5' && inpStr[0] >= '0') { inpStr = tests[(int)inpStr[0] - 48]; }
+            Task_2 task2 = new Task_2(inpStr);
+            Console.WriteLine("Исходный: {0}", task2);
+            task2.ParseText();
+            Console.WriteLine("Транслированный: {0}", task2);
+
+            Task_4 task4 = new Task_4(inpStr);
+            Console.WriteLine("Исходный: {0}", task4);
+            task4.ParseText();
+
+            Task_6 task6 = new Task_6(inpStr);
+            Console.WriteLine("Исходный: {0}", task6);
+            task6.ParseText();
+
+            Task_8 task8 = new Task_8(inpStr);
+            Console.WriteLine("Исходный: {0}", task8);
+            task8.ParseText();
+            Console.WriteLine("Форматированный: ");
+            Console.WriteLine(task8);
+
+            Task_9_10 task9_10 = new Task_9_10(inpStr);
+            Console.WriteLine("Исходный: {0}", task9_10);
+            task9_10.ParseText();
+            Console.WriteLine("Закодированный: ");
+            Console.WriteLine(task9_10);
+
+            Console.WriteLine("Задание 10");
+            Console.WriteLine("Закодированный: ");
+            Console.WriteLine(task9_10);
+            task9_10.DecodeText();
+            Console.WriteLine("Раскодированный: ");
+            Console.WriteLine(task9_10);
+        }
+    }
+}
