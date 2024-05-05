@@ -1,0 +1,7 @@
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\bin\Debug\Lab7_alekseev_lvl3.exe.config
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\bin\Debug\Lab7_alekseev_lvl3.exe
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\bin\Debug\Lab7_alekseev_lvl3.pdb
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\obj\Debug\Lab7_alekseev_lvl3.csproj.AssemblyReference.cache
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\obj\Debug\Lab7_alekseev_lvl3.csproj.CoreCompileInputs.cache
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\obj\Debug\Lab7_alekseev_lvl3.exe
+C:\Users\artem\source\repos\Lab7_alekseev_lvl3\obj\Debug\Lab7_alekseev_lvl3.pdb
