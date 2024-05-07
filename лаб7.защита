@@ -1,0 +1,168 @@
+﻿using System;
+public struct Participant
+{
+    private string name;
+    private double jump1;
+    private double jump2;
+    private double jump3;
+    private double jump4;
+    private double result;
+    public double Result { get { return result; } } //public, т.к. используется в классе Diving в методе Sort
+    private static double JumpResult(double[] list, double index)
+    {
+        int n = list.Length;
+        int imin = 0;
+        int imax = 0;
+        double sum = 0;
+        for (int i = 0; i < n; i++)
+        {
+            if (list[i] > list[imax]) imax = i;
+            if (list[i] < list[imin]) imin = i;
+            sum += list[i];
+        }
+        return (sum - list[imin] - list[imax]) * index;
+    }
+    public void PrintInfo()//используется в классе Diving в методе Print
+    {
+        Console.WriteLine($"{name}, итоговый результат: {result}");
+    }
+    public Participant(string name, double[,] points) //конструктор всегда public 
+    // в массиве 4*8 в каждой строке, соотвествующей каждому из 4-х прыжков,
+    // содержится индекс прыжка и 7 оценок судей от 0 до 6 баллов каждая
+    {
+        this.name = name;
+        double[] result_jumps = new double[4];
+        for (int i = 0; i < 4; i++)
+        {
+            double index = points[i, 0];
+            double[] voices = new double[7];
+            for (int k = 0; k < 7; k++) voices[k] = points[i, k + 1];
+            result_jumps[i] = JumpResult(voices, index);
+        }
+        jump1 = result_jumps[0];
+        jump2 = result_jumps[1];
+        jump3 = result_jumps[2];
+        jump4 = result_jumps[3];
+        result = jump1 + jump2 + jump3 + jump4;
+    }
+}
+public abstract class Diving
+{
+    protected string discipline_name;
+    private Participant[] peoplelist;
+    public Diving(Participant[] peoplelist)
+    {
+        this.peoplelist = peoplelist;
+        discipline_name = "прыжки в воду";
+    }
+    private void Sort(int left, int right)
+    {
+        if (left >= right) return;
+        double p = peoplelist[(left + right) / 2].Result;
+        int i = left;
+        int j = right;
+        while (i <= j)
+        {
+            while (peoplelist[i].Result > p) i++;
+            while (peoplelist[j].Result < p) j--;
+            if (i <= j)
+            {
+                Participant a = peoplelist[i];
+                peoplelist[i] = peoplelist[j];
+                peoplelist[j] = a;
+                i++;
+                j--;
+            }
+        }
+        Sort(left, j);
+        Sort(i, right);
+    }
+    protected void Sort()
+    {
+        Sort(0, peoplelist.Length - 1);
+    }
+    private void Print()
+    {
+        Console.WriteLine($"Результаты соревнования по дисциплине {discipline_name}:");
+        for (int i = 0; i < peoplelist.Length; i++)
+        {
+            Console.Write($"{i + 1} место:"); ;
+            peoplelist[i].PrintInfo();
+        }
+    }
+    public void Hold_Competition()//используется в Main
+    {
+        Sort();
+        Print();
+        Console.WriteLine();
+    }
+}
+public class Diving_from_3 : Diving
+{
+    public Diving_from_3(Participant[] peoplelist) : base(peoplelist)
+    {
+        discipline_name = "прыжки в воду с 3-х метров";
+    }
+}
+public class Diving_from_5 : Diving
+{
+    public Diving_from_5(Participant[] peoplelist) : base(peoplelist)
+    {
+        discipline_name = "прыжки в воду с 5-и метров";
+    }
+}
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Данные в коде, количество участников 5
+        double[,] sportsman1 = new double[4, 8] { { 2.5,0,5,2,2,2,2,2},
+            {2.7,1,6,3,3,3,3,3 },
+            {3.2,2,6,4,4,4,4,4 },
+            {3.5,1,1,1,1,1,1,1 } };
+        double[,] sportsman2 = new double[4, 8] { { 3,1,1,1,1,1,1,1},
+            {3,2,2,2,2,2,2,2},
+            {3,4,4,4,4,4,6,1},
+            {3,0,5,2,2,2,2,2}};
+        double[,] sportsman3 = new double[4, 8] { { 2.5, 5, 5, 5, 5, 6, 1, 5 }, { 3, 0, 2, 3, 4, 5, 1, 2 }, { 3, 3, 4, 5, 2, 5, 5, 1 }, { 3, 2, 1, 2, 2, 2, 6, 2 } };
+        double[,] sportsman4 = new double[4, 8] { { 2.8, 1, 1, 1, 1, 1, 1, 1 }, { 3.1, 2, 2, 2, 2, 2, 2, 2 }, { 3.3, 4, 4, 4, 4, 4, 6, 1 }, { 3.5, 0, 5, 2, 2, 2, 2, 2 } };
+        double[,] sportsman5 = new double[4, 8] { { 2.9, 5, 5, 5, 5, 6, 1, 5 }, { 3.3, 0, 2, 3, 4, 5, 1, 2 }, { 3.5, 3, 4, 0, 2, 5, 5, 1 }, { 3, 2, 1, 2, 2, 2, 6, 2 } };
+        double[,] sportsman6 = new double[4, 8] { { 2.6,0,5,2,2,2,2,2},
+            {2.7,1,6,3,3,3,3,3 },
+            {3.2,2,6,4,4,4,4,4 },
+            {3.5,1,1,1,1,1,1,1 } };
+        double[,] sportsman7 = new double[4, 8] { { 2.7,1,1,1,1,1,1,1},
+            {3,2,2,2,2,2,2,2},
+            {3,4,4,4,4,4,6,1},
+            {3,0,5,2,2,2,2,2}};
+        double[,] sportsman8 = new double[4, 8] { { 3.1,0,5,2,2,2,2,2},
+            {2.7,1,6,3,3,3,3,3 },
+            {3.2,2,6,4,4,4,4,4 },
+            {3.5,1,1,1,1,1,1,1 } };
+        double[,] sportsman9 = new double[4, 8] { { 3.2,1,1,1,1,1,1,1},
+            {3,2,2,2,2,2,2,2},
+            {3,4,4,4,4,4,6,1},
+            {3,0,5,2,2,2,2,2}};
+        double[,] sportsman10 = new double[4, 8] { { 3.3,6,5,1,1,1,1,1},
+            {3,2,2,2,2,2,2,2},
+            {3,4,4,4,4,4,6,1},
+            {3,0,5,2,2,2,2,2}};
+        Participant[] peoplelist1 = { new Participant("name1",sportsman1),
+            new Participant("name2", sportsman2),
+            new Participant("name3", sportsman3),
+            new Participant("name4",sportsman4),
+            new Participant("name5", sportsman5)
+        }; //массив учатников, прыгающих с 3 метров
+        Participant[] peoplelist2 = { new Participant("name6",sportsman6),
+            new Participant("name7", sportsman7),
+            new Participant("name8", sportsman8),
+            new Participant("name9",sportsman9),
+            new Participant("name10", sportsman10)
+        };//массив участников, прыгающих с 5 метров
+        Diving_from_3 competition1 = new Diving_from_3(peoplelist1);
+        Diving_from_5 competition2 = new Diving_from_5(peoplelist2);
+        competition1.Hold_Competition();
+        competition2.Hold_Competition();
+        Console.ReadKey();
+    }
+}
