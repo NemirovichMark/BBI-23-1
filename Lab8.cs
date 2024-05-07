@@ -148,7 +148,7 @@ class SyllableCountTask : Task
         foreach (char c in word)
         {
             // Если текущая буква - гласная, а предыдущая не была гласной, увеличиваем счетчик слогов
-            if ("aeiouyаеёиоуыэюя".IndexOf(c) >= 0)
+            if ("ауоиэы".IndexOf(c) >= 0)
             {
                 if (!isPrevVowel)
                 {
@@ -156,16 +156,15 @@ class SyllableCountTask : Task
                 }
                 isPrevVowel = true;
             }
+            if("яюеё".IndexOf(c) >= 0)
+            {
+                count++;
+                isPrevVowel = true;
+            }
             else
             {
                 isPrevVowel = false;
             }
-        }
-
-        // Если слово заканчивается на "e" и имеет более одного слога, уменьшаем счетчик слогов на 1
-        if (word.EndsWith("e") && count > 1)
-        {
-            count--;
         }
 
         // Возвращаем общее количество слогов в слове
