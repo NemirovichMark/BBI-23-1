@@ -156,7 +156,7 @@ class SyllableCountTask : Task
                 }
                 isPrevVowel = true;
             }
-            if("яюеё".IndexOf(c) >= 0)
+            if ("яюеё".IndexOf(c) >= 0)
             {
                 count++;
                 isPrevVowel = true;
@@ -192,7 +192,7 @@ class FormatTextTask : Task
             // Если добавление текущего слова превышает ширину страницы, выводим строку и очищаем буфер
             if (lineBuilder.Length + word.Length >= pageWidth)
             {
-                Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
+                Console.WriteLine(AlignText(lineBuilder.ToString().TrimEnd(' '), pageWidth));
                 lineBuilder.Clear();
             }
             lineBuilder.Append(word); // Добавляем текущее слово к текущей строке без пробела
@@ -202,24 +202,31 @@ class FormatTextTask : Task
         // Выводим последнюю строку, если она не пустая
         if (lineBuilder.Length > 0)
         {
-            Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
+            Console.WriteLine(AlignText(lineBuilder.ToString().TrimEnd(' '), pageWidth));
         }
 
         // Возвращаем сообщение об успешном форматировании текста
         return "Текст успешно отформатирован.";
     }
 
+
     // Метод для выравнивания текста по ширине страницы
     static string AlignText(string text, int width)
     {
+        // Разбиваем текст на слова
+        string[] words = text.Split(' ');
+
+        // Если в тексте только одно слово или в тексте нет слов, просто возвращаем его без изменений
+        if (words.Length <= 1)
+        {
+            return text;
+        }
+
         // Вычисляем количество пробелов, которые нужно добавить между словами
         int spacesToAdd = width - text.Replace(" ", "").Length;
         int wordCount = text.Split(' ').Length;
-        int regularSpaces = spacesToAdd / (wordCount - 1);
-        int extraSpaces = spacesToAdd % (wordCount - 1);
-
-        // Разбиваем текст на слова
-        string[] words = text.Split(' ');
+        int regularSpaces = wordCount > 1 ? spacesToAdd / (wordCount - 1) : 0;
+        int extraSpaces = wordCount > 1 ? spacesToAdd % (wordCount - 1) : 0;
 
         // Создаем объект StringBuilder для формирования выровненного текста
         StringBuilder alignedText = new StringBuilder();
@@ -228,7 +235,7 @@ class FormatTextTask : Task
         for (int i = 0; i < words.Length; i++)
         {
             alignedText.Append(words[i]); // Добавляем текущее слово
-            // Если это не последнее слово, добавляем пробелы
+                                          // Если это не последнее слово, добавляем пробелы
             if (i < words.Length - 1)
             {
                 // Вычисляем количество пробелов для текущего слова
@@ -239,170 +246,171 @@ class FormatTextTask : Task
         }
         return alignedText.ToString(); // Возвращаем выровненный текст
     }
-}
 
 
 
 
-class TextCompressionTask : Task
-{
-    // Переопределяем метод Process для обработки оригинального текста
-    public override string Process(string originalText)
+
+    class TextCompressionTask : Task
     {
-        Console.WriteLine("Оригинальный текст:");
-        Console.WriteLine(originalText);
-
-        Dictionary<string, char> codeTable; // Создаем таблицу кодов
-        string compressedText = CompressText(originalText, out codeTable); // Сжимаем текст и получаем таблицу кодов
-        Console.WriteLine("\nСжатый текст:");
-        Console.WriteLine(compressedText); // Выводим сжатый текст
-
-        Console.WriteLine("\nТаблица кодов:");
-        foreach (var pair in codeTable) // Выводим таблицу кодов
+        // Переопределяем метод Process для обработки оригинального текста
+        public override string Process(string originalText)
         {
-            Console.WriteLine($"{pair.Key} : {pair.Value}");
+            Console.WriteLine("Оригинальный текст:");
+            Console.WriteLine(originalText);
+
+            Dictionary<string, char> codeTable; // Создаем таблицу кодов
+            string compressedText = CompressText(originalText, out codeTable); // Сжимаем текст и получаем таблицу кодов
+            Console.WriteLine("\nСжатый текст:");
+            Console.WriteLine(compressedText); // Выводим сжатый текст
+
+            Console.WriteLine("\nТаблица кодов:");
+            foreach (var pair in codeTable) // Выводим таблицу кодов
+            {
+                Console.WriteLine($"{pair.Key} : {pair.Value}");
+            }
+
+            string decompressedText = DecompressText(compressedText, codeTable); // Декомпрессируем текст
+            Console.WriteLine("\nДекомпрессированный текст:");
+            Console.WriteLine(decompressedText); // Выводим декомпрессированный текст
+
+            return "Текст успешно сжат и затем декомпрессирован.";
         }
 
-        string decompressedText = DecompressText(compressedText, codeTable); // Декомпрессируем текст
-        Console.WriteLine("\nДекомпрессированный текст:");
-        Console.WriteLine(decompressedText); // Выводим декомпрессированный текст
+        // Метод для сжатия текста
+        static string CompressText(string text, out Dictionary<string, char> codeTable)
+        {
+            codeTable = new Dictionary<string, char>(); // Инициализируем таблицу кодов
+            Dictionary<string, int> pairCount = new Dictionary<string, int>(); // Создаем словарь для подсчета пар
 
-        return "Текст успешно сжат и затем декомпрессирован.";
+            char code = '1'; // Начинаем с кода '1'
+
+            // Подсчет количества вхождений каждой пары букв
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                string pair = text.Substring(i, 2);
+                if (!pairCount.ContainsKey(pair))
+                {
+                    pairCount.Add(pair, 1);
+                }
+                else
+                {
+                    pairCount[pair]++;
+                }
+            }
+
+            // Выбор пяти самых часто встречающихся пар
+            var topPairs = pairCount.OrderByDescending(pair => pair.Value).Take(5);
+
+            // Создание кодов для выбранных пар
+            foreach (var pair in topPairs)
+            {
+                codeTable.Add(pair.Key, code++); // Добавляем пару и соответствующий ей код в таблицу кодов
+            }
+
+            // Сжатие текста
+            StringBuilder compressedText = new StringBuilder();
+            int index = 0;
+
+            while (index < text.Length - 1)
+            {
+                string pair = text.Substring(index, 2);
+                if (codeTable.ContainsKey(pair))
+                {
+                    compressedText.Append(codeTable[pair]); // Добавляем код пары, если она есть в таблице кодов
+                }
+                else
+                {
+                    compressedText.Append(pair); // Иначе добавляем саму пару
+                }
+                index += 2;
+            }
+
+            return compressedText.ToString(); // Возвращаем сжатый текст
+        }
+
+        // Метод для декомпрессии текста
+        static string DecompressText(string compressedText, Dictionary<string, char> codeTable)
+        {
+            StringBuilder decompressedText = new StringBuilder(); // Создаем объект StringBuilder для декомпрессированного текста
+            int index = 0;
+
+            while (index < compressedText.Length)
+            {
+                char code = compressedText[index]; // Получаем текущий код
+                string pair = codeTable.FirstOrDefault(x => x.Value == code).Key; // Находим соответствующую пару по коду
+                if (pair != null)
+                {
+                    decompressedText.Append(pair); // Добавляем пару в декомпрессированный текст
+                }
+                else
+                {
+                    decompressedText.Append(code); // Если пары нет в таблице кодов, добавляем сам код
+                }
+                index++;
+            }
+
+            return decompressedText.ToString(); // Возвращаем декомпрессированный текст
+        }
     }
 
-    // Метод для сжатия текста
-    static string CompressText(string text, out Dictionary<string, char> codeTable)
+
+    class Program
     {
-        codeTable = new Dictionary<string, char>(); // Инициализируем таблицу кодов
-        Dictionary<string, int> pairCount = new Dictionary<string, int>(); // Создаем словарь для подсчета пар
-
-        char code = '1'; // Начинаем с кода '1'
-
-        // Подсчет количества вхождений каждой пары букв
-        for (int i = 0; i < text.Length - 1; i++)
+        static void Main(string[] args)
         {
-            string pair = text.Substring(i, 2);
-            if (!pairCount.ContainsKey(pair))
+            // Выводим пользователю список доступных заданий и запрашиваем выбор
+            Console.WriteLine("Выберите задание: 1 - Шифрование сообщения(№2), 2 - Подсчёт сложности предложения(№4), 3 - Подсчет количества слогов(№6), 4 - Разделение текста на строки(№8), 5 - Кодирование текста(№9, №10)");
+            int choice = int.Parse(Console.ReadLine());
+
+            Task task; // Создаем объект задачи
+
+            // В зависимости от выбора пользователя создаем соответствующий объект задачи
+            if (choice == 1)
             {
-                pairCount.Add(pair, 1);
+                task = new EncryptionTask();
+                Console.WriteLine("Введите сообщение для шифрования:");
+            }
+            else if (choice == 2)
+            {
+                task = new ComplexityTask();
+                Console.WriteLine("Введите предложение:");
+            }
+            else if (choice == 3)
+            {
+                task = new SyllableCountTask();
+                Console.WriteLine("Введите предложение:");
+            }
+            else if (choice == 4)
+            {
+                task = new FormatTextTask();
+                Console.WriteLine("Введите текст:");
+            }
+            else if (choice == 5)
+            {
+                task = new TextCompressionTask();
             }
             else
             {
-                pairCount[pair]++;
+                Console.WriteLine("Выбрано недопустимое задание."); // В случае недопустимого выбора выводим сообщение и завершаем программу
+                return;
             }
-        }
 
-        // Выбор пяти самых часто встречающихся пар
-        var topPairs = pairCount.OrderByDescending(pair => pair.Value).Take(5);
+            string input = ""; // Переменная для хранения входных данных
 
-        // Создание кодов для выбранных пар
-        foreach (var pair in topPairs)
-        {
-            codeTable.Add(pair.Key, code++); // Добавляем пару и соответствующий ей код в таблицу кодов
-        }
-
-        // Сжатие текста
-        StringBuilder compressedText = new StringBuilder();
-        int index = 0;
-
-        while (index < text.Length - 1)
-        {
-            string pair = text.Substring(index, 2);
-            if (codeTable.ContainsKey(pair))
+            // Если выбрано задание №5, вводим тестовый текст по умолчанию
+            if (choice == 5)
             {
-                compressedText.Append(codeTable[pair]); // Добавляем код пары, если она есть в таблице кодов
+                input = "После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.";
             }
             else
             {
-                compressedText.Append(pair); // Иначе добавляем саму пару
+                input = Console.ReadLine(); // Вводим данные с консоли
             }
-            index += 2;
+
+            string result = task.Process(input); // Обрабатываем входные данные и получаем результат выполнения задачи
+            Console.WriteLine($"Результат:");
+            Console.WriteLine(result); // Выводим результат на консоль
         }
-
-        return compressedText.ToString(); // Возвращаем сжатый текст
-    }
-
-    // Метод для декомпрессии текста
-    static string DecompressText(string compressedText, Dictionary<string, char> codeTable)
-    {
-        StringBuilder decompressedText = new StringBuilder(); // Создаем объект StringBuilder для декомпрессированного текста
-        int index = 0;
-
-        while (index < compressedText.Length)
-        {
-            char code = compressedText[index]; // Получаем текущий код
-            string pair = codeTable.FirstOrDefault(x => x.Value == code).Key; // Находим соответствующую пару по коду
-            if (pair != null)
-            {
-                decompressedText.Append(pair); // Добавляем пару в декомпрессированный текст
-            }
-            else
-            {
-                decompressedText.Append(code); // Если пары нет в таблице кодов, добавляем сам код
-            }
-            index++;
-        }
-
-        return decompressedText.ToString(); // Возвращаем декомпрессированный текст
-    }
-}
-
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // Выводим пользователю список доступных заданий и запрашиваем выбор
-        Console.WriteLine("Выберите задание: 1 - Шифрование сообщения(№2), 2 - Подсчёт сложности предложения(№4), 3 - Подсчет количества слогов(№6), 4 - Разделение текста на строки(№8), 5 - Кодирование текста(№9, №10)");
-        int choice = int.Parse(Console.ReadLine());
-
-        Task task; // Создаем объект задачи
-
-        // В зависимости от выбора пользователя создаем соответствующий объект задачи
-        if (choice == 1)
-        {
-            task = new EncryptionTask();
-            Console.WriteLine("Введите сообщение для шифрования:");
-        }
-        else if (choice == 2)
-        {
-            task = new ComplexityTask();
-            Console.WriteLine("Введите предложение:");
-        }
-        else if (choice == 3)
-        {
-            task = new SyllableCountTask();
-            Console.WriteLine("Введите предложение:");
-        }
-        else if (choice == 4)
-        {
-            task = new FormatTextTask();
-            Console.WriteLine("Введите текст:");
-        }
-        else if (choice == 5)
-        {
-            task = new TextCompressionTask();
-        }
-        else
-        {
-            Console.WriteLine("Выбрано недопустимое задание."); // В случае недопустимого выбора выводим сообщение и завершаем программу
-            return;
-        }
-
-        string input = ""; // Переменная для хранения входных данных
-
-        // Если выбрано задание №5, вводим тестовый текст по умолчанию
-        if (choice == 5)
-        {
-            input = "После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений.";
-        }
-        else
-        {
-            input = Console.ReadLine(); // Вводим данные с консоли
-        }
-
-        string result = task.Process(input); // Обрабатываем входные данные и получаем результат выполнения задачи
-        Console.WriteLine($"Результат:");
-        Console.WriteLine(result); // Выводим результат на консоль
     }
 }
