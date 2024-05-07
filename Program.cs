@@ -102,15 +102,21 @@ public class RazbienieNaStroki : Zadanie
 
 
 // 3 задание (№5)
+public struct BukvaChastota
+{
+    public char Bukva { get; set; }
+    public int Chastota { get; set; }
+}
+
 public class ChastotaNachalnyhBukv : Zadanie
 {
-    private int[] chastota = new int[33];
+    private List<BukvaChastota> chastotaBukv = new List<BukvaChastota>();
+
     public ChastotaNachalnyhBukv(string text) : base(text) { }
 
     public override void Reshit()
     {
-
-        string[] slova = text.Split(' ', '.', ',', '!', '?', ':', ';');
+        string[] slova = text.Split(new char[] { ' ', '.', ',', '!', '?', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
 
         foreach (string slovo in slova)
         {
@@ -119,24 +125,28 @@ public class ChastotaNachalnyhBukv : Zadanie
                 char firstChar = char.ToLower(slovo[0]);
                 if (char.IsLetter(firstChar))
                 {
-                    chastota[firstChar - 'а']++;
+                    var existing = chastotaBukv.FindIndex(b => b.Bukva == firstChar);
+                    if (existing != -1)
+                    {
+                        chastotaBukv[existing] = new BukvaChastota { Bukva = firstChar, Chastota = chastotaBukv[existing].Chastota + 1 };
+                    }
+                    else
+                    {
+                        chastotaBukv.Add(new BukvaChastota { Bukva = firstChar, Chastota = 1 });
+                    }
                 }
             }
         }
 
-
+        chastotaBukv.Sort((x, y) => y.Chastota.CompareTo(x.Chastota));
     }
 
     public override string ToString()
     {
         string result = "";
-        for (int i = 0; i < 33; i++)
+        foreach (var bukvaChastota in chastotaBukv)
         {
-            if (chastota[i] > 0)
-            {
-                char bukva = (char)('а' + i);
-                result += $"{bukva} ";
-            }
+            result += $"{bukvaChastota.Bukva} ({bukvaChastota.Chastota}) ";
         }
         return result;
     }
@@ -169,11 +179,9 @@ public class PoiskOdnokorennyhSlov : Zadanie
 
     private bool IsOdnokorennoe(string slovo, string koren)
     {
+        return slovo.Contains(koren); // Проверяем, содержит ли слово корень
 
-        return slovo.StartsWith(koren) && slovo.Length > koren.Length;
     }
-
-
 
 
     public override string ToString()
@@ -272,7 +280,7 @@ public class Program
         Console.WriteLine(zadanie3);
 
 
-        string text1 = "Водопад это вода.Водная гладь прекрасна";
+        string text1 = "Водопад это вода.Водная гладь прекрасна.Подводная";
         Console.WriteLine("Четвертое");
         Zadanie zadanie4 = new PoiskOdnokorennyhSlov(text1, koren);
         zadanie4.Reshit();
