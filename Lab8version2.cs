@@ -19,7 +19,8 @@ namespace Lab8
         public virtual void ParseText()
         {
             _text += " ";
-            string sout = ""; string anyWord = "";
+            string sout = ""; 
+            string anyWord = "";
             for (int i = 0; i < _text.Length; i++)
             {
                 char c = _text[i];
@@ -37,7 +38,6 @@ namespace Lab8
                     }
                     sout = sout + _text[i];
                 }
-
 
 
             }
@@ -71,49 +71,86 @@ namespace Lab8
         }
       
     }
+
+    // Класс Task_4 является наследником абстрактного класса Task и представляет задание 4
     class Task_4 : Task
     {
         private const string TaskName = "Задание 4";
+
+        //конструктор класса Task_4, принимающий строку text и вызывающий конструктор базового класса Task с переданным параметром
         public Task_4(string text) : base(text)
         {
             Console.WriteLine();
             Console.WriteLine(TaskName);
         }
+
+        //переопределенный метод ToString(), который возвращает текст задания
         public override string ToString()
         {
             return _text;
         }
+
+        //переопределенный метод ParseText(), который анализирует текст задания на основе заданных условий
         public override void ParseText()
         {
-            string sout = ""; string anyWord = "";
-            int nWords = 0;int nZn = 0;
+            string sout = "";
+            string anyWord = "";
+            int nWords = 0;
+            int nZn = 0;
+            int nNumbers = 0;
+            int currentNumber = 0;
+
             for (int i = 0; i < _text.Length; i++)
             {
                 char c = _text[i];
                 sout += c;
-                if ((c >= 'А' && c <= 'я') || ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) || (c >= '0' && c <= '9') )
+
+                if ((c >= 'А' && c <= 'я') || ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')))
                 {
                     anyWord = anyWord + _text[i];
-
+                }
+                else if (c >= '0' && c <= '9')
+                {
+                    currentNumber = currentNumber * 10 + (c - '0');
                 }
                 else
                 {
+                    //добавляется к текущему слову
                     if (anyWord.Length > 0)
                     {
-                        nWords++;                        
+                        nWords++;
                         anyWord = "";
-                        if (c==',' || c == '-' || c == '.' || c== ':' || c == ';' || c == '!' || c =='?') { nZn++; }
-                        if (c == '.' || c == '!' || c == '?')
-                        {
-                            Console.WriteLine(sout);
-                            Console.WriteLine("Сложность {0}", nZn + nWords);
-                            nZn = 0; nWords=0;sout = "";
-                        }
+                    }
+                    //добавляется к текущему числу
+                    if (currentNumber > 0)
+                    {
+                        nNumbers += currentNumber;
+                        currentNumber = 0;
+                    }
+                    //увеличиваются счетчики слов, чисел, символов пунктуации в соответствии с условиями задачи
+                    if (c == ',' || c == '-' || c == '.' || c == ':' || c == ';' || c == '!' || c == '?')
+                    {
+                        nZn++;
+                    }
+                    // выводится текущая последовательность символов, определяется сложность предложения как сумма числа слов, чисел и символов пунктуации,
+                    // сбрасываются счетчики, чтобы начать анализ следующего предложения
+                    if (c == '.' || c == '!' || c == '?')
+                    {
+                        Console.WriteLine(sout);
+                        Console.WriteLine("Сложность {0}", nZn + nWords + nNumbers);
+                        nZn = 0;
+                        nWords = 0;
+                        nNumbers = 0;
+                        sout = "";
                     }
                 }
             }
         }
     }
+
+    //класс Task_4 анализирует текст на уровне предложений, считая сложность каждого предложения как сумму числа слов, чисел и символов пунктуации
+
+
     class Task_6 : Task
     {
         private const string TaskName = "Задание 6";
