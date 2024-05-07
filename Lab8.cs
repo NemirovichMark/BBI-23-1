@@ -178,7 +178,7 @@ class FormatTextTask : Task
     // Переопределяем метод Process для обработки входной строки
     public override string Process(string input)
     {
-        int pageWidth = 80; // Ширина страницы
+        int pageWidth = 50; // Ширина страницы
 
         // Разбиваем входную строку на слова
         string[] words = input.Split(' ');
@@ -195,7 +195,8 @@ class FormatTextTask : Task
                 Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
                 lineBuilder.Clear();
             }
-            lineBuilder.Append(word + " "); // Добавляем текущее слово к текущей строке
+            lineBuilder.Append(word); // Добавляем текущее слово к текущей строке без пробела
+            lineBuilder.Append(' '); // Добавляем пробел между словами
         }
 
         // Выводим последнюю строку, если она не пустая
@@ -239,6 +240,7 @@ class FormatTextTask : Task
         return alignedText.ToString(); // Возвращаем выровненный текст
     }
 }
+
 
 
 
