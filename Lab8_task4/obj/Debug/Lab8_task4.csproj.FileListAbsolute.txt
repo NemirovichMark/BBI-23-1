@@ -1,0 +1,7 @@
+C:\Users\artem\source\repos\Lab8_task4\bin\Debug\Lab8_task4.exe.config
+C:\Users\artem\source\repos\Lab8_task4\bin\Debug\Lab8_task4.exe
+C:\Users\artem\source\repos\Lab8_task4\bin\Debug\Lab8_task4.pdb
+C:\Users\artem\source\repos\Lab8_task4\obj\Debug\Lab8_task4.csproj.AssemblyReference.cache
+C:\Users\artem\source\repos\Lab8_task4\obj\Debug\Lab8_task4.csproj.CoreCompileInputs.cache
+C:\Users\artem\source\repos\Lab8_task4\obj\Debug\Lab8_task4.exe
+C:\Users\artem\source\repos\Lab8_task4\obj\Debug\Lab8_task4.pdb
