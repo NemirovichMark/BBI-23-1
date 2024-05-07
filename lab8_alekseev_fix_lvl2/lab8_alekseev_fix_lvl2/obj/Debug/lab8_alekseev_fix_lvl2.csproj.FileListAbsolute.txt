@@ -1,0 +1,8 @@
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\bin\Debug\lab8_alekseev_fix_lvl2.exe.config
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\bin\Debug\lab8_alekseev_fix_lvl2.exe
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\bin\Debug\lab8_alekseev_fix_lvl2.pdb
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\obj\Debug\lab8_alekseev_fix_lvl2.csproj.AssemblyReference.cache
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\obj\Debug\lab8_alekseev_fix_lvl2.csproj.SuggestedBindingRedirects.cache
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\obj\Debug\lab8_alekseev_fix_lvl2.csproj.CoreCompileInputs.cache
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\obj\Debug\lab8_alekseev_fix_lvl2.exe
+C:\Users\m2207365\source\repos\lab8_alekseev_fix_lvl2\lab8_alekseev_fix_lvl2\obj\Debug\lab8_alekseev_fix_lvl2.pdb
