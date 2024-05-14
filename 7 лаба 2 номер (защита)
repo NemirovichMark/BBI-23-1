@@ -1,0 +1,63 @@
+using System;
+
+class Person
+{
+    private string _fullName;
+
+    public string FullName => _fullName;
+
+    public Person(string fullName)
+    {
+        _fullName = fullName;
+    }
+}
+
+class Student : Person
+{
+    private static int _nextStudentId = 10000; 
+
+    private int _studentId;
+    private double _mathGrade;
+    private double _physicsGrade;
+    private double _programmingGrade;
+
+    public int StudentId => _studentId;
+    public double MathGrade => _mathGrade;
+    public double PhysicsGrade => _physicsGrade;
+    public double ProgrammingGrade => _programmingGrade;
+    public double AverageGrade => (_mathGrade + _physicsGrade + _programmingGrade) / 3;
+
+    public Student(string fullName, double mathGrade, double physicsGrade, double programmingGrade) : base(fullName)
+    {
+        _studentId = _nextStudentId++;
+        _mathGrade = mathGrade;
+        _physicsGrade = physicsGrade;
+        _programmingGrade = programmingGrade;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Student[] students = new Student[]
+        {
+            new Student("Иванов Иван Иванович", 4, 5, 4),
+            new Student("Губеев Виталий Денисович", 4, 5, 4),
+            new Student("Енукидзе Гиви Гивиевич", 3, 4, 5),
+            new Student("Жуков Андрей Александрович", 4, 3, 5),
+            new Student("Капелин Илья Викторович", 5, 5, 5)
+        };
+
+        Array.Sort(students, (x, y) => y.AverageGrade.CompareTo(x.AverageGrade));
+
+        Console.WriteLine("Список успешно сдавших экзамены студентов, отсортированный по убыванию среднего балла:");
+        Console.WriteLine("|   ФИО               |  № студ. билета |  Средний балл |");
+        Console.WriteLine("|---------------------|-----------------|----------------|");
+
+        foreach (var student in students)
+        {
+            Console.WriteLine($"| {student.FullName,-20} | {student.StudentId,-15} | {student.AverageGrade,-13:F2} |");
+        }
+    }
+}
