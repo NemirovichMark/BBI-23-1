@@ -1,0 +1,156 @@
+using System;
+
+abstract class FootballTeam
+{
+    protected string _name;
+    protected int _points;
+    protected string _gender;
+
+    public FootballTeam(string name, string gender)
+    {
+        _name = name;
+        _gender = gender;
+        _points = 0;
+    }
+
+    // Виртуальный метод для сравнения двух команд по количеству очков.
+    public virtual int CompareTo(FootballTeam other)
+    {
+        // Сравниваем по количеству набранных очков.
+        return other._points.CompareTo(_points);
+    }
+
+    // Метод для слияния двух отсортированных массивов команд.
+    protected static FootballTeam[] Merge(FootballTeam[] leftArray, FootballTeam[] rightArray)
+    {
+        int leftLength = leftArray.Length;
+        int rightLength = rightArray.Length;
+        int totalLength = leftLength + rightLength;
+        FootballTeam[] mergedArray = new FootballTeam[totalLength];
+        int leftIndex = 0, rightIndex = 0, mergeIndex = 0;
+
+        // Слияние массивов, пока не достигнут конец одного из них.
+        while (leftIndex < leftLength && rightIndex < rightLength)
+        {
+            // Сравниваем команды по количеству очков.
+            if (leftArray[leftIndex].CompareTo(rightArray[rightIndex]) > 0)
+            {
+                mergedArray[mergeIndex++] = leftArray[leftIndex++];
+            }
+            else
+            {
+                mergedArray[mergeIndex++] = rightArray[rightIndex++];
+            }
+        }
+
+        // Добавление оставшихся элементов из левого массива.
+        while (leftIndex < leftLength)
+        {
+            mergedArray[mergeIndex++] = leftArray[leftIndex++];
+        }
+
+        // Добавление оставшихся элементов из правого массива.
+        while (rightIndex < rightLength)
+        {
+            mergedArray[mergeIndex++] = rightArray[rightIndex++];
+        }
+
+        return mergedArray;
+    }
+
+    // Виртуальный метод сортировки слиянием для массива команд.
+    public virtual FootballTeam[] MergeSort(FootballTeam[] teams)
+    {
+        int length = teams.Length;
+
+        // Базовый случай рекурсии: массив с одним элементом уже отсортирован.
+        if (length <= 1)
+        {
+            return teams;
+        }
+
+        // Находим середину массива.
+        int mid = length / 2;
+
+        // Разделяем массив на два подмассива.
+        FootballTeam[] leftArray = new FootballTeam[mid];
+        FootballTeam[] rightArray = new FootballTeam[length - mid];
+        Array.Copy(teams, 0, leftArray, 0, mid);
+        Array.Copy(teams, mid, rightArray, 0, length - mid);
+
+        // Рекурсивно сортируем оба подмассива.
+        leftArray = MergeSort(leftArray);
+        rightArray = MergeSort(rightArray);
+
+        // Сливаем отсортированные подмассивы в один отсортированный массив.
+        return Merge(leftArray, rightArray);
+    }
+
+    public string Name => _name;
+    public int Points => _points;
+    public string Gender => _gender;
+
+    public void DisplayTeamInfo(int rank)
+    {
+        Console.WriteLine($"{rank + 1}\t{Name}\t\t{Points}\t{Gender}");
+    }
+}
+
+class FemaleFootballTeam : FootballTeam
+{
+    public FemaleFootballTeam(string name) : base(name, "женская") { }
+}
+
+class MaleFootballTeam : FootballTeam
+{
+    public MaleFootballTeam(string name) : base(name, "мужская") { }
+}
+
+class Program
+{
+    
+    static void PlayMatch(FootballTeam team1, FootballTeam team2)
+    {
+        Random random = new Random();
+        int goalsForTeam1 = random.Next(0, 5); 
+        int goalsForTeam2 = random.Next(0, 5); 
+
+        team1.AddResult(goalsForTeam1, goalsForTeam2);
+        team2.AddResult(goalsForTeam2, goalsForTeam1);
+    }
+
+    static void Main()
+    {
+        FootballTeam[] femaleTeams = new FootballTeam[]
+        {
+            new FemaleFootballTeam("ЦСКА"),
+            new FemaleFootballTeam("Спартак")
+        };
+
+        FootballTeam[] maleTeams = new FootballTeam[]
+        {
+            new MaleFootballTeam("Динамо"),
+            new MaleFootballTeam("Локомотив"),
+            new MaleFootballTeam("Зенит")
+        };
+
+       
+        FootballTeam[] allTeams = new FootballTeam[femaleTeams.Length + maleTeams.Length];
+        femaleTeams.CopyTo(allTeams, 0);
+        maleTeams.CopyTo(allTeams, femaleTeams.Length);
+
+        // Сортировка массива команд слиянием MergeSort.
+        FootballTeam[] sortedTeams = allTeams[0].MergeSort(allTeams);
+      
+        Console.WriteLine("Место\tКоманда\t\tОчки\tПол");
+        Console.WriteLine("------\t--------------\t----\t---");
+
+        // Вывод информации о каждой команде.
+        for (int i = 0; i < sortedTeams.Length; i++)
+        {
+            sortedTeams[i].DisplayTeamInfo(i);
+        }
+    }
+}
+
+//массив делится пополам, и так далее пока не останется по одному элементу, а потом в обратном порядке сравниваясь "попарно" объединяется в один массив
