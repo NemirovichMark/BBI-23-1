@@ -9,37 +9,53 @@ abstract class Task
     public Task(string text) { }
     public abstract void ParseText(string text); 
 }
+public struct LetterInfo
+{
+    public char Letter { get; set; }
+    public int Count { get; set; }
+
+    public void IncrementCount()
+    {
+        Count++;
+    }
+}
 
 class Task_1 : Task
 {
-    private Dictionary<char, int> Countsword;
+    private List<LetterInfo> letterInfos; // Список для хранения информации о буквах и их частоте
+
     public Task_1(string text) : base(text)
     {
-        Countsword = new Dictionary<char, int>();
+        letterInfos = new List<LetterInfo>();
     }
     public override void ParseText(string text)
     {
-        char firstLetter;
+        // Разбиение текста на слова с помощью заданных разделителей
         string[] words = text.Split(new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Перебор каждого слова в массиве слов
         foreach (string word in words)
         {
-            if (!string.IsNullOrEmpty(word))
+            if (!string.IsNullOrEmpty(word)) // Проверка, что слово не пустое
             {
-                foreach (char letter in word)
+                char firstLetter = word.FirstOrDefault(char.IsLetter); // Получение первой буквы слова
+
+                if (firstLetter != default(char)) // Проверка, что первый символ является буквой
                 {
-                    if (char.IsLetter(letter))
+                    firstLetter = char.ToLowerInvariant(firstLetter); // Приведение первой буквы к нижнему регистру
+
+                    // Поиск структуры LetterInfo с текущей буквой в списке
+                    LetterInfo letterInfo = letterInfos.FirstOrDefault(li => li.Letter == firstLetter);
+
+                    if (letterInfo.Letter == default(char)) // Если буква не найдена в списке
                     {
-                        if (letter == word[0])
-                        {
-                            firstLetter = char.ToLowerInvariant(word[0]);
-                            if (Countsword.ContainsKey(firstLetter)) { Countsword[firstLetter]++; }
-                            else { Countsword[firstLetter] = 1; }
-                        }
-                        else
-                        {
-                            if (Countsword.ContainsKey(letter)) { Countsword[letter]++; }
-                            else { Countsword[letter] = 1; }
-                        }
+                        // Добавление новой структуры LetterInfo в список с частотой 1
+                        letterInfos.Add(new LetterInfo { Letter = firstLetter, Count = 1 });
+                    }
+                    else // Если буква найдена в списке
+                    {
+                        // Увеличение частоты повторений буквы в найденной структуре LetterInfo
+                        letterInfo.IncrementCount();
                     }
                 }
             }
@@ -48,11 +64,12 @@ class Task_1 : Task
     public void Print()
     {
         Console.WriteLine("Статистика частоты повторения буквы:");
-        foreach (var entry in Countsword.OrderBy(x => x.Key))
+        foreach (var letterInfo in letterInfos.OrderBy(li => li.Letter))
         {
-            char letter = entry.Key;
-            int count = entry.Value;
-            double percent = (double)count / Countsword.Values.Sum() * 100;
+            char letter = letterInfo.Letter;      // Получение буквы из структуры
+            int count = letterInfo.Count;         // Получение частоты повторений буквы из структуры
+
+            double percent = (double)count / letterInfos.Sum(li => li.Count) * 100;
             Console.WriteLine($"Буква '{letter}': {percent:F2}%");
         }
     }
@@ -195,23 +212,42 @@ class Task_12 : Task
 
 class Task_13 : Task
 {
-    private Dictionary<char, int> wordCounts;
+    private List<LetterInfo> letterInfos; // Список для хранения информации о буквах и их частоте
+
     public Task_13(string text) : base(text)
     {
-        wordCounts = new Dictionary<char, int>();
+        letterInfos = new List<LetterInfo>();
     }
     public override void ParseText(string text)
     {
+        // Разбиваем текст на слова, игнорируя разделители и удаляем пустые элементы
         string[] words = text.Split(new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+        // Для каждого слова из полученного массива слов
         foreach (string word in words)
         {
+            // Проверяем, не пустое ли это слово
             if (!string.IsNullOrEmpty(word))
             {
+                // Получаем первую букву слова в нижнем регистре
                 char firstLetter = char.ToLowerInvariant(word[0]);
+
+                // Проверяем, является ли первый символ буквой
                 if (char.IsLetter(firstLetter))
                 {
-                    if (wordCounts.ContainsKey(firstLetter)) { wordCounts[firstLetter]++; }
-                    else { wordCounts[firstLetter] = 1; }
+                    // Поиск структуры LetterInfo с текущей буквой в списке
+                    LetterInfo letterInfo = letterInfos.FirstOrDefault(li => li.Letter == firstLetter);
+
+                    if (letterInfo.Letter == default(char)) // Если буква не найдена в списке
+                    {
+                        // Добавление новой структуры LetterInfo в список с частотой 1
+                        letterInfos.Add(new LetterInfo { Letter = firstLetter, Count = 1 });
+                    }
+                    else // Если буква найдена в списке
+                    {
+                        // Увеличение счетчика повторений буквы в найденной структуре LetterInfo
+                        letterInfo.IncrementCount();
+                    }
                 }
             }
         }
@@ -219,11 +255,13 @@ class Task_13 : Task
     public void Print()
     {
         Console.WriteLine("Статистика слов, начинающихся на различные буквы:");
-        foreach (var entry in wordCounts.OrderBy(x => x.Key))
+
+        foreach (var letterInfo in letterInfos.OrderBy(li => li.Letter))
         {
-            char letter = entry.Key;
-            int count = entry.Value;
-            double percentage = (double)count / wordCounts.Values.Sum() * 100;
+            char letter = letterInfo.Letter;      // Получение буквы из структуры
+            int count = letterInfo.Count;         // Получение частоты повторений буквы из структуры
+
+            double percentage = (double)count / letterInfos.Sum(li => li.Count) * 100;
             Console.WriteLine($"Буква '{letter}': {percentage:F2}%");
         }
     }
