@@ -24,10 +24,10 @@ class EncryptionTask : Task
                 char[] characters = fragment.ToCharArray();
                 Array.Reverse(characters);
                 encryptedText.Append(characters);
-                Array.Reverse(characters); 
+                Array.Reverse(characters);
                 decryptedText.Append(characters);
             }
-            else 
+            else
             {
                 encryptedText.Append(fragment);
                 decryptedText.Append(fragment);
@@ -131,26 +131,28 @@ class SyllableCountTask : Task
     }
 }
 
+
 class FormatTextTask : Task
 {
     public override string Process(string input)
     {
-        int pageWidth = 80; 
+        int pageWidth = 80;
 
-        string[] words = input.Split(' ');
+        string[] sentences = input.Split('.');
         StringBuilder lineBuilder = new StringBuilder();
-        foreach (string word in words)
+        for (int i = 0; i < sentences.Length - 1; i++) // Исключаем последнее предложение из обработки
         {
-            if (lineBuilder.Length + word.Length >= pageWidth)
+            string sentence = sentences[i].Trim();
+            string[] words = sentence.Split(' ');
+            foreach (string word in words)
             {
-                Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
-                lineBuilder.Clear();
+                if (lineBuilder.Length + word.Length + 1 > pageWidth)
+                {
+                    Console.WriteLine(AlignText(lineBuilder.ToString().TrimEnd(), pageWidth));
+                    lineBuilder.Clear();
+                }
+                lineBuilder.Append(word + " ");
             }
-            lineBuilder.Append(word + " ");
-        }
-        if (lineBuilder.Length > 0)
-        {
-            Console.WriteLine(AlignText(lineBuilder.ToString(), pageWidth));
         }
 
         return "Текст успешно отформатирован.";
@@ -177,6 +179,7 @@ class FormatTextTask : Task
         return alignedText.ToString();
     }
 }
+
 
 class TextCompressionTask : Task
 {
@@ -207,7 +210,7 @@ class TextCompressionTask : Task
     {
         codeTable = new Dictionary<string, char>();
         Dictionary<string, int> pairCount = new Dictionary<string, int>();
-        char code = '1'; 
+        char code = 'A';
 
         for (int i = 0; i < text.Length - 1; i++)
         {
@@ -272,6 +275,7 @@ class TextCompressionTask : Task
         return decompressedText.ToString();
     }
 }
+
 
 class Program
 {
