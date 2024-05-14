@@ -1,0 +1,146 @@
+
+
+using System;
+
+abstract class Runner
+{
+    protected string surname;
+    protected string coachSurname;
+    protected string group;
+    protected double result;
+
+    public string Surname => surname;
+    public string CoachSurname => coachSurname;
+    public string Group => group;
+    public double Result => result;
+
+    public Runner(string surname, string coachSurname, string group, double result)
+    {
+        this.surname = surname;
+        this.coachSurname = coachSurname;
+        this.group = group;
+        this.result = result;
+    }
+
+    public abstract string Standard { get; }
+
+    public virtual void PrintInfo()
+    {
+        Console.WriteLine("Фамилия: {0} \t Группа: {1} \t Тренер: {2} \t Результат: {3} \t Норматив: {4}",
+            Surname, Group, CoachSurname, Result, Standard);
+    }
+
+    public static void QuickSort(Runner[] array, int left, int right)//Принимает массив объектов Runner, левую и правую границы сортируемой части массива.
+   //Вызывает сам себя для разделения массива и сортировки его частей.
+  
+    {
+        if (left < right)
+        {
+            int pivotIndex = Partition(array, left, right);//Выполняет разделение массива на две части относительно опорного элемента (pivot).
+            
+           //Используется в методе QuickSort для выбора опорного элемента и его правильного расположения в массиве
+           //Выбирает опорный элемент и размещает все элементы, которые меньше и все элементы, которые больше справа
+            QuickSort(array, left, pivotIndex - 1);
+            QuickSort(array, pivotIndex + 1, right);
+        }
+    }
+
+    private static int Partition(Runner[] array, int left, int right)//Она упорядочивает элементы массива относительно выбранного "опорного" элемента
+    {
+        double pivot = array[right].Result;//Определяется метод Partition, он принимает массив Runner[], индекс начального элемента left и индекс конечного элемента right.
+        int i = left - 1;
+        for (int j = left; j < right; j++)//Индекс i инициализируется на один меньше начального индекса. Эта переменная будет отслеживать разделение на элементы
+        {
+            if (array[j].Result >= pivot)
+            {
+                i++;
+                Swap(array, i, j); //Вызываем метод Swap, который меняет местами элементы с индексами i и j, тем самым перемещая элементы, которые больше или равны опорному значения, в начало массива.
+            }
+        }
+        Swap(array, i + 1, right);//Позволяет поменять местами два элемента массива.
+        return i + 1;
+    }
+
+    private static void Swap(Runner[] array, int i, int j)
+    {
+        Runner temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+class Runner100m : Runner
+{
+    public override string Standard => "1.5 секунды";
+
+    public Runner100m(string surname, string coachSurname, string group, double result)
+        : base(surname, coachSurname, group, result)
+    {
+    }
+}
+
+class Runner500m : Runner
+{
+    public override string Standard => "3 минуты";
+
+    public Runner500m(string surname, string coachSurname, string group, double result)
+        : base(surname, coachSurname, group, result)
+    {
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        int passedCount100m = 0;
+        int passedCount500m = 0;
+
+        Runner[] runners = new Runner[5];
+        runners[0] = new Runner100m("Губеева", "Тренеровна", "234", 1.50);
+        runners[1] = new Runner100m("Капелина", "Гасанов", "666", 1.55);
+        runners[2] = new Runner100m("Попова", "Кужель", "777", 1.47);
+        runners[3] = new Runner100m("Орлова", "Лушина", "889", 1.46);
+        runners[4] = new Runner100m("Коцарь", "Пушина", "995", 1.54);
+
+        Console.WriteLine("Таблица результатов бега на 100 м:");
+        Runner.QuickSort(runners, 0, runners.Length - 1);
+        for (int i = 0; i < runners.Length; i++)
+        {
+            var runner = runners[i] as Runner100m;
+            if (runner != null)
+            {
+                if (runner.Result <= 1.5)
+                {
+                    passedCount100m++;
+                }
+                runner.PrintInfo();
+            }
+        }
+
+        runners[0] = new Runner500m("Иванова", "Тренеровна", "234", 2.50);
+        runners[1] = new Runner500m("Петрова", "Гасанов", "666", 3.05);
+        runners[2] = new Runner500m("Сидорова", "Кужель", "777", 2.57);
+        runners[3] = new Runner500m("Кузнецова", "Лушина", "889", 2.46);
+        runners[4] = new Runner500m("Смирнова", "Пушина", "995", 3.04);
+
+        Console.WriteLine("\nТаблица результатов бега на 500 м:");
+        Runner.QuickSort(runners, 0, runners.Length - 1);
+        for (int i = 0; i < runners.Length; i++)
+        {
+            var runner = runners[i] as Runner500m;
+            if (runner != null)
+            {
+                if (runner.Result <= 3.0)
+                {
+                    passedCount500m++;
+                }
+                runner.PrintInfo();
+            }
+        }
+
+
+        Console.WriteLine("\nЛюди, сдавшие норматив на 100 м: " + passedCount100m);
+        Console.WriteLine("Люди, сдавшие норматив на 500 м: " + passedCount500m);
+    }
+}
