@@ -62,23 +62,23 @@ public class Sportsman
     {
         Console.WriteLine( $"{LastName} - {FinishTime} очка");
     }
-    
-    //public static void SortResults(ref Sportsman[] results) //не работает для наследников(((( почему-то
-    //{
 
-    //    for (int i = 0; i < results.Length - 1; i++)
-    //    {
-    //        for (int j = i + 1; j < results.Length; j++)
-    //        {
-    //            if (results[j].FinishTime > results[i].FinishTime)
-    //            {
-    //                Sportsman a = results[i];
-    //                results[i] = results[j];
-    //                results[j] = a;
-    //            }
-    //        }
-    //    }
-    //}
+    public static void SortResults(Sportsman[] results) 
+    {
+
+        for (int i = 0; i < results.Length - 1; i++)
+        {
+            for (int j = i + 1; j < results.Length; j++)
+            {
+                if (results[j].FinishTime < results[i].FinishTime)
+                {
+                    Sportsman a = results[i];
+                    results[i] = results[j];
+                    results[j] = a;
+                }
+            }
+        }
+    }
 
 }
 [Serializable]
@@ -160,55 +160,9 @@ public class SkiRace
 
         MergeAndPrintResults();
     }
-    private static void SortResults(ref Skieress[] results) // метод SortResults нормально работает только вот с таким тройным повторением кода
-                                                            //- для класса-родителя Sportsman  и его наследников
-    {
-
-        for (int i = 0; i < results.Length - 1; i++)
-        {
-            for (int j = i + 1; j < results.Length; j++)
-            {
-                if (results[j].FinishTime > results[i].FinishTime)
-                {
-                    Skieress a = results[i];
-                    results[i] = results[j];
-                    results[j] = a;
-                }
-            }
-        }
-    }
-    private static void SortResults(ref Skier[] results)
-    {
-
-        for (int i = 0; i < results.Length - 1; i++)
-        {
-            for (int j = i + 1; j < results.Length; j++)
-            {
-                if (results[j].FinishTime > results[i].FinishTime)
-                {
-                    Skier a = results[i];
-                    results[i] = results[j];
-                    results[j] = a;
-                }
-            }
-        }
-    }
-    private static void SortResults(ref Sportsman[] results) 
-    {
-
-        for (int i = 0; i < results.Length - 1; i++)
-        {
-            for (int j = i + 1; j < results.Length; j++)
-            {
-                if (results[j].FinishTime > results[i].FinishTime)
-                {
-                    Sportsman a = results[i];
-                    results[i] = results[j];
-                    results[j] = a;
-                }
-            }
-        }
-    }
+    
+    
+    
 
     private void PrintResults(Sportsman[] results, string groupName)
     {
@@ -224,11 +178,11 @@ public class SkiRace
 
     private void MergeAndPrintResults()
     {
-        SortResults(ref skieressGroup1Results);
-        SortResults(ref skieressGroup2Results);
-        SortResults(ref skierGroup1Results);
-        SortResults(ref skierGroup2Results);
-
+        
+        Sportsman.SortResults(skieressGroup1Results);
+        Sportsman.SortResults(skieressGroup2Results);
+        Sportsman.SortResults(skierGroup1Results);
+        Sportsman.SortResults(skierGroup2Results);
         PrintResults(skieressGroup1Results, "Лыжницы-1");
         PrintResults(skieressGroup2Results, "Лыжницы-2");
         PrintResults(skierGroup1Results, "Лыжники-1");
@@ -237,12 +191,14 @@ public class SkiRace
         Skieress[] WomenResults = new Skieress[skieressGroup1Results.Length + skieressGroup2Results.Length];
         Array.Copy(skieressGroup1Results, WomenResults, skieressGroup1Results.Length);
         Array.Copy(skieressGroup2Results, 0, WomenResults, skieressGroup1Results.Length, skieressGroup2Results.Length);
-        SortResults(ref WomenResults);
+        
+        Sportsman.SortResults(WomenResults);
         PrintResults(WomenResults, "Все женские команды");
         Skier[] MenResults = new Skier[skierGroup1Results.Length + skierGroup2Results.Length];
         Array.Copy(skierGroup1Results, MenResults, skierGroup1Results.Length);
         Array.Copy(skierGroup2Results, 0, MenResults, skierGroup1Results.Length, skierGroup2Results.Length);
-        SortResults(ref MenResults);
+        
+        Sportsman.SortResults(MenResults);
         PrintResults(MenResults, "Все мужские команды");
         //Сериализация:
         MySerializer[] serializers = new MySerializer[3] { new JsonMySerializer(), new XmlMySerializer(), new BinMySerializer() };
@@ -280,7 +236,8 @@ public class SkiRace
         Sportsman[] allResults = new Sportsman[WomenResults.Length + MenResults.Length];
         Array.Copy(WomenResults, allResults, WomenResults.Length);
         Array.Copy(MenResults, 0, allResults, WomenResults.Length, MenResults.Length);
-        SortResults(ref allResults);
+        
+        Sportsman.SortResults(allResults);
         PrintResults(allResults, "Все участники");
         Console.ReadKey();
     }
