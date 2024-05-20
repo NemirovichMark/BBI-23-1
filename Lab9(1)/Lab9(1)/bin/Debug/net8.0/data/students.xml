@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStudent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Student xsi:type="ComputerScienceStudent">
+    <Name>Misha</Name>
+    <Mark>2</Mark>
+    <Miss>3</Miss>
+  </Student>
+  <Student xsi:type="ComputerScienceStudent">
+    <Name>Pasha</Name>
+    <Mark>2</Mark>
+    <Miss>9</Miss>
+  </Student>
+  <Student xsi:type="ComputerScienceStudent">
+    <Name>Tigran</Name>
+    <Mark>2</Mark>
+    <Miss>6</Miss>
+  </Student>
+  <Student xsi:type="ComputerScienceStudent">
+    <Name>Sofia</Name>
+    <Mark>5</Mark>
+    <Miss>1</Miss>
+  </Student>
+  <Student xsi:type="ComputerScienceStudent">
+    <Name>Ivan</Name>
+    <Mark>0</Mark>
+    <Miss>20</Miss>
+  </Student>
+  <Student xsi:type="MathStudent">
+    <Name>Alex</Name>
+    <Mark>2</Mark>
+    <Miss>5</Miss>
+  </Student>
+  <Student xsi:type="MathStudent">
+    <Name>Anna</Name>
+    <Mark>2</Mark>
+    <Miss>2</Miss>
+  </Student>
+  <Student xsi:type="MathStudent">
+    <Name>Viktor</Name>
+    <Mark>3</Mark>
+    <Miss>3</Miss>
+  </Student>
+  <Student xsi:type="MathStudent">
+    <Name>Maria</Name>
+    <Mark>4</Mark>
+    <Miss>4</Miss>
+  </Student>
+  <Student xsi:type="MathStudent">
+    <Name>Nikolai</Name>
+    <Mark>2</Mark>
+    <Miss>7</Miss>
+  </Student>
+</ArrayOfStudent>

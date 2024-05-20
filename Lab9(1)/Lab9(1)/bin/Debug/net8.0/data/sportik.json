@@ -1,0 +1,97 @@
+[
+  {
+    "Surname": "Gubeeva",
+    "Refs": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "Diving": {
+      "$type": "DivingWith5M, Lab9(1)",
+      "DisciplineName": "Дисциплина 4"
+    }
+  },
+  {
+    "Surname": "Kapelina",
+    "Refs": [
+      4,
+      5,
+      5,
+      4,
+      4,
+      5,
+      5,
+      4,
+      4,
+      5
+    ],
+    "Diving": {
+      "$type": "DivingWith3M, Lab9(1)",
+      "DisciplineName": "Дисциплина 5"
+    }
+  },
+  {
+    "Surname": "Oganezov",
+    "Refs": [
+      4,
+      5,
+      2,
+      3,
+      4,
+      3,
+      4,
+      4,
+      5,
+      5
+    ],
+    "Diving": {
+      "$type": "DivingWith3M, Lab9(1)",
+      "DisciplineName": "Дисциплина 1"
+    }
+  },
+  {
+    "Surname": "Popov",
+    "Refs": [
+      3,
+      5,
+      1,
+      4,
+      2,
+      5,
+      3,
+      3,
+      2,
+      2
+    ],
+    "Diving": {
+      "$type": "DivingWith5M, Lab9(1)",
+      "DisciplineName": "Дисциплина 2"
+    }
+  },
+  {
+    "Surname": "Machkalyan",
+    "Refs": [
+      1,
+      2,
+      1,
+      1,
+      3,
+      3,
+      4,
+      4,
+      2,
+      4
+    ],
+    "Diving": {
+      "$type": "DivingWith3M, Lab9(1)",
+      "DisciplineName": "Дисциплина 3"
+    }
+  }
+]
