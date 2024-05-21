@@ -1,47 +1,63 @@
 ﻿using System.Diagnostics;
 using System.Xml.Linq;
 
-//Вариант 7
+//Вариант 1
 
-struct Goods
+using System;
+
+public struct Number
 {
-    public string name;
-    public int article;
-    public double price;
-    public int quantity;
+    private int realPart;
+
+    public Number(int realPart)
+    {
+        this.realPart = realPart;
+    }
+
+    public static Number Add(Number num1, Number num2)
+    {
+        return new Number(num1.realPart + num2.realPart);
+    }
+
+    public static Number Subtract(Number num1, Number num2)
+    {
+        return new Number(num1.realPart - num2.realPart);
+    }
+
+    public static Number Multiply(Number num1, Number num2)
+    {
+        return new Number(num1.realPart * num2.realPart);
+    }
+
+    public static Number Divide(Number num1, Number num2)
+    {
+        return new Number(num1.realPart / num2.realPart);
+    }
+
+    public void PrintNumber()
+    {
+        Console.WriteLine("Number = " + realPart);
+    }
 }
 
-class program
+class Program
 {
     static void Main()
     {
-        Random art = new Random();
-        Goods[] goods = new Goods[]
-        {
-            new Goods {name = "Хлеб     ", article = art.Next(100000000,1000000000), price = 34.5, quantity = 132},
-            new Goods {name = "Молоко   ", article = art.Next(100000000,1000000000), price = 79.9, quantity = 573},
-            new Goods {name = "Чебупели ", article = art.Next(100000000,1000000000), price = 170, quantity = 75},
-            new Goods {name = "Пельмени ", article = art.Next(100000000,1000000000), price = 463.9, quantity = 83},
-            new Goods {name = "Апельсины", article = art.Next(100000000,1000000000), price = 75.5, quantity = 563}
-        };
-        for (int i = 0; i < goods.Length - 1; i++)
-        {
-            if (goods[i].price < goods[i + 1].price)
-            {
-                double t = goods[i].price;
-                goods[i].price = goods[i + 1].price;
-                goods[i + 1].price = t;
-            }
-        }
-        Console.WriteLine("Товар   \t" + "Артикул   \t" + "Цена  \t" + "Количество\t");
-        print(goods);
-    }
-    static void print(Goods [] matrix)
-    {
-        for (int i = 0; i < matrix.Length; i++)
-        {
-            Console.WriteLine(matrix[i].name +"\t" + matrix[i].article + "\t" +  matrix[i].price + "\t" +  matrix[i].quantity);
-        }
+        Number num1 = new Number(5);
+        Number num2 = new Number(8);
+
+        Number sum = Number.Add(num1, num2);
+        Number diff = Number.Subtract(num1, num2);
+        Number product = Number.Multiply(num1, num2);
+        Number quotient = Number.Divide(num1, num2);
+
+        num1.PrintNumber();
+        num2.PrintNumber();
+        sum.PrintNumber();
+        diff.PrintNumber();
+        product.PrintNumber();
+        quotient.PrintNumber();
     }
 }
 
