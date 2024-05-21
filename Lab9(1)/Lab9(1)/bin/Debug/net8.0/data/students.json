@@ -1,0 +1,62 @@
+[
+  {
+    "$type": "ComputerScienceStudent, Lab9(1)",
+    "Name": "Misha",
+    "Mark": 2,
+    "Miss": 3
+  },
+  {
+    "$type": "ComputerScienceStudent, Lab9(1)",
+    "Name": "Pasha",
+    "Mark": 2,
+    "Miss": 9
+  },
+  {
+    "$type": "ComputerScienceStudent, Lab9(1)",
+    "Name": "Tigran",
+    "Mark": 2,
+    "Miss": 6
+  },
+  {
+    "$type": "ComputerScienceStudent, Lab9(1)",
+    "Name": "Sofia",
+    "Mark": 5,
+    "Miss": 1
+  },
+  {
+    "$type": "ComputerScienceStudent, Lab9(1)",
+    "Name": "Ivan",
+    "Mark": 0,
+    "Miss": 20
+  },
+  {
+    "$type": "MathStudent, Lab9(1)",
+    "Name": "Alex",
+    "Mark": 2,
+    "Miss": 5
+  },
+  {
+    "$type": "MathStudent, Lab9(1)",
+    "Name": "Anna",
+    "Mark": 2,
+    "Miss": 2
+  },
+  {
+    "$type": "MathStudent, Lab9(1)",
+    "Name": "Viktor",
+    "Mark": 3,
+    "Miss": 3
+  },
+  {
+    "$type": "MathStudent, Lab9(1)",
+    "Name": "Maria",
+    "Mark": 4,
+    "Miss": 4
+  },
+  {
+    "$type": "MathStudent, Lab9(1)",
+    "Name": "Nikolai",
+    "Mark": 2,
+    "Miss": 7
+  }
+]

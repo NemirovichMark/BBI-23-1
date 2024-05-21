@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Person>
+    <SurName>Gubeeva</SurName>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Diving xsi:type="DivingWith5M">
+      <DisciplineName>Дисциплина 4</DisciplineName>
+    </Diving>
+  </Person>
+  <Person>
+    <SurName>Kapelina</SurName>
+    <Refs>4</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>4</Refs>
+    <Refs>4</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Refs>4</Refs>
+    <Refs>4</Refs>
+    <Refs>5</Refs>
+    <Diving xsi:type="DivingWith3M">
+      <DisciplineName>Дисциплина 5</DisciplineName>
+    </Diving>
+  </Person>
+  <Person>
+    <SurName>Oganezov</SurName>
+    <Refs>4</Refs>
+    <Refs>5</Refs>
+    <Refs>2</Refs>
+    <Refs>3</Refs>
+    <Refs>4</Refs>
+    <Refs>3</Refs>
+    <Refs>4</Refs>
+    <Refs>4</Refs>
+    <Refs>5</Refs>
+    <Refs>5</Refs>
+    <Diving xsi:type="DivingWith3M">
+      <DisciplineName>Дисциплина 1</DisciplineName>
+    </Diving>
+  </Person>
+  <Person>
+    <SurName>Popov</SurName>
+    <Refs>3</Refs>
+    <Refs>5</Refs>
+    <Refs>1</Refs>
+    <Refs>4</Refs>
+    <Refs>2</Refs>
+    <Refs>5</Refs>
+    <Refs>3</Refs>
+    <Refs>3</Refs>
+    <Refs>2</Refs>
+    <Refs>2</Refs>
+    <Diving xsi:type="DivingWith5M">
+      <DisciplineName>Дисциплина 2</DisciplineName>
+    </Diving>
+  </Person>
+  <Person>
+    <SurName>Machkalyan</SurName>
+    <Refs>1</Refs>
+    <Refs>2</Refs>
+    <Refs>1</Refs>
+    <Refs>1</Refs>
+    <Refs>3</Refs>
+    <Refs>3</Refs>
+    <Refs>4</Refs>
+    <Refs>4</Refs>
+    <Refs>2</Refs>
+    <Refs>4</Refs>
+    <Diving xsi:type="DivingWith3M">
+      <DisciplineName>Дисциплина 3</DisciplineName>
+    </Diving>
+  </Person>
+</ArrayOfPerson>

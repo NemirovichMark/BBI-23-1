@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTeam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Team xsi:type="WomenTeam">
+    <Name>Женская команда 1</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+  </Team>
+  <Team xsi:type="WomenTeam">
+    <Name>Женская команда 2</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+  </Team>
+  <Team xsi:type="WomenTeam">
+    <Name>Женская команда 3</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+  </Team>
+  <Team xsi:type="MenTeam">
+    <Name>Мужская команда 1</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+  </Team>
+  <Team xsi:type="MenTeam">
+    <Name>Мужская команда 2</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+  </Team>
+  <Team xsi:type="MenTeam">
+    <Name>Мужская команда 3</Name>
+    <Participants>
+      <Name>Участник 1</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 2</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 4</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 5</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 6</Name>
+      <Place>1</Place>
+    </Participants>
+    <Participants>
+      <Name>Участник 3</Name>
+      <Place>11</Place>
+    </Participants>
+  </Team>
+</ArrayOfTeam>
