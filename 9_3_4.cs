@@ -85,13 +85,19 @@ public class Sportsman
 [ProtoContract]
 public class Skier : Sportsman
 {
+    [JsonIgnore]
+    [NonSerialized]
 
+    private int _age;
+    [ProtoMember(5)]
+    [JsonInclude]
+    public int age { get { return _age; } set { if (value > 0) _age = value; } }
     public Skier(): base() { }
     [JsonConstructor]
-    public Skier(string lastName, int finishTime) : base(lastName, finishTime) { }
+    public Skier(string lastName, int finishTime, int age) : base(lastName, finishTime) { _age = age; }
     public override void  Print()
     {
-        Console.WriteLine($"Мужская команда - {_lastName} - {_finishTime} очка");
+        Console.WriteLine($"лыжник - {_lastName}, возраст -{_age}, время {_finishTime} сек ");
     }
     
 }
@@ -99,12 +105,20 @@ public class Skier : Sportsman
 [ProtoContract]
 public class Skieress : Sportsman
 {
+    [JsonIgnore]
+    [NonSerialized]
+
+    private string _color;
+
+    [ProtoMember(6)]
+    [JsonInclude]
+    public string Color { get { return _color; } set { _color = value ?? String.Empty; } }
     public Skieress() : base() { }
     [JsonConstructor]
-    public Skieress(string lastName, int finishTime) : base(lastName, finishTime) { }
+    public Skieress(string lastName, int finishTime, string Color) : base(lastName, finishTime) { _color = Color; }
     public override void Print()
     {
-        Console.WriteLine($"Женская команда - {_lastName} - {_finishTime} очка");
+        Console.WriteLine($"Женская команда - {_lastName}, цвет формы - {_color}, - {_finishTime} очка");
     }
     
 }
@@ -124,38 +138,38 @@ public class SkiRace
     {
         skieressGroup1Results = new Skieress[]
         {
-            new Skieress("Чиченкова", 60),
-            new Skieress("Агапова", 55),
-            new Skieress("Чайкина", 58),
-            new Skieress("Абраменкова", 57),
-            new Skieress("Бычкова", 62)
+            new Skieress("Чиченкова", 60, "Blue"),
+            new Skieress("Агапова", 55, "Red"),
+            new Skieress("Чайкина", 58, "Green"),
+            new Skieress("Абраменкова", 57, "Black"),
+            new Skieress("Бычкова", 62, "Grey")
         };
 
         skieressGroup2Results = new Skieress[]
         {
-            new Skieress("Куулар", 63),
-            new Skieress("Лунина", 56),
-            new Skieress("Щербакова", 59),
-            new Skieress("Родина", 61),
-            new Skieress("Лищенко", 58)
+            new Skieress("Куулар", 63, "Purple"),
+            new Skieress("Лунина", 56, "Brown"),
+            new Skieress("Щербакова", 59, "Pink"),
+            new Skieress("Родина", 61, "Yellow"),
+            new Skieress("Лищенко", 58, "Orange")
         };
 
         skierGroup1Results = new Skier[]
         {
-            new Skier("Стоценко", 57),
-            new Skier("Виноградов", 59),
-            new Skier("Смирнов", 58),
-            new Skier("Волков", 56),
-            new Skier("Иванов", 61)
+            new Skier("Стоценко", 57, 14),
+            new Skier("Виноградов", 59, 15),
+            new Skier("Смирнов", 58,16),
+            new Skier("Волков", 56, 17),
+            new Skier("Иванов", 61, 18)
         };
 
         skierGroup2Results = new Skier[]
         {
-            new Skier("Зайцев", 62),
-            new Skier("Павлов", 63),
-            new Skier("Козлов", 55),
-            new Skier("Голубев", 58),
-            new Skier("Горбунов", 60)
+            new Skier("Зайцев", 62, 20),
+            new Skier("Павлов", 63, 21),
+            new Skier("Козлов", 55, 25),
+            new Skier("Голубев", 58, 20),
+            new Skier("Горбунов", 60, 19)
         };
 
         MergeAndPrintResults();
@@ -250,3 +264,5 @@ class Program
         SkiRace skiRace = new SkiRace();
     }
 }
+
+
