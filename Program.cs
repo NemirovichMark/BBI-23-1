@@ -1,305 +1,107 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-// Абстрактный класс "Задание"
-public abstract class Zadanie
+abstract class Task
 {
-    protected string text;
+    protected string text = "Здесь пока нет текста";
 
-    public Zadanie(string text)
+    public string Text
+    {
+        get => text;
+        protected set => text = value;
+    }
+
+    public Task(string text)
     {
         this.text = text;
     }
 
-    public abstract void Reshit();
-    public override abstract string ToString();
-}
-
-// Первое задание (№1)
-public class ChastotaBukv : Zadanie
-{
-    private int[] chastota = new int[33];
-
-    public ChastotaBukv(string text) : base(text) { }
-
-    public override void Reshit()
-    {
-
-        int totalBukv = 0;
-
-        foreach (char c in text.ToLower())
-        {
-            if (char.IsLetter(c))
-            {
-                chastota[c - 'а']++;
-                totalBukv++;
-            }
-        }
-
-        for (int i = 0; i < chastota.Length; i++)
-        {
-            chastota[i] = (int)((double)chastota[i] / totalBukv * 100);
-        }
-
-
-    }
+    public abstract void Solve();
 
     public override string ToString()
     {
-        string result = "";
-        for (int i = 0; i < 33; i++)
-        {
-            char bukva = (char)('а' + i);
-            result += $"{bukva}: {chastota[i]}% ";
-        }
-        return result;
-    }
-
-}
-
-
-
-// Второе задание (№3)
-public class RazbienieNaStroki : Zadanie
-{
-    private List<string> stroki = new List<string>();
-    public RazbienieNaStroki(string text) : base(text) { }
-
-    public override void Reshit()
-    {
-        string[] slova = text.Split(' ');
-        string stroka = "";
-
-
-        foreach (string slovo in slova)
-        {
-            if (stroka.Length + slovo.Length + 1 <= 50)
-            {
-                stroka += slovo + " ";
-            }
-            else
-            {
-                stroki.Add(stroka.Trim());
-                stroka = slovo + " ";
-            }
-        }
-        stroki.Add(stroka.Trim());
-
-
-    }
-
-    public override string ToString()
-    {
-        string result = "";
-        foreach (string stroka in stroki)
-        {
-            result += stroka + "\n";
-        }
-        return result;
+        return text;
     }
 }
 
-
-
-// 3 задание (№5)
-public struct BukvaChastota
+class Task1 : Task
 {
-    public char Bukva { get; set; }
-    public int Chastota { get; set; }
-}
+    [JsonConstructor]
+    public Task1(string text) : base(text) { }
 
-public class ChastotaNachalnyhBukv : Zadanie
-{
-    private List<BukvaChastota> chastotaBukv = new List<BukvaChastota>();
-
-    public ChastotaNachalnyhBukv(string text) : base(text) { }
-
-    public override void Reshit()
+    public override void Solve()
     {
-        string[] slova = text.Split(new char[] { ' ', '.', ',', '!', '?', ':', ';' }, StringSplitOptions.RemoveEmptyEntries);
+        char[] charArray = text.ToCharArray();
+        string result = new string(charArray.Where(c => charArray.Count(x => x == c) == 1).ToArray());
 
-        foreach (string slovo in slova)
-        {
-            if (slovo.Length > 0)
-            {
-                char firstChar = char.ToLower(slovo[0]);
-                if (char.IsLetter(firstChar))
-                {
-                    var existing = chastotaBukv.FindIndex(b => b.Bukva == firstChar);
-                    if (existing != -1)
-                    {
-                        chastotaBukv[existing] = new BukvaChastota { Bukva = firstChar, Chastota = chastotaBukv[existing].Chastota + 1 };
-                    }
-                    else
-                    {
-                        chastotaBukv.Add(new BukvaChastota { Bukva = firstChar, Chastota = 1 });
-                    }
-                }
-            }
-        }
-
-        chastotaBukv.Sort((x, y) => y.Chastota.CompareTo(x.Chastota));
-    }
-
-    public override string ToString()
-    {
-        string result = "";
-        foreach (var bukvaChastota in chastotaBukv)
-        {
-            result += $"{bukvaChastota.Bukva} ({bukvaChastota.Chastota}) ";
-        }
-        return result;
-    }
-}
-//4 задние(№7)
-public class PoiskOdnokorennyhSlov : Zadanie
-{
-    private string koren;
-    List<string> naĭdennyeSlova = new List<string>();
-    public PoiskOdnokorennyhSlov(string text, string koren) : base(text)
-    {
-        this.koren = koren.ToLower();
-
-    }
-    public override void Reshit()
-    {
-        string[] slova = text.ToLower().Split(' ', '.', ',', '!', '?', ':', ';');
-
-
-        foreach (string slovo in slova)
-        {
-            if (IsOdnokorennoe(slovo, koren))
-            {
-                naĭdennyeSlova.Add(slovo);
-            }
-        }
-
-
-    }
-
-    private bool IsOdnokorennoe(string slovo, string koren)
-    {
-        return slovo.Contains(koren); // Проверяем, содержит ли слово корень
-
-    }
-
-
-    public override string ToString()
-    {
-        string result = "Найденные однокоренные слова: ";
-        foreach (string slovo in naĭdennyeSlova)
-        {
-            result += slovo + " ";
-        }
-        return result;
+        Console.WriteLine(result);
     }
 }
 
-//5 задание (№14)
-public class SummaChisel : Zadanie
+class Task2 : Task
 {
-    private int summa;
+    [JsonConstructor]
+    public Task2(string text) : base(text) { }
 
-    public SummaChisel(string text) : base(text) { }
-
-    public override void Reshit()
+    public override void Solve()
     {
-        summa = 0;
+        string[] sentences = text.Split('.', '!', '?');
+        string reversedText = "";
 
-
-        foreach (char symbol in text)
+        foreach (string sentence in sentences)
         {
-
-            if (symbol >= '0' && symbol <= '9')
-            {
-
-                summa += symbol - '0';
-            }
+            string[] words = sentence.Trim().Split(' ');
+            Array.Reverse(words);
+            reversedText += string.Join(" ", words) + ". ";
         }
-    }
 
-    public override string ToString()
-    {
-        return $"Сумма цифр в тексте: {summa}";
+        Console.WriteLine(reversedText.Trim());
     }
 }
 
-//6 задание (#11)
-public class SortirovkaFamilij : Zadanie
+class Program
 {
-    private string[] Items;
-
-    public SortirovkaFamilij(string text) : base(text) { }
-
-    public override void Reshit()
+    static void Main()
     {
-
-        Items = text.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-
-        for (int i = 0; i < Items.Length - 1; i++)
+        string path = @"C:\Users\m2304881\Desktop\Зарузки";
+        string folderName = "Answer";
+        path = Path.Combine(path, folderName);
+        if (!Directory.Exists(path))
         {
-            for (int j = 0; j < Items.Length - i - 1; j++)
-            {
-                if (string.Compare(Items[j], Items[j + 1], StringComparison.CurrentCultureIgnoreCase) > 0)
-                {
-                    string temp = Items[j];
-                    Items[j] = Items[j + 1];
-                    Items[j + 1] = temp;
-                }
-            }
+            Directory.CreateDirectory(path);
         }
-    }
 
-    public override string ToString()
-    {
-        return string.Join(", ", Items);
-    }
-}
+        string fileName1Input = "task1_input.json";
+        string fileName1Output = "task1_output.json";
+        string fileName2Input = "task2_input.json";
+        string fileName2Output = "task2_output.json";
 
-// Пример использования
-public class Program
-{
-    static void Main(string[] args)
-    {
+        fileName1Input = Path.Combine(path, fileName1Input);
+        fileName1Output = Path.Combine(path, fileName1Output);
+        fileName2Input = Path.Combine(path, fileName2Input);
+        fileName2Output = Path.Combine(path, fileName2Output);
 
-        string text = "международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов. ";
-        string koren = "вод";
-        Console.WriteLine("Первое");
-        Zadanie zadanie1 = new ChastotaBukv(text);
-        zadanie1.Reshit();
-        Console.WriteLine(zadanie1);
+      
+        Task task1 = new Task1("Привет мирррр");
+        task1.Solve();
 
-        Console.WriteLine("Второе");
-        Zadanie zadanie2 = new RazbienieNaStroki(text);
-        zadanie2.Reshit();
-        Console.WriteLine(zadanie2);
+        var jsonTask1Input = JsonSerializer.Serialize(task1);
+        File.WriteAllText(fileName1Input, jsonTask1Input);
 
-        Console.WriteLine("Третье");
-        Zadanie zadanie3 = new ChastotaNachalnyhBukv(text);
-        zadanie3.Reshit();
-        Console.WriteLine(zadanie3);
+        
+        Task task2 = new Task2("Это предложение переверни его");
+        task2.Solve();
 
+        var jsonTask2Input = JsonSerializer.Serialize(task2);
+        File.WriteAllText(fileName2Input, jsonTask2Input);
 
-        string text1 = "Водопад это вода.Водная гладь прекрасна.Подводная";
-        Console.WriteLine("Четвертое");
-        Zadanie zadanie4 = new PoiskOdnokorennyhSlov(text1, koren);
-        zadanie4.Reshit();
-        Console.WriteLine(zadanie4);
+        
+        var savedTask1 = JsonSerializer.Deserialize<Task1>(File.ReadAllText(fileName1Input));
+        var savedTask2 = JsonSerializer.Deserialize<Task2>(File.ReadAllText(fileName2Input));
 
-
-
-        Console.WriteLine("Пятое");
-
-
-        string input = "Текст содержит 1 слово, 2015 числа и 3 знака препинания. Сумма: 999 !";
-        Zadanie zadanie6 = new SummaChisel(input);
-        zadanie6.Reshit();
-        Console.WriteLine(zadanie6);
-
-        Console.WriteLine("Шестое");
-        string input5 = "Козлов\r\nНовиков\r\nИванова\r\nПетрова\r\nСмирнова\r\n\r\n\r\nIvanov\r\nPetrov\r\nSmirnov\r\nSokolov\r\n, Антонов Борисов";
-        Zadanie task5 = new SortirovkaFamilij(input5);
-        task5.Reshit();
-        Console.WriteLine(task5.ToString());
+        Console.WriteLine(savedTask1);
+        Console.WriteLine(savedTask2);
     }
 }
