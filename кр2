@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите строку:");
+        string input = Console.ReadLine();
+
+        char bukva = Bukva(input);
+
+        Console.WriteLine("Самый часто встречающийся символ в строке:" + bukva);
+
+        int palindrom = Palindrom(input);
+
+        Console.WriteLine($"Количество слов-палиндромов в строке:" + palindrom);
+
+        string zagruzki = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
+        string solution = Path.Combine(zagruzki, "Solution");
+
+        if (!Directory.Exists(solution))
+        {
+            Directory.CreateDirectory(solution);
+            Console.WriteLine("Папка 'Solution' успешно создана.");
+
+            string task1 = Path.Combine(solution, "task_1.json");
+            string task2 = Path.Combine(solution, "task_2.json");
+
+            if (!File.Exists(task1))
+            {
+                File.Create(task1).Close();
+                Console.WriteLine("Файл 'task_1.json' создан.");
+            }
+            else
+            {
+                Console.WriteLine("Файл 'task_1.json' уже существует.");
+            }
+
+            if (!File.Exists(task2))
+            {
+                File.Create(task2).Close();
+                Console.WriteLine("Файл 'task_2.json' создан.");
+            }
+            else
+            {
+                Console.WriteLine("Файл 'task_2.json' уже существует.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Папка 'Solution' уже существует.");
+        }
+    }
+
+    static char Bukva(string input)
+    {
+        Dictionary<char, int> a = new Dictionary<char, int>();
+
+        foreach (char c in input.ToLower())
+        {
+            if (char.IsLetter(c))
+            {
+                if (a.ContainsKey(c))
+                {
+                    a[c]++;
+                }
+                else
+                {
+                    a[c] = 1;
+                }
+            }
+        }
+
+        char bukva = a.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+
+        return bukva;
+    }
+    static int Palindrom(string input)
+    {
+        string[] words = input.Split(new char[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+        int palindrom = 0;
+
+        foreach (string word in words)
+        {
+            if (Pal(word))
+            {
+                palindrom++;
+            }
+        }
+
+        return palindrom;
+    }
+
+    static bool Pal(string word)
+    {
+        string reversedWord = new string(word.Reverse().ToArray());
+        return word.Length > 1 && string.Equals(word, reversedWord, StringComparison.OrdinalIgnoreCase);
+    }
+}
