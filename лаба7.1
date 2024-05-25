@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+class Participant
+{
+ private string name;
+ private int id;
+ private int best_result;
+ private int flag = 1;
+
+ public int Result { get { return best_result; } }
+ public int Flag { get { return flag; } }
+
+ public Participant(string name, int i, int res)
+    {
+        this.name = name;
+        id = i;
+        best_result = res;
+    }
+
+ public int SECOND_RES
+    {
+        set
+        {
+            if (value > best_result) best_result = value;
+        }
+    }
+
+    public void Diskfalif()
+    {
+        flag = 0;
+    }
+
+    public void Info()
+    {
+        Console.WriteLine($"результат: {best_result} имя: {name} ");
+    }
+
+}
+
+public class Program
+{
+    static Participant[] Sort(Participant[] list)
+    {
+        for (int i = 1; i < list.Length; i++)
+        {
+            int k = list[i].Result;
+            Participant now = list[i];
+            int j = i - 1;
+
+            while (j >= 0 && list[j].Result < k)
+            {
+                list[j + 1] = list[j];
+                j--;
+            }
+            list[j + 1] = now;
+        }
+        return list;
+    }
+
+
+    public static void Main(string[] args)
+    {
+        Console.Write("Введите кол-во участников: ");
+        int n = int.Parse(Console.ReadLine());
+        Participant[] peoplelist = new Participant[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Введите имя участника: ");
+            string name_people = Console.ReadLine();
+            Console.Write("Введите 1 результат участника: ");
+            int first_res = int.Parse(Console.ReadLine());
+            Console.Write("Введите 2 результат участника: ");
+            int second_res = int.Parse(Console.ReadLine());
+
+            Participant Person = new Participant(name_people, i + 1, first_res);
+            Person.SECOND_RES = second_res;
+
+            Console.WriteLine("Дисквалифицирован? Ответ: да/нет");
+            string f = Console.ReadLine();
+            if (f == "да")
+            {
+                Person.Diskfalif();
+            }
+            peoplelist[i] = Person;
+        }
+
+        peoplelist = Sort(peoplelist);
+
+        int m = 1;
+        for (int i = 0; i < n; i++)
+        {
+            if (peoplelist[i].Flag == 1)
+            {
+                Console.Write($"{m} место:"); ;
+                peoplelist[i].Info();
+                Console.WriteLine();
+                m += 1;
+            }
+        }
+        Console.WriteLine();
+    }
+}
