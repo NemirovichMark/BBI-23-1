@@ -1,136 +1,103 @@
-﻿#region 2
-/*
-using System;
+﻿using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
-public abstract class MessageEncryption
+abstract class Task
 {
-    public abstract string Encrypt(string message);
-    public abstract string Decrypt(string encryptedMessage);
+    public string Text { get; set; }
+    public Task(string text)
+    {
+        Text = text;
+    }
+
+    public abstract (string Text, Dictionary<string, string> tableCodes) ParseText();
 }
 
-public class ReverseEncryption : MessageEncryption
+class Task2 : Task
 {
-    private char[] charArray;
+    public Task2(string text) : base(text) { }
 
-    public override string Encrypt(string message)
+    public string Encrypt(string text)
     {
-        charArray = message.ToCharArray();
-        Array.Reverse(charArray);
-        return new string(charArray);
-    }
+        char[] punctuation = { '.', ',', '!', '?', ';', ':', '(', ')' };
+        StringBuilder reversed = new StringBuilder();
+        string[] words = text.Split(' ');
 
-    public override string Decrypt(string encryptedMessage)
-    {
-        charArray = encryptedMessage.ToCharArray();
-        Array.Reverse(charArray);
-        return new string(charArray);
-    }
-
-    public override string ToString()
-    {
-        return "Обратное шифрование";
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        string originalMessage = "Hello, Mark Anatolyevich!";
-
-        ReverseEncryption encryption = new ReverseEncryption();
-        string encryptedMessage = encryption.Encrypt(originalMessage);
-        Console.WriteLine($"Зашифрованное сообщение: {encryptedMessage}");
-
-        string decryptedMessage = encryption.Decrypt(encryptedMessage);
-        Console.WriteLine($"Расшифрованное сообщение: {decryptedMessage}");
-    }
-}
-*/
-#endregion
-
-#region 4
-/*
-using System;
-class Sentence
-{
-    private string _sentence;
-
-    public Sentence(string sentence)
-    {
-        _sentence = sentence;
-    }
-
-    public int CalculateComplexity()
-    {
-        if (string.IsNullOrEmpty(_sentence))
+        for (int i = 0; i < words.Length; i++)
         {
-            return 0;
-        }
+            string word = words[i];
+            int punctuationIndex = -1;
 
-        int wordCount = _sentence.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
-        int punctuationCount = 0;
-        foreach (char c in _sentence)
-        {
-            if (char.IsPunctuation(c))
+            foreach (char p in punctuation)
             {
-                punctuationCount++;
+                if (word.Contains(p))
+                {
+                    punctuationIndex = word.IndexOf(p);
+                    break;
+                }
+            }
+
+            if (punctuationIndex != -1)
+            {
+                string reversedWord = new string(word.Substring(0, punctuationIndex).ToCharArray().Reverse().ToArray());
+                reversed.Append(reversedWord + word[punctuationIndex]);
+            }
+            else
+            {
+                string reversedWord = new string(word.ToCharArray().Reverse().ToArray());
+                reversed.Append(reversedWord);
+            }
+
+            if (i < words.Length - 1)
+            {
+                reversed.Append(" ");
             }
         }
 
-        return wordCount + punctuationCount;
+        return reversed.ToString();
+    }
+
+    public string Descrypt(string text2)
+    {
+        return Encrypt(text2);
+    }
+
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
+    {
+        return (Text, null);
     }
 }
 
-class Program
+class Task6 : Task
 {
-    static void Main()
-    {
-        string sentence = "Здравству��те, всё работает!!!";
-        Sentence sentenceObj = new Sentence(sentence);
-        int complexity = sentenceObj.CalculateComplexity();
-        Console.WriteLine($"Сложность предложения: {complexity}");
-    }
-}
-*/
-#endregion
-
-#region 6 
-/*
-using System;
-using System.Text.RegularExpressions;
-
-class TextAnalyzer
-{
-    private string text;
-
-    public TextAnalyzer(string inputText)
-    {
-        text = inputText;
-    }
+    public Task6(string inputText) : base(inputText) { }
 
     public void SetText(string inputText)
     {
-        text = inputText;
+        Text = inputText;
     }
 
     public string GetText()
     {
-        return text;
+        return Text;
     }
 
     public void AnalyzeSyllables()
     {
-        string[] words = text.Split(new char[] { ' ', ',', '.', ':', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-
-        int[] syllableCount = new int[6]; // Массив для подсчета количества слов с определенным количеством слогов(это так, для себя, чтобы не защите не забыть) )
+        string[] words = Text.Split(new char[] { ' ', ',', '.', ':', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        int[] syllableCount = new int[11];
 
         foreach (string word in words)
         {
-            int count = Regex.Matches(word, "[аеёиоуыэюяaeiouy]+", RegexOptions.IgnoreCase).Count;
-            if (count <= 5)
+            int count = Regex.Matches(word, "[аеёиоуыэюя]+", RegexOptions.IgnoreCase).Count;
+            if (count <= 10)
             {
                 syllableCount[count]++;
+            }
+            else
+            {
+                syllableCount[10]++;
             }
         }
 
@@ -139,58 +106,120 @@ class TextAnalyzer
             Console.WriteLine($"Слов с {i} слогом: {syllableCount[i]}");
         }
     }
-}
 
-class Program
-{
-    static void Main()
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
     {
-        string text = "Представим, что тут написан умный длинный текст";
-
-        TextAnalyzer analyzer = new TextAnalyzer(text);
-        analyzer.AnalyzeSyllables();
+        return (Text, null);
     }
 }
-*/
-#endregion
 
-
-#region 8
-/*
-using System;
-
-class TextProcessor
+class Task8 : Task
 {
-    private string text;
-    private int maxLength;
-    private int currentIndex;
+    public List<string> lines = new List<string>();
 
-    public TextProcessor(string text, int maxLength)
+    public Task8(string text) : base(text)
     {
-        this.text = text;
-        this.maxLength = maxLength;
-        this.currentIndex = 0;
+        ParseText();
     }
 
-    public void ProcessText()
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
     {
-        while (currentIndex < text.Length)
+        string[] words = Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string line = "";
+        int lineLength = 0;
+
+        foreach (string word in words)
         {
-            if (text.Length - currentIndex <= maxLength)
+            if (lineLength + word.Length > 50)
             {
-                Console.WriteLine(text.Substring(currentIndex));
-                break;
+                string[] spacedWords = line.Trim().Split(' ');
+                int vseProbeli = 50 - line.Replace(" ", "").Length;
+                int ProbeliSlov = vseProbeli / (spacedWords.Length - 1);
+                int dopProbeli = vseProbeli % (spacedWords.Length - 1);
+                line = "";
+                for (int i = 0; i < spacedWords.Length - 1; i++)
+                {
+                    line += spacedWords[i] + new string(' ', ProbeliSlov + (i < dopProbeli ? 1 : 0));
+                }
+                line += spacedWords[spacedWords.Length - 1];
+                lines.Add(line);
+                line = "";
+                lineLength = 0;
             }
-
-            int spaceIndex = text.LastIndexOf(' ', Math.Min(currentIndex + maxLength, text.Length - 1), maxLength - 1);
-            if (spaceIndex <= currentIndex)
-            {
-                spaceIndex = currentIndex + maxLength;
-            }
-
-            Console.WriteLine(text.Substring(currentIndex, spaceIndex - currentIndex));
-            currentIndex = spaceIndex + 1;
+            line += word + " ";
+            lineLength += word.Length + 1;
         }
+        if (!string.IsNullOrEmpty(line))
+        {
+            lines.Add(line.Trim());
+        }
+        return (null, null);
+    }
+}
+
+class Task9 : Task
+{
+    public Task9(string text) : base(text) { }
+
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
+    {
+        string _text = Text.Replace(" ", "");
+
+        Dictionary<string, string> tableCodes = new Dictionary<string, string>();
+        int countOfPar = 5;
+        int counter = 0;
+        HashSet<string> letters = new HashSet<string>
+        {
+            "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+            "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]",
+            "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'",
+            "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/",
+            "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+",
+            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}",
+            "a", "s", "d", "f", "g", "h", "j", "k", "l", ":", "\"",
+            "z", "x", "c", "v", "b", "n", "m", "<", ">", "?",
+            "ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+            "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ",
+            "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э",
+            "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".",
+            "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+",
+            "Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+",
+            "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ",
+            "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э",
+            "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", ","
+        };
+
+        HashSet<string> _tmp = new HashSet<string>(letters);
+        foreach (string s in _tmp)
+        {
+            if (_text.IndexOf(s) != -1)
+                letters.Remove(s);
+        }
+
+        Dictionary<string, int> meetings = new Dictionary<string, int>();
+        for (int i = 0; i < _text.Length - 1; i++)
+        {
+            string key = _text.Substring(i, 2);
+            if (!meetings.ContainsKey(key))
+                meetings[key] = 0;
+            meetings[key] = meetings[key] + 1;
+        }
+
+        var sortedMeetings = meetings.OrderBy(pair => pair.Value).Reverse();
+        foreach (var pair in sortedMeetings)
+        {
+            if (counter >= countOfPar)
+                break;
+            Text = Text.Replace(pair.Key, letters.ElementAtOrDefault(counter));
+            tableCodes[pair.Key] = letters.ElementAtOrDefault(counter);
+            counter++;
+        }
+
+        foreach (var pair in tableCodes)
+        {
+            Console.WriteLine($"{pair.Key} - {pair.Value}");
+        }
+        return (Text, tableCodes);
     }
 }
 
@@ -198,160 +227,41 @@ class Program
 {
     static void Main()
     {
-        string text = "После твоего имени – Джеральдина – следует моя фамилия – Чаплин. С этой фамилией более сорока лет я смешил людей на земле. Но плакал я больше, нежели они смеялись." +
-            "Джеральдина, в мире, в котором ты живешь, существуют не одни только танцы и музыка! В полночь, когда ты выходишь из огромного зала, ты можешь забыть богатых поклонников, но не забывай спросить у шофера такси, который повезет тебя домой, о его жене." +
-            "И если она беременна, если у них нет денег на пеленки для будущего ребенка, положи деньги ему в карман. Но всем другим плати строго по счету." +
-            "Время от времени езди в метро или на автобусе, ходи пешком и осматривай город.Приглядывайся к людям! Смотри на вдов и сирот! И хотя бы один раз в день говори себе: «Я такая же, как они. " +
-            "С этим письмом посылаю тебе чековую книжку, чтобы ты могла тратить сколько пожелаешь. Но когда истратишь два франка, не забудь напомнить себе, что третья монета — не твоя. Она должна принадлежать незнакомому человеку, который в ней нуждается.";
+        string text = "1 июля 2015 года Греция объявила о дефолте по государственному долгу, став первой развитой страной в истории. Высокопревосходительство (для 6)";
         int maxLength = 50;
 
-        TextProcessor processor = new TextProcessor(text, maxLength);
-        processor.ProcessText();
-    }
-}
-*/
-#endregion
+        Task2 task2 = new Task2(text);
+        Console.WriteLine("Задание 2");
+        Console.WriteLine("\tТекст: ");
+        Console.WriteLine(text);
 
-#region 9
-/*
-using System;
-using System.Collections.Generic;
-class Compression
-{
-    private Dictionary<string, char> codeTable = new Dictionary<string, char>();
-    private char code = 'P';
+        Console.WriteLine("\n\tТекст зашифрован:");
+        Console.WriteLine(task2.Encrypt(text));
 
-    public void CompressText(string text)
-    {
-        for (int i = 0; i < text.Length - 1; i++)
+        Console.WriteLine("\n\tТекст расшифрован:");
+        Console.WriteLine(task2.Descrypt(task2.Encrypt(text)));
+
+        Task6 task6 = new Task6(text);
+        Console.WriteLine("Задание 6");
+        Console.WriteLine("\n\t Анализ слогов:");
+        task6.AnalyzeSyllables();
+
+        Task8 task8 = new Task8(text);
+        Console.WriteLine("Задание 8");
+        Console.WriteLine("\n\t Текст разбит по строкам:");
+        foreach (var line in task8.lines)
         {
-            string sequence = text.Substring(i, 2);
-            if (!codeTable.ContainsKey(sequence))
-            {
-                codeTable.Add(sequence, code);
-                code++;
-            }
-            i++;
+            Console.WriteLine(line);
         }
 
-        string compressedText = "";
-        for (int i = 0; i < text.Length - 1; i++)
-        {
-            string sequence = text.Substring(i, 2);
-            compressedText += codeTable[sequence];
-            i++;
-        }
-
-        Console.WriteLine("Текст до сжатия: " + text);
-        Console.WriteLine("Таблица кодов:");
-        foreach (var item in codeTable)
-        {
-            Console.WriteLine(item.Key + " : " + item.Value);
-        }
-        Console.WriteLine("Сжатый текст: " + compressedText);
+        Task9 task9 = new Task9(text);
+        Console.WriteLine("Задание 9");
+        Console.WriteLine("\n\t Таблица кодов:");
+        var result = task9.ParseText();
+        Console.WriteLine("\n\t Зашифрованный текст:");
+        Console.WriteLine(result.Text);
+     
+        
     }
 }
 
-class Program
-{
-    static void Main()
-    {
-        string text = "мама, тетерев, ветер";
-        Compression compressor = new Compression();
-        compressor.CompressText(text);
-    }
-}
-*/
-#endregion
-
-#region 10
-/*
-using System;
-using System.Collections.Generic;
-
-class CodeTable
-{
-    private Dictionary<string, char> table;
-
-    public CodeTable()
-    {
-        table = new Dictionary<string, char>();
-    }
-
-    public void AddCode(string sequence, char code)
-    {
-        if (!table.ContainsKey(sequence))
-        {
-            table.Add(sequence, code);
-        }
-    }
-
-    public string CompressText(string text)
-    {
-        string compressedText = "";
-        for (int i = 0; i < text.Length - 1; i++)
-        {
-            string sequence = text.Substring(i, 2);
-            compressedText += table[sequence];
-            i++;
-        }
-        return compressedText;
-    }
-
-    public string DecodeText(string compressedText)
-    {
-        string decodedText = "";
-        for (int i = 0; i < compressedText.Length; i++)
-        {
-            string sequence = compressedText.Substring(i, 1);
-            foreach (var pair in table)
-            {
-                if (pair.Value.ToString() == sequence)
-                {
-                    decodedText += pair.Key;
-                    break;
-                }
-            }
-        }
-        return decodedText;
-    }
-
-    public void PrintCodes()
-    {
-        Console.WriteLine("Таблица кодов:");
-        foreach (var item in table)
-        {
-            Console.WriteLine(item.Key + " : " + item.Value);
-        }
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        string text = "мама, тетерев, ветер";
-        CodeTable codeTable = new CodeTable();
-        char code = 'P';
-
-        for (int i = 0; i < text.Length - 1; i++)
-        {
-            string sequence = text.Substring(i, 2);
-            codeTable.AddCode(sequence, code);
-            code++;
-            i++;
-        }
-
-        string compressedText = codeTable.CompressText(text);
-
-        Console.WriteLine("Текст до сжатия: " + text);
-        codeTable.PrintCodes();
-        Console.WriteLine("Сжатый текст: " + compressedText);
-
-        string decodedText = codeTable.DecodeText(compressedText);
-
-        Console.WriteLine("Декодированный текст: " + decodedText);
-    }
-}
-*/
-#endregion
