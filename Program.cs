@@ -1,147 +1,269 @@
-#region 1.5
+#region 6.1.5
 using System;
-struct student
+
+namespace StudentGrades
 {
-    public string famile; public int pass; public int grade;
-}
-class Program
-{
-    static void Main()
+    class Program
     {
-        student[] students = new student[] 
+        private struct Student
         {
-            new student { famile = "Шерстобитова", pass = 5, grade = 4 },            
-            new student { famile = "Клименко", pass = 10, grade = 2 },
-            new student { famile = "Крамер  ", pass = 13, grade = 2 },            
-            new student { famile = "Рудь    ", pass = 9, grade = 2 }
-        };
-        for (int i = 0; i < students.Length - 1; i++)
-        {
-            for (int j = 0; j < students.Length - 1 - i; j++)
+            private string name;
+            private int grade;
+            private int missedClasses;
+
+            public Student(string name, int grade, int missedClasses)
             {
-                if (students[j].pass < students[j + 1].pass)
-                {
-                    student temp = students[j]; students[j] = students[j + 1]; students[j + 1] = temp;
-                }
+                this.name = name;
+                this.grade = grade;
+                this.missedClasses = missedClasses;
+            }
+
+            public string Name
+            {
+                get { return name; }
+            }
+
+            public int Grade
+            {
+                get { return grade; }
+            }
+
+            public int MissedClasses
+            {
+                get { return missedClasses; }
             }
         }
-        Console.WriteLine("Список неуспевающих студентов в порядке убывания их пропусков:");
-        Console.WriteLine("Фамилия \t" + "Пропуски \t"); Console.WriteLine();
-        for (int i = 0; i < students.Length; i++)
+
+        static void Main(string[] args)
         {
-            if (students[i].grade == 2)
+
+            Student[] students = new Student[5];
+            students[0] = new Student("Клименко", 2, 5);
+            students[1] = new Student("Радченко", 4, 2);
+            students[2] = new Student("Шерстобитова", 2, 7);
+            students[3] = new Student("Крамер", 3, 1);
+            students[4] = new Student("Рудь", 2, 3);
+
+            Console.WriteLine("Неуспевающие студенты в порядке убывания количества пропущенных занятий:");
+            PrintFailingStudents(students);
+        }
+
+        static void PrintFailingStudents(Student[] students)
+        {
+
+            Student[] failingStudents = new Student[students.Length];
+            int count = 0;
+
+
+            for (int i = 0; i < students.Length; i++)
             {
-                Console.WriteLine("{0} \t" + "{1} \t ", students[i].famile, students[i].pass);
+                if (students[i].Grade == 2)
+                {
+                    failingStudents[count] = students[i];
+                    count++;
+                }
+            }
+
+
+            for (int i = 0; i < count - 1; i++)
+            {
+                for (int j = 0; j < count - i - 1; j++)
+                {
+                    if (failingStudents[j].MissedClasses < failingStudents[j + 1].MissedClasses)
+                    {
+                        Student temp = failingStudents[j];
+                        failingStudents[j] = failingStudents[j + 1];
+                        failingStudents[j + 1] = temp;
+                    }
+                }
+            }
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Имя: {failingStudents[i].Name}, Пропущенные занятия: {failingStudents[i].MissedClasses}");
             }
         }
     }
 }
 #endregion
 
-#region 2.5
-struct competitions
+
+#region 6.2.2
+using System;
+
+namespace ExamResults
 {
-    public string name; public int meters;
-    public int[] score;
-    public int CanculateScore()
+    class Program
     {
-        for (int i = 0; i < score.Length - 1; i++)
+        private struct Student
         {
-            if (score[i] < score[i + 1])
+            private string name;
+            private int math;
+            private int physics;
+            private int russian;
+
+            public Student(string name, int math, int physics, int russian)
             {
-                int t = score[i]; score[i] = score[i + 1];
-                score[i + 1] = t;
+                this.name = name;
+                this.math = math;
+                this.physics = physics;
+                this.russian = russian;
             }
-        };
-        int totalscore = 0;
-        for (int i = 1; i < score.Length - 1; i++)
-        {
-            totalscore += score[i];
-        }
-        int dastancepoint = 60 + (meters - 120) * 2; totalscore += dastancepoint;
-        return totalscore;
-    }
-}
-class program
-{
-    static void Main()
-    {
-        competitions[] competition = new competitions[]
-        {
-            new competitions {name = "Шерстобитова", meters = 126, score = new int[] {18, 17, 16, 19, 20} },            
-            new competitions {name = "Рудь        ", meters = 132, score = new int[] {16, 20, 15, 17, 16} },
-            new competitions {name = "Букин       ", meters = 115, score = new int [] {15, 16, 14, 17, 18} },            
-            new competitions {name = "Крамер      ", meters = 133, score = new int[] {12, 16, 17, 19, 16 } },
-            new competitions {name = "Клименко    ", meters = 125, score = new int[] { 13, 15, 13, 17, 20} }        
-        };
-        for (int i = 0; i < competition.Length - 1; i++)
-        {
-            for (int j = 0; j < competition.Length - 1 - i; j++)
+
+            public string Name
             {
-                if (competition[j].CanculateScore() < competition[j + 1].CanculateScore())
+                get { return name; }
+            }
+
+            public int Math
+            {
+                get { return math; }
+            }
+
+            public int Physics
+            {
+                get { return physics; }
+            }
+
+            public int Russian
+            {
+                get { return russian; }
+            }
+
+            public double Average
+            {
+                get { return (math + physics + russian) / 3.0; }
+            }
+
+            public bool IsPassed
+            {
+                get { return math > 2 && physics > 2 && russian > 2; }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+
+            Student[] students = new Student[5];
+            students[0] = new Student("Шерстобитова", 5, 4, 3);
+            students[1] = new Student("Клименко", 2, 4, 5);
+            students[2] = new Student("Рудь", 3, 4, 4);
+            students[3] = new Student("Крамер", 5, 5, 5);
+            students[4] = new Student("Радченко", 3, 2, 3);
+
+
+            Console.WriteLine("Учащиеся, успешно сдавшие экзамены, в порядке убывания среднего балла:");
+            PrintPassedStudents(students);
+        }
+
+        static void PrintPassedStudents(Student[] students)
+        {
+            Student[] passedStudents = new Student[students.Length];
+            int count = 0;
+
+            for (int i = 0; i < students.Length; i++)
+            {
+                if (students[i].IsPassed)
                 {
-                    competitions temp = competition[j]; competition[j] = competition[j + 1];
-                    competition[j + 1] = temp;
+                    passedStudents[count] = students[i];
+                    count++;
                 }
             }
-        }
-        Console.WriteLine("Результаты совевнований: "); Console.WriteLine("Имя и Фамилия\t" + "Очки\t");
-        for (int i = 0; i < competition.Length; i++)
-        {
-            Console.WriteLine($"{i + 1}." + "{0}\t" + "{1}\t", competition[i].name, competition[i].CanculateScore());
+            for (int i = 0; i < count - 1; i++)
+            {
+                for (int j = 0; j < count - i - 1; j++)
+                {
+                    if (passedStudents[j].Average < passedStudents[j + 1].Average)
+                    {
+                        Student temp = passedStudents[j];
+                        passedStudents[j] = passedStudents[j + 1];
+                        passedStudents[j + 1] = temp;
+                    }
+                }
+            }
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine($"Имя: {passedStudents[i].Name}, Средний балл: {passedStudents[i].Average:F2}");
+            }
         }
     }
 }
 #endregion
 
-#region 3.5
+
+#region 6.3.2
 using System;
-public struct Team
+
+namespace FootballChampionship
 {
-    public string Name;
-    public int GoalsFor;
-    public int GoalsAgainst;
-    public int Wins;
-    public int Draws;
-    public int Losses;
-
-    public int CalculatePoints()
+    struct Team
     {
-        int points = Wins * 3 + Draws;
-        return points;
-    }
-
-    public int GoalDifference()
-    {
-        int goals = Math.Abs(GoalsFor - GoalsAgainst);
-        return goals;
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        Team[] teams = new Team[]
+        private string name;
+        private int points;
+        private int goalsFor;
+        private int goalsAgainst;
+        public Team(string name)
         {
-            new Team { Name = "Сморчи", GoalsFor = 10, GoalsAgainst = 5, Wins = 3, Draws = 1, Losses = 1 },
-            new Team { Name = "КардиБишники", GoalsFor = 8, GoalsAgainst = 7, Wins = 2, Draws = 3, Losses = 0 },
-            new Team { Name = "Генералы", GoalsFor = 12, GoalsAgainst = 4, Wins = 4, Draws = 0, Losses = 1 }
-        };
-
-        for (int i = 0; i < teams.Length - 1; i++)
+            this.name = name;
+            this.points = 0;
+            this.goalsFor = 0;
+            this.goalsAgainst = 0;
+        }
+        public string Name
         {
-            for (int j = 0; j < teams.Length - 1 - i; j++)
+            get { return name; }
+        }
+        public int Points
+        {
+            get { return points; }
+        }
+        public void UpdateResults(int goalsFor, int goalsAgainst)
+        {
+            this.goalsFor += goalsFor;
+            this.goalsAgainst += goalsAgainst;
+            if (goalsFor > goalsAgainst)
             {
-                if (teams[j].CalculatePoints() < teams[j + 1].CalculatePoints())
+                points += 3; // Победа
+            }
+            else if (goalsFor == goalsAgainst)
+            {
+                points += 1; // Ничья
+            }
+        }
+
+        public int GoalDifference()
+        {
+            return goalsFor - goalsAgainst;
+        }
+    }
+
+    class Championship
+    {
+        private Team[] teams;
+
+        public Championship(string[] teamNames)
+        {
+            teams = new Team[teamNames.Length];
+            for (int i = 0; i < teamNames.Length; i++)
+            {
+                teams[i] = new Team(teamNames[i]);
+            }
+        }
+
+        public void PlayMatch(int team1Index, int team2Index, int team1Goals, int team2Goals)
+        {
+            teams[team1Index].UpdateResults(team1Goals, team2Goals);
+            teams[team2Index].UpdateResults(team2Goals, team1Goals);
+        }
+
+        public void SortTeams()
+        {
+            for (int i = 0; i < teams.Length - 1; i++)
+            {
+                for (int j = 0; j < teams.Length - i - 1; j++)
                 {
-                    Team temp = teams[j];
-                    teams[j] = teams[j + 1];
-                    teams[j + 1] = temp;
-                }
-                if (teams[j].CalculatePoints() == teams[j + 1].CalculatePoints())
-                {
-                    if (teams[j].GoalDifference() < teams[j + 1].GoalDifference())
+                    if (teams[j].Points < teams[j + 1].Points ||
+                        (teams[j].Points == teams[j + 1].Points && teams[j].GoalDifference() < teams[j + 1].GoalDifference()))
                     {
                         Team temp = teams[j];
                         teams[j] = teams[j + 1];
@@ -150,12 +272,29 @@ class Program
                 }
             }
         }
-        Console.WriteLine("Таблица результатов:");
-        Console.WriteLine("Команда   \t" + "Очки\t");
-        Console.WriteLine();
-        for (int i = 0; i < teams.Length; i++)
+        public void PrintTable()
         {
-            Console.WriteLine($"{i + 1} " + "{0}\t" + "{1}\t", teams[i].Name, teams[i].CalculatePoints());
+            Console.WriteLine("Место\tКоманда\tОчки");
+            for (int i = 0; i < teams.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}\t{teams[i].Name}\t{teams[i].Points}");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] teamNames = { "Сморчи", "БалБИсы", "Фанатки" };
+            Championship championship = new Championship(teamNames);
+            // Проведение матчей
+            championship.PlayMatch(0, 1, 2, 1); // Сморчи vs БалБИсы
+            championship.PlayMatch(0, 2, 1, 3); // Сморчи vs Фанатки
+            championship.PlayMatch(1, 2, 0, 0); // БалБИсы vs Фанатки
+
+            championship.SortTeams();
+            championship.PrintTable();
         }
     }
 }
