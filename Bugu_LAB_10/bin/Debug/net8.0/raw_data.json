@@ -1,0 +1,197 @@
+[
+  {
+    "Name": "Garage 1",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Petrol",
+        "MaxSpeed": 180.0,
+        "Name": "Жигули",
+        "Speed": 60.0,
+        "Width": 2.0,
+        "Length": 3.0,
+        "Area": 6.0
+      },
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Diesel",
+        "MaxSpeed": 200.0,
+        "Name": "БМВ",
+        "Speed": 70.0,
+        "Width": 2.1,
+        "Length": 3.1,
+        "Area": 6.510000000000001
+      },
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 10000.0,
+        "NumberOfWheels": 4,
+        "MaxSpeed": 120.0,
+        "Name": "Вольво",
+        "Speed": 50.0,
+        "Width": 3.0,
+        "Length": 6.0,
+        "Area": 18.0
+      }
+    ]
+  },
+  {
+    "Name": "Garage 2",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Petrol",
+        "MaxSpeed": 180.0,
+        "Name": "Жигули",
+        "Speed": 60.0,
+        "Width": 2.0,
+        "Length": 3.0,
+        "Area": 6.0
+      },
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Diesel",
+        "MaxSpeed": 200.0,
+        "Name": "БМВ",
+        "Speed": 70.0,
+        "Width": 2.1,
+        "Length": 3.1,
+        "Area": 6.510000000000001
+      },
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 10000.0,
+        "NumberOfWheels": 4,
+        "MaxSpeed": 120.0,
+        "Name": "Вольво",
+        "Speed": 50.0,
+        "Width": 3.0,
+        "Length": 6.0,
+        "Area": 18.0
+      }
+    ]
+  },
+  {
+    "Name": "Garage 3",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Petrol",
+        "MaxSpeed": 180.0,
+        "Name": "Жигули",
+        "Speed": 60.0,
+        "Width": 2.0,
+        "Length": 3.0,
+        "Area": 6.0
+      },
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Diesel",
+        "MaxSpeed": 200.0,
+        "Name": "БМВ",
+        "Speed": 70.0,
+        "Width": 2.1,
+        "Length": 3.1,
+        "Area": 6.510000000000001
+      },
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 10000.0,
+        "NumberOfWheels": 4,
+        "MaxSpeed": 120.0,
+        "Name": "Вольво",
+        "Speed": 50.0,
+        "Width": 3.0,
+        "Length": 6.0,
+        "Area": 18.0
+      }
+    ]
+  },
+  {
+    "Name": "Garage 4",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Petrol",
+        "MaxSpeed": 180.0,
+        "Name": "Жигули",
+        "Speed": 60.0,
+        "Width": 2.0,
+        "Length": 3.0,
+        "Area": 6.0
+      },
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Diesel",
+        "MaxSpeed": 200.0,
+        "Name": "БМВ",
+        "Speed": 70.0,
+        "Width": 2.1,
+        "Length": 3.1,
+        "Area": 6.510000000000001
+      },
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 10000.0,
+        "NumberOfWheels": 4,
+        "MaxSpeed": 120.0,
+        "Name": "Вольво",
+        "Speed": 50.0,
+        "Width": 3.0,
+        "Length": 6.0,
+        "Area": 18.0
+      }
+    ]
+  },
+  {
+    "Name": "Garage 5",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Petrol",
+        "MaxSpeed": 180.0,
+        "Name": "Жигули",
+        "Speed": 60.0,
+        "Width": 2.0,
+        "Length": 3.0,
+        "Area": 6.0
+      },
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Diesel",
+        "MaxSpeed": 200.0,
+        "Name": "БМВ",
+        "Speed": 70.0,
+        "Width": 2.1,
+        "Length": 3.1,
+        "Area": 6.510000000000001
+      },
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 10000.0,
+        "NumberOfWheels": 4,
+        "MaxSpeed": 120.0,
+        "Name": "Вольво",
+        "Speed": 50.0,
+        "Width": 3.0,
+        "Length": 6.0,
+        "Area": 18.0
+      }
+    ]
+  }
+]

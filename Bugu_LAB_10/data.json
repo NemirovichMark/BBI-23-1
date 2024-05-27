@@ -1,0 +1,183 @@
+[
+    {
+      "Name": "Garage 1",
+      "Area": 500,
+      "Vehicles": [
+        {
+          "$type": "Namespace.Car, AssemblyName",
+          "Name": "Car1",
+          "Speed": 100,
+          "Width": 2.0,
+          "Length": 4.5,
+          "NumberOfDoors": 4,
+          "FuelType": "Gasoline",
+          "MaxSpeed": 180
+        },
+        {
+          "$type": "Namespace.Truck, AssemblyName",
+          "Name": "Truck1",
+          "Speed": 80,
+          "Width": 2.5,
+          "Length": 6.0,
+          "LoadCapacity": 12000,
+          "NumberOfWheels": 8,
+          "MaxSpeed": 120
+        },
+        {
+          "$type": "Namespace.Motorcycle, AssemblyName",
+          "Name": "Motorcycle1",
+          "Speed": 120,
+          "Width": 0.8,
+          "Length": 2.0,
+          "HasSidecar": false,
+          "Type": "Sport",
+          "MaxSpeed": 220
+        }
+      ]
+    },
+    {
+      "Name": "Garage 2",
+      "Area": 500,
+      "Vehicles": [
+        {
+          "$type": "Namespace.Car, AssemblyName",
+          "Name": "Car2",
+          "Speed": 90,
+          "Width": 2.0,
+          "Length": 4.0,
+          "NumberOfDoors": 4,
+          "FuelType": "Diesel",
+          "MaxSpeed": 170
+        },
+        {
+          "$type": "Namespace.Truck, AssemblyName",
+          "Name": "Truck2",
+          "Speed": 70,
+          "Width": 2.6,
+          "Length": 7.0,
+          "LoadCapacity": 15000,
+          "NumberOfWheels": 10,
+          "MaxSpeed": 110
+        },
+        {
+          "$type": "Namespace.Motorcycle, AssemblyName",
+          "Name": "Motorcycle2",
+          "Speed": 110,
+          "Width": 0.9,
+          "Length": 2.1,
+          "HasSidecar": true,
+          "Type": "Cruiser",
+          "MaxSpeed": 200
+        }
+      ]
+    },
+    {
+      "Name": "Garage 3",
+      "Area": 500,
+      "Vehicles": [
+        {
+          "$type": "Namespace.Car, AssemblyName",
+          "Name": "Car3",
+          "Speed": 120,
+          "Width": 2.1,
+          "Length": 4.2,
+          "NumberOfDoors": 2,
+          "FuelType": "Electric",
+          "MaxSpeed": 200
+        },
+        {
+          "$type": "Namespace.Truck, AssemblyName",
+          "Name": "Truck3",
+          "Speed": 75,
+          "Width": 2.4,
+          "Length": 6.5,
+          "LoadCapacity": 13000,
+          "NumberOfWheels": 6,
+          "MaxSpeed": 115
+        },
+        {
+          "$type": "Namespace.Motorcycle, AssemblyName",
+          "Name": "Motorcycle3",
+          "Speed": 115,
+          "Width": 1.0,
+          "Length": 2.3,
+          "HasSidecar": false,
+          "Type": "Touring",
+          "MaxSpeed": 210
+        }
+      ]
+    },
+    {
+      "Name": "Garage 4",
+      "Area": 500,
+      "Vehicles": [
+        {
+          "$type": "Namespace.Car, AssemblyName",
+          "Name": "Car4",
+          "Speed": 110,
+          "Width": 2.2,
+          "Length": 4.1,
+          "NumberOfDoors": 5,
+          "FuelType": "Hybrid",
+          "MaxSpeed": 190
+        },
+        {
+          "$type": "Namespace.Truck, AssemblyName",
+          "Name": "Truck4",
+          "Speed": 65,
+          "Width": 2.7,
+          "Length": 7.2,
+          "LoadCapacity": 14000,
+          "NumberOfWheels": 12,
+          "MaxSpeed": 100
+        },
+        {
+          "$type": "Namespace.Motorcycle, AssemblyName",
+          "Name": "Motorcycle4",
+          "Speed": 105,
+          "Width": 0.9,
+          "Length": 2.2,
+          "HasSidecar": true,
+          "Type": "Adventure",
+          "MaxSpeed": 205
+        }
+      ]
+    },
+    {
+      "Name": "Garage 5",
+      "Area": 500,
+      "Vehicles": [
+        {
+          "$type": "Namespace.Car, AssemblyName",
+          "Name": "Car5",
+          "Speed": 130,
+          "Width": 2.3,
+          "Length": 4.3,
+          "NumberOfDoors": 3,
+          "FuelType": "Electric",
+          "MaxSpeed": 210
+        },
+        {
+          "$type": "Namespace.Truck, AssemblyName",
+          "Name": "Truck5",
+          "Speed": 85,
+          "Width": 2.8,
+          "Length": 7.5,
+          "LoadCapacity": 16000,
+          "NumberOfWheels": 14,
+          "MaxSpeed": 125
+        },
+        {
+          "$type": "Namespace.Motorcycle, AssemblyName",
+          "Name": "Motorcycle5",
+          "Speed": 125,
+          "Width": 1.1,
+          "Length": 2.5,
+          "HasSidecar": false,
+          "Type": "Sport",
+          "MaxSpeed": 230
+        }
+      ]
+    }
+  ]
+  

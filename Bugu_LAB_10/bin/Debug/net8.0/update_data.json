@@ -1,0 +1,62 @@
+[
+  {
+    "Name": "Garage 1",
+    "Area": 500.0,
+    "Vehicles": []
+  },
+  {
+    "Name": "Garage 2",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Car, VehicleApp",
+        "NumberOfDoors": 4,
+        "FuelType": "Electric",
+        "MaxSpeed": 150.0,
+        "Name": "Car3",
+        "Speed": 60.0,
+        "Width": 2.5,
+        "Length": 3.5,
+        "Area": 8.75
+      },
+      {
+        "$type": "Motorcycle, VehicleApp",
+        "HasSidecar": false,
+        "Type": "Touring",
+        "MaxSpeed": 240.0,
+        "Name": "Motorcycle3",
+        "Speed": 100.0,
+        "Width": 1.2,
+        "Length": 2.7,
+        "Area": 3.24
+      }
+    ]
+  },
+  {
+    "Name": "Garage 3",
+    "Area": 500.0,
+    "Vehicles": [
+      {
+        "$type": "Truck, VehicleApp",
+        "LoadCapacity": 15000.0,
+        "NumberOfWheels": 6,
+        "MaxSpeed": 100.0,
+        "Name": "Truck3",
+        "Speed": 60.0,
+        "Width": 3.5,
+        "Length": 7.0,
+        "Area": 24.5
+      }
+    ]
+  },
+  {
+    "Name": "Garage 4",
+    "Area": 500.0,
+    "Vehicles": []
+  },
+  {
+    "Name": "Garage 5",
+    "Area": 500.0,
+    "Vehicles": []
+  }
+]

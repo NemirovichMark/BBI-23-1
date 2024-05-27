@@ -1,0 +1,17 @@
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.csproj.AssemblyReference.cache
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.AssemblyInfoInputs.cache
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.AssemblyInfo.cs
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.csproj.CoreCompileInputs.cache
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\VehicleApp.exe
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\VehicleApp.deps.json
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\VehicleApp.runtimeconfig.json
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\VehicleApp.dll
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\VehicleApp.pdb
+C:\Users\liufa\Documents\VehicleApp\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.csproj.Up2Date
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.dll
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\refint\VehicleApp.dll
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.pdb
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\VehicleApp.genruntimeconfig.cache
+C:\Users\liufa\Documents\VehicleApp\obj\Debug\net8.0\ref\VehicleApp.dll
