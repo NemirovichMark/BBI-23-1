@@ -1,254 +1,78 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace lab8_rework_alekseev
+﻿// Создайте структуру Profession с полями для сферы (медицина макетинг IT и тд), уникального УИД, размер заработной платы, описание(не менее 20 и не более 50 символов).Реализуйте метод вывода информации о профессии.Реализуйте метод для изменения описания професии. В конструктор передавать все поля крое УИД, В основной программе создайте имассив из 5 профессий Измините описание самой прибыльной професии. Отсортируйте их по убыванию размера зп и выведите их в консоль
+class Profession
 {
-    abstract class Task
-    {
-        protected string Text = "";
+    protected string _sphere;
+    protected Guid _uid;
+    protected decimal _salary;
+    public string Description;
 
-        public Task(string text)
-        {
-            Text = text;
-        }
+    public Profession(string sphere, decimal salary, string description)
+    {
+        _salary= salary;
+        _sphere= sphere;
+        _uid= Guid.NewGuid();
+
+        if (description.Length >= 20 && description.Length <= 50)
+            Description = description;
+        else
+            Console.WriteLine("Описание должно быть от 20 до 50 символов"); 
     }
 
-    class Task_2 : Task
+
+    public string Sphere { get { return _sphere;} }
+    public decimal Salary { get { return _salary;} }
+    public void ChangeDescription(string newDescription)
     {
-        public Task_2(string text) : base(text)
-        {
-            Text = text;
-        }
-
-        public override string ToString()
-        {
-            return ($"Зашифрованное : {Message(Text)}, Расшифрованное : {DecryptMessage(Message(Text))}");
-        }
-
-        public string Message(string text)
-        {
-            string encryptedText = EncryptMessage(text);
-            return encryptedText;
-        }
-        protected string pattern = @"(\b\w+\b|\s|[.,!?;:])";
-        protected string EncryptMessage(string text)
-        {
-            string[] messageParts = Regex.Split(text, pattern);
-            for (int i = 0; i < messageParts.Length; i++)
-            {
-                messageParts[i] = ReverseString(messageParts[i]);
-            }
-            return string.Join("", messageParts);
-        }
-
-        protected string DecryptMessage(string encryptedText)
-        {
-            string[] words = Regex.Split(encryptedText, pattern);
+        if (newDescription.Length >= 20 && newDescription.Length <= 50)
             
-            StringBuilder decryptText = new StringBuilder(); // для хранения разобранного текста 
-            foreach(string word in words)
-            {
-                string decryptWords = ReverseString(word);
-                decryptText.Append(decryptWords);
-
-            }
-            return decryptText.ToString();
-        }
-
-        protected string ReverseString(string input)
-        {
-            char[] charArray = input.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
-        }
+            Description = newDescription;
+        else
+            Console.WriteLine("Описание должно быть от 20 до 50 символов"); 
     }
-    class Task_4 : Task
+    public  void Print()
     {
-        public Task_4(string text) : base(text) { Text = text; }
-
-        public override string ToString()
-        {
-            return $"Сложность {Complexity()}";
-        }
-        public int Complexity()
-        {
-            return CalculateSentenceComplexity(Text);
-        }
-
-
-        protected int CalculateSentenceComplexity(string text)
-        {
-            string pattern = @"\w+|[^\w\s]";
-            MatchCollection matches = Regex.Matches(text, pattern);
-
-            int complexity = matches.Count;
-            return complexity;
-        }
+        Console.WriteLine($"Sphere: {_sphere}, UUID: {_uid}, Salary: {_salary}, Description: {Description}"); 
     }
+}
 
-    class Task_5 : Task
+class Program
+{
+    static void Main(string[] args)
     {
-        public Task_5(string text) : base(text) { Text = text; }
-        public override string ToString()
+        var professions = new Profession[]
         {
-            return string.Join(", ", LetterCounter(Text));
+            new Profession("Медицина",  1000000, "Врач уйу ао фыв  ыфв  ше  фыдыф вжд "),
+            new Profession("Макетинг", 800000, "Дизайнер вф qweeqывф ыфцйу кйцу йw"),
+            new Profession("IT", 1200000, "Программист eeeeeзщфызвщфзыщвфывлwada"),
+            new Profession("Финансы", 1500000, "Аналитик яeчсииавп awdwa dad wad ad "),
+            new Profession("Право", 900000, "Юрист 7912739187329218390 dawda w wadwa")
+        };
+
+        
+        
+        Sort(professions);
+        professions[0].ChangeDescription("Эксперт в своей области просто класс 1");
+    
+        foreach (var profession in professions)
+        {
+            profession.Print();
         }
-        public IEnumerable<KeyValuePair<char, int>> LetterCounter (string text) 
+        static void Sort(Profession[] array)
         {
-            text = text.ToLower();
-            string[] words = text.Split(new char[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-
-            char[] firstLetter = new char[words.Length];
-
-            for(int i =0; i < words.Length; i++)
+            int n = array.Length;
+            for (int i = 0; i < n - 1; i++)
             {
-                firstLetter[i] = words[i][0];
-            }
-            Dictionary<char, int> lettercounter = new Dictionary<char, int>();
-            foreach(var letter in firstLetter)
-            {
-                if (lettercounter.ContainsKey(letter))
+                for (int j = 0; j < n - i - 1; j++)
                 {
-                    lettercounter[letter]++;
-                }
-                else
-                {
-                    lettercounter[letter] = 1;
+                    if (array[j].Salary < array[j + 1].Salary)
+                    {
+                        
+                        Profession temp = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = temp;
+                    }
                 }
             }
-
-            var sortedLetters = lettercounter.OrderByDescending(x =>x.Value).Select(x => new KeyValuePair<char, int>(x.Key, x.Value)).ToList();
-
-            return sortedLetters;
-            
-        }
-
-    }
-
-    class Task_7 : Task
-    {
-        public Task_7(string text) : base (text ) { Text = text.ToLower(); }
-
-        public override string ToString()
-        {
-            return Sequence(Text).ToString();
-        }
-        public string Sequence (string text)
-        {
-            text = text.ToLower();
-            string[] words = text.Split(new char[] { ' ', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-             Console.WriteLine("Задайте последовательность букв, которую нужно найти :");
-             string sequence = Console.ReadLine().ToLower();
-            //string sequence = "дет";
-            string[] matchingWords = new string[words.Length]; 
-            int count = 0;
-
-            foreach (string word in words)
-            {
-                if (word.Contains(sequence))
-                {
-                    matchingWords[count] = word;
-                    count++;
-                }
-            }
-            if (count > 0)
-            {
-                return string.Join(", ", matchingWords.Take(count).ToArray());  
-            }
-            else
-            {
-                return "Ничего не смогли найти, попробуйте другое";
-            }
-            
-        }
-    }
-
-    class Task_11 : Task
-    {
-        public Task_11(string text) : base (text ) { Text = text; }
-        public override string ToString()
-        {
-            return SortedSurname(Text).ToString();
-        }
-        public string SortedSurname(string text)
-        {
-            string[] strings = text.Split(',');
-            string[] sortedStrings = strings.OrderBy(s => s).ToArray();
-
-            string sortedSurnamelist = string.Join(",", sortedStrings);
-            return sortedSurnamelist;
-        }
-    }
-
-    class Task_14 : Task
-    {
-        public Task_14(string text) : base (text ) {Text = text ;}
-
-        public override string ToString()
-        {
-            return CounterNumbers(Text).ToString();
-        }
-        public int CounterNumbers(string text)
-        {
-            int counter = 0;
-            string[] words = text.Split(' ');
-            foreach (string word in words)
-            {
-                if(int.TryParse(word, out int number))
-                {
-                    counter+=number;
-                }
-            }
-            return counter;
-        }
-    }
-
-
-
-
-
-
-
-    internal class Program
-    {
-        static void Main()
-        {
-            Console.WriteLine("1 задание :");
-            Task_2 task2 = new Task_2("Дождь. Чёрная листва. Снова весна, зима уже позади. Жёлтые, красные, розовые бутоны – разбросанные краски по всему саду. Густая трава, закрытая калитка, тихий шум ветра.");
-            Console.WriteLine(task2);
-
-            Console.WriteLine("2 задание :");
-            Task_4 task4 = new Task_4("Прекрасная пора и майский день дождливый. Сижу у окна и чувствую аромат.\r\n      Я вспоминаю с радостью сегодняшнюю встречу, и сердце бьётся в упоении. Слышу голос, смотрю на букет. Я в эйфории! Снова вдыхаю запах сирени. Вчитываюсь в письмо.\r\n       После замираю. Ошибка в имени. Одна буква. Письмо сестре!\r\n       Мгновенно выступившие слёзы.");
-            Console.WriteLine(task4);
-
-            Console.WriteLine("3 задание :");
-            Task_5 task5 = new Task_5("Утром в низинах расстилался туман. Но вот из-за горизонта появляются солнце, и его лучи съедают серую пелену тумана.     Солнце поднимается выше и разбрасывает свои лучи по необъятным полям желтой пшеницы верхушкам далекого леса.     На расстоянии километра от леса замечаешь блестящую на солнце поверхность озера. В неё впадает извилистая речонка. Мы направляемся к ней.");
-            Console.WriteLine(task5);
-
-            Console.WriteLine("4 задание :");
-            Task_7 task7 = new Task_7("Коля и Лёня ехали в лифте. Внезапно свет погас и лифт остановился. Кабина застыла на месте. Дети оказались в полной темноте, одни в маленькой тесной кабине. Коля и Лёня испугались. Они стали звать соседей. Тут свет вспыхнул, и кабина поехала. Но несколько минут в тёмном лифте показались детям удивительно длинными.");
-            Console.WriteLine(task7);
-
-            Console.WriteLine("5 задание :");
-            Task_11 task11 = new Task_11("Иванов,Алексеев,Кузьмин,Совельев,Кайдорин");
-            Console.WriteLine(task11);
-
-            Console.WriteLine("6 задание :");
-            Task_14 task14 = new Task_14("Вселенная, в которой мы живём, имеет возраст около 4 миллиардов лет. Солнце, наша звезда, имеет диаметр около 3 миллиона километров. Расстояние от Земли до Солнца составляет 7 миллионов километров.");
-            Console.WriteLine(task14);
-
-
-            Console.ReadKey();
         }
     }
 }
