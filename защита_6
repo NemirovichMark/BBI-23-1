@@ -1,0 +1,120 @@
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+struct Sportsman
+{
+    private string name;
+    private double jump1;
+    private double jump2;
+    private double jump3;
+    private double jump4;
+
+    public Sportsman(string name, double one, double two, double three, double four)
+    {
+        this.name = name;
+        jump1 = one;
+        jump2 = two;
+        jump3 = three;
+        jump4 = four;
+    }
+
+
+    public double End_result()
+    {
+        return jump1 + jump2 + jump3 + jump4;
+    }
+
+    public void Info()
+    {
+        Console.WriteLine($"результат: {jump1 + jump2 + jump3 + jump4} имя: {name} ");
+    }
+}
+
+public class Program
+{
+
+    public static int[] SortedGolosa(int[] list, int n)
+    {
+        for (int i = 1; i < n; i++)
+        {
+            for (int j = 0; j < n - i; j++)
+            {
+                if (list[j + 1] > list[j])
+                {
+                    int now = list[j];
+                    list[j] = list[j + 1];
+                    list[j + 1] = now;
+                }
+            }
+        }
+        return list;
+    }
+
+    static Sportsman[] Sort(Sportsman[] list)
+    {
+        for (int i = 0; i < list.Length; i++)
+        {
+            Sportsman key = list[i];
+            int j = i - 1;
+            while (j >= 0 && list[j].End_result() < key.End_result())
+            {
+                list[j + 1] = list[j];
+                j--;
+            }
+            list[j + 1] = key;
+        }
+        return list;
+    }
+
+
+    public static void Main(string[] args)
+    {
+        Console.Write($"Введите кол-во игроков:");
+        int n = int.Parse(Console.ReadLine());
+        Sportsman[] peoplelist = new Sportsman[n];
+        int h = 1;
+        
+        for (int i = 0; i < n; i++) //каждый спортсмен
+        {
+            Console.Write($"Введите имя:");
+            string name_people = Console.ReadLine();
+            double[] result_jumps = new double[4];
+            for (int j = 0; j < 4; j++) //для каждого прыжка
+            {
+                Console.Write($"Введите коэф-нт сложности прыжка :"); 
+                double index = double.Parse(Console.ReadLine()); //коэф сложности этого прыжка
+                Console.WriteLine($"Введите голоса судей дла прыжка:");
+                int[] golosa = new int[7]; //голоса семи судей
+                for (int s = 0; s < 7; s++)
+                {
+                    int golos = int.Parse(Console.ReadLine());
+                    golosa[s] = golos;
+                    
+                }
+                golosa = SortedGolosa(golosa, 7); //сортировка голосов
+                int sum_golos = 0;
+                for (int k = 1; k < 6; k++)
+                {
+                    sum_golos += golosa[k];
+                }
+
+                result_jumps[j] = sum_golos * index; //записываем итоговый результат прыжка спортсмену
+            }
+
+            Sportsman person = new Sportsman(name_people, result_jumps[0], result_jumps[1], result_jumps[2], result_jumps[3]);
+            peoplelist[i] = person;
+        }
+
+        peoplelist = Sort(peoplelist);
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"{i + 1} место: "); ;
+            peoplelist[i].Info();
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+    }
+}
