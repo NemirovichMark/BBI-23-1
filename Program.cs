@@ -1,127 +1,94 @@
 ﻿using System;
 
-abstract class Task
+public class Program
 {
-    protected string text;
-    public Task(string text)
+    struct Ychastnik
     {
-        this.text = text;
-    }
-    protected abstract void ParseText(string text);
-}
+        private string name;
+        private int id;
+        private int _bestres;
 
-class Task_1 : Task
-{
-    public Task_1(string text) : base(text)
-    {
-        ParseText(text);
-    }
-    public override string ToString()
-    {
-        return text;
-    }
-    private string Find_long(string text)
-    {
-        string[] symb = new string[] { ".", "!", "?" };
-        for (int i = 0; i < symb.Length; i++)
+        public int Result { get { return _bestres; } }
+
+        public Ychastnik(string name, int i, int bestres)
         {
-            text = text.Replace(symb[i], "&&");
+            this.name = name;
+            id = i;
+            _bestres = bestres;
         }
-        text += " ";
-        string[] lines = text.Split("&& ");
-        string line = "";
-        int longline = 0;
-        for (int j = 0; j < lines.Length; j++)
+
+        public int ressec
         {
-            if (lines[j].Length > longline)
+            get { return _bestres; }
+            set
             {
-                line = lines[j];
-                longline = lines[j].Length;
+                if (value > _bestres) _bestres = value;
             }
         }
-        return line;
 
-    }
-
-    protected override void ParseText(string text)
-    {
-        this.text = Find_long(text);
-    }
-}
-
-class Program
-{
-    public static void Main()
-    {
-        Task_1 task1 = new Task_1("Привет! я самое длинное предложение. а ты?");
-        Console.WriteLine(task1);
-
-    }
-}
-////
-class Task_2 : Task
-{
-    public Task_2(string text) : base(text)
-    {
-        ParseText(text);
-    }
-    public override string ToString()
-    {
-        return text;
-    }
-    private char Find_word(string text)
-    {
-        string[] words = text.Split(" ");
-        char[] best = new char[words.Length];
-        int[] count = new int[words.Length];
-        int idd = 0;
-        for (int j = 0; j < words.Length; j++)
+        public void Info()
         {
-            bool f = false;
-            for (int i = 0; i < best.Length; i++)
+            Console.WriteLine($"результат: {_bestres} имя участника: {name} ");
+        }
+
+    }
+
+    static Ychastnik[] GnomeSort(Ychastnik[] list)
+    {
+        int i = 1;
+        int j = 2;
+
+        while (i < list.Length)
+        {
+            if (list[i - 1].Result <= list[i].Result)
             {
-                if (words[j][0] == best[i])
+                i = j;
+                j++;
+            }
+            else
+            {
+                Ychastnik tmp = list[i - 1];
+                list[i - 1] = list[i];
+                list[i] = tmp;
+                i--;
+                if (i == 0)
                 {
-                    count[i] += 1;
-                    f = true;
-                    break;
+                    i = j;
+                    j++;
                 }
             }
-            if (!f)
-            {
-                best[idd] = words[j][0];
-                count[idd] = 1;
-                idd++;
-            }
         }
-
-        int l = 0;
-        char sym = '-';
-        for (int j = 0; j <= count.Length; j++)
-        {
-            if (count[j] > l)
-            {
-                l = count[j];
-                sym = best[j];
-            }
-        }
-        return sym;
-
+        return list;
     }
 
-    protected override void ParseText(string text)
+    public static void Main(string[] args)
     {
-        char n = Find_word(text);
-        string s = "";
-        string[] m = text.Split(" ");
-        for (int i = 0; i < m.Length
-          ; i++)
+        int n = int.Parse(Console.ReadLine());
+        Ychastnik[] peoplelist = new Ychastnik[n];
+
+        for (int i = 0; i < n; i++)
         {
-            if (m[i][0] == n)
-            {
-                s += m[i] + " ";
-            }
+            string name_people = Console.ReadLine();
+            int firstres = int.Parse(Console.ReadLine());
+            int secondres = int.Parse(Console.ReadLine());
+
+            Ychastnik Person = new Ychastnik(name_people, i + 1, firstres);
+            Person.ressec = secondres;
+
+            peoplelist[i] = Person;
         }
-        this.text = s;
+
+        peoplelist = GnomeSort(peoplelist);
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"{i + 1} занятое место: ");
+            peoplelist[i].Info();
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+        Console.ReadLine();
     }
 }
+
+
