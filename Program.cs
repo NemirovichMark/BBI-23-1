@@ -1,153 +1,152 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
+using System.IO;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace Lab7_1
+public abstract class Task
 {
-    public class Sportwoman
+
+    protected string _text = "No text here yet";
+    public string Text
     {
-        private string _surname;
-        private int _group;
-        private string _trainerName;
-        private int _sec;
-
-        public int Sec
-        {
-            get { return _sec; }
-            set
-            {
-                if (value > 0)
-                    _sec = value;
-            }
-        }
-
-        public Sportwoman(string surname, int group, string trainerName, int sec)
-        {
-            _surname = surname;
-            _group = group;
-            _trainerName = trainerName;
-            _sec = sec;
-        }
-        public void ShowInfo()
-        {
-            Console.WriteLine($"Фамилия: {_surname}, группа: {_group}, имя тренера: {_trainerName}, результат: {_sec} секунд");
-        }
-
+        get => _text;
+        protected set => _text = value;
     }
-    abstract class Competition
+    [JsonConstructor]
+    public Task(string text)
     {
-        protected string _competitionName;
-        protected Sportwoman[] _sportwomen;
-        public Competition(string competitionName, Sportwoman[] sportwomen)
+        _text = text;
+    }
+}
+
+public class Task1 : Task
+{
+
+    private int[] _data;
+    public int[] Data
+    {
+        get => _data;
+        private set => _data = value;
+    }
+    [JsonConstructor]
+    public Task1(string text) : base(text)
+    {
+        _data = Count();
+    }
+    public int[] Count()
+    {
+        int[] data = new int[] { 0, 0, 0,0 };
+        for (int i = 0; i < _text.Length; i++)
         {
-            _competitionName = competitionName;
-            _sportwomen = sportwomen;
+            if (char.IsLetter(_text[i])) data[0]++;
+            else if (char.IsDigit(_text[i])) data[1]++;
+            else if (char.IsPunctuation(_text[i])) data[2]++;
+            else if (char.IsWhiteSpace(_text[i])) data[3]++;
         }
-        private static void quickSort(Sportwoman[] table, int left, int right)
+        return data;
+    }
+    public override string ToString()
+    {
+        return $"{_data[0]}, {_data[1]}, {_data[2]}, {_data[3]}";
+    }
+}
+
+public class Task2 : Task
+{
+    
+    [JsonConstructor]
+    public Task2(string text) : base(text)
+    {
+        
+    }
+
+    public override string ToString()
+    {
+        return Edit();
+    }
+
+    private string Edit()
+    {
+        string newText = "";
+        for (int i = 0; i < _text.Length; i++)
         {
-            if (left >= right) return;
-            int p = table[(left + right) / 2].Sec;
-            int i = left;
-            int j = right;
-            while (i <= j)
+            if (_text[i] >= 'а' && _text[i] <= 'я')
             {
-                while (table[i].Sec < p) i++;
-                while (table[j].Sec > p) j--;
-                if (i <= j)
+                if (_text[i] < 'о')
                 {
-                    Sportwoman a = table[i];
-                    table[i] = table[j];
-                    table[j] = a;
-                    i++;
-                    j--;
+                    int t = _text[i] - 'а';
+                    newText += (char)('я' - 14 + t);
                 }
+                else newText += (char)(_text[i] - 15);
             }
-            quickSort(table, left, j);
-            quickSort(table, i, right);
-        }
-        public void Sort()
-        {
-            quickSort(_sportwomen, 0, _sportwomen.Length - 1);
-        }
-        public virtual void Print()
-        {;}
-        public virtual void PrintCounter() {; }
-        public void HoldCompetition()
-        {
-            Console.WriteLine($"Название соревнования:{_competitionName}");
-            Console.WriteLine();
-            Sort();
-            Print();
-            Console.WriteLine();
-            PrintCounter(); 
-            Console.WriteLine();
-        }
-    }
-    class Distance100 : Competition
-    {
-        private static int _norma = 25;
-        private static int _counter;
-        public Distance100(string competitionName, Sportwoman[] sportwomen) : base(competitionName, sportwomen)
-        {
-
-        }
-        public override void Print()
-        {
-            foreach (var sportwoman in _sportwomen)
+            else if (_text[i] >= 'А' && _text[i] <= 'Я')
             {
-                if (sportwoman.Sec <= _norma) _counter++;
-                sportwoman.ShowInfo();
+                if (_text[i] < 'О')
+                {
+                    int t = _text[i] - 'А';
+                    newText += (char)('Я' - 14 + t);
+                }
+                else newText += (char)(_text[i] - 15);
             }
+            else newText += _text[i];
         }
-        public override void PrintCounter() => Console.WriteLine($"Количество спортсменок, сдавших норматив({_norma} секунд): {_counter}");
+        return newText;
     }
-    class Distance500 : Competition
+}
+public class JsonIO
+{
+    public static void Write<T>(T obj, string FilePath)
     {
-        private static int _norma = 110;
-        private static int _counter;
-        public Distance500(string competitionName, Sportwoman[] sportwomen) : base(competitionName, sportwomen)
+        using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate))
         {
-
+            JsonSerializer.Serialize(fs, obj);
         }
-        public override void Print()
-        {
-            foreach (var sportwoman in _sportwomen)
-            {
-                if (sportwoman.Sec <= _norma) _counter++;
-                sportwoman.ShowInfo();
-            }
-        }
-        public override void PrintCounter() => Console.WriteLine($"Количество спортсменок, сдавших норматив({_norma} секунд): {_counter}");
     }
-    class Program
+    public static T Read<T>(string FilePath)
     {
-        static void Main()
+        using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate))
         {
-            Sportwoman[] sportwomen1 = {
-                new Sportwoman("Кукушкина", 1, "Овечкин", 111),
-                new Sportwoman("Соловьёва", 1, "Зверев", 107),
-                new Sportwoman("Воробьёва", 2, "Козлов", 112),
-                new Sportwoman("Синицына", 2, "Зайцев", 109),
-                new Sportwoman("Орлова", 1, "Волков", 110)
-            };
-            Sportwoman[] sportwomen2 = {
-                new Sportwoman("Кукушкина", 1, "Овечкин", 25),
-                new Sportwoman("Соловьёва", 1, "Зверев", 27),
-                new Sportwoman("Воробьёва", 2, "Козлов",24),
-                new Sportwoman("Синицына", 2, "Зайцев", 26)
-            };
-            Distance100 competition1 = new Distance100("Международные соревнования на 100 метров", sportwomen2);
-            competition1.HoldCompetition();
-            
-            Distance500 competition2 = new Distance500("Всероссийские соревнования на 500 метров", sportwomen1);
-            competition2.HoldCompetition();
-
-            Console.ReadKey();
+            return JsonSerializer.Deserialize<T>(fs);
         }
+        return default(T);
+    }
+}
+public class Program
+{
+    static void Main()
+    {
+        string text = "опрс , ? ! 124 - +=";
+        Task[] tasks = new Task[] { new Task1(text), new Task2(text) };
+        Console.WriteLine(tasks[0]);
+        Console.WriteLine(tasks[1]);
+        string file1 = "cw2_1.json";
+        string file2 = "cw2_2.json";
+        string path = "C:\\Users\\m2308909\\Downloads";
+        string folder = "Test";
+        path = Path.Combine(path, folder);
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+        }
+        file1 = Path.Combine(path, file1);
+        file2 = Path.Combine(path, file2);
+        if (!File.Exists(file1))
+        {
+            JsonIO.Write<Task1>((Task1)tasks[0], file1);
+            JsonIO.Write<Task2>((Task2)tasks[1], file2);
+            Console.WriteLine("Файлы успешно записаны");
+        }
+        else
+        {
+            Console.WriteLine("Десериализованные файлы:");
+            var t1 = JsonIO.Read<Task1>(file1);
+            var t2 = JsonIO.Read<Task2>(file2);
+            Console.WriteLine(t1);
+            Console.WriteLine(t2);
+        }
+        Console.ReadKey();
     }
 }
