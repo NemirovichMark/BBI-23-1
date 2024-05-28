@@ -25,14 +25,11 @@ namespace laba6new
             Competition competition = new Competition(initialParticipants);
 
             //adding participants  
-            competition.AddParticipant("Ivan");
-            competition.AddParticipant("Alex");
-            competition.AddParticipant("Maria");
+            competition.AddParticipant("Ivan", 0.55);
+            competition.AddParticipant("Alex", 0.14);
+            competition.AddParticipant("Maria", 0.34);
 
             //creating jumps 
-            competition.MakeJump("Ivan", 0.6);
-            competition.MakeJump("Alex", 0.87);
-            competition.MakeJump("Maria", 0.59);
 
             competition.MakeJump("Ivan", 0.72);
             competition.MakeJump("Alex", 0.66);
@@ -122,16 +119,16 @@ namespace laba6new
         }
     }
     //level 1 ex4
-    public struct Participant
+    public class Participant
     {
         public string Name { get; private set; }
         public double BestHeight { get; private set; }
-        public bool IsDisqualified { get; set; } //new field for lab7 task
+        public bool IsDisqualified { get; private set; } //new field for lab7 task
 
-        public Participant(string name)
+        public Participant(string name, double initialHeight)
         {
             Name = name;
-            BestHeight = 0;
+            BestHeight = initialHeight;
             IsDisqualified = false;
         }
 
@@ -142,8 +139,13 @@ namespace laba6new
                 BestHeight = height;
             }
         }
+
+        public void Disqualify() //method to disqualify a partisipant
+        {
+            IsDisqualified = true;
+        }
     }
-    public struct Competition
+    public class Competition
     {
         public List<Participant> Participants;
 
@@ -152,9 +154,9 @@ namespace laba6new
             Participants = participants;
         }
 
-        public void AddParticipant(string name) //method to add new participants to the initial list of participants
+        public void AddParticipant(string name, double initialHeight) //method to add new participants to the initial list of participants
         {
-            Participants.Add(new Participant(name));
+            Participants.Add(new Participant(name, initialHeight));
         }
 
         public void MakeJump(string name, double height) //method to create jumps linked to a name
@@ -174,7 +176,7 @@ namespace laba6new
             if (index != -1) //checks: if index is -1 that means that name is not found in the list -> we can't disqualify nonexistent participant 
             {
                 Participant participant = Participants[index];
-                participant.IsDisqualified = true;
+                participant.Disqualify();
                 Participants[index] = participant;
             }
         }
@@ -184,9 +186,17 @@ namespace laba6new
             var validParticipants = Participants.Where(p => !p.IsDisqualified).ToList(); // makes a new list only with participants with false IsDisqualified property
             validParticipants.Sort((p1, p2) => p2.BestHeight.CompareTo(p1.BestHeight)); // sorts that new "valid" list
             Console.WriteLine("Results of a high jumps competition:");
-            foreach (Participant participant in Participants)
+            foreach (Participant participant in validParticipants)
             {
-                Console.WriteLine($"Participants: {participant.Name}, Best height: {participant.BestHeight}");
+                Console.WriteLine($"Participant: {participant.Name}, Best height: {participant.BestHeight}");
+            }
+
+            var disqualifiedParticipants = Participants.Where(p => p.IsDisqualified).ToList();
+            Console.WriteLine("\nDisqualified participants:\n");
+
+            foreach (Participant participant in disqualifiedParticipants)
+            {
+                Console.WriteLine($"Participant: {participant.Name}, Best height: {participant.BestHeight}");
             }
         }
     }
