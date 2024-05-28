@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRadioPoll xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RadioPoll xsi:type="Man">
+    <Answer>Владимир Путин</Answer>
+    <Count>110</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Man">
+    <Answer>Грета Тунберг</Answer>
+    <Count>90</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Man">
+    <Answer>Джо Байден</Answer>
+    <Count>70</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Man">
+    <Answer>Анджелина Джоли</Answer>
+    <Count>60</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Man">
+    <Answer>Эльон Маск</Answer>
+    <Count>10</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Opening">
+    <Answer>Brain Decoder</Answer>
+    <Count>110</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Opening">
+    <Answer>Artificial intelligence</Answer>
+    <Count>90</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Opening">
+    <Answer>The sunken ship Endurance</Answer>
+    <Count>70</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Opening">
+    <Answer>The Ancient Whale</Answer>
+    <Count>50</Count>
+  </RadioPoll>
+  <RadioPoll xsi:type="Opening">
+    <Answer>Living robot</Answer>
+    <Count>10</Count>
+  </RadioPoll>
+</ArrayOfRadioPoll>

@@ -1,0 +1,62 @@
+[
+  {
+    "$type": "Program+ManTeam, лаба 9",
+    "Name": "Команда 1 мужская",
+    "TotalScore": 8,
+    "Goals": 5
+  },
+  {
+    "$type": "Program+ManTeam, лаба 9",
+    "Name": "Команда 2 мужская",
+    "TotalScore": 9,
+    "Goals": 4
+  },
+  {
+    "$type": "Program+ManTeam, лаба 9",
+    "Name": "Команда 3 мужская",
+    "TotalScore": 5,
+    "Goals": -2
+  },
+  {
+    "$type": "Program+ManTeam, лаба 9",
+    "Name": "Команда 4 мужская",
+    "TotalScore": 1,
+    "Goals": -5
+  },
+  {
+    "$type": "Program+ManTeam, лаба 9",
+    "Name": "Команда 5 мужская",
+    "TotalScore": 3,
+    "Goals": -2
+  },
+  {
+    "$type": "Program+WomanTeam, лаба 9",
+    "Name": "Команда 1 женская",
+    "TotalScore": 9,
+    "Goals": 1
+  },
+  {
+    "$type": "Program+WomanTeam, лаба 9",
+    "Name": "Команда 2 женская",
+    "TotalScore": 0,
+    "Goals": -10
+  },
+  {
+    "$type": "Program+WomanTeam, лаба 9",
+    "Name": "Команда 3 женская",
+    "TotalScore": 5,
+    "Goals": 3
+  },
+  {
+    "$type": "Program+WomanTeam, лаба 9",
+    "Name": "Команда 4 женская",
+    "TotalScore": 7,
+    "Goals": 6
+  },
+  {
+    "$type": "Program+WomanTeam, лаба 9",
+    "Name": "Команда 5 женская",
+    "TotalScore": 7,
+    "Goals": 0
+  }
+]

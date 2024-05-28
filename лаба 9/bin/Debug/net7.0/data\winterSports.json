@@ -1,0 +1,92 @@
+[
+  {
+    "$type": "FigureSkating, лаба 9",
+    "SportsMenName": "Саша",
+    "NameDiscipline": "Фигурное катание",
+    "Scores": [
+      5.8,
+      5.7,
+      5.9,
+      5.5,
+      5.6,
+      5.6,
+      5.5
+    ],
+    "TotalPlace": 1
+  },
+  {
+    "$type": "FigureSkating, лаба 9",
+    "SportsMenName": "Маша",
+    "NameDiscipline": "Фигурное катание",
+    "Scores": [
+      5.6,
+      5.3,
+      5.0,
+      5.8,
+      5.7,
+      5.5,
+      5.9
+    ],
+    "TotalPlace": 2
+  },
+  {
+    "$type": "FigureSkating, лаба 9",
+    "SportsMenName": "Паша",
+    "NameDiscipline": "Фигурное катание",
+    "Scores": [
+      5.0,
+      5.1,
+      5.7,
+      5.6,
+      5.9,
+      5.4,
+      5.6
+    ],
+    "TotalPlace": 3
+  },
+  {
+    "$type": "SpeedSkating, лаба 9",
+    "SportsMenName": "Ваня",
+    "NameDiscipline": "Конькобежный спорт",
+    "Scores": [
+      5.8,
+      5.7,
+      5.9,
+      5.5,
+      5.6,
+      5.6,
+      5.5
+    ],
+    "TotalPlace": 1
+  },
+  {
+    "$type": "SpeedSkating, лаба 9",
+    "SportsMenName": "Леша",
+    "NameDiscipline": "Конькобежный спорт",
+    "Scores": [
+      5.6,
+      5.3,
+      5.0,
+      5.8,
+      5.7,
+      5.5,
+      5.9
+    ],
+    "TotalPlace": 2
+  },
+  {
+    "$type": "SpeedSkating, лаба 9",
+    "SportsMenName": "Оскар",
+    "NameDiscipline": "Конькобежный спорт",
+    "Scores": [
+      5.0,
+      5.1,
+      5.7,
+      5.6,
+      5.9,
+      5.4,
+      5.6
+    ],
+    "TotalPlace": 3
+  }
+]

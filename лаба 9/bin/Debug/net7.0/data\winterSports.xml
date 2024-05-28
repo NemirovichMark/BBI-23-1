@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfWinterSports xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <WinterSports xsi:type="FigureSkating">
+    <SportsMenName>Саша</SportsMenName>
+    <NameDiscipline>Фигурное катание</NameDiscipline>
+    <Scores>5.8</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.9</Scores>
+    <Scores>5.5</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.5</Scores>
+    <TotalPlace>1</TotalPlace>
+  </WinterSports>
+  <WinterSports xsi:type="FigureSkating">
+    <SportsMenName>Маша</SportsMenName>
+    <NameDiscipline>Фигурное катание</NameDiscipline>
+    <Scores>5.6</Scores>
+    <Scores>5.3</Scores>
+    <Scores>5</Scores>
+    <Scores>5.8</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.5</Scores>
+    <Scores>5.9</Scores>
+    <TotalPlace>2</TotalPlace>
+  </WinterSports>
+  <WinterSports xsi:type="FigureSkating">
+    <SportsMenName>Паша</SportsMenName>
+    <NameDiscipline>Фигурное катание</NameDiscipline>
+    <Scores>5</Scores>
+    <Scores>5.1</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.9</Scores>
+    <Scores>5.4</Scores>
+    <Scores>5.6</Scores>
+    <TotalPlace>3</TotalPlace>
+  </WinterSports>
+  <WinterSports xsi:type="SpeedSkating">
+    <SportsMenName>Ваня</SportsMenName>
+    <NameDiscipline>Конькобежный спорт</NameDiscipline>
+    <Scores>5.8</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.9</Scores>
+    <Scores>5.5</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.5</Scores>
+    <TotalPlace>1</TotalPlace>
+  </WinterSports>
+  <WinterSports xsi:type="SpeedSkating">
+    <SportsMenName>Леша</SportsMenName>
+    <NameDiscipline>Конькобежный спорт</NameDiscipline>
+    <Scores>5.6</Scores>
+    <Scores>5.3</Scores>
+    <Scores>5</Scores>
+    <Scores>5.8</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.5</Scores>
+    <Scores>5.9</Scores>
+    <TotalPlace>2</TotalPlace>
+  </WinterSports>
+  <WinterSports xsi:type="SpeedSkating">
+    <SportsMenName>Оскар</SportsMenName>
+    <NameDiscipline>Конькобежный спорт</NameDiscipline>
+    <Scores>5</Scores>
+    <Scores>5.1</Scores>
+    <Scores>5.7</Scores>
+    <Scores>5.6</Scores>
+    <Scores>5.9</Scores>
+    <Scores>5.4</Scores>
+    <Scores>5.6</Scores>
+    <TotalPlace>3</TotalPlace>
+  </WinterSports>
+</ArrayOfWinterSports>

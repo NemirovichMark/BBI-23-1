@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfMan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Man>
+    <answer>Эльон Маск</answer>
+    <count>120</count>
+  </Man>
+  <Man>
+    <answer>Грета Тунберг</answer>
+    <count>90</count>
+  </Man>
+  <Man>
+    <answer>Владимир Путин</answer>
+    <count>80</count>
+  </Man>
+  <Man>
+    <answer>Джо Байден</answer>
+    <count>70</count>
+  </Man>
+  <Man>
+    <answer>Анджелина Джоли</answer>
+    <count>60</count>
+  </Man>
+</ArrayOfMan>
