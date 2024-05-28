@@ -1,81 +1,106 @@
-﻿using System;
-using System.Text.Json;
-using System.IO;
-using System.Text.Json.Serialization;
-
+//Вариант 17
+//Задание 1
 #region 1
+using System;
+using System.IO;
+using System.Text.Json;
 
-abstract class Task
+namespace LongestWordTask
 {
-    protected string text = "Hello students ;)";
-
-    public string Text
+    class Program
     {
-        get => text;
-        protected set => text = value;
-    }
+        static void Main(string[] args)
+        {
+            string input = "Карл у Клары украл кораллы, а Клара у Карла украла кларнет";
+            string[] words = input.Split(' ');
+            string longestWord = "";
+            foreach (string word in words)
+            {
+                if (word.Length > longestWord.Length)
+                {
+                    longestWord = word;
+                }
+                else if (word.Length == longestWord.Length && word.CompareTo(longestWord) < 0)
+                {
+                    longestWord = word;
+                }
+            }
 
-    public Task(string text)
-    {
-        this.text = text;
-    }
-}
+            Console.WriteLine("Самое длинное слово: " + longestWord);
 
-class Task1 : Task
-{
-    [JsonConstructor]
-    public Task1(string text) : base(text) { }
+            string jsonOutput = JsonSerializer.Serialize(longestWord);
 
-    public override string ToString()
-    {
-        return text;
-    }
-}
-
-class program
-{
-    static void Main()
-    {
-        Console.WriteLine("Введите текст:");
-        string inputText = Console.ReadLine();
-        string[] words = inputText.Split(new char[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
-        string longestWord = words.OrderByDescending(w => w.Length).First();
-
-        Console.WriteLine($"Самое длинное слово в тексте: {longestWord}");
+        }
     }
 }
 #endregion
 
+//Задание 2
 #region 2
+using System;
+using System.IO;
+using System.Text.Json;
+namespace LastWordsTask
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = "На вход подаётся строка. На выход - массив строк. Выписать последние слова всех предложений построчно.";
+            string[] sentences = input.Split('.');
+            string[] lastWords = new string[sentences.Length];
+            for (int i = 0; i < sentences.Length; i++)
+            {
+                string[] words = sentences[i].Trim().Split(' ');
+                lastWords[i] = words[words.Length - 1];
+            }
+
+            Console.WriteLine("Последние слова в предложениях:");
+            foreach (string word in lastWords)
+            {
+                Console.WriteLine(word);
+            }
+
+            string jsonOutput = JsonSerializer.Serialize(lastWords);
+        }
+    }
+}
+
+#endregion
+
+//Задание 3
+#region 3
+
+
 class Program
 {
     static void Main()
     {
         string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string controlWorkPath = Path.Combine(documentsPath, "Control work");
+        string FourthTaskPath = Path.Combine(documentsPath, "Fourth Task");
 
-        if (!Directory.Exists(controlWorkPath))
+        if (!Directory.Exists(FourthTaskPath))
         {
-            Directory.CreateDirectory(controlWorkPath);
+            Directory.CreateDirectory(FourthTaskPath);
 
-            string cw2_1FilePath = Path.Combine(controlWorkPath, "cw2_1.json");
-            string cw2_2FilePath = Path.Combine(controlWorkPath, "cw2_2.json");
+            string string_1FilePath = Path.Combine(FourthTaskPath, "string_1.json");
+            string string_2FilePath = Path.Combine(FourthTaskPath, "string_2.json");
 
-            if (!File.Exists(cw2_1FilePath))
+            if (!File.Exists(string_1FilePath))
             {
-                File.Create(cw2_1FilePath).Close();
+                File.Create(string_1FilePath).Close();
             }
 
-            if (!File.Exists(cw2_2FilePath))
+            if (!File.Exists(string_2FilePath))
             {
-                File.Create(cw2_2FilePath).Close();
+                File.Create(string_2FilePath).Close();
             }
 
             Console.WriteLine("Папка и файлы успешно созданы.");
         }
         else
         {
-            Console.WriteLine("Папка 'Control work' уже существует.");
+            Console.WriteLine("Папка 'Fourth Task' уже существует.");
         }
     }
 }
