@@ -1,11 +1,12 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using System.Text.RegularExpressions;
 
 abstract class Task
 {
     public string Text { get; set; }
+
     public Task(string text)
     {
         Text = text;
@@ -66,6 +67,46 @@ class Task2 : Task
     public override (string Text, Dictionary<string, string> tableCodes) ParseText()
     {
         return (Text, null);
+    }
+}
+
+class Task4 : Task
+{
+    public Task4(string text) : base(text) { }
+
+    public int HardText(string text4)
+    {
+        int hardText = 0;
+        string[] words = text4.Split(new char[] { ' ', ',', '.', ':', ';', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
+        {
+            foreach (char c in word)
+            {
+                if (char.IsPunctuation(c))
+                {
+                    hardText++;
+                }
+            }
+        }
+
+        int punctuationCount = 0;
+        foreach (char c in text4)
+        {
+            if (char.IsPunctuation(c))
+            {
+                punctuationCount++;
+            }
+        }
+        int wordCount = words.Length;
+
+        return wordCount + punctuationCount;
+    }
+
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
+    {
+        int complexity = HardText(Text);
+        return ($"Сложность текста: {complexity}", null);
     }
 }
 
@@ -157,69 +198,106 @@ class Task8 : Task
     }
 }
 
-class Task9 : Task
+internal class Task_9 : Task
 {
-    public Task9(string text) : base(text) { }
+    private Dictionary<string, string> symbols;
+    public string newtext;
+
+    public Task_9(string text) : base(text)
+    {
+        symbols = new Dictionary<string, string>();
+    }
+
+    public override string ToString()
+    {
+        return newtext;
+    }
 
     public override (string Text, Dictionary<string, string> tableCodes) ParseText()
     {
-        string _text = Text.Replace(" ", "");
-
-        Dictionary<string, string> tableCodes = new Dictionary<string, string>();
-        int countOfPar = 5;
-        int counter = 0;
-        HashSet<string> letters = new HashSet<string>
+        var pairs = new Dictionary<string, int>();
+        for (int i = 0; i < Text.Length - 1; i++)
         {
-            "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
-            "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]",
-            "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'",
-            "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/",
-            "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+",
-            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}",
-            "a", "s", "d", "f", "g", "h", "j", "k", "l", ":", "\"",
-            "z", "x", "c", "v", "b", "n", "m", "<", ">", "?",
-            "ё", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
-            "й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ",
-            "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э",
-            "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", ".",
-            "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+",
-            "Ё", "!", "\"", "№", ";", "%", ":", "?", "*", "(", ")", "_", "+",
-            "Й", "Ц", "У", "К", "Е", "Н", "Г", "Ш", "Щ", "З", "Х", "Ъ",
-            "Ф", "Ы", "В", "А", "П", "Р", "О", "Л", "Д", "Ж", "Э",
-            "Я", "Ч", "С", "М", "И", "Т", "Ь", "Б", "Ю", ","
-        };
-
-        HashSet<string> _tmp = new HashSet<string>(letters);
-        foreach (string s in _tmp)
-        {
-            if (_text.IndexOf(s) != -1)
-                letters.Remove(s);
+            if (char.IsLetter(Text[i]) && char.IsLetter(Text[i + 1]))
+            {
+                var sequence = Text.Substring(i, 2);
+                if (!pairs.ContainsKey(sequence))
+                {
+                    pairs[sequence] = 0;
+                }
+                pairs[sequence]++;
+            }
         }
 
-        Dictionary<string, int> meetings = new Dictionary<string, int>();
-        for (int i = 0; i < _text.Length - 1; i++)
+        var topSequences = new List<KeyValuePair<string, int>>();
+        foreach (var pair in pairs)
         {
-            string key = _text.Substring(i, 2);
-            if (!meetings.ContainsKey(key))
-                meetings[key] = 0;
-            meetings[key] = meetings[key] + 1;
+            if (topSequences.Count < 5)
+            {
+                topSequences.Add(pair);
+            }
+            else
+            {
+                for (int i = 0; i < topSequences.Count; i++)
+                {
+                    if (pair.Value > topSequences[i].Value)
+                    {
+                        topSequences[i] = pair;
+                        break;
+                    }
+                }
+            }
         }
 
-        var sortedMeetings = meetings.OrderBy(pair => pair.Value).Reverse();
-        foreach (var pair in sortedMeetings)
+        topSequences.Sort((x, y) => y.Value.CompareTo(x.Value));
+        char code = '[';
+        foreach (var sequence in topSequences)
         {
-            if (counter >= countOfPar)
-                break;
-            Text = Text.Replace(pair.Key, letters.ElementAtOrDefault(counter));
-            tableCodes[pair.Key] = letters.ElementAtOrDefault(counter);
-            counter++;
+            symbols[sequence.Key] = code.ToString();
+            Text = Text.Replace(sequence.Key, code.ToString());
+            code++;
         }
+        newtext = Text;
+        return (newtext, symbols);
+    }
 
-        foreach (var pair in tableCodes)
+    public void DisplayCodesTable()
+    {
+        Console.WriteLine("Таблица кодов:");
+        foreach (var codePair in symbols)
         {
-            Console.WriteLine($"{pair.Key} - {pair.Value}");
+            Console.WriteLine($"Пара букв: {codePair.Key} - Знак шифра: {codePair.Value}");
         }
-        return (Text, tableCodes);
+    }
+}
+
+internal class Task_10 : Task
+{
+    private Dictionary<string, string> symbols;
+    private string firsttext;
+
+    public Task_10(string text) : base(text)
+    {
+        symbols = new Dictionary<string, string>();
+        firsttext = text;
+    }
+
+    public override string ToString()
+    {
+        return firsttext;
+    }
+
+    public override (string Text, Dictionary<string, string> tableCodes) ParseText()
+    {
+        return (null, null);
+    }
+
+    public void ParseText(Dictionary<string, string> tableCodes)
+    {
+        foreach (var codePair in tableCodes)
+        {
+            firsttext = firsttext.Replace(codePair.Value, codePair.Key);
+        }
     }
 }
 
@@ -241,27 +319,38 @@ class Program
         Console.WriteLine("\n\tТекст расшифрован:");
         Console.WriteLine(task2.Descrypt(task2.Encrypt(text)));
 
+        Task4 task4 = new Task4(text);
+        Console.WriteLine("Задание 4");
+        Console.WriteLine("\n \tСложность текста");
+        Console.WriteLine(task4.HardText(text));
+
         Task6 task6 = new Task6(text);
         Console.WriteLine("Задание 6");
-        Console.WriteLine("\n\t Анализ слогов:");
+        Console.WriteLine("\n\tАнализ слогов:");
         task6.AnalyzeSyllables();
 
         Task8 task8 = new Task8(text);
         Console.WriteLine("Задание 8");
-        Console.WriteLine("\n\t Текст разбит по строкам:");
+        Console.WriteLine("\n\tТекст разбит по строкам:");
         foreach (var line in task8.lines)
         {
             Console.WriteLine(line);
         }
 
-        Task9 task9 = new Task9(text);
+        Task_9 task9 = new Task_9(text);
+        task9.ParseText();
         Console.WriteLine("Задание 9");
-        Console.WriteLine("\n\t Таблица кодов:");
-        var result = task9.ParseText();
-        Console.WriteLine("\n\t Зашифрованный текст:");
-        Console.WriteLine(result.Text);
-     
-        
+        Console.WriteLine("\n\tЗашифрованное сообщение:");
+        Console.WriteLine(task9.ToString());
+        Console.WriteLine();
+        task9.DisplayCodesTable();
+
+        Task_10 task10 = new Task_10(text);
+        task10.ParseText(task9.ParseText().tableCodes);
+        Console.WriteLine("\n\nЗадание 10");
+        Console.WriteLine("\n\tДекодированное сообщение:");
+        Console.WriteLine(task10.ToString());
+
+        Console.ReadKey();
     }
 }
-
