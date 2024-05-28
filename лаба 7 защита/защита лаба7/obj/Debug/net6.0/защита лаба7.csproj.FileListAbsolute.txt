@@ -1,0 +1,28 @@
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\bin\Debug\net6.0\защита лаба7.exe
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\bin\Debug\net6.0\защита лаба7.deps.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\bin\Debug\net6.0\защита лаба7.runtimeconfig.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\bin\Debug\net6.0\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\bin\Debug\net6.0\защита лаба7.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.AssemblyInfoInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.AssemblyInfo.cs
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.csproj.CoreCompileInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\refint\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\защита лаба7.genruntimeconfig.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\защита лаба7\защита лаба7\obj\Debug\net6.0\ref\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\bin\Debug\net6.0\защита лаба7.exe
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\bin\Debug\net6.0\защита лаба7.deps.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\bin\Debug\net6.0\защита лаба7.runtimeconfig.json
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\bin\Debug\net6.0\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\bin\Debug\net6.0\защита лаба7.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.AssemblyInfoInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.AssemblyInfo.cs
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.csproj.CoreCompileInputs.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\refint\защита лаба7.dll
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.pdb
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\защита лаба7.genruntimeconfig.cache
+C:\Users\dnipr_rpqbl9m\OneDrive\Рабочий стол\мисися\лаба 7 защита\защита лаба7\obj\Debug\net6.0\ref\защита лаба7.dll
