@@ -1,0 +1,14 @@
+/Users/laviprog/Projects/lab10/lab10/bin/Debug/net8.0/lab10
+/Users/laviprog/Projects/lab10/lab10/bin/Debug/net8.0/lab10.deps.json
+/Users/laviprog/Projects/lab10/lab10/bin/Debug/net8.0/lab10.runtimeconfig.json
+/Users/laviprog/Projects/lab10/lab10/bin/Debug/net8.0/lab10.dll
+/Users/laviprog/Projects/lab10/lab10/bin/Debug/net8.0/lab10.pdb
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.GeneratedMSBuildEditorConfig.editorconfig
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.AssemblyInfoInputs.cache
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.AssemblyInfo.cs
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.csproj.CoreCompileInputs.cache
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.dll
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/refint/lab10.dll
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.pdb
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/lab10.genruntimeconfig.cache
+/Users/laviprog/Projects/lab10/lab10/obj/Debug/net8.0/ref/lab10.dll
