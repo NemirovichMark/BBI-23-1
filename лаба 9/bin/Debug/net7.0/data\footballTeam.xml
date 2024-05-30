@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFootballTeam xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FootballTeam xsi:type="ManTeam">
+    <Name>Команда 1 мужская</Name>
+    <TotalScore>8</TotalScore>
+    <Goals>5</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="ManTeam">
+    <Name>Команда 2 мужская</Name>
+    <TotalScore>9</TotalScore>
+    <Goals>4</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="ManTeam">
+    <Name>Команда 3 мужская</Name>
+    <TotalScore>5</TotalScore>
+    <Goals>-2</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="ManTeam">
+    <Name>Команда 4 мужская</Name>
+    <TotalScore>1</TotalScore>
+    <Goals>-5</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="ManTeam">
+    <Name>Команда 5 мужская</Name>
+    <TotalScore>3</TotalScore>
+    <Goals>-2</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="WomanTeam">
+    <Name>Команда 1 женская</Name>
+    <TotalScore>9</TotalScore>
+    <Goals>1</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="WomanTeam">
+    <Name>Команда 2 женская</Name>
+    <TotalScore>0</TotalScore>
+    <Goals>-10</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="WomanTeam">
+    <Name>Команда 3 женская</Name>
+    <TotalScore>5</TotalScore>
+    <Goals>3</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="WomanTeam">
+    <Name>Команда 4 женская</Name>
+    <TotalScore>7</TotalScore>
+    <Goals>6</Goals>
+  </FootballTeam>
+  <FootballTeam xsi:type="WomanTeam">
+    <Name>Команда 5 женская</Name>
+    <TotalScore>7</TotalScore>
+    <Goals>0</Goals>
+  </FootballTeam>
+</ArrayOfFootballTeam>

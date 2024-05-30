@@ -1,0 +1,12 @@
+/Users/elizzavetta_s/Projects/лаба 9/lb9/bin/Debug/net7.0/lb9.deps.json
+/Users/elizzavetta_s/Projects/лаба 9/lb9/bin/Debug/net7.0/lb9.dll
+/Users/elizzavetta_s/Projects/лаба 9/lb9/bin/Debug/net7.0/lb9.pdb
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.csproj.AssemblyReference.cache
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.GeneratedMSBuildEditorConfig.editorconfig
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.AssemblyInfoInputs.cache
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.AssemblyInfo.cs
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.csproj.CoreCompileInputs.cache
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.dll
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/refint/lb9.dll
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/lb9.pdb
+/Users/elizzavetta_s/Projects/лаба 9/lb9/obj/Debug/net7.0/ref/lb9.dll

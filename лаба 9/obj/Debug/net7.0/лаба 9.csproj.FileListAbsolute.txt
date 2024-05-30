@@ -1,0 +1,21 @@
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/лаба 9
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/лаба 9.deps.json
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/лаба 9.runtimeconfig.json
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/лаба 9.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/лаба 9.pdb
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.csproj.AssemblyReference.cache
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.GeneratedMSBuildEditorConfig.editorconfig
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.AssemblyInfoInputs.cache
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.AssemblyInfo.cs
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.csproj.CoreCompileInputs.cache
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/refint/лаба 9.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.pdb
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.genruntimeconfig.cache
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/ref/лаба 9.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/protobuf-net.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/protobuf-net.Core.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/lb9.dll
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/bin/Debug/net7.0/lb9.pdb
+/Users/elizzavetta_s/Projects/лаба 9/лаба 9/obj/Debug/net7.0/лаба 9.csproj.CopyComplete

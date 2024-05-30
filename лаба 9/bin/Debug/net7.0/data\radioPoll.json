@@ -1,0 +1,52 @@
+[
+  {
+    "$type": "Man, лаба 9",
+    "Answer": "Владимир Путин",
+    "Count": 110
+  },
+  {
+    "$type": "Man, лаба 9",
+    "Answer": "Грета Тунберг",
+    "Count": 90
+  },
+  {
+    "$type": "Man, лаба 9",
+    "Answer": "Джо Байден",
+    "Count": 70
+  },
+  {
+    "$type": "Man, лаба 9",
+    "Answer": "Анджелина Джоли",
+    "Count": 60
+  },
+  {
+    "$type": "Man, лаба 9",
+    "Answer": "Эльон Маск",
+    "Count": 10
+  },
+  {
+    "$type": "Opening, лаба 9",
+    "Answer": "Brain Decoder",
+    "Count": 110
+  },
+  {
+    "$type": "Opening, лаба 9",
+    "Answer": "Artificial intelligence",
+    "Count": 90
+  },
+  {
+    "$type": "Opening, лаба 9",
+    "Answer": "The sunken ship Endurance",
+    "Count": 70
+  },
+  {
+    "$type": "Opening, лаба 9",
+    "Answer": "The Ancient Whale",
+    "Count": 50
+  },
+  {
+    "$type": "Opening, лаба 9",
+    "Answer": "Living robot",
+    "Count": 10
+  }
+]
