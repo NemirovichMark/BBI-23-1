@@ -1,0 +1,128 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+class Program
+{
+    struct Ychastnik
+    {
+        private string name;
+        private int result;
+
+        public int Result { get { return result; } }
+
+        public Ychastnik(string name, int res)
+        {
+            this.name = name;
+            result = res;
+        }
+
+        public void Info()
+        {
+            Console.WriteLine($"результат: {result}, имя: {name}");
+        }
+    }
+
+    class Komanda
+    {
+        protected List<Ychastnik> uchastniki = new List<Ychastnik>();
+
+        public void AddYchastnik(string name, int result)
+        {
+            uchastniki.Add(new Ychastnik(name, result));
+        }
+
+        public Ychastnik[] GetSortedYchastniki()
+        {
+            Ychastnik[] sortedYchastniki = uchastniki.ToArray();
+            Array.Sort(sortedYchastniki, (x, y) => y.Result.CompareTo(x.Result));
+            return sortedYchastniki;
+        }
+
+        public void DisplayInfo(string title)
+        {
+            Console.WriteLine(title);
+            var sortedYchastniki = GetSortedYchastniki();
+            for (int i = 0; i < sortedYchastniki.Length; i++)
+            {
+                Console.Write($"{i + 1} место: ");
+                sortedYchastniki[i].Info();
+            }
+            Console.WriteLine();
+        }
+    }
+
+    class ZhenskayaKomanda : Komanda { }
+
+    class MuzhskayaKomanda : Komanda { }
+
+    static void Main(string[] args)
+    {
+        ZhenskayaKomanda zhenskaya1 = new ZhenskayaKomanda();
+        ZhenskayaKomanda zhenskaya2 = new ZhenskayaKomanda();
+
+        MuzhskayaKomanda muzhskaya1 = new MuzhskayaKomanda();
+        MuzhskayaKomanda muzhskaya2 = new MuzhskayaKomanda();
+
+       
+        zhenskaya1.AddYchastnik("Анна", 100);
+        zhenskaya1.AddYchastnik("Елена", 94);
+
+        zhenskaya2.AddYchastnik("Ольга", 98);
+        zhenskaya2.AddYchastnik("Мария", 95);
+
+        muzhskaya1.AddYchastnik("Иван", 99);
+        muzhskaya1.AddYchastnik("Петр", 93);
+
+        muzhskaya2.AddYchastnik("Алексей", 97);
+        muzhskaya2.AddYchastnik("Дмитрий", 95);
+
+        zhenskaya1.DisplayInfo("Женская команда 1:");
+        zhenskaya2.DisplayInfo("Женская команда 2:");
+
+        muzhskaya1.DisplayInfo("Мужская команда 1:");
+        muzhskaya2.DisplayInfo("Мужская команда 2:");
+
+        
+        var allZhenskie = new List<Ychastnik>(zhenskaya1.GetSortedYchastniki());
+        allZhenskie.AddRange(zhenskaya2.GetSortedYchastniki());
+        var allMuzhskie = new List<Ychastnik>(muzhskaya1.GetSortedYchastniki());
+        allMuzhskie.AddRange(muzhskaya2.GetSortedYchastniki());
+
+        Array.Sort(allZhenskie.ToArray(), (x, y) => y.Result.CompareTo(x.Result));
+        Array.Sort(allMuzhskie.ToArray(), (x, y) => y.Result.CompareTo(x.Result));
+
+        Console.WriteLine("Общий результат: Женские команды");
+        for (int i = 0; i < allZhenskie.Count; i++)
+        {
+            Console.Write($"{i + 1} место: ");
+            allZhenskie[i].Info();
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("Общий результат: Мужские команды");
+        for (int i = 0; i < allMuzhskie.Count; i++)
+        {
+            Console.Write($"{i + 1} место: ");
+            allMuzhskie[i].Info();
+        }
+        Console.WriteLine();
+
+        
+        var allUchastniki = new List<Ychastnik>(allZhenskie);
+        allUchastniki.AddRange(allMuzhskie);
+
+        Ychastnik[] sortedAll = allUchastniki.ToArray();
+        Array.Sort(sortedAll, (x, y) => y.Result.CompareTo(x.Result));
+        Console.WriteLine("Общий результат: Все участники");
+        for (int i = 0; i < sortedAll.Length; i++)
+        {
+            Console.Write($"{i + 1} место: ");
+            sortedAll[i].Info();
+        }
+        Console.WriteLine();
+        Console.ReadLine();
+    }
+}
+
+
