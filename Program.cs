@@ -1,301 +1,239 @@
-#region 6.1.5
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
-namespace StudentGrades
+abstract class Task
 {
-    class Program
+    public string Text { get; set; }
+
+    public Task(string text)
     {
-        private struct Student
+        Text = text;
+    }
+
+    public abstract void Execute();
+    public abstract override string ToString();
+}
+
+class Task1 : Task
+{
+    private double[] letterFrequencies;
+    private char[] letters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя".ToCharArray();
+
+    public Task1(string text) : base(text) { }
+
+    public override void Execute()
+    {
+        letterFrequencies = new double[letters.Length];
+        string filteredText = new string(Text.ToLower().Where(c => letters.Contains(c)).ToArray());
+        int totalLetters = filteredText.Length;
+
+        foreach (char c in filteredText)
         {
-            private string name;
-            private int grade;
-            private int missedClasses;
-
-            public Student(string name, int grade, int missedClasses)
+            int index = Array.IndexOf(letters, c);
+            if (index != -1)
             {
-                this.name = name;
-                this.grade = grade;
-                this.missedClasses = missedClasses;
-            }
-
-            public string Name
-            {
-                get { return name; }
-            }
-
-            public int Grade
-            {
-                get { return grade; }
-            }
-
-            public int MissedClasses
-            {
-                get { return missedClasses; }
+                letterFrequencies[index]++;
             }
         }
 
-        static void Main(string[] args)
+        for (int i = 0; i < letterFrequencies.Length; i++)
         {
-
-            Student[] students = new Student[5];
-            students[0] = new Student("Клименко", 2, 5);
-            students[1] = new Student("Радченко", 4, 2);
-            students[2] = new Student("Шерстобитова", 2, 7);
-            students[3] = new Student("Крамер", 3, 1);
-            students[4] = new Student("Рудь", 2, 3);
-
-            Console.WriteLine("Неуспевающие студенты в порядке убывания количества пропущенных занятий:");
-            PrintFailingStudents(students);
+            letterFrequencies[i] /= totalLetters;
         }
+    }
 
-        static void PrintFailingStudents(Student[] students)
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < letters.Length; i++)
         {
-
-            Student[] failingStudents = new Student[students.Length];
-            int count = 0;
-
-
-            for (int i = 0; i < students.Length; i++)
+            if (letterFrequencies[i] > 0)
             {
-                if (students[i].Grade == 2)
-                {
-                    failingStudents[count] = students[i];
-                    count++;
-                }
-            }
-
-
-            for (int i = 0; i < count - 1; i++)
-            {
-                for (int j = 0; j < count - i - 1; j++)
-                {
-                    if (failingStudents[j].MissedClasses < failingStudents[j + 1].MissedClasses)
-                    {
-                        Student temp = failingStudents[j];
-                        failingStudents[j] = failingStudents[j + 1];
-                        failingStudents[j + 1] = temp;
-                    }
-                }
-            }
-
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine($"Имя: {failingStudents[i].Name}, Пропущенные занятия: {failingStudents[i].MissedClasses}");
+                sb.AppendLine($"{letters[i]}: {letterFrequencies[i]:F4}");
             }
         }
+        return sb.ToString();
     }
 }
-#endregion
 
-
-#region 6.2.2
-using System;
-
-namespace ExamResults
+class Task3 : Task
 {
-    class Program
+    private List<string> lines;
+    private const int maxLength = 50;
+
+    public Task3(string text) : base(text) { }
+
+    public override void Execute()
     {
-        private struct Student
+        lines = new List<string>();
+        string[] words = Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        StringBuilder currentLine = new StringBuilder();
+
+        foreach (string word in words)
         {
-            private string name;
-            private int math;
-            private int physics;
-            private int russian;
-
-            public Student(string name, int math, int physics, int russian)
+            if (currentLine.Length + word.Length + 1 > maxLength)
             {
-                this.name = name;
-                this.math = math;
-                this.physics = physics;
-                this.russian = russian;
+                lines.Add(currentLine.ToString());
+                currentLine.Clear();
             }
-
-            public string Name
+            if (currentLine.Length > 0)
             {
-                get { return name; }
+                currentLine.Append(' ');
             }
-
-            public int Math
-            {
-                get { return math; }
-            }
-
-            public int Physics
-            {
-                get { return physics; }
-            }
-
-            public int Russian
-            {
-                get { return russian; }
-            }
-
-            public double Average
-            {
-                get { return (math + physics + russian) / 3.0; }
-            }
-
-            public bool IsPassed
-            {
-                get { return math > 2 && physics > 2 && russian > 2; }
-            }
+            currentLine.Append(word);
         }
 
-        static void Main(string[] args)
+        if (currentLine.Length > 0)
         {
-
-            Student[] students = new Student[5];
-            students[0] = new Student("Шерстобитова", 5, 4, 3);
-            students[1] = new Student("Клименко", 2, 4, 5);
-            students[2] = new Student("Рудь", 3, 4, 4);
-            students[3] = new Student("Крамер", 5, 5, 5);
-            students[4] = new Student("Радченко", 3, 2, 3);
-
-
-            Console.WriteLine("Учащиеся, успешно сдавшие экзамены, в порядке убывания среднего балла:");
-            PrintPassedStudents(students);
+            lines.Add(currentLine.ToString());
         }
+    }
 
-        static void PrintPassedStudents(Student[] students)
-        {
-            Student[] passedStudents = new Student[students.Length];
-            int count = 0;
-
-            for (int i = 0; i < students.Length; i++)
-            {
-                if (students[i].IsPassed)
-                {
-                    passedStudents[count] = students[i];
-                    count++;
-                }
-            }
-            for (int i = 0; i < count - 1; i++)
-            {
-                for (int j = 0; j < count - i - 1; j++)
-                {
-                    if (passedStudents[j].Average < passedStudents[j + 1].Average)
-                    {
-                        Student temp = passedStudents[j];
-                        passedStudents[j] = passedStudents[j + 1];
-                        passedStudents[j + 1] = temp;
-                    }
-                }
-            }
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine($"Имя: {passedStudents[i].Name}, Средний балл: {passedStudents[i].Average:F2}");
-            }
-        }
+    public override string ToString()
+    {
+        return string.Join("\n", lines);
     }
 }
-#endregion
 
-
-#region 6.3.2
-using System;
-
-namespace FootballChampionship
+class Task5 : Task
 {
-    struct Team
+    private List<(char, int)> letterCounts;
+
+    public Task5(string text) : base(text) { }
+
+    public override void Execute()
     {
-        private string name;
-        private int points;
-        private int goalsFor;
-        private int goalsAgainst;
-        public Team(string name)
+        letterCounts = new List<(char, int)>();
+        string[] words = Text.Split(new[] { ' ', '.', ',', '!', '?', ';', ':', '-', '—' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
         {
-            this.name = name;
-            this.points = 0;
-            this.goalsFor = 0;
-            this.goalsAgainst = 0;
-        }
-        public string Name
-        {
-            get { return name; }
-        }
-        public int Points
-        {
-            get { return points; }
-        }
-        public void UpdateResults(int goalsFor, int goalsAgainst)
-        {
-            this.goalsFor += goalsFor;
-            this.goalsAgainst += goalsAgainst;
-            if (goalsFor > goalsAgainst)
+            char firstLetter = char.ToLower(word[0]);
+            if (char.IsLetter(firstLetter))
             {
-                points += 3; // Победа
-            }
-            else if (goalsFor == goalsAgainst)
-            {
-                points += 1; // Ничья
-            }
-        }
-
-        public int GoalDifference()
-        {
-            return goalsFor - goalsAgainst;
-        }
-    }
-
-    class Championship
-    {
-        private Team[] teams;
-
-        public Championship(string[] teamNames)
-        {
-            teams = new Team[teamNames.Length];
-            for (int i = 0; i < teamNames.Length; i++)
-            {
-                teams[i] = new Team(teamNames[i]);
-            }
-        }
-
-        public void PlayMatch(int team1Index, int team2Index, int team1Goals, int team2Goals)
-        {
-            teams[team1Index].UpdateResults(team1Goals, team2Goals);
-            teams[team2Index].UpdateResults(team2Goals, team1Goals);
-        }
-
-        public void SortTeams()
-        {
-            for (int i = 0; i < teams.Length - 1; i++)
-            {
-                for (int j = 0; j < teams.Length - i - 1; j++)
+                if (!letterCounts.Any(l => l.Item1 == firstLetter))
                 {
-                    if (teams[j].Points < teams[j + 1].Points ||
-                        (teams[j].Points == teams[j + 1].Points && teams[j].GoalDifference() < teams[j + 1].GoalDifference()))
-                    {
-                        Team temp = teams[j];
-                        teams[j] = teams[j + 1];
-                        teams[j + 1] = temp;
-                    }
+                    letterCounts.Add((firstLetter, 0));
                 }
+                int index = letterCounts.FindIndex(l => l.Item1 == firstLetter);
+                letterCounts[index] = (firstLetter, letterCounts[index].Item2 + 1);
             }
         }
-        public void PrintTable()
-        {
-            Console.WriteLine("Место\tКоманда\tОчки");
-            for (int i = 0; i < teams.Length; i++)
-            {
-                Console.WriteLine($"{i + 1}\t{teams[i].Name}\t{teams[i].Points}");
-            }
-        }
+
+        letterCounts.Sort((x, y) => y.Item2.CompareTo(x.Item2));
     }
 
-    class Program
+    public override string ToString()
     {
-        static void Main(string[] args)
+        StringBuilder sb = new StringBuilder();
+        foreach (var (letter, count) in letterCounts)
         {
-            string[] teamNames = { "Сморчи", "БалБИсы", "Фанатки" };
-            Championship championship = new Championship(teamNames);
-            // Проведение матчей
-            championship.PlayMatch(0, 1, 2, 1); // Сморчи vs БалБИсы
-            championship.PlayMatch(0, 2, 1, 3); // Сморчи vs Фанатки
-            championship.PlayMatch(1, 2, 0, 0); // БалБИсы vs Фанатки
-
-            championship.SortTeams();
-            championship.PrintTable();
+            sb.AppendLine($"{letter}: {count}");
         }
+        return sb.ToString();
     }
 }
-#endregion
+
+class Task7 : Task
+{
+    private string sequence;
+    private List<string> matchingWords;
+
+    public Task7(string text, string sequence) : base(text)
+    {
+        this.sequence = sequence;
+    }
+
+    public override void Execute()
+    {
+        matchingWords = new List<string>();
+        string[] words = Text.Split(new[] { ' ', '.', ',', '!', '?', ';', ':', '-', '—' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
+        {
+            if (word.Contains(sequence))
+            {
+                matchingWords.Add(word);
+            }
+        }
+    }
+
+    public override string ToString()
+    {
+        return string.Join(", ", matchingWords);
+    }
+}
+
+class Task11 : Task
+{
+    private string[] names;
+    private string[] sortedNames;
+
+    public Task11(string text) : base(text)
+    {
+        names = text.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(n => n.Trim()).ToArray();
+    }
+
+    public override void Execute()
+    {
+        sortedNames = names.OrderBy(n => n).ToArray();
+    }
+
+    public override string ToString()
+    {
+        return string.Join(", ", sortedNames);
+    }
+}
+
+class Task14 : Task
+{
+    private int sum;
+
+    public Task14(string text) : base(text) { }
+
+    public override void Execute()
+    {
+        sum = 0;
+        string[] words = Text.Split(new[] { ' ', '.', ',', '!', '?', ';', ':', '-', '—' }, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string word in words)
+        {
+            if (int.TryParse(word, out int number) && number >= 1 && number <= 10)
+            {
+                sum += number;
+            }
+        }
+    }
+
+    public override string ToString()
+    {
+        return $"Сумма чисел: {sum}";
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Task[] tasks = new Task[]
+        {
+            new Task1("1 июля 2015 года Греция объявила о дефолте по государственному долгу, став первой развитой страной в истории, которая не смогла выплатить свои долговые обязательства в полном объеме. Сумма дефолта составила порядка 1,6 миллиарда евро. Этому предшествовали долгие переговоры с международными кредиторами, такими как Международный валютный фонд (МВФ), Европейский центральный банк (ЕЦБ) и Европейская комиссия (ЕК), о программах финансовой помощи и реструктуризации долга. Основными причинами дефолта стали недостаточная эффективность реформ, направленных на улучшение финансовой стабильности страны, а также политическая нестабильность, что вызвало потерю доверия со стороны международных инвесторов и кредиторов. Последствия дефолта оказались глубокими и долгосрочными: сокращение кредитного рейтинга страны, увеличение затрат на заемный капитал, рост стоимости заимствований и утрата доверия со стороны международных инвесторов."),
+            new Task3("После многолетних исследований ученые обнаружили тревожную тенденцию в вырубке лесов Амазонии. Анализ данных показал, что основной участник разрушения лесного покрова – человеческая деятельность. За последние десятилетия рост объема вырубки достиг критических показателей. Главными факторами, способствующими этому, являются промышленные рубки, производство древесины, расширение сельскохозяйственных угодий и незаконная добыча древесины. Это приводит к серьезным экологическим последствиям, таким как потеря биоразнообразия, ухудшение климата и угроза вымирания многих видов животных и растений."),
+            new Task5("Двигатель самолета – это сложная инженерная конструкция, обеспечивающая подъем, управление и движение в воздухе. Он состоит из множества компонентов, каждый из которых играет важную роль в общей работе механизма. Внутреннее устройство двигателя включает в себя компрессор, камеру сгорания, турбину и системы управления и охлаждения. Принцип работы основан на воздушно-топливной смеси, которая подвергается сжатию, воспламенению и расширению, обеспечивая движение воздушного судна."),
+            new Task7("Двигатель самолета – это сложная инженерная конструкция, обеспечивающая подъем, управление и движение в воздухе. Он состоит из множества компонентов, каждый из которых играет важную роль в общей работе механизма. Внутреннее устройство двигателя включает в себя компрессор, камеру сгорания, турбину и системы управления и охлаждения. Принцип работы основан на воздушно-топливной смеси, которая подвергается сжатию, воспламенению и расширению, обеспечивая движение воздушного судна.", "двиг"),
+            new Task11("Иванов, Петров, Смирнов, Соколов, Кузнецов, Попов, Лебедев, Волков, Козлов, Новиков, Иванова, Петрова, Смирнова, Ivanov, Petrov, Smirnov, Sokolov, Kuznetsov, Popov, Lebedev, Volkov, Kozlov, Novikov, Ivanova, Petrova, Smirnova"),
+            new Task14("1 июля 2015 года Греция объявила о дефолте по государственному долгу, став первой развитой страной в истории, которая не смогла выплатить свои долговые обязательства в полном объеме. Сумма дефолта составила порядка 1,6 миллиарда евро. Этому предшествовали долгие переговоры с международными кредиторами, такими как Международный валютный фонд (МВФ), Европейский центральный банк (ЕЦБ) и Европейская комиссия (ЕК), о программах финансовой помощи и реструктуризации долга. Основными причинами дефолта стали недостаточная эффективность реформ, направленных на улучшение финансовой стабильности страны, а также политическая нестабильность, что вызвало потерю доверия со стороны ")
+        };
+
+        foreach (var task in tasks)
+        {
+            task.Execute();
+            Console.WriteLine(task.ToString());
+        }
+
+        Console.ReadKey();
+    }
+}
