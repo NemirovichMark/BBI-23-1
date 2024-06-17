@@ -1,7 +1,0 @@
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\bin\Debug\preparation_exam_OOP.exe.config
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\bin\Debug\preparation_exam_OOP.exe
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\bin\Debug\preparation_exam_OOP.pdb
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\obj\Debug\preparation_exam_OOP.csproj.AssemblyReference.cache
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\obj\Debug\preparation_exam_OOP.csproj.CoreCompileInputs.cache
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\obj\Debug\preparation_exam_OOP.exe
-C:\Users\Пользователь\source\repos\preparation_exam_OOP\obj\Debug\preparation_exam_OOP.pdb
