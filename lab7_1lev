@@ -1,0 +1,91 @@
+﻿using System;
+
+public class Program
+{
+    struct Ychastnik
+    {
+        public string Name;
+        public int Id;
+        private int _bestres;
+        public bool IsDisqualified;
+
+        public Ychastnik(string name, int id, int bestres) : this()
+        {
+            Name = name;
+            Id = id;
+            _bestres = bestres;
+            IsDisqualified = false;
+        }
+
+        public int BestResult
+        {
+            get { return _bestres; }
+            set
+            {
+                if (value > _bestres) _bestres = value;
+            }
+        }
+
+        public void Disqualify()
+        {
+            IsDisqualified = true;
+        }
+
+        public void Info()
+        {
+            Console.WriteLine($"Имя участника: {Name}, результат: {_bestres}");
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        int n = int.Parse(Console.ReadLine());
+        Ychastnik[] peoplelist = new Ychastnik[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            string name = Console.ReadLine();
+            int firstResult = int.Parse(Console.ReadLine());
+            int secondResult = int.Parse(Console.ReadLine());
+
+            Ychastnik participant = new Ychastnik(name, i, firstResult);
+            participant.BestResult = secondResult; 
+
+            peoplelist[i] = participant;
+        }
+
+        //дисквалифицируем участника с индексом 0
+        if (peoplelist.Length > 0)
+        {
+            peoplelist[0].Disqualify();
+        }
+
+        Ychastnik[] sortedParticipants = Sort(peoplelist);
+        foreach (var participant in sortedParticipants)
+        {
+            if (!participant.IsDisqualified)
+            {
+                participant.Info();
+            }
+        }
+
+        Console.ReadLine();
+    }
+
+    static Ychastnik[] Sort(Ychastnik[] list)
+    {
+        for (int i = 0; i < list.Length - 1; i++)
+        {
+            for (int j = i + 1; j < list.Length; j++)
+            {
+                if (list[i].BestResult < list[j].BestResult)
+                {
+                    var temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
+                }
+            }
+        }
+        return list;
+    }
+}

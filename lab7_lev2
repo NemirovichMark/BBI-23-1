@@ -1,0 +1,109 @@
+﻿using System;
+
+public class Sportsman
+{
+    private string name;
+    private double[] jumpsScores;
+
+    public string Name { get { return name; } }
+
+    public Sportsman(string name, double[] jumpsScores)
+    {
+        this.name = name;
+        this.jumpsScores = jumpsScores;
+    }
+
+    public double TotalScore()
+    {
+        double totalScore = 0;
+        foreach (var score in jumpsScores)
+        {
+            totalScore += score;
+        }
+        return totalScore;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Результат: {TotalScore()} Имя: {name}");
+    }
+}
+
+public abstract class JumpWater
+{
+    protected string disciplineName;
+    protected Sportsman[] sportsmen;
+
+    public JumpWater(string disciplineName, Sportsman[] sportsmen)
+    {
+        this.disciplineName = disciplineName;
+        this.sportsmen = sportsmen;
+    }
+
+    public void StartCompetition()
+    {
+        Console.WriteLine(disciplineName);
+        SortSportsmen();
+        foreach (var sportsman in sportsmen)
+        {
+            sportsman.DisplayInfo();
+        }
+    }
+
+    protected void SortSportsmen()
+    {
+        for (int i = 0; i < sportsmen.Length - 1; i++)
+        {
+            for (int j = i + 1; j < sportsmen.Length; j++)
+            {
+                if (sportsmen[i].TotalScore() < sportsmen[j].TotalScore())
+                {
+                    var temp = sportsmen[i];
+                    sportsmen[i] = sportsmen[j];
+                    sportsmen[j] = temp;
+                }
+            }
+        }
+    }
+}
+
+public class Jump3m : JumpWater
+{
+    public Jump3m(Sportsman[] sportsmen) : base("Прыжки с высоты 3м", sportsmen) { }
+}
+
+public class Jump5m : JumpWater
+{
+    public Jump5m(Sportsman[] sportsmen) : base("Прыжки с высоты 5м", sportsmen) { }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int n = int.Parse(Console.ReadLine());
+        Sportsman[] sportsmen = new Sportsman[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            string name = Console.ReadLine();
+            double[] scores = new double[4];
+            for (int j = 0; j < 4; j++)
+            {
+                scores[j] = double.Parse(Console.ReadLine());
+            }
+            sportsmen[i] = new Sportsman(name, scores);
+        }
+
+        JumpWater competition3m = new Jump3m(sportsmen);
+        JumpWater competition5m = new Jump5m(sportsmen);
+
+        competition3m.StartCompetition();
+        Console.WriteLine(); 
+        competition5m.StartCompetition();
+
+        Console.ReadLine();
+    }
+}
+
+
